@@ -1,9 +1,18 @@
-package skeleton.elveszlelket;
+package skeleton.elveszlelket.item;
+
+import skeleton.elveszlelket.Player;
+import skeleton.elveszlelket.Room;
+import strategy.TeleportStrategy;
 
 public class Transistor extends Item{
     private Transistor pair;
     private Room location;
 
+
+    public Transistor() {
+        name = "Transistor";
+        strategy = new TeleportStrategy();
+    }
     public void use(Player player) {
         
     }

@@ -1,8 +1,11 @@
-package skeleton.elveszlelket;
+package skeleton.elveszlelket.item;
 
 abstract class ProtectionItem extends Item {
-    private int uses;
-
+    
+    protected int uses;
+    
+    public ProtectionItem() {
+    }
     public void decreaseUse() {
         uses--;
     }
