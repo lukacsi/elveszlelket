@@ -15,15 +15,19 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
-  
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>3.2.0</version>
+        <configuration>
+          <mainClass>skeleton.elveszlelket.App</mainClass>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 </project>
-<plugin>
-    <groupId>org.codehaus.mojo</groupId>
-    <artifactId>exec-maven-plugin</artifactId>
-    <version>3.2.0</version>
-    <configuration>
-        <mainClass>com.example.MainClass</mainClass> <!-- Replace with your main class -->
-    </configuration>
-</plugin>
+
 
 
