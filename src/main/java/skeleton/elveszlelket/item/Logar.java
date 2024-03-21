@@ -1,6 +1,6 @@
 package skeleton.elveszlelket.item;
 
-import skeleton.elveszlelket.Player;
+import skeleton.elveszlelket.Student;
 import strategy.WinStrategy;
 
 public class Logar extends Item {
@@ -8,7 +8,7 @@ public class Logar extends Item {
         name = "Logar";
         strategy = new WinStrategy();
     }
-    public void use(Player player) {
+    public void use(Student student) {
         
     }
 }

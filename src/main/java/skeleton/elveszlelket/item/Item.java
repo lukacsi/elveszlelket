@@ -1,6 +1,6 @@
 package skeleton.elveszlelket.item;
 
-import skeleton.elveszlelket.Player;
+import skeleton.elveszlelket.Student;
 import strategy.ItemUseStrategy;
 
 public abstract class Item {
@@ -10,5 +10,5 @@ public abstract class Item {
     public Item() {
         
     }
-    public abstract void use(Player player);
+    public abstract void use(Student student);
 }

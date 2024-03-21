@@ -1,6 +1,6 @@
 package skeleton.elveszlelket.item;
 
-import skeleton.elveszlelket.Player;
+import skeleton.elveszlelket.Student;
 import strategy.RagStrategy;
 
 public class Rag extends ProtectionItem{
@@ -9,7 +9,7 @@ public class Rag extends ProtectionItem{
         uses = 30;
         strategy = new RagStrategy();
     }
-    public void use(Player player) {
+    public void use(Student student) {
         
     }
 }

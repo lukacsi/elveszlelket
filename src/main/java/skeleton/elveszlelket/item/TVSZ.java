@@ -1,6 +1,6 @@
 package skeleton.elveszlelket.item;
 
-import skeleton.elveszlelket.Player;
+import skeleton.elveszlelket.Student;
 import strategy.IHaveTheRightStrategy;
 
 public class TVSZ extends ProtectionItem{
@@ -9,7 +9,7 @@ public class TVSZ extends ProtectionItem{
         uses = 3;
         strategy = new IHaveTheRightStrategy();
     }
-    public void use(Player player) {
+    public void use(Student student) {
         
     }
 }

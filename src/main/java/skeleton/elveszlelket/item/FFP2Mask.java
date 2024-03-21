@@ -1,6 +1,6 @@
 package skeleton.elveszlelket.item;
 
-import skeleton.elveszlelket.Player;
+import skeleton.elveszlelket.Student;
 import strategy.GasProtectionStrategy;
 
 public class FFP2Mask extends ProtectionItem{
@@ -9,7 +9,7 @@ public class FFP2Mask extends ProtectionItem{
         uses = 3;
         strategy = new GasProtectionStrategy();
     }
-    public void use(Player player) {
+    public void use(Student student) {
 
     }
 }

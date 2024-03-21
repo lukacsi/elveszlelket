@@ -1,5 +1,4 @@
 package skeleton.elveszlelket;
-import skeleton.elveszlelket.Player;
 import skeleton.elveszlelket.item.*;
 
 public interface Human {

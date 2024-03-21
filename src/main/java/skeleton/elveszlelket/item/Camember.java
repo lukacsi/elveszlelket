@@ -1,6 +1,6 @@
 package skeleton.elveszlelket.item;
 
-import skeleton.elveszlelket.Player;
+import skeleton.elveszlelket.Student;
 import strategy.GasStrategy;
 
 public class Camember extends Item {
@@ -11,7 +11,7 @@ public class Camember extends Item {
         strategy = new GasStrategy();
         opened = false;
     }
-    public void use(Player player) {
+    public void use(Student student) {
         
     }
 }

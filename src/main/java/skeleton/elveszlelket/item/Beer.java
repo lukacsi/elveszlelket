@@ -1,6 +1,6 @@
 package skeleton.elveszlelket.item;
 
-import skeleton.elveszlelket.Player;
+import skeleton.elveszlelket.Student;
 import strategy.DrunkStrategy;
 
 public class Beer extends ProtectionItem {
@@ -9,7 +9,7 @@ public class Beer extends ProtectionItem {
         uses = 1;
         strategy = new DrunkStrategy();
     }
-    public void use(Player player) {
+    public void use(Student student) {
         
     }
 }

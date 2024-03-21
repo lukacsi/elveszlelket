@@ -1,7 +1,7 @@
 package skeleton.elveszlelket.item;
 
-import skeleton.elveszlelket.Player;
 import skeleton.elveszlelket.Room;
+import skeleton.elveszlelket.Student;
 import strategy.TeleportStrategy;
 
 public class Transistor extends Item{
@@ -13,7 +13,7 @@ public class Transistor extends Item{
         name = "Transistor";
         strategy = new TeleportStrategy();
     }
-    public void use(Player player) {
+    public void use(Student student) {
         
     }
 
