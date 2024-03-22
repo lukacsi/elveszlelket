@@ -1,6 +1,11 @@
 package skeleton.elveszlelket;
 import skeleton.elveszlelket.item.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import skeleton.elveszlelket.door.*;
+
 public class Student implements Human {
     private int stunDuration;
     private int immunityDuration;
@@ -11,10 +16,33 @@ public class Student implements Human {
     private boolean dead;
     private boolean winCondition;
     private Door lastDoor;
+    private List<Item> items;
+
+    public Student() {
+        items = new ArrayList<>();
+        stunDuration = 0;
+        immunityDuration = 0;
+        doorBlocked = false;
+        logarObtained = false;
+        protectedDuration = 0;
+        gasProtectionDuration = 0;
+        dead = false;
+        winCondition = false;
+        lastDoor = null;  
+    }
 
     @Override
     public boolean use(OneWayDoor door) {
-        return false;
+        if (!door.isRightDirection(getRoom())) {
+            return false;
+        }
+        /*Room currentRoom = getRoom(); // Get the current room
+        currentRoom.removeHuman(this);
+        Room destinationRoom = door.getDestinationRoom(); // Get the destination room
+        destinationRoom.addHuman(this);
+        lastDoor = door;*/
+        return true;
+        
     }
 
     @Override
@@ -24,19 +52,29 @@ public class Student implements Human {
 
     @Override
     public boolean pickupItem(Item item) {
-        return false;
+        if (items.size() >= 5) {
+            return false;
+        }
+        items.add(item);
+        return true;
     }
 
     @Override
     public boolean dropItem(Item item) {
-        return false;
+        return items.remove(item);
     }
 
     public boolean useItem(Item item) {
-        return false;
+        if (item instanceof Transistor) {
+            //transistor logic: 
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public void removeItem(Item item) {
+        items.remove(item);
     }
 
     public boolean pairTransistor(Transistor t1, Transistor t2) {
@@ -48,30 +86,43 @@ public class Student implements Human {
     }
 
     public void blockDoor() {
+        doorBlocked = true;
     }
 
     public void stun(int duration) {
-        
+        stunDuration += duration;
     }
 
     public boolean teleport(Room room) {
-        return false;
+        getRoom().removeHuman(this);
+        room.addHuman(this);
+        return true;
     }
 
     @Override
     public boolean decreaseStun(int amount) {
+        stunDuration -= amount;
+        if (stunDuration < 0) {
+            stunDuration = 0;
+            return true;
+        }
+        return false;
     }
 
     public void setImmunity(int immunity) {
+        immunityDuration = immunity;
     }
 
     public void decreaseImmunity() {
+        immunityDuration--;
     }
 
     public void setGasProtection(int duration) {
+        gasProtectionDuration = duration;
     }
 
     public void decreaseGasProtection() {
+        gasProtectionDuration--;
     }
 
     @Override
