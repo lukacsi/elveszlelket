@@ -1,5 +1,6 @@
 package skeleton.elveszlelket;
 import skeleton.elveszlelket.item.*;
+import skeleton.elveszlelket.door.*;
 
 public interface Human {
     boolean use(OneWayDoor door);

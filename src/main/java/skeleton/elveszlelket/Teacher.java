@@ -1,5 +1,6 @@
 package skeleton.elveszlelket;
 import skeleton.elveszlelket.item.*;
+import skeleton.elveszlelket.door.*;
 
 public class Teacher implements Human {
     private int stunDuration;
