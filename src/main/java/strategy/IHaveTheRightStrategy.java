@@ -1,10 +1,10 @@
 package strategy;
 
-import skeleton.elveszlelket.Player;
+import skeleton.elveszlelket.Student;
 import skeleton.elveszlelket.item.Item;
 
 public class IHaveTheRightStrategy implements ItemUseStrategy {
-    public void execute(Player player, Item item) {
+    public void execute(Student student, Item item) {
         
     }
 }

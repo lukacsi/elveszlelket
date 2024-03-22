@@ -10,6 +10,6 @@ public class FFP2Mask extends ProtectionItem{
         strategy = new GasProtectionStrategy();
     }
     public void use(Student student) {
-
+        
     }
 }
