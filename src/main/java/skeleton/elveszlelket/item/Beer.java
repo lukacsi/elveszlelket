@@ -1,7 +1,7 @@
 package skeleton.elveszlelket.item;
 
 import skeleton.elveszlelket.Student;
-import strategy.DrunkStrategy;
+import skeleton.elveszlelket.strategy.DrunkStrategy;
 
 public class Beer extends ProtectionItem {
     public Beer(String name) {

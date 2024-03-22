@@ -1,7 +1,7 @@
 package skeleton.elveszlelket.item;
 
 import skeleton.elveszlelket.Student;
-import strategy.ItemUseStrategy;
+import skeleton.elveszlelket.strategy.ItemUseStrategy;
 
 public abstract class Item {
     protected String name;

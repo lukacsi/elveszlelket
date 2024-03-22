@@ -1,4 +1,4 @@
-package strategy;
+package skeleton.elveszlelket.strategy;
 
 import skeleton.elveszlelket.Student;
 import skeleton.elveszlelket.item.Item;

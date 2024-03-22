@@ -1,7 +1,7 @@
 package skeleton.elveszlelket.item;
 
 import skeleton.elveszlelket.Student;
-import strategy.IHaveTheRightStrategy;
+import skeleton.elveszlelket.strategy.IHaveTheRightStrategy;
 
 public class TVSZ extends ProtectionItem{
     public TVSZ(){

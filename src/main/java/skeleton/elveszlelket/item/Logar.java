@@ -1,7 +1,7 @@
 package skeleton.elveszlelket.item;
 
 import skeleton.elveszlelket.Student;
-import strategy.WinStrategy;
+import skeleton.elveszlelket.strategy.WinStrategy;
 
 public class Logar extends Item {
     public Logar() {

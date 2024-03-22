@@ -2,7 +2,7 @@ package skeleton.elveszlelket.item;
 
 import skeleton.elveszlelket.Room;
 import skeleton.elveszlelket.Student;
-import strategy.TeleportStrategy;
+import skeleton.elveszlelket.strategy.TeleportStrategy;
 
 public class Transistor extends Item{
     private Transistor pair;

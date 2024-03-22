@@ -1,7 +1,7 @@
 package skeleton.elveszlelket.item;
 
 import skeleton.elveszlelket.Student;
-import strategy.GasStrategy;
+import skeleton.elveszlelket.strategy.GasStrategy;
 
 public class Camember extends Item {
     private Boolean opened;

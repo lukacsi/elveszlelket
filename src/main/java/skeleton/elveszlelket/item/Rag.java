@@ -1,7 +1,7 @@
 package skeleton.elveszlelket.item;
 
 import skeleton.elveszlelket.Student;
-import strategy.RagStrategy;
+import skeleton.elveszlelket.strategy.RagStrategy;
 
 public class Rag extends ProtectionItem{
     public Rag() {

@@ -1,7 +1,7 @@
 package skeleton.elveszlelket.item;
 
 import skeleton.elveszlelket.Student;
-import strategy.GasProtectionStrategy;
+import skeleton.elveszlelket.strategy.GasProtectionStrategy;
 
 public class FFP2Mask extends ProtectionItem{
     public FFP2Mask() {
