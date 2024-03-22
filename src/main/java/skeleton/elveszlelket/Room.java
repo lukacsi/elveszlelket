@@ -26,17 +26,33 @@ public class Room {
 
     /**
      * Hallgatót ad a szobához.
-     * @param h A hozzáadandő hallgató.
+     * @param s A hozzáadandó hallgató.
      */
-    public void addHuman(Human h){
+    public void addHuman(Student s){
         //értesítés
     }
 
     /**
-     * Elvesz egy embert a szobából.
-     * @param h A törlendő ember.
+     * Oktatót ad a szobához.
+     * @param t A hozzáadandó oktató.
      */
-    public void removeHuman(Human h){// nem lesz ez így jó szerintem (külön student és teacher kell)
+    public void addHuman(Teacher s){
+        //értesítés
+    }
+    
+    /**
+     * Elvesz egy hallgatót a szobából.
+     * @param s A törlendő hallgató.
+     */
+    public void removeHuman(Student s){// nem lesz ez így jó szerintem (külön student és teacher kell)
+        //értesítés
+    }
+
+    /**
+     * Elvesz egy oktatót a szobából.
+     * @param t A törlendő oktató.
+     */
+    public void removeHuman(Teacher t){// nem lesz ez így jó szerintem (külön student és teacher kell)
         //értesítés
     }
 
@@ -73,13 +89,11 @@ public class Room {
 
     /**
      * Kettéoszt egy szobát.
-     * @param r1 ?
-     * @param r2 ?
-     * @return Az osztás során eletkező két új szoba.
+     * @param r1 Az egyik előre létrehozott szoba.
+     * @param r2 A másik előre létrehozott szoba.
      */
-    public List<Room> split(Room r1, Room r2){
-        List result = new ArrayList<>();
-        return result;
+    public void split(Room r1, Room r2){
+        
     }
 
     /**
@@ -107,10 +121,10 @@ public class Room {
     }
 
     /**
-     * Megbénítja a szobában tartózkodó embereket (?)
-     * 3 kör erejéig. (?)
+     * Megbénítja a szobában tartózkodó embereket
+     * 3 kör erejéig.
      */
-    public void stunHuman(/*Human h?*/){
+    public void stunHuman(){
         int duration = 3;
         for (Student s : students) {
             s.stun(duration);
@@ -155,7 +169,7 @@ public class Room {
      * Megbénítja a szobában tartózkodó összes tanárt.
      */
     public void stunTechers(){
-        int duration = 3; //(?)
+        int duration = 3;
         for (Teacher t : teachers) {
             t.stun(duration);
         }
@@ -179,8 +193,9 @@ public class Room {
     }
 
     /**
-     * (?)
-     * @param r
+     * A szoba, melyre mehgívják az összes benne található
+     * tárgyat átrakja a paraméterül kapott szobába.
+     * @param r A szoba, melybe a tárgyak kerülnek majd.
      */
     public void moveItemsToRoom(Room r){
 
