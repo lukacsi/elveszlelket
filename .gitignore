@@ -73,3 +73,10 @@ venv.bak/
 # Ignore all .env files #
 #########################
 *.env
+
+# Ignore target #
+#################
+.classpath
+.project
+.settings/
+target/
