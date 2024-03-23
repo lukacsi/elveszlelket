@@ -168,7 +168,7 @@ public class Room {
     /**
      * Megbénítja a szobában tartózkodó összes tanárt.
      */
-    public void stunTechers(){
+    public void stunTeachers(){
         int duration = 3;
         for (Teacher t : teachers) {
             t.stun(duration);
