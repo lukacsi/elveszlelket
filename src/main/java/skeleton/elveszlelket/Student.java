@@ -127,7 +127,8 @@ public class Student implements Human {
 
     @Override
     public Room getRoom() {
-        return null;
+        Room currentRoom = getRoom();
+        return currentRoom;
     }
 
     public void iHaveArrived() {

@@ -1,9 +1,20 @@
 package skeleton.elveszlelket;
 import skeleton.elveszlelket.item.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import skeleton.elveszlelket.door.*;
 
 public class Teacher implements Human {
     private int stunDuration;
+    private List<Item> items;
+
+    public Teacher()
+    {
+        items = new ArrayList<>();
+        stunDuration = 0;
+    }
 
     @Override
     public boolean use(OneWayDoor door) {
@@ -17,26 +28,34 @@ public class Teacher implements Human {
 
     @Override
     public boolean pickupItem(Item item) {
-        return false;
+        items.add(item);
+        return true;
     }
 
     @Override
     public boolean dropItem(Item item) {
-        return false;
+        return items.remove(item);
     }
 
     @Override
     public void stun(int duration) {
+        stunDuration += duration;
     }
 
     @Override
     public boolean decreaseStun(int amount) {
+        stunDuration -= amount;
+        if (stunDuration < 0) {
+            stunDuration = 0;
+            return true;
+        }
         return false;
     }
 
     @Override
     public Room getRoom() {
-        return null;
+        Room currentRoom = getRoom();
+        return currentRoom;
     }
 
     public void iHaveArrived() {
