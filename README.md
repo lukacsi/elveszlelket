@@ -1,4 +1,4 @@
 # Building app
-mvn clean package
+./mvnw clean install
 # Running app
-mvn exec:java
+./mvnw exec:java
