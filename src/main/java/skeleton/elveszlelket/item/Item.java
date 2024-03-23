@@ -10,5 +10,9 @@ public abstract class Item {
     public Item() {
         
     }
+
+    public String getName() {
+        return name;
+    }
     public abstract void use(Student student);
 }

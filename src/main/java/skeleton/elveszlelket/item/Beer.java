@@ -4,7 +4,7 @@ import skeleton.elveszlelket.Student;
 import skeleton.elveszlelket.strategy.DrunkStrategy;
 
 public class Beer extends ProtectionItem {
-    public Beer(String name) {
+    public Beer() {
         name = "Beer";
         uses = 1;
         strategy = new DrunkStrategy();

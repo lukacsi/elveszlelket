@@ -129,5 +129,9 @@ public class Student implements Human {
     public Room getRoom() {
         return null;
     }
+
+    public void iHaveArrived() {
+        
+    }
 }
 

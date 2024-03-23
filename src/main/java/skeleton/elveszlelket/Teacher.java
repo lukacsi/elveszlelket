@@ -38,5 +38,9 @@ public class Teacher implements Human {
     public Room getRoom() {
         return null;
     }
+
+    public void iHaveArrived() {
+        
+    }
 }
 

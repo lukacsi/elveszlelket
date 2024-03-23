@@ -10,4 +10,5 @@ public interface Human {
     void stun(int duration);
     boolean decreaseStun(int amount);
     Room getRoom();
+    void iHaveArrived();
 }

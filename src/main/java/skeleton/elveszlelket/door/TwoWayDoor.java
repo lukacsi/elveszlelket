@@ -5,7 +5,7 @@ import skeleton.elveszlelket.Student;
 import skeleton.elveszlelket.Teacher;
 
 public class TwoWayDoor extends Door{
-    private Room firsRoom;
+    private Room firstRoom;
     private Room secoundRoom;
     
     public TwoWayDoor(){}
@@ -35,7 +35,7 @@ public class TwoWayDoor extends Door{
      */
     @Override
     public void putMeThrough(Student s){
-        Room destination = firsRoom;
+        Room destination = firstRoom;
         if(destination == s.getRoom()){
             destination = secoundRoom;
         }
@@ -55,12 +55,22 @@ public class TwoWayDoor extends Door{
      */
     @Override
     public void putMeThrough(Teacher t){
-        Room destination = firsRoom;
+        Room destination = firstRoom;
         if(destination == t.getRoom()){
             destination = secoundRoom;
         }
         t.getRoom().removeHuman(t);
         destination.addHuman(t);
         t.iHaveArrived();
+    }
+
+    /*
+     * Beállítja az szobáit, inicializáláskor kell.
+     * @param r1 Egyik szoba
+     * @param r2 Második szoba
+     */
+    public void setRooms(Room r1, Room r2) {
+        firstRoom = r1;
+        secoundRoom = r2;
     }
 }

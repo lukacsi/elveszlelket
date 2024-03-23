@@ -44,7 +44,7 @@ public class Room {
      * Elvesz egy hallgatót a szobából.
      * @param s A törlendő hallgató.
      */
-    public void removeHuman(Student s){// nem lesz ez így jó szerintem (külön student és teacher kell)
+    public void removeHuman(Student s){
         //értesítés
     }
 
@@ -52,7 +52,7 @@ public class Room {
      * Elvesz egy oktatót a szobából.
      * @param t A törlendő oktató.
      */
-    public void removeHuman(Teacher t){// nem lesz ez így jó szerintem (külön student és teacher kell)
+    public void removeHuman(Teacher t){
         //értesítés
     }
 
@@ -78,13 +78,13 @@ public class Room {
 
     /**
      * Összevon két szobát.
-     * @param r1 Az egyik összevonandó szoba.
-     * @param r2 A másik összevonandó szoba.
+     * @param r1 A másik összevonandó szoba, mivel ezt egy adott Room példányra hívjuk meg,
+     * így ő lesz a merge egyik szereplője
+     * @param r2 -> Az a szoba amelyik a két szoba összevonásának a végeredménye lesz.
      * @return Az összevonás során keletkező új szoba.
      */
-    public Room merge(Room r1, Room r2){
-        Room result = new Room();
-        return result;
+    public void merge(Room r1, Room r2){
+        
     }
 
     /**

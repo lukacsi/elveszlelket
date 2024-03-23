@@ -68,4 +68,14 @@ public class OneWayDoor extends Door{
         }
         return result;
     }
+
+        /*
+     * Beállítja az szobáit, inicializáláskor kell.
+     * @param r1 Egyik szoba - ennek most nincs jelentősége
+     * @param r2 Második szoba
+     */
+    @Override
+    public void setRooms(Room r1, Room r2) {
+        destination = r2;
+    }
 }
