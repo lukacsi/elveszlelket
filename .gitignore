@@ -80,4 +80,5 @@ venv.bak/
 .project
 .settings/
 */target/*
-*/target/**
+target/*
+target/**
