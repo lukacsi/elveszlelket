@@ -1,5 +1,6 @@
 package skeleton.elveszlelket.tester;
 import java.util.Scanner;
+import java.util.Collection;
 import java.util.HashMap;
 import skeleton.elveszlelket.*;
 import skeleton.elveszlelket.door.*;
@@ -25,6 +26,9 @@ public class Tester {
         commands.put("ADDTOTEACHER", new ADDTOTEACHER());
         commands.put("CONNECTROOM", new CONNECTROOM());
         commands.put("CONNECTTRANS", new CONNECTTRANS());
+        commands.put("REMOVE", new REMOVE());
+        commands.put("CHECKWIN", new CHECKWIN());
+        commands.put("CHECKLOSE", new CHECKLOSE());
 
         hallgatok = new HashMap<>();
         oktatok = new HashMap<>();
@@ -92,6 +96,29 @@ public class Tester {
         } else {
             return false;
         }
+    }
+
+    public void removeStudent(String name) {
+        hallgatok.remove(name);
+    }
+
+    public void removeTeacher(String name) {
+        oktatok.remove(name);
+    }
+
+    public Collection<Student> getStudents() {
+        return hallgatok.values();
+    }
+
+    // Method to check if a student has Logar item
+    public boolean hasLogar(Student hallgato) 
+    {
+        return hallgato.hasLogar();
+    }
+
+    // Method to check if a student is dead
+    public boolean halottE(Student hallgato) {
+        return hallgato.halottE();
     }
 
     public void listen() {

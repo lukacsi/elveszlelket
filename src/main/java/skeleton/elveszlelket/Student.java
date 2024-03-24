@@ -65,12 +65,7 @@ public class Student implements Human {
     }
 
     public boolean useItem(Item item) {
-        if (item instanceof Transistor) {
-            //transistor logic: 
-            return true;
-        } else {
             return false;
-        }
     }
 
     public void removeItem(Item item) {
@@ -130,8 +125,26 @@ public class Student implements Human {
         return null;
     }
 
+    public boolean hasLogar() {
+        for (Item item : items) {
+            if (item instanceof Logar) {
+                logarObtained = true;
+                return logarObtained;
+            }
+        }
+        return false;
+    }
+
+    public boolean halottE() {
+        if(dead)
+        {
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
     public void iHaveArrived() {
         
     }
 }
-
