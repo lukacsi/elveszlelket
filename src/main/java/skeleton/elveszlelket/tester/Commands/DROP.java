@@ -25,9 +25,9 @@ public class DROP implements skeleton.elveszlelket.tester.Commands.Command {
         }
 
         if (human.dropItem(item)) {
-            System.out.println("Item '" + item.getName() + "' dropped by human '" + human.getName() + "'.");
+            System.out.println("Item '" + item.getName() + "' dropped by human.");
         } else {
-            System.out.println("Unable to drop item '" + item.getName() + "' for human '" + human.getName() + "'.");
+            System.out.println("Unable to drop item '" + item.getName() + "' for human .");
         }
     }
 }

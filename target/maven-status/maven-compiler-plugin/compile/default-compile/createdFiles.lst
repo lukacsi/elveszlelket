@@ -1,4 +1,6 @@
+skeleton/elveszlelket/tester/Commands/REMOVE.class
 skeleton/elveszlelket/item/Item.class
+skeleton/elveszlelket/tester/Commands/USEITEM.class
 skeleton/elveszlelket/tester/Commands/Make.class
 skeleton/elveszlelket/item/ProtectionItem.class
 skeleton/elveszlelket/item/TVSZ.class
@@ -7,8 +9,10 @@ skeleton/elveszlelket/tester/Commands/ADDTTOROOM.class
 skeleton/elveszlelket/strategy/GasProtectionStrategy.class
 skeleton/elveszlelket/item/Rag.class
 skeleton/elveszlelket/tester/Commands/ADDSTOROOM.class
-skeleton/elveszlelket/door/OneWayDoor.class
 skeleton/elveszlelket/strategy/ItemUseStrategy.class
+skeleton/elveszlelket/door/OneWayDoor.class
+skeleton/elveszlelket/tester/Commands/CHECKLOSE.class
+skeleton/elveszlelket/tester/Commands/PICKUP.class
 skeleton/elveszlelket/tester/Commands/ADDTOSTUDENT.class
 skeleton/elveszlelket/Room.class
 skeleton/elveszlelket/strategy/WinStrategy.class
@@ -23,13 +27,15 @@ skeleton/elveszlelket/strategy/TeleportStrategy.class
 skeleton/elveszlelket/Student.class
 skeleton/elveszlelket/item/Camember.class
 skeleton/elveszlelket/tester/Commands/CONNECTTRANS.class
+skeleton/elveszlelket/tester/Commands/CHECKWIN.class
 skeleton/elveszlelket/Teacher.class
 skeleton/elveszlelket/door/TwoWayDoor.class
 skeleton/elveszlelket/item/Logar.class
-skeleton/elveszlelket/App.class
 skeleton/elveszlelket/strategy/IHaveTheRightStrategy.class
+skeleton/elveszlelket/App.class
 skeleton/elveszlelket/strategy/GasStrategy.class
+skeleton/elveszlelket/tester/Commands/DROP.class
 skeleton/elveszlelket/tester/Tester.class
 skeleton/elveszlelket/tester/Commands/Command.class
-skeleton/elveszlelket/door/Door.class
 skeleton/elveszlelket/strategy/RagStrategy.class
+skeleton/elveszlelket/door/Door.class
