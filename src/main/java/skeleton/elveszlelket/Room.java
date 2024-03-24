@@ -32,6 +32,10 @@ public class Room {
         //értesítés
     }
 
+    public List<Item> getItems() {
+        return items;
+    }
+
     /**
      * Oktatót ad a szobához.
      * @param t A hozzáadandó oktató.
@@ -173,6 +177,14 @@ public class Room {
         for (Teacher t : teachers) {
             t.stun(duration);
         }
+    }
+
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public List<Teacher> getTeacher() {
+        return teachers;
     }
 
     /**

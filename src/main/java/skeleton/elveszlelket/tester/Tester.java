@@ -19,22 +19,41 @@ public class Tester {
     public Tester() {
         commands = new HashMap<>();
         commands.put("MAKE", new Make());
-        commands.put("ADDSTOROOM", new ADDSTOROOM());
-        commands.put("ADDTTOROOM", new ADDTTOROOM());
+        commands.put("ADDHTOROOM", new ADDHTOROOM());
         commands.put("ADDITOROOM", new ADDITOROOM());
-        commands.put("ADDTOSTUDENT", new ADDTOSTUDENT());
-        commands.put("ADDTOTEACHER", new ADDTOTEACHER());
+        commands.put("ADDTOHUMAN", new ADDTOHUMAN());
         commands.put("CONNECTROOM", new CONNECTROOM());
         commands.put("CONNECTTRANS", new CONNECTTRANS());
+<<<<<<< HEAD
         commands.put("REMOVE", new REMOVE());
         commands.put("CHECKWIN", new CHECKWIN());
         commands.put("CHECKLOSE", new CHECKLOSE());
+=======
+        commands.put("MOVE", new MOVE());
+        commands.put("MERGE", new MERGE());
+>>>>>>> dani_fasza_branche
 
         hallgatok = new HashMap<>();
         oktatok = new HashMap<>();
         szobak = new HashMap<>();
         ajtok = new HashMap<>();
         targyak = new HashMap<>();
+    }
+
+    public void removeHuman(Teacher t) {
+        oktatok.remove(t);
+    }
+
+    public void removeHuman(Student s) {
+        hallgatok.remove(s);
+    }
+
+    public void removeRoom(Room r) {
+        szobak.remove(r);
+    }
+
+    public Command getCommand(Object key) {
+        return commands.get(key);
     }
 
     public void addStudent(String name, Student s) {
