@@ -9,12 +9,12 @@ import skeleton.elveszlelket.tester.Commands.*;
 
 public class Tester {
 
-    private HashMap<String, Command> commands;
-    private HashMap<String, Student> hallgatok;
-    private HashMap<String, Teacher> oktatok;
-    private HashMap<String, Room> szobak;
-    private HashMap<String, Door> ajtok;
-    private HashMap<String, Item> targyak;
+    private static HashMap<String, Command> commands;
+    private static HashMap<String, Student> hallgatok;
+    private static HashMap<String, Teacher> oktatok;
+    private static HashMap<String, Room> szobak;
+    private static HashMap<String, Door> ajtok;
+    private static HashMap<String, Item> targyak;
 
     public Tester() {
         commands = new HashMap<>();
@@ -24,14 +24,15 @@ public class Tester {
         commands.put("ADDTOHUMAN", new ADDTOHUMAN());
         commands.put("CONNECTROOM", new CONNECTROOM());
         commands.put("CONNECTTRANS", new CONNECTTRANS());
-<<<<<<< HEAD
         commands.put("REMOVE", new REMOVE());
         commands.put("CHECKWIN", new CHECKWIN());
         commands.put("CHECKLOSE", new CHECKLOSE());
-=======
         commands.put("MOVE", new MOVE());
         commands.put("MERGE", new MERGE());
->>>>>>> dani_fasza_branche
+        commands.put("SPLIT", new SPLIT());
+        commands.put("DROP", new DROP());
+        commands.put("PICKUP", new PICKUP());
+        commands.put("USEITEM", new USEITEM());
 
         hallgatok = new HashMap<>();
         oktatok = new HashMap<>();
