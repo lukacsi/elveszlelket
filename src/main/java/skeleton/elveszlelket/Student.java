@@ -78,8 +78,10 @@ public class Student implements Human {
         if (items.size() >= 5) {
             return false;
         }
-        if(item.getName() == "Logar")
+        if(item.getName() == "Logar") {
             item.use(this);
+            logarObtained = true;
+        }
         items.add(item);
         return true;
     }
