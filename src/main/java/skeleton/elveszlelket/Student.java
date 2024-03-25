@@ -48,24 +48,26 @@ public class Student implements Human {
     @Override
     public boolean use(OneWayDoor door) {
         Room currentRoom = getRoom();
-        if (doorBlocked!=true) {
-            if (!door.isRightDirection(getRoom())) {
+        if(doorBlocked == true) {
+            if(lastDoor.equals(door)) {
+                System.out.println("Szoba valtas sikertelen!");
                 return false;
             }
-            if(!currentRoom.hasFreePlace())
-            {
-                return false;
-            }
-            currentRoom.removeHuman(this);
-            door.accept(this);
-            door.putMeThrough(this);
-            lastDoor = door;
-            return true;
         }
-        else{
+        if (!door.isRightDirection(getRoom())) {
+            System.out.println("Szoba valtas sikertelen!");
             return false;
         }
-        
+        if(!currentRoom.hasFreePlace())
+        {
+            return false;
+        }
+        currentRoom.removeHuman(this);
+        door.accept(this);
+        door.putMeThrough(this);
+        lastDoor = door;
+        System.out.println("Szoba valtas sikeres!");
+        return true;
     }
 
     /**
@@ -77,7 +79,12 @@ public class Student implements Human {
     @Override
     public boolean use(TwoWayDoor door) {
         Room currentRoom = getRoom();
-        if (doorBlocked!=true) {
+        if(doorBlocked == true) {
+            if(lastDoor.equals(door)) {
+                System.out.println("Szoba valtas sikertelen!");
+                return false;
+            }
+        }
         if(!currentRoom.hasFreePlace())
         {
             return false;
@@ -85,12 +92,9 @@ public class Student implements Human {
         currentRoom.removeHuman(this);
         door.accept(this);
         door.putMeThrough(this);
+        System.out.println("Szoba valtas sikeres!");
         lastDoor = door;
         return true;
-        }
-        else{
-            return false;
-        }
     }
 
      /**

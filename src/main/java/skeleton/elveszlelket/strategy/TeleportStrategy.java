@@ -32,7 +32,7 @@ public class TeleportStrategy implements ItemUseStrategy {
             t.unPair();
             tp.unPair();
             student.teleport(tp.getLocation());
-            System.out.println("Teleportacio megtortent.")    
+            System.out.println("Teleportacio megtortent.");   
         }
     }
 }

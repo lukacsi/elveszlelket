@@ -20,6 +20,7 @@ public class ADDHTOROOM implements skeleton.elveszlelket.tester.Commands.Command
         if(keresettTeacher != null) {
             if(keresettR != null) {
                 keresettR.addHuman(keresettTeacher);
+                keresettTeacher.setCurrentRoom(keresettR);
                 System.out.println("Sikeresen hozzaadta az oktatot a szobahoz.");
             } else {
                 System.out.println("Parameterkent kapott szoba nincs meg feljegyezve.");
@@ -27,6 +28,7 @@ public class ADDHTOROOM implements skeleton.elveszlelket.tester.Commands.Command
         } else if(keresettStudent != null) { // felvett szoba a testernél
             if(keresettR != null) {
                 keresettR.addHuman(keresettStudent);
+                keresettStudent.setCurrentRoom(keresettR);
                 System.out.println("Sikeresen hozzaadta a hallgatot a szobahoz.");
             } else {
                 System.out.println("Parameterkent kapott Szoba nincs meg feljegyezve.");

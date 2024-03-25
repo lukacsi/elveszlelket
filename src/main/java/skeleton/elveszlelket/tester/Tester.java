@@ -21,7 +21,7 @@ public class Tester {
     private static HashMap<String, Room> szobak;
     private static HashMap<String, Door> ajtok;
     private static HashMap<String, Item> targyak;
-    private Scanner sc = new Scanner(System.in);
+    public Scanner sc = new Scanner(System.in);
     /**
      * Konstruktor, amely inicializálja a parancsokat és a szimulációs objektumokat tároló
      * gyűjteményeket.
@@ -312,6 +312,7 @@ public class Tester {
             }
     
             executeCommand(sor.split(" ")); // Split the line and execute the command
+            sor = "";
         }
     }
     /**

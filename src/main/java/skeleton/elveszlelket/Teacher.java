@@ -34,17 +34,19 @@ public class Teacher implements Human {
     @Override
     public boolean use(OneWayDoor door) {
         Room currentRoom = getRoom();
-            if (!door.isRightDirection(getRoom())) {
-                return false;
-            }
-            if(!currentRoom.hasFreePlace())
-            {
-                return false;
-            }
-            currentRoom.removeHuman(this);
-            door.accept(this);
-            door.putMeThrough(this);
-            return true;
+        if (!door.isRightDirection(getRoom())) {
+            System.out.println("Szoba valtas sikertelen!");
+            return false;
+        }
+        if(!currentRoom.hasFreePlace())
+        {
+            return false;
+        }
+        currentRoom.removeHuman(this);
+        door.accept(this);
+        door.putMeThrough(this);
+        System.out.println("Szoba valtas sikeres!");
+        return true;
         }
 
 
@@ -64,6 +66,7 @@ public class Teacher implements Human {
         currentRoom.removeHuman(this);
         door.accept(this);
         door.putMeThrough(this);
+        System.out.println("Szoba valtas sikeres!");
         return true;
     }
 
