@@ -15,8 +15,6 @@ public class Teacher implements Human {
     {
         items = new ArrayList<>();
         stunDuration = 0;
-        currentRoom = new Room();
-        currentRoom.addHuman(this); 
     }
 
     @Override
@@ -31,8 +29,10 @@ public class Teacher implements Human {
 
     @Override
     public boolean pickupItem(Item item) {
-        items.add(item);
-        return true;
+        if(items.size()<1) {
+            items.add(item);
+            return true;
+        } else return false;
     }
 
     @Override

@@ -29,8 +29,6 @@ public class Student implements Human {
         dead = false;
         winCondition = false;
         lastDoor = null;
-        currentRoom = new Room();
-        currentRoom.addHuman(this); 
     }
 
     @Override
@@ -47,6 +45,7 @@ public class Student implements Human {
             currentRoom.removeHuman(this);
             door.accept(this);
             door.putMeThrough(this);
+            lastDoor = door;
             return true;
         }
         else{
@@ -66,6 +65,7 @@ public class Student implements Human {
         currentRoom.removeHuman(this);
         door.accept(this);
         door.putMeThrough(this);
+        lastDoor = door;
         return true;
         }
         else{
@@ -86,23 +86,11 @@ public class Student implements Human {
 
     @Override
     public boolean dropItem(Item item) {
+        currentRoom.addItem(item);
         return items.remove(item);
     }
 
     public boolean useItem(Item item) {
-        // if (item instanceof Beer) {
-        //     ((Beer) item).use(this);
-        // } else if (item instanceof Camember) {
-        //     ((Camember) item).use(this);
-        // } else if (item instanceof FFP2Mask) {
-        //     ((FFP2Mask) item).use(this);
-        // } else if (item instanceof Rag) {
-        //     ((Rag) item).use(this);
-        // } else if (item instanceof Transistor) {
-        //     ((Transistor) item).use(this);
-        // } else if (item instanceof TVSZ) {
-        //     ((TVSZ) item).use(this);
-        // }
         item.use(this);
         return true;
     }
@@ -124,6 +112,8 @@ public class Student implements Human {
     }
 
     public boolean killYourself() {
+        if(immunityDuration != 0)
+            dead = true;
         return dead;
     }
 
@@ -136,9 +126,11 @@ public class Student implements Human {
     }
 
     public boolean teleport(Room room) {
-        getRoom().removeHuman(this);
-        room.addHuman(this);
-        return true;
+        if(room.hasFreePlace()) {
+            getRoom().removeHuman(this);
+            room.addHuman(this);
+            return true;
+        } else return false;
     }
 
     @Override

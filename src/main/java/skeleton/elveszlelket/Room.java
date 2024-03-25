@@ -13,6 +13,8 @@ public class Room {
     private List<Student> students;
     private List<Item> items;
     private List<Door> doors;
+    private boolean cursed;
+    private boolean hasGas;
 
     /**
      * Alapkonstruktor a szobához.
@@ -22,6 +24,8 @@ public class Room {
         students = new ArrayList<>();
         items = new ArrayList<>();
         doors = new ArrayList<>();
+        cursed = false;
+        hasGas = false;
     }
 
     /**
@@ -29,7 +33,7 @@ public class Room {
      * @param s A hozzáadandó hallgató.
      */
     public void addHuman(Student s){
-        //értesítés
+        students.add(s);
     }
 
     public List<Item> getItems() {
@@ -40,8 +44,8 @@ public class Room {
      * Oktatót ad a szobához.
      * @param t A hozzáadandó oktató.
      */
-    public void addHuman(Teacher s){
-        //értesítés
+    public void addHuman(Teacher t){
+        teachers.add(t);
     }
     
     /**
@@ -49,7 +53,7 @@ public class Room {
      * @param s A törlendő hallgató.
      */
     public void removeHuman(Student s){
-        //értesítés
+        students.remove(s);
     }
 
     /**
@@ -57,7 +61,7 @@ public class Room {
      * @param t A törlendő oktató.
      */
     public void removeHuman(Teacher t){
-        //értesítés
+        students.remove(t);
     }
 
     /**
@@ -84,11 +88,16 @@ public class Room {
      * Összevon két szobát.
      * @param r1 A másik összevonandó szoba, mivel ezt egy adott Room példányra hívjuk meg,
      * így ő lesz a merge egyik szereplője
-     * @param r2 -> Az a szoba amelyik a két szoba összevonásának a végeredménye lesz.
+     * @param uj -> Az a szoba amelyik a két szoba összevonásának a végeredménye lesz.
      * @return Az összevonás során keletkező új szoba.
      */
-    public void merge(Room r1, Room r2){
-        
+    public void merge(Room r1, Room uj){
+        moveItemsToRoom(uj);
+        r1.moveItemsToRoom(uj);
+        if(cursed || r1.isCursed())
+            uj.setCursed();
+        if(hasGas || r1.hasGas())
+            uj.setGas();
     }
 
     /**
@@ -142,7 +151,11 @@ public class Room {
      * Megváltoztatja az ajtók státuszát.
      */
     public void changeDoorStatus(){
-
+        if(cursed) {
+            for (Door door : doors) {
+                door.changeVisibility();
+            }
+        }
     }
 
     /**
@@ -159,14 +172,14 @@ public class Room {
      * Elgázosítja a szobát.
      */
     public void setGas(){
-
+        hasGas = true;
     }
 
     /**
      * Elátkozza a szobát.
      */
     public void setCursed(){
-
+        cursed = true;
     }
 
     /**
@@ -210,7 +223,10 @@ public class Room {
      * @param r A szoba, melybe a tárgyak kerülnek majd.
      */
     public void moveItemsToRoom(Room r){
-
+        for (Item i : items) {
+            r.addItem(i);
+        }
+        items.clear();
     }
 
     /**

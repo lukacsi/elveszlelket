@@ -4,7 +4,8 @@ import skeleton.elveszlelket.Student;
 import skeleton.elveszlelket.Teacher;
 
 public abstract class Door {
-    
+    boolean hidden = false;
+
     /*
      * Beállítja az szobáit, inicializáláskor kell.
      * @param r1 Egyik szoba
@@ -14,14 +15,14 @@ public abstract class Door {
     public void setRooms(Room r1, Room r2) {}
 
     /**
-     * Eltűnteti az ajtót.
+     * Megjeleníti vagy eltünteti az ajtót
      */
-    public void hide(){}
-
-    /**
-     * Megjeleníti az ajtót.
-     */
-    public void show(){}
+    public void changeVisibility() {
+        if(hidden) 
+            hidden = false;
+        else 
+            hidden = true;
+    }
 
     /**
      * Elfogadja az observer hallgatót.
