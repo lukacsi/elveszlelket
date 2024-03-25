@@ -19,7 +19,7 @@ public class Tester {
 
     public Tester() {
         commands = new HashMap<>();
-        commands.put("MAKE", new Make());
+        commands.put("MAKE", new MAKE());
         commands.put("ADDHTOROOM", new ADDHTOROOM());
         commands.put("ADDITOROOM", new ADDITOROOM());
         commands.put("ADDTOHUMAN", new ADDTOHUMAN());
