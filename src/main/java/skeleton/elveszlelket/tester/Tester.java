@@ -15,6 +15,7 @@ public class Tester {
     private static HashMap<String, Room> szobak;
     private static HashMap<String, Door> ajtok;
     private static HashMap<String, Item> targyak;
+    private Scanner sc = new Scanner(System.in);
 
     public Tester() {
         commands = new HashMap<>();
@@ -99,18 +100,13 @@ public class Tester {
 
     public int askInt(String uzenet) {
         System.out.println(uzenet);
-        Scanner sc = new Scanner(System.in);
         int vissza = sc.nextInt();
-        sc.close();
         return vissza;
     }
 
     public boolean askBoolean(String uzenet) {
         System.out.println(uzenet);
-        Scanner sc = new Scanner(System.in);
         String vissza = sc.nextLine();
-        sc.close();
-
         if(vissza.toLowerCase().equals("true")) {
             return true;
         } else {
@@ -142,14 +138,17 @@ public class Tester {
     }
 
     public void listen() {
-        Scanner sc = new Scanner(System.in);
-        // egy ciklusban addig futunk ameddig end of line jel nincs
-        while(sc.hasNextLine()) {
-            String sor = sc.nextLine(); // kiolvassuk a sort
-            executeCommand(sor.split(" ")); // szetszedjuk a space-k menten, majd meghivjuk az igy kapott
-            // string tombbel az executeCommand-ot.
+        while(true) {
+            String sor = sc.nextLine(); // Read the line
+    
+            // Check if the user wants to exit
+            if ("exit".equalsIgnoreCase(sor.trim())) {
+                sc.close();
+                break;
+            }
+    
+            executeCommand(sor.split(" ")); // Split the line and execute the command
         }
-        sc.close();
     }
     public void executeCommand(String[] params) {
         // a parameterek elso mezoje adja meg hogy milyen parancs lett meghivva(pl: MAKE)
