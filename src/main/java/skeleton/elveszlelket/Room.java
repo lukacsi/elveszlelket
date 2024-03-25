@@ -36,6 +36,9 @@ public class Room {
         students.add(s);
     }
 
+    /*
+     * Vissza adja a szobában található tárgyakat.
+     */
     public List<Item> getItems() {
         return items;
     }
@@ -69,8 +72,7 @@ public class Room {
      * @return Igaz csakis akkor, ha gázos.
      */
     public boolean containsGas(){
-        boolean result = false;
-        //kérdés a teszternek
+        boolean result = App.t.askBoolean("Gazos a szoba?");
         return result;
     }
 
@@ -79,8 +81,7 @@ public class Room {
      * @return Igaz csakis akkor, ha van hely.
      */
     public boolean hasFreePlace(){
-        boolean result = false;
-        //kérdés a teszternek
+        boolean result = App.t.askBoolean("Van szabad hely?");
         return result;
     }
 
@@ -96,7 +97,7 @@ public class Room {
         r1.moveItemsToRoom(uj);
         if(cursed || r1.isCursed())
             uj.setCursed();
-        if(hasGas || r1.hasGas())
+        if(hasGas || r1.containsGas())
             uj.setGas();
     }
 
@@ -164,7 +165,6 @@ public class Room {
      */
     public boolean isCursed(){
         boolean result = false;
-        //kérdés a teszternek
         return result;
     }
 

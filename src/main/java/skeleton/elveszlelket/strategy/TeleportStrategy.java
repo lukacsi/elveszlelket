@@ -1,5 +1,6 @@
 package skeleton.elveszlelket.strategy;
 
+import skeleton.elveszlelket.App;
 import skeleton.elveszlelket.Student;
 import skeleton.elveszlelket.item.Item;
 import skeleton.elveszlelket.item.Transistor;
@@ -20,14 +21,18 @@ public class TeleportStrategy implements ItemUseStrategy {
      */
     public void execute(Student student, Item item) {
         Transistor t = (Transistor) item;
-        if(!t.hasPair()) {
-            System.out.println("Transistor has no pair");
+        boolean answer = App.t.askBoolean(t.getName() + " parositott?");
+        if(!answer) {
+            System.out.println("Teleportacio sikertelen");
             return;
         }
         Transistor tp = t.getPair();
-        student.dropItem(item);
-        t.unPair();
-        tp.unPair();
-        student.teleport(tp.getLocation());
+        if(tp != null) {
+            student.dropItem(item);
+            t.unPair();
+            tp.unPair();
+            student.teleport(tp.getLocation());
+            System.out.println("Teleportacio megtortent.")    
+        }
     }
 }

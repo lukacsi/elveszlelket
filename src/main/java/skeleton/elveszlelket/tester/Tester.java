@@ -49,6 +49,15 @@ public class Tester {
         targyak = new HashMap<>();
     }
 
+    public String getStudentReturnName(Student s) {
+        for(String st : hallgatok.keySet()) {
+            if(hallgatok.get(st).equals(s)) {
+                return st;
+            }
+        }
+        return "";
+    }
+
     /**
      * Eltávolít egy tanárt az oktatók gyűjteményéből.
      *

@@ -1,20 +1,17 @@
 package skeleton.elveszlelket.tester.Commands;
+import skeleton.elveszlelket.App;
 import skeleton.elveszlelket.Student;
 import skeleton.elveszlelket.tester.Tester;
 
 public class CHECKWIN implements skeleton.elveszlelket.tester.Commands.Command {
     public void execute(String[] params, Tester t) {
-        boolean win = true;
         for (Student hallgato : t.getStudents()) {
-            if (!hallgato.hasLogar()) {
-                win = false;
-                break;
+            boolean result = App.t.askBoolean(App.t.getStudentReturnName(hallgato) + ": has i obtained logar?");
+            if(result) {
+                System.out.println("A hallgatok megtalaltak a logart, gyozelem!");
+                return;
             }
         }
-        if (win) {
-            System.out.println("Gratulálok! Megnyerted a játékot!");
-        } else {
-            System.out.println("Keresd tovább a Logar tárgyat!");
-        }
+        System.out.println("A hallgatok meg nem talaltak ra a logarra.");
     }
 }

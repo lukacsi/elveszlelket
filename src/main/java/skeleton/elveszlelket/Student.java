@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import skeleton.elveszlelket.door.*;
-import skeleton.elveszlelket.Room.*;
 
 public class Student implements Human {
     private int stunDuration;
