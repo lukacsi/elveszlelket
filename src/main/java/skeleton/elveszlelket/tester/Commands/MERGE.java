@@ -4,7 +4,18 @@ import skeleton.elveszlelket.*;
 import skeleton.elveszlelket.door.*;
 import skeleton.elveszlelket.tester.Tester;
 
+/**
+ * Két szoba összeolvasztását végző parancs.
+ */
 public class MERGE implements skeleton.elveszlelket.tester.Commands.Command {
+    /**
+     * Két szoba összeolvasztását végző parancs végrehajtása.
+     *
+     * @param params A parancs paraméterei tömbként.
+     *               A params[0] tartalmazza a parancs nevét.
+     *               A params[1] és params[2] tartalmazza a két szoba nevét, amelyet össze kell olvasztani.
+     * @param t      A Tester objektum, amely tartalmazza a szimulációs objektumokat.
+     */
     public void execute(String[] params, Tester t) {
         Room r1 = t.getRoom(params[1]);
         Room r2 = t.getRoom(params[2]);

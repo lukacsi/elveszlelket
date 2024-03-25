@@ -5,7 +5,18 @@ import java.util.Random;
 import skeleton.elveszlelket.*;
 import skeleton.elveszlelket.tester.Tester;
 
+/**
+ * A szoba felosztását végző parancs.
+ */
 public class SPLIT implements skeleton.elveszlelket.tester.Commands.Command {
+    /**
+     * A szoba felosztását végző parancs végrehajtása.
+     *
+     * @param params A parancs paraméterei tömbként.
+     *               A params[0] tartalmazza a parancs nevét.
+     *               A params[1] tartalmazza a szoba nevét, amelyet fel kell osztani.
+     * @param t      A Tester objektum, amely tartalmazza a szimulációs objektumokat.
+     */
     public void execute(String[] params, Tester t) {
         Room r1 = t.getRoom(params[1]);
         if(r1 != null) {
