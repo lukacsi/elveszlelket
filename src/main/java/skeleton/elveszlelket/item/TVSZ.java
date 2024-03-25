@@ -3,13 +3,29 @@ package skeleton.elveszlelket.item;
 import skeleton.elveszlelket.Student;
 import skeleton.elveszlelket.strategy.IHaveTheRightStrategy;
 
-public class TVSZ extends ProtectionItem{
-    public TVSZ(){
+/**
+ * A TVSZ osztály egy védelmi elemet reprezentál, amelyet a diákok használhatnak.
+ * Ez az elem egy adott stratégiát használ, amelyet a diákok védelmére alkalmaznak.
+ */
+public class TVSZ extends ProtectionItem {
+
+    /**
+     * Konstruktor, amely létrehoz egy TVSZ objektumot.
+     * Inicializálja a név és a használatok számát, valamint beállítja a védelmi stratégiát.
+     */
+    public TVSZ() {
         name = "TVSZ";
         uses = 3;
         strategy = new IHaveTheRightStrategy();
     }
+
+    /**
+     * Egy metódus, amely lehetővé teszi a TVSZ használatát egy diákon.
+     * A stratégia végrehajtásakor a diák védelem alá kerül.
+     *
+     * @param student A diák, aki a TVSZ-t használja.
+     */
     public void use(Student student) {
-        
+        strategy.execute(student, this);
     }
 }

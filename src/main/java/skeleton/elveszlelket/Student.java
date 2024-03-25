@@ -78,6 +78,8 @@ public class Student implements Human {
         if (items.size() >= 5) {
             return false;
         }
+        if(item.getName() == "Logar")
+            item.use(this);
         items.add(item);
         return true;
     }
@@ -88,19 +90,20 @@ public class Student implements Human {
     }
 
     public boolean useItem(Item item) {
-        if (item instanceof Beer) {
-            ((Beer) item).use(this);
-        } else if (item instanceof Camember) {
-            ((Camember) item).use(this);
-        } else if (item instanceof FFP2Mask) {
-            ((FFP2Mask) item).use(this);
-        } else if (item instanceof Rag) {
-            ((Rag) item).use(this);
-        } else if (item instanceof Transistor) {
-            ((Transistor) item).use(this);
-        } else if (item instanceof TVSZ) {
-            ((TVSZ) item).use(this);
-        }
+        // if (item instanceof Beer) {
+        //     ((Beer) item).use(this);
+        // } else if (item instanceof Camember) {
+        //     ((Camember) item).use(this);
+        // } else if (item instanceof FFP2Mask) {
+        //     ((FFP2Mask) item).use(this);
+        // } else if (item instanceof Rag) {
+        //     ((Rag) item).use(this);
+        // } else if (item instanceof Transistor) {
+        //     ((Transistor) item).use(this);
+        // } else if (item instanceof TVSZ) {
+        //     ((TVSZ) item).use(this);
+        // }
+        item.use(this);
         return true;
     }
     
@@ -174,14 +177,7 @@ public class Student implements Human {
     }
 
     public boolean hasLogar() {
-        for (Item item : items) {
-            if (item instanceof Logar) {
-                logarObtained = true;
-                winCondition=true;
-                return winCondition;
-            }
-        }
-        return false;
+        return winCondition;
     }
 
     public boolean halottE() {
@@ -197,5 +193,9 @@ public class Student implements Human {
         Room currentRoom = getRoom();
         currentRoom.addHuman(this); 
         System.out.println("I have arrived");
+    }
+
+    public void setWinCondition() {
+        winCondition = true;
     }
 }

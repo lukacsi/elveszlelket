@@ -7,10 +7,12 @@ public abstract class Item {
     protected String name;
     protected ItemUseStrategy strategy;
 
-    public Item() {
-        
-    }
+    public Item() { }
 
+    
+    /** 
+     * @return String Visszaadja a tárgy nevét
+     */
     public String getName() {
         return name;
     }

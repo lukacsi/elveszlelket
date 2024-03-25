@@ -6,10 +6,19 @@ abstract class ProtectionItem extends Item {
     
     public ProtectionItem() {
     }
+
+    /**
+     * A maradék használatok számát leviszi 1-el ha a használatok száma nem 0
+     */
     public void decreaseUse() {
-        uses--;
+        if(uses > 0)
+            uses--;
     }
 
+    
+    /** 
+     * @return int A maradék használatok számát adja vissza
+     */
     public int getUses() {
         return uses;
     }

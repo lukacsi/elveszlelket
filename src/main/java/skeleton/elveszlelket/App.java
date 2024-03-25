@@ -6,7 +6,7 @@ import skeleton.elveszlelket.tester.Tester;
  */
 public class App 
 {
-    static Tester t;
+    public static Tester t;
 
     public static void main( String[] args )
     {
