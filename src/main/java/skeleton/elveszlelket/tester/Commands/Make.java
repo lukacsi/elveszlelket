@@ -6,7 +6,7 @@ import skeleton.elveszlelket.door.TwoWayDoor;
 import skeleton.elveszlelket.item.*;
 import skeleton.elveszlelket.tester.Tester;
 
-public class Make implements skeleton.elveszlelket.tester.Commands.Command {
+public class MAKE implements skeleton.elveszlelket.tester.Commands.Command {
     public void execute(String[] params, Tester t) {
         Student s = t.getStudent(params[2]);
         Teacher teacher = t.getTeacher(params[2]);
