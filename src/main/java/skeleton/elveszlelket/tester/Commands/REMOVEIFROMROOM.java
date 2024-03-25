@@ -12,7 +12,7 @@ public class REMOVEIFROMROOM implements Command {
             Room room = t.getRoom(params[2]);
 
             if(item == null){
-                System.out.println("Nincs ilyen tárgy.");
+                System.out.println("Nincs ilyen targy.");
             }
             if(room == null){
                 System.out.println("Nincs ilyen szoba.");
@@ -24,13 +24,13 @@ public class REMOVEIFROMROOM implements Command {
                 }
             }
             if(!hasItem){
-                System.out.println("Nincs a szobában ilyen tárgy.");
+                System.out.println("Nincs a szobaban ilyen targy.");
             }
             if(item != null && room != null && hasItem){
                 room.removeItem(item);
             }
         }else{
-            System.out.println("A paraméterek száma nem megfelelő.");
+            System.out.println("A parameterek szama nem megfelelo.");
         }
         
     }

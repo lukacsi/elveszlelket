@@ -241,10 +241,4 @@ public class Room {
             s.killYourself();
         }
     }
-
-    public boolean hasGas(){
-        boolean result = false;
-        
-        return result;
-    }
 }

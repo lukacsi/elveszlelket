@@ -14,17 +14,17 @@ public class REMOVEIFROMHUMAN implements Command{
                 human = t.getTeacher(params[2]);
             }
             if(item == null){
-                System.out.println("Nincs ilyen tárgy.");
+                System.out.println("Nincs ilyen targy.");
             }
             if(human == null){
-                System.out.println("Nincs ilyen nevű ember.");
+                System.out.println("Nincs ilyen nevu ember.");
             }
 
             if(item != null && human != null){
                 human.dropItem(item);
             }
         }else{
-            System.out.println("A paraméterek száma nem megfelelő.");
+            System.out.println("A parameterek szama nem megfelelo.");
         }
         
     }
