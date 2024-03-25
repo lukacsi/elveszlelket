@@ -34,15 +34,19 @@ public class Teacher implements Human {
     @Override
     public boolean use(OneWayDoor door) {
         Room currentRoom = getRoom();
-        if(!currentRoom.hasFreePlace())
-        {
-            return false;
+            if (!door.isRightDirection(getRoom())) {
+                return false;
+            }
+            if(!currentRoom.hasFreePlace())
+            {
+                return false;
+            }
+            currentRoom.removeHuman(this);
+            door.accept(this);
+            door.putMeThrough(this);
+            return true;
         }
-        currentRoom.removeHuman(this);
-        door.accept(this);
-        door.putMeThrough(this);
-        return true;
-    }
+
 
     /**
      * A tanár használ egy kétirányú ajtót.
