@@ -9,11 +9,14 @@ import skeleton.elveszlelket.door.*;
 public class Teacher implements Human {
     private int stunDuration;
     private List<Item> items;
+    private Room currentRoom;
 
     public Teacher()
     {
         items = new ArrayList<>();
         stunDuration = 0;
+        currentRoom = new Room();
+        currentRoom.addHuman(this); 
     }
 
     @Override
@@ -54,12 +57,16 @@ public class Teacher implements Human {
 
     @Override
     public Room getRoom() {
-        Room currentRoom = getRoom();
         return currentRoom;
     }
 
+    public void setCurrentRoom(Room room) {
+        this.currentRoom = room;
+    }
+
     public void iHaveArrived() {
-        
+        Room currentRoom = getRoom();
+        currentRoom.addHuman(this); 
+        System.out.println("I have arrived");
     }
 }
-

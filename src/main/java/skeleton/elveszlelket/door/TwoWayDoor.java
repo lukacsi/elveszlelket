@@ -46,6 +46,7 @@ public class TwoWayDoor extends Door{
         s.getRoom().removeHuman(s);
         destination.addHuman(s);
         s.iHaveArrived();
+        s.setCurrentRoom(destination);
     }
     
     /**
@@ -62,6 +63,7 @@ public class TwoWayDoor extends Door{
         t.getRoom().removeHuman(t);
         destination.addHuman(t);
         t.iHaveArrived();
+        t.setCurrentRoom(destination);
     }
 
     /*

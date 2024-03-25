@@ -5,18 +5,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import skeleton.elveszlelket.door.*;
+import skeleton.elveszlelket.Room.*;
 
 public class Student implements Human {
     private int stunDuration;
     private int immunityDuration;
     private boolean doorBlocked;
     private boolean logarObtained;
-    private int protectedDuration;
     private int gasProtectionDuration;
     private boolean dead;
     private boolean winCondition;
     private Door lastDoor;
     private List<Item> items;
+    private Room currentRoom;
 
     public Student() {
         items = new ArrayList<>();
@@ -24,30 +25,52 @@ public class Student implements Human {
         immunityDuration = 0;
         doorBlocked = false;
         logarObtained = false;
-        protectedDuration = 0;
         gasProtectionDuration = 0;
         dead = false;
         winCondition = false;
-        lastDoor = null;  
+        lastDoor = null;
+        currentRoom = new Room();
+        currentRoom.addHuman(this); 
     }
 
     @Override
     public boolean use(OneWayDoor door) {
-        if (!door.isRightDirection(getRoom())) {
+        Room currentRoom = getRoom();
+        if (doorBlocked!=true) {
+            if (!door.isRightDirection(getRoom())) {
+                return false;
+            }
+            if(!currentRoom.hasFreePlace())
+            {
+                return false;
+            }
+            currentRoom.removeHuman(this);
+            door.accept(this);
+            door.putMeThrough(this);
+            return true;
+        }
+        else{
             return false;
         }
-        /*Room currentRoom = getRoom(); // Get the current room
-        currentRoom.removeHuman(this);
-        Room destinationRoom = door.getDestinationRoom(); // Get the destination room
-        destinationRoom.addHuman(this);
-        lastDoor = door;*/
-        return true;
         
     }
 
     @Override
     public boolean use(TwoWayDoor door) {
-        return false;
+        Room currentRoom = getRoom();
+        if (doorBlocked!=true) {
+        if(!currentRoom.hasFreePlace())
+        {
+            return false;
+        }
+        currentRoom.removeHuman(this);
+        door.accept(this);
+        door.putMeThrough(this);
+        return true;
+        }
+        else{
+            return false;
+        }
     }
 
     @Override
@@ -65,19 +88,40 @@ public class Student implements Human {
     }
 
     public boolean useItem(Item item) {
-            return false;
+        if (item instanceof Beer) {
+            ((Beer) item).use(this);
+        } else if (item instanceof Camember) {
+            ((Camember) item).use(this);
+        } else if (item instanceof FFP2Mask) {
+            ((FFP2Mask) item).use(this);
+        } else if (item instanceof Rag) {
+            ((Rag) item).use(this);
+        } else if (item instanceof Transistor) {
+            ((Transistor) item).use(this);
+        } else if (item instanceof TVSZ) {
+            ((TVSZ) item).use(this);
+        }
+        return true;
     }
-
+    
     public void removeItem(Item item) {
         items.remove(item);
     }
 
     public boolean pairTransistor(Transistor t1, Transistor t2) {
-        return false;
+        t1.setLocation(currentRoom);
+        t2.setLocation(currentRoom);
+        t1.addPair(t2);
+        if (t1.hasPair()) {
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     public boolean killYourself() {
-        return false;
+        return dead;
     }
 
     public void blockDoor() {
@@ -122,14 +166,19 @@ public class Student implements Human {
 
     @Override
     public Room getRoom() {
-        return null;
+        return currentRoom;
+    }
+
+    public void setCurrentRoom(Room room) {
+        this.currentRoom = room;
     }
 
     public boolean hasLogar() {
         for (Item item : items) {
             if (item instanceof Logar) {
                 logarObtained = true;
-                return logarObtained;
+                winCondition=true;
+                return winCondition;
             }
         }
         return false;
@@ -145,6 +194,8 @@ public class Student implements Human {
         }
     }
     public void iHaveArrived() {
-        
+        Room currentRoom = getRoom();
+        currentRoom.addHuman(this); 
+        System.out.println("I have arrived");
     }
 }
