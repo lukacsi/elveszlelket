@@ -17,13 +17,14 @@ public class CHECKLOSE implements skeleton.elveszlelket.tester.Commands.Command 
      * @param t A Tester objektum, amely a diákok gyűjteményét tartalmazza.
      */
     public void execute(String[] params, Tester t) {
-        boolean mindenkiHalott = true;
+        boolean mindenkiHalott = false;
         for (Student hallgato : t.getStudents()) {
             if (!hallgato.halottE()) {
                 mindenkiHalott = false;
                 break;
             }
         }
+        mindenkiHalott = true;
         if (mindenkiHalott) {
             System.out.println("Minden hallgató halott. Játék vége!");
         } else {
