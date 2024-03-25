@@ -27,6 +27,7 @@ public class IHaveTheRightStrategy implements ItemUseStrategy {
             boolean result2 = App.t.askBoolean("Last use?");
             if(result2) {
                 student.removeItem(item);
+                App.t.removeItem(item);
             }
         }
     }
