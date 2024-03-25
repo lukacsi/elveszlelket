@@ -3,7 +3,16 @@ package skeleton.elveszlelket.tester.Commands;
 import skeleton.elveszlelket.*;
 import skeleton.elveszlelket.tester.Tester;
 
+/**
+ * Egy parancsot implementál, amely lehetővé teszi egy diák vagy tanár hozzáadását egy megadott szobához.
+ */
 public class ADDHTOROOM implements skeleton.elveszlelket.tester.Commands.Command {
+    /**
+     * Végrehajtja a diák vagy tanár hozzáadását egy szobához.
+     *
+     * @param params A parancs paraméterei, amelyek tartalmazzák a diák/tanár nevét és a szoba nevét.
+     * @param t A Tester objektum, amely a parancsot végrehajtja, és tartalmazza a diákok, tanárok és szobák gyűjteményét.
+     */
     public void execute(String[] params, Tester t) {
         Student keresettStudent = t.getStudent(params[1]);
         Teacher keresettTeacher = t.getTeacher(params[1]); 

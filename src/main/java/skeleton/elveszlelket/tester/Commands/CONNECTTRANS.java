@@ -5,7 +5,19 @@ import skeleton.elveszlelket.item.Item;
 import skeleton.elveszlelket.item.Transistor;
 import skeleton.elveszlelket.tester.Tester;
 
+/**
+ * Parancs a tranzisztorok összekapcsolására egy hallgatóval.
+ */
 public class CONNECTTRANS implements skeleton.elveszlelket.tester.Commands.Command {
+    /**
+     * A tranzisztorok összekapcsolását végző parancs végrehajtása.
+     *
+     * @param params A parancs paraméterei tömbként.
+     *               A params[0] tartalmazza a parancs nevét.
+     *               A params[1] tartalmazza a hallgató nevét.
+     *               A params[2] és params[3] tartalmazza a két tranzisztor nevét, amelyeket össze kell kapcsolni.
+     * @param t      A Tester objektum, amely tartalmazza a szimulációs objektumokat.
+     */
     public void execute(String[] params, Tester t) {
         Student keresettStudent = t.getStudent(params[1]); 
         // Ha keresettStudent nem null, akkor létezik params[1] nevű hallgató.

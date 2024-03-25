@@ -101,6 +101,10 @@ public class Room {
             uj.setGas();
     }
 
+    public boolean hasGas() {
+        return hasGas;
+    }
+
     /**
      * Kettéoszt egy szobát.
      * @param r1 Az egyik előre létrehozott szoba.

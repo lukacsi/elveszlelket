@@ -26,6 +26,7 @@ public class DrunkStrategy implements ItemUseStrategy {
         if(result) {
             student.setImmunity(10);
             student.removeItem(item);
+            App.t.removeItem(item);
         }
     }
 }
