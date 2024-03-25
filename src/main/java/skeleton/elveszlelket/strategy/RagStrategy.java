@@ -20,9 +20,12 @@ public class RagStrategy implements ItemUseStrategy {
      * @param item A rongy, amelynek használata a stratégiát aktiválja.
      */
     public void execute(Student student, Item item) {
-        boolean result = App.t.askBoolean("Rag is wet?");
-        if(result) {
+        int result = App.t.askInt("Hanyszor hasznalhato meg a rongy?");
+        if(result > 0) {
             student.getRoom().stunTeachers();
+            System.out.println("Rongy hasznalva.");
+        } else {
+            System.out.println("Rongy kiszaradt.");
         }
     }
 }

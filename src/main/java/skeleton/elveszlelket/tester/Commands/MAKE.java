@@ -6,7 +6,20 @@ import skeleton.elveszlelket.door.TwoWayDoor;
 import skeleton.elveszlelket.item.*;
 import skeleton.elveszlelket.tester.Tester;
 
+
+/**
+ * Az objektumok létrehozását végző parancs.
+ */
 public class MAKE implements skeleton.elveszlelket.tester.Commands.Command {
+    /**
+     * Az objektumok létrehozását végző parancs végrehajtása.
+     *
+     * @param params A parancs paraméterei tömbként.
+     *               A params[0] tartalmazza a parancs nevét.
+     *               A params[1] tartalmazza az objektum típusát, amelyet létre kell hozni.
+     *               A params[2] tartalmazza az objektum nevét.
+     * @param t      A Tester objektum, amely tartalmazza a szimulációs objektumokat.
+     */
     public void execute(String[] params, Tester t) {
         Student s = t.getStudent(params[2]);
         Teacher teacher = t.getTeacher(params[2]);

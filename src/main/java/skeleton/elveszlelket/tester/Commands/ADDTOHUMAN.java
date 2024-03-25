@@ -4,7 +4,16 @@ import skeleton.elveszlelket.*;
 import skeleton.elveszlelket.item.*;
 import skeleton.elveszlelket.tester.Tester;
 
+/**
+ * Egy parancsot implementál, amely lehetővé teszi egy tárgy hozzáadását egy diákhoz vagy tanárhoz.
+ */
 public class ADDTOHUMAN implements skeleton.elveszlelket.tester.Commands.Command {
+    /**
+     * Végrehajtja a tárgy hozzáadását egy diákhoz vagy tanárhoz.
+     *
+     * @param params A parancs paraméterei, amelyek tartalmazzák a tárgy nevét és a diák/tanár nevét.
+     * @param t A Tester objektum, amely a parancsot végrehajtja, és tartalmazza a diákok, tanárok és tárgyak gyűjteményét.
+     */
     public void execute(String[] params, Tester t) {
         Item keresettItem = t.getItem(params[1]); 
         // Ha keresettItem nem null, akkor létezik params[1] nevű tárgy.

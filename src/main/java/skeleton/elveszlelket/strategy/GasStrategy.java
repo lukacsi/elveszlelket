@@ -27,6 +27,7 @@ public class GasStrategy implements ItemUseStrategy {
         
         if (result) {
             student.dropItem(item);
+            App.t.removeItem(item);
             r.setGas();
         }
     }

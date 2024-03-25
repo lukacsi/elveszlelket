@@ -3,6 +3,7 @@ package skeleton.elveszlelket.strategy;
 import skeleton.elveszlelket.App;
 import skeleton.elveszlelket.Student;
 import skeleton.elveszlelket.item.Item;
+import skeleton.elveszlelket.item.TVSZ;
 
 /**
  * Az IHaveTheRightStrategy implementálja az ItemUseStrategy interfészt,
@@ -21,13 +22,18 @@ public class IHaveTheRightStrategy implements ItemUseStrategy {
      * @param item A tárgy, amelyre a stratégia alkalmazva lesz.
      */
     public void execute(Student student, Item item) {
-        boolean result1 = App.t.askBoolean("TVSZ has uses left?");
-        if(result1) {
+        int result1 = App.t.askInt("Hanyszor hasznalhato a TVSZ meg?");
+        if(result1 > 0) {
             student.setImmunity(2);
-            boolean result2 = App.t.askBoolean("Last use?");
-            if(result2) {
+            TVSZ t = (TVSZ)item;
+            t.decreaseUse();
+            if(result1 == 1) {
                 student.removeItem(item);
+                App.t.removeItem(item);
             }
+            System.out.println("TVSZ felhasznalva");
+        } else {
+            System.out.println("Ez a TVSZ mar nem letezik.");
         }
     }
 }

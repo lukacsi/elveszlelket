@@ -2,6 +2,8 @@ package skeleton.elveszlelket.tester;
 import java.util.Scanner;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Map;
+
 import skeleton.elveszlelket.*;
 import skeleton.elveszlelket.door.*;
 import skeleton.elveszlelket.item.*;
@@ -47,6 +49,15 @@ public class Tester {
         szobak = new HashMap<>();
         ajtok = new HashMap<>();
         targyak = new HashMap<>();
+    }
+
+    public String getStudentReturnName(Student s) {
+        for(String st : hallgatok.keySet()) {
+            if(hallgatok.get(st).equals(s)) {
+                return st;
+            }
+        }
+        return "";
     }
 
     /**
@@ -175,6 +186,30 @@ public class Tester {
      */
     public void addItem(String name, Item i) {
         targyak.put(name, i);
+    }
+    
+    /**
+     * Eltávolít egy tárgyat a tárgyak gyűjteményéből.
+     *
+     * @param item Az eltávolítandó tárgy objektuma.
+     */
+    public void removeItem(Item item) {
+        // Megkeressük azon kulcsot (tárgy nevét), amelynek az értéke az adott tárgy.
+        String itemKey = null;
+        for (Map.Entry<String, Item> entry : targyak.entrySet()) {
+            if (entry.getValue().equals(item)) {
+                itemKey = entry.getKey();
+                break;
+            }
+        }
+        
+        // Ha megtaláltuk a kulcsot, eltávolítjuk a tárgyat a gyűjteményből.
+        if (itemKey != null) {
+            targyak.remove(itemKey);
+            System.out.println(itemKey + " tárgy sikeresen eltávolítva.");
+        } else {
+            System.out.println("A tárgy nem található a gyűjteményben.");
+        }
     }
 
     /**
