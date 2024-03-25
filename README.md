@@ -6,3 +6,5 @@ JAVA 17
 ./mvnw exec:java
 ## Build and Run
 ./mvnw clean install exec:java
+### or
+bash br.sh
