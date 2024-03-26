@@ -1,7 +1,9 @@
 package skeleton.elveszlelket.tester;
 import java.util.Scanner;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import skeleton.elveszlelket.*;
@@ -302,17 +304,10 @@ public class Tester {
      * A fő hallgatási ciklus, amely várja a felhasználói bemenetet és végrehajtja a megfelelő parancsokat.
      */
     public void listen() {
-        while(true) {
-            String sor = sc.nextLine(); // Read the line
-    
-            // Check if the user wants to exit
-            if ("exit".equalsIgnoreCase(sor.trim())) {
-                sc.close();
-                break;
-            }
-    
-            executeCommand(sor.split(" ")); // Split the line and execute the command
-            sor = "";
+        String row = sc.nextLine();
+        while(!row.toLowerCase().equals("exit")){
+            executeCommand(row.split(" "));
+            row = sc.nextLine();
         }
     }
     /**

@@ -43,7 +43,6 @@ public class Teacher implements Human {
             return false;
         }
         currentRoom.removeHuman(this);
-        door.accept(this);
         door.putMeThrough(this);
         System.out.println("Szoba valtas sikeres!");
         return true;
@@ -59,12 +58,11 @@ public class Teacher implements Human {
     @Override
     public boolean use(TwoWayDoor door) {
         Room currentRoom = getRoom();
-        if(!currentRoom.hasFreePlace())
+        if(!door.getDest(currentRoom).hasFreePlace())
         {
             return false;
         }
         currentRoom.removeHuman(this);
-        door.accept(this);
         door.putMeThrough(this);
         System.out.println("Szoba valtas sikeres!");
         return true;

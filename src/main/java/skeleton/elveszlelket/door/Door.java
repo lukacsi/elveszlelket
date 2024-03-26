@@ -14,6 +14,10 @@ public abstract class Door {
      */
     public void setRooms(Room r1, Room r2) {}
 
+    public Room getDest(Room r){
+        return null;
+    }
+
     /**
      * Megjeleníti vagy eltünteti az ajtót
      */

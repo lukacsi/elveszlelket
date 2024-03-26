@@ -10,6 +10,15 @@ public class TwoWayDoor extends Door{
     
     public TwoWayDoor(){}
 
+    @Override
+    public Room getDest(Room r){
+        Room result = firstRoom;
+        if(result == r){
+            result = secoundRoom;
+        }
+        return result;
+    }
+
     /**
      * Elfogadja az observer hallgatót.
      * @param s A hallgató.

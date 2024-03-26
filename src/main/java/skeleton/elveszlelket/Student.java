@@ -63,7 +63,6 @@ public class Student implements Human {
             return false;
         }
         currentRoom.removeHuman(this);
-        door.accept(this);
         door.putMeThrough(this);
         lastDoor = door;
         System.out.println("Szoba valtas sikeres!");
@@ -85,12 +84,11 @@ public class Student implements Human {
                 return false;
             }
         }
-        if(!currentRoom.hasFreePlace())
+        if(!door.getDest(currentRoom).hasFreePlace())
         {
             return false;
         }
         currentRoom.removeHuman(this);
-        door.accept(this);
         door.putMeThrough(this);
         System.out.println("Szoba valtas sikeres!");
         lastDoor = door;

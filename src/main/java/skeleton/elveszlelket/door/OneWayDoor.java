@@ -9,6 +9,11 @@ public class OneWayDoor extends Door{
     
     public OneWayDoor(){}
 
+    @Override
+    public Room getDest(Room r){
+        return destination;
+    }
+
     /**
      * Elfogadja az observer hallgatót.
      * @param s A hallgató.
