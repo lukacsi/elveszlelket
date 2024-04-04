@@ -95,6 +95,10 @@ public class Student implements Human {
         return true;
     }
 
+    public List<Item> getInventory() {
+        return items;
+    }
+
      /**
      * A diák felvesz egy tárgyat.
      * 
@@ -103,15 +107,15 @@ public class Student implements Human {
      */
     @Override
     public boolean pickupItem(Item item) {
-        if (items.size() >= 5) {
-            return false;
+        if (items.size() < 5) {
+            items.add(item);
+            if ("Logar".equals(item.getName())) {
+                item.use(this);
+                logarObtained = true;
+            }
+            return true;
         }
-        if(item.getName() == "Logar") {
-            item.use(this);
-            logarObtained = true;
-        }
-        items.add(item);
-        return true;
+        return false;
     }
 
     /**

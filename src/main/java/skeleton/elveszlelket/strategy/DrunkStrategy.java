@@ -1,5 +1,7 @@
 package skeleton.elveszlelket.strategy;
 
+import java.util.Random;
+
 import skeleton.elveszlelket.App;
 import skeleton.elveszlelket.Student;
 import skeleton.elveszlelket.item.Item;
@@ -14,7 +16,8 @@ public class DrunkStrategy implements ItemUseStrategy {
     /**
      * Végrehajtja a stratégiát egy adott diákon és tárgyon.
      * Ha a tárgynak van még használata (itt a sörnek), akkor növeli a diák immunitását és eltávolítja a tárgyat a diák inventory-jából.
-     *
+     * Ezenkívül esetlegesen elejt egy tárgyat.
+     * 
      * @param student A diák, aki a tárgyat használja.
      * @param item A tárgy, amelyre a stratégiát alkalmazzuk.
      */
@@ -27,6 +30,27 @@ public class DrunkStrategy implements ItemUseStrategy {
             student.setImmunity(10);
             student.removeItem(item);
             App.t.removeItem(item);
+            System.out.println("Beer has been used!");
+            dropRandomItem(student);
+        }
+    }
+
+    private void dropRandomItem(Student student) {
+        // Meghatározzuk, hány tárgy van a hallgatónál
+        int numItems = student.getInventory().size();
+        if (numItems > 0) {
+            // Véletlenszerűen kiválasztunk egy tárgyat
+            Random random = new Random();
+            int index = random.nextInt(numItems);
+
+            // Tárgy eltávolítása a hallgatótól és eldobása a szobába
+            Item itemToDrop = student.getInventory().get(index);
+            boolean dropped = student.dropItem(itemToDrop);
+            if (dropped) {
+                System.out.println("Student dropped item: " + itemToDrop.getName());
+            } else {
+                System.out.println("Failed to drop item: " + itemToDrop.getName());
+            }
         }
     }
 }
