@@ -180,6 +180,15 @@ public class Room {
     }
 
     /**
+    * Kapcsolja át a szoba gáz állapotát.
+    * Ha jelenleg gáz van a szobában, akkor kikapcsolja,
+    * ha nincs, akkor bekapcsolja.
+    */
+    public void toggleGas() {
+        hasGas = !hasGas;
+    }
+
+    /**
      * Elátkozza a szobát.
      */
     public void setCursed(){
