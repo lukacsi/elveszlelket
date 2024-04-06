@@ -1,4 +1,5 @@
 package skeleton.elveszlelket.door;
+import skeleton.elveszlelket.CleaningLady;
 import skeleton.elveszlelket.Room;
 import skeleton.elveszlelket.Student;
 import skeleton.elveszlelket.Teacher;
@@ -34,6 +35,8 @@ public abstract class Door {
      */
     public void accept(Student s){}
 
+    public void accept(CleaningLady c) {}
+
     /**
      * Elfogadja az observer oktatót.
      * @param t Az oktató.
@@ -46,6 +49,8 @@ public abstract class Door {
      * @return A művelet sikeressége: Igaz csakis akkor, ha sikeres.
      */
     public void putMeThrough(Student s){}
+
+    public void putMeThrough(CleaningLady c) {}
 
     /**
      * Átrakja az oktatót a másik szobába.

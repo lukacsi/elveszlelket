@@ -11,10 +11,13 @@ public class Room {
 
     private List<Teacher> teachers;
     private List<Student> students;
+    private List<CleaningLady> cleaningLadies;
     private List<Item> items;
     private List<Door> doors;
     private boolean cursed;
     private boolean hasGas;
+    private boolean sticky;
+    private int visitsUntillSticky;
 
     /**
      * Alapkonstruktor a szobához.
@@ -26,6 +29,8 @@ public class Room {
         doors = new ArrayList<>();
         cursed = false;
         hasGas = false;
+        sticky = false;
+        visitsUntillSticky = 3;
     }
 
     /**
@@ -34,21 +39,34 @@ public class Room {
      */
     public void addHuman(Student s){
         students.add(s);
+        visitsUntillSticky--;
     }
 
-    /*
-     * Vissza adja a szobában található tárgyakat.
+    /**
+     * Takarítónőt ad a szobához.
+     * @param c A hozzáadandó takarító.
      */
-    public List<Item> getItems() {
-        return items;
+    public void addCleaningLady(CleaningLady c) {
+        cleaningLadies.add(c);
     }
-
+    
     /**
      * Oktatót ad a szobához.
      * @param t A hozzáadandó oktató.
      */
     public void addHuman(Teacher t){
         teachers.add(t);
+        visitsUntillSticky--;
+     }
+
+    /*
+     * Vissza adja a szobában található tárgyakat.
+     */
+    public List<Item> getItems() {
+        // ha a szoba ragacsos akkor üres listat ad vissza, így nem lehet felvenni a tárgyat.
+        if(visitsUntillSticky <= 0)
+            return new ArrayList<>();
+        return items;
     }
     
     /**
@@ -64,7 +82,15 @@ public class Room {
      * @param t A törlendő oktató.
      */
     public void removeHuman(Teacher t){
-        students.remove(t);
+        teachers.remove(t);
+    }
+
+    /**
+     * Elvesz egy takarítót a szobából.
+     * @param c A törlendő takarító.
+     */
+    public void removeHuman(CleaningLady c) {
+        cleaningLadies.remove(c);
     }
 
     /**
@@ -99,10 +125,27 @@ public class Room {
             uj.setCursed();
         if(hasGas || r1.containsGas())
             uj.setGas();
+
     }
 
     public boolean hasGas() {
         return hasGas;
+    }
+
+    public boolean isSticky(){
+        return sticky;
+    }
+
+    /**
+     * Tisztítja a szobát.
+     */
+    public void clean(){
+        if(hasGas)
+            hasGas = false;
+        if(sticky) {
+            sticky = false;
+            visitsUntillSticky = 3;
+        }
     }
 
     /**
@@ -202,6 +245,10 @@ public class Room {
 
     public List<Teacher> getTeacher() {
         return teachers;
+    }
+
+    public List<CleaningLady> getCleaningLadies() {
+        return cleaningLadies;
     }
 
     /**
