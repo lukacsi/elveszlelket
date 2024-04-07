@@ -52,10 +52,14 @@ public class TwoWayDoor extends Door{
         if(gasDest){
             s.blockDoor();
         }
+        //redundáns
         s.getRoom().removeHuman(s);
+        //redundáns
         destination.addHuman(s);
-        s.iHaveArrived();
+        //ide kell
         s.setCurrentRoom(destination);
+        s.iHaveArrived();
+        //s.setCurrentRoom(destination);
     }
     
     /**
