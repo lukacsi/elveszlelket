@@ -19,7 +19,7 @@ public class Room {
     /**
      * Alapkonstruktor a szobához.
      */
-    public Room(){
+    public Room() {
         teachers = new ArrayList<>();
         students = new ArrayList<>();
         items = new ArrayList<>();
@@ -30,9 +30,10 @@ public class Room {
 
     /**
      * Hallgatót ad a szobához.
+     * 
      * @param s A hozzáadandó hallgató.
      */
-    public void addHuman(Student s){
+    public void addHuman(Student s) {
         students.add(s);
     }
 
@@ -45,60 +46,67 @@ public class Room {
 
     /**
      * Oktatót ad a szobához.
+     * 
      * @param t A hozzáadandó oktató.
      */
-    public void addHuman(Teacher t){
+    public void addHuman(Teacher t) {
         teachers.add(t);
     }
-    
+
     /**
      * Elvesz egy hallgatót a szobából.
+     * 
      * @param s A törlendő hallgató.
      */
-    public void removeHuman(Student s){
+    public void removeHuman(Student s) {
         students.remove(s);
     }
 
     /**
      * Elvesz egy oktatót a szobából.
+     * 
      * @param t A törlendő oktató.
      */
-    public void removeHuman(Teacher t){
+    public void removeHuman(Teacher t) {
         students.remove(t);
     }
 
     /**
      * Visszaadja, hogy gázos-e a szoba.
+     * 
      * @return Igaz csakis akkor, ha gázos.
      */
-    public boolean containsGas(){
-        boolean result = App.t.askBoolean("Gazos a szoba?");
-        return result;
+    public boolean containsGas() {
+        return hasGas;
     }
 
     /**
      * Visszaadja, hogy van-e szabad hely a szobában.
+     * 
      * @return Igaz csakis akkor, ha van hely.
      */
-    public boolean hasFreePlace(){
-        boolean result = App.t.askBoolean("Van szabad hely?");
-        return result;
+    public boolean hasFreePlace() {
+        int tartozkodok = students.size() + teachers.size();
+        return tartozkodok < 5;
     }
 
     /**
      * Összevon két szobát.
-     * @param r1 A másik összevonandó szoba, mivel ezt egy adott Room példányra hívjuk meg,
-     * így ő lesz a merge egyik szereplője
-     * @param uj -> Az a szoba amelyik a két szoba összevonásának a végeredménye lesz.
+     * 
+     * @param r1 A másik összevonandó szoba, mivel ezt egy adott Room példányra
+     *           hívjuk meg,
+     *           így ő lesz a merge egyik szereplője
+     * @param uj -> Az a szoba amelyik a két szoba összevonásának a végeredménye
+     *           lesz.
      * @return Az összevonás során keletkező új szoba.
      */
-    public void merge(Room r1, Room uj){
+    public void merge(Room r1, Room uj) {
         moveItemsToRoom(uj);
         r1.moveItemsToRoom(uj);
-        if(cursed || r1.isCursed())
-            uj.setCursed();
-        if(hasGas || r1.containsGas())
-            uj.setGas();
+        if (cursed || r1.isCursed())
+            uj.setCursed(true);
+        if (hasGas || r1.containsGas())
+            uj.setGas(true);
     }
 
     public boolean hasGas() {
@@ -107,34 +115,38 @@ public class Room {
 
     /**
      * Kettéoszt egy szobát.
+     * 
      * @param r1 Az egyik előre létrehozott szoba.
      * @param r2 A másik előre létrehozott szoba.
      */
-    public void split(Room r1, Room r2){
-        
+    public void split(Room r1, Room r2) {
+
     }
 
     /**
      * Hozzáad egy ajtót a szobához.
+     * 
      * @param d A hozzáadandó ajtó.
      */
-    public void addDoor(Door d){
+    public void addDoor(Door d) {
         doors.add(d);
     }
 
     /**
      * Hozzáad egy tárgyat a szobához.
+     * 
      * @param i A hozzáadandó tárgy.
      */
-    public void addItem(Item i){
+    public void addItem(Item i) {
         items.add(i);
     }
 
     /**
      * Töröl egy tárgyat a szobából.
+     * 
      * @param i A törlendő tárgy.
      */
-    public void removeItem(Item i){
+    public void removeItem(Item i) {
         items.remove(i);
     }
 
@@ -142,7 +154,7 @@ public class Room {
      * Megbénítja a szobában tartózkodó embereket
      * 3 kör erejéig.
      */
-    public void stunHuman(){
+    public void stunHuman() {
         int duration = 3;
         for (Student s : students) {
             s.stun(duration);
@@ -155,8 +167,8 @@ public class Room {
     /**
      * Megváltoztatja az ajtók státuszát.
      */
-    public void changeDoorStatus(){
-        if(cursed) {
+    public void changeDoorStatus() {
+        if (cursed) {
             for (Door door : doors) {
                 door.changeVisibility();
             }
@@ -165,35 +177,41 @@ public class Room {
 
     /**
      * Visszaadja, hogy a szoba elátkozott-e.
+     * 
      * @return Igaz csakis akkor, ha elátkozott.
      */
-    public boolean isCursed(){
-        boolean result = false;
-        return result;
+    public boolean isCursed() {
+        return cursed;
     }
 
     /**
-     * Elgázosítja a szobát.
+     * @param boolean. Ha a paraméter igaz, elátkozza a szobát.
+     *                 Ha a paraméter hamis, megszűnteti az átkot.
      */
-    public void setGas(){
-        hasGas = true;
+    public void setGas(boolean ertek) {
+        hasGas = ertek;
     }
 
     /**
-     * Elátkozza a szobát.
+     * @param boolean. Ha a paraméter igaz, elgázosítja a szobát.
+     *                 Ha a paraméter hamis, megszűnteti a gázt.
      */
-    public void setCursed(){
-        cursed = true;
+    public void setCursed(boolean ertek) {
+        cursed = ertek;
     }
 
     /**
      * Megbénítja a szobában tartózkodó összes tanárt.
      */
-    public void stunTeachers(){
+    public void stunTeachers() {
         int duration = 3;
         for (Teacher t : teachers) {
             t.stun(duration);
         }
+    }
+
+    public List<Door> getDoors() {
+        return doors;
     }
 
     public List<Student> getStudents() {
@@ -206,27 +224,55 @@ public class Room {
 
     /**
      * Visszaad egy ajtót.
-     * @param i Az ejtó indexe.
+     * 
+     * @param i Az ajtó indexe.
      * @return Az ajtó. Ha az index értéke nem megfelelő,
-     * egy olyan fantom ajtó kerül visszaadásra, mely nem 
-     * látható (érvénytelen) és nem tartozik a szoba ajtajai
-     * közé.
+     *         egy olyan fantom ajtó kerül visszaadásra, mely nem
+     *         látható (érvénytelen) és nem tartozik a szoba ajtajai
+     *         közé.
      */
-    public Door getDoor(int i){
+    public Door getDoor(int i) {
         Door result = new TwoWayDoor();
-        //result.setVisible(false);
-        if(i >= 0 && i < doors.size()){
+        // result.setVisible(false);
+        if (i >= 0 && i < doors.size()) {
             result = doors.get(i);
         }
         return result;
     }
 
     /**
+     * Visszaad egy ajtót.
+     * 
+     * @param i Az ajtó indexe.
+     * @return Ha volt találat a szoba feljegyzett ajtajai között,
+     *         azt adja vissza. Egyéb esetben null-lal tér vissza.
+     */
+    public Door getDoorAt(int i) {
+        if (i >= 0 && i < doors.size()) {
+            return doors.get(i);
+        }
+        return null;
+    }
+
+    /**
+     * Visszaad egy ajtót.
+     * 
+     * @param i A törölni kívánt ajtó.
+     * @return Ha volt találat a szoba feljegyzett ajtajai között,
+     *         azt törli és igaz értékkel tér vissza,
+     *         Egyéb esetben false értékkel.
+     */
+    public boolean removeDoor(Door d) {
+        return doors.remove(d);
+    }
+
+    /**
      * A szoba, melyre mehgívják az összes benne található
      * tárgyat átrakja a paraméterül kapott szobába.
+     * 
      * @param r A szoba, melybe a tárgyak kerülnek majd.
      */
-    public void moveItemsToRoom(Room r){
+    public void moveItemsToRoom(Room r) {
         for (Item i : items) {
             r.addItem(i);
         }
@@ -236,7 +282,7 @@ public class Room {
     /**
      * Megpróbál végezni a szobában tartózodó összes hallgatóval.
      */
-    public void killStudents(){
+    public void killStudents() {
         for (Student s : students) {
             s.killYourself();
         }

@@ -1,4 +1,5 @@
 package skeleton.elveszlelket;
+
 import skeleton.elveszlelket.item.*;
 
 import java.util.ArrayList;
@@ -15,14 +16,22 @@ public class Teacher implements Human {
     private List<Item> items;
     private Room currentRoom;
 
+    public int getStunDuration() {
+        return stunDuration;
+    }
+
+    public List<Item> getItems() {
+        return items;
+    }
+
     /**
      * A Teacher osztály konstruktora.
      * Inicializálja a tanárt az alapértelmezett értékekkel.
      */
-    public Teacher()
-    {
+    public Teacher() {
         items = new ArrayList<>();
         stunDuration = 0;
+        currentRoom = null;
     }
 
     /**
@@ -38,8 +47,7 @@ public class Teacher implements Human {
             System.out.println("Szoba valtas sikertelen!");
             return false;
         }
-        if(!currentRoom.hasFreePlace())
-        {
+        if (!currentRoom.hasFreePlace()) {
             return false;
         }
         currentRoom.removeHuman(this);
@@ -47,8 +55,7 @@ public class Teacher implements Human {
         door.putMeThrough(this);
         System.out.println("Szoba valtas sikeres!");
         return true;
-        }
-
+    }
 
     /**
      * A tanár használ egy kétirányú ajtót.
@@ -59,8 +66,7 @@ public class Teacher implements Human {
     @Override
     public boolean use(TwoWayDoor door) {
         Room currentRoom = getRoom();
-        if(!currentRoom.hasFreePlace())
-        {
+        if (!currentRoom.hasFreePlace()) {
             return false;
         }
         currentRoom.removeHuman(this);
@@ -78,10 +84,14 @@ public class Teacher implements Human {
      */
     @Override
     public boolean pickupItem(Item item) {
-        if(items.size()<1) {
+        if (!item.getRoom().equals(currentRoom)) {
+            return false;
+        }
+        if (items.size() < 1) {
             items.add(item);
             return true;
-        } else return false;
+        } else
+            return false;
     }
 
     /**
@@ -92,13 +102,17 @@ public class Teacher implements Human {
      */
     @Override
     public boolean dropItem(Item item) {
-        currentRoom.addItem(item);
-        return items.remove(item);
+        if (items.contains(item)) {
+            currentRoom.addItem(item);
+            return items.remove(item);
+        }
+        return false;
     }
 
     /**
      * Megbénítja a tanárt egy adott időtartamra.
      * Eldobja a tárgyait.
+     * 
      * @param duration A bénulás időtartama.
      */
     @Override
@@ -146,11 +160,12 @@ public class Teacher implements Human {
     /**
      * Jelzi, hogy a tanár megérkezett egy új helyszínre.
      * Ezt a metódust hívhatjuk meg, amikor a tanár belép egy szobába,
-     * és jelezhetjük a játékban vagy szimulációban, hogy a tanár új helyszínre érkezett.
+     * és jelezhetjük a játékban vagy szimulációban, hogy a tanár új helyszínre
+     * érkezett.
      */
     public void iHaveArrived() {
         Room currentRoom = getRoom();
-        currentRoom.addHuman(this); 
+        currentRoom.addHuman(this);
         System.out.println("I have arrived");
     }
 }

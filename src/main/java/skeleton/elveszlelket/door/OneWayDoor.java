@@ -1,41 +1,57 @@
 package skeleton.elveszlelket.door;
+
 import skeleton.elveszlelket.Room;
 import skeleton.elveszlelket.Student;
 import skeleton.elveszlelket.Teacher;
 
-public class OneWayDoor extends Door{
-    
+public class OneWayDoor extends Door {
+
     private Room destination;
-    
-    public OneWayDoor(){}
+
+    public OneWayDoor() {
+        ownerRoom = null;
+        destination = null;
+    }
+
+    /**
+     * @return Szoba. Vissza adja, melyik (az eredeti szobán kívül) a másik
+     *         feljegyzett
+     *         szobája.
+     */
+    public Room getSecondRoom() {
+        return destination;
+    }
 
     /**
      * Elfogadja az observer hallgatót.
+     * 
      * @param s A hallgató.
      */
     @Override
-    public void accept(Student s){
+    public void accept(Student s) {
         s.use(this);
     }
 
     /**
      * Elfogadja az observer oktatót.
+     * 
      * @param t Az oktató.
      */
     @Override
-    public void accept(Teacher t){
+    public void accept(Teacher t) {
         t.use(this);
     }
 
     /**
      * Átrakja a hallgatót a másik szobába.
+     * 
      * @param s A hallgató.
      * @return A művelet sikeressége: Igaz csakis akkor, ha sikeres.
      */
     @Override
-    public void putMeThrough(Student s){
+    public void putMeThrough(Student s) {
         boolean gasDest = destination.containsGas();
-        if(gasDest){
+        if (gasDest) {
             s.blockDoor();
         }
         s.getRoom().removeHuman(s);
@@ -43,14 +59,15 @@ public class OneWayDoor extends Door{
         s.iHaveArrived();
         s.setCurrentRoom(destination);
     }
-    
-     /**
+
+    /**
      * Átrakja az oktatót a másik szobába.
+     * 
      * @param t Az oktató.
      * @return A művelet sikeressége: Igaz csakis akkor, ha sikeres.
      */
     @Override
-    public void putMeThrough(Teacher t){
+    public void putMeThrough(Teacher t) {
         t.getRoom().removeHuman(t);
         destination.addHuman(t);
         t.iHaveArrived();
@@ -59,25 +76,29 @@ public class OneWayDoor extends Door{
 
     /**
      * Visszaadja, hogy a jó irányban akarják-e használni.
+     * 
      * @param r A szoba melyből indul a használó.
      * @return Igaz csakis akkor, ha kiinduló szoba nem egyezik
-     * azzal az egyetlen szobával, melybe el lehet jutni az ajtón át.
+     *         azzal az egyetlen szobával, melybe el lehet jutni az ajtón át.
      */
-    public boolean isRightDirection(Room r){
+    public boolean isRightDirection(Room r) {
         boolean result = true;
-        if(r == destination){
+        if (r == destination) {
             result = false;
         }
         return result;
     }
 
-        /*
+    /*
      * Beállítja az szobáit, inicializáláskor kell.
+     * 
      * @param r1 Egyik szoba - ennek most nincs jelentősége
+     * 
      * @param r2 Második szoba
      */
     @Override
     public void setRooms(Room r1, Room r2) {
+        ownerRoom = r1;
         destination = r2;
     }
 }

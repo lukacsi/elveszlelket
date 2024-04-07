@@ -14,22 +14,30 @@ public class SPLIT implements skeleton.elveszlelket.tester.Commands.Command {
      *
      * @param params A parancs paraméterei tömbként.
      *               A params[0] tartalmazza a parancs nevét.
-     *               A params[1] tartalmazza a szoba nevét, amelyet fel kell osztani.
-     * @param t      A Tester objektum, amely tartalmazza a szimulációs objektumokat.
+     *               A params[1] tartalmazza a szoba nevét, amelyet fel kell
+     *               osztani.
+     * @param t      A Tester objektum, amely tartalmazza a szimulációs
+     *               objektumokat.
      */
     public void execute(String[] params, Tester t) {
+
+        if (params.length != 2) {
+            System.out.println("Parameterk szama nem megfelelo.");
+            return;
+        }
+
         Room r1 = t.getRoom(params[1]);
-        if(r1 != null) {
+        if (r1 != null) {
             boolean answer = t.askBoolean("Van oktato/hallgato " + params[1] + "-ben?");
-            if(!answer) {
+            if (!answer) {
                 String base = "SplitedRoom";
                 String elsoNev, masodikNev;
                 String roomNev = base;
                 int i = 0;
-                while(t.getRoom(roomNev) != null) {
+                while (t.getRoom(roomNev) != null) {
                     i++;
                     roomNev = base.concat(String.valueOf(i));
-                    if(i > 1000) {
+                    if (i > 1000) {
                         roomNev = String.valueOf(i) + base;
                     }
                 }
@@ -38,10 +46,10 @@ public class SPLIT implements skeleton.elveszlelket.tester.Commands.Command {
                 Room egyik = t.getRoom(roomNev);
                 elsoNev = roomNev;
                 i = 0;
-                while(t.getRoom(roomNev) != null) {
+                while (t.getRoom(roomNev) != null) {
                     i++;
                     roomNev = base.concat(String.valueOf(i));
-                    if(i > 1000) {
+                    if (i > 1000) {
                         roomNev = String.valueOf(i) + base;
                     }
                 }
@@ -49,35 +57,35 @@ public class SPLIT implements skeleton.elveszlelket.tester.Commands.Command {
                 masodikNev = roomNev;
                 t.getCommand("MAKE").execute(makeParams, t);
                 Room masodik = t.getRoom(roomNev);
-    
-                if(r1.containsGas()) {
+
+                if (r1.containsGas()) {
                     Random r = new Random();
                     float value = r.nextFloat();
-                    if(value <= 0.5) {
-                        egyik.setGas();
+                    if (value <= 0.5) {
+                        egyik.setGas(true);
                     } else {
-                        masodik.setGas();
+                        masodik.setGas(true);
                     }
                 }
-                if(r1.isCursed()) {
-                    if(egyik.containsGas()) {
-                        masodik.setCursed();
-                    } else if(masodik.containsGas()) {
-                        egyik.setCursed();
+                if (r1.isCursed()) {
+                    if (egyik.containsGas()) {
+                        masodik.setCursed(true);
+                    } else if (masodik.containsGas()) {
+                        egyik.setCursed(true);
                     } else {
                         Random r = new Random();
                         float value = r.nextFloat();
-                        if(value <= 0.5) {
-                            egyik.setCursed();
+                        if (value <= 0.5) {
+                            egyik.setCursed(true);
                         } else {
-                            masodik.setCursed();
+                            masodik.setCursed(true);
                         }
                     }
                 }
-                for(i = 0; i < r1.getItems().size(); i++) {
+                for (i = 0; i < r1.getItems().size(); i++) {
                     Random r = new Random();
                     float value = r.nextFloat();
-                    if(value <= 0.5) {
+                    if (value <= 0.5) {
                         egyik.addItem(r1.getItems().get(i));
                     } else {
                         masodik.addItem(r1.getItems().get(i));

@@ -1,16 +1,23 @@
 package skeleton.elveszlelket.tester;
+
 import java.util.Scanner;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import skeleton.elveszlelket.*;
 import skeleton.elveszlelket.door.*;
 import skeleton.elveszlelket.item.*;
 import skeleton.elveszlelket.tester.Commands.*;
+import skeleton.elveszlelket.tester.Tests.*;
+
 /**
- * Ez az osztály egy tesztelő keretrendszert biztosít, amely lehetővé teszi a felhasználó
- * számára, hogy különböző parancsokat hajtson végre, befolyásolva ezzel a diákokat,
+ * Ez az osztály egy tesztelő keretrendszert biztosít, amely lehetővé teszi a
+ * felhasználó
+ * számára, hogy különböző parancsokat hajtson végre, befolyásolva ezzel a
+ * diákokat,
  * tanárokat, szobákat, ajtókat és tárgyakat a szimulációs környezetben.
  */
 public class Tester {
@@ -22,8 +29,10 @@ public class Tester {
     private static HashMap<String, Door> ajtok;
     private static HashMap<String, Item> targyak;
     public Scanner sc = new Scanner(System.in);
+
     /**
-     * Konstruktor, amely inicializálja a parancsokat és a szimulációs objektumokat tároló
+     * Konstruktor, amely inicializálja a parancsokat és a szimulációs objektumokat
+     * tároló
      * gyűjteményeket.
      */
     public Tester() {
@@ -43,6 +52,13 @@ public class Tester {
         commands.put("DROP", new DROP());
         commands.put("PICKUP", new PICKUP());
         commands.put("USEITEM", new USEITEM());
+        commands.put("TOGGLEGAS", new TOGGLEGAS());
+        commands.put("TOGGLECURSE", new TOGGLECURSE());
+        commands.put("INFO", new INFO());
+        commands.put("SETUP", new SETUP());
+        commands.put("CLEAR", new CLEAR());
+
+        commands.put("T_CONNECTION", new T_CONNECTION());
 
         hallgatok = new HashMap<>();
         oktatok = new HashMap<>();
@@ -51,9 +67,95 @@ public class Tester {
         targyak = new HashMap<>();
     }
 
-    public String getStudentReturnName(Student s) {
-        for(String st : hallgatok.keySet()) {
-            if(hallgatok.get(st).equals(s)) {
+    /**
+     * @param Student. Keresett hallgató.
+     * @return Keresett hallgató neve.
+     *         Ha nincs a paraméternek megfelelő hallgató, üres sztringgel tér
+     *         vissza.
+     */
+    public String getStudentName(Student s) {
+        for (String st : hallgatok.keySet()) {
+            if (hallgatok.get(st).equals(s)) {
+                return st;
+            }
+        }
+        return "";
+    }
+
+    /**
+     * @param Room. Keresett szoba.
+     * @return Keresett szoba neve.
+     *         Ha nincs a paraméternek megfelelő szoba, üres sztringgel tér
+     *         vissza.
+     */
+    public String getRoomName(Room r) {
+        for (String st : szobak.keySet()) {
+            if (szobak.get(st).equals(r)) {
+                return st;
+            }
+        }
+        return "";
+    }
+
+    /**
+     * @param Door. Keresett ajtó.
+     * @return Keresett ajtó neve.
+     *         Ha nincs a paraméternek megfelelő ajtó, üres sztringgel tér
+     *         vissza.
+     */
+    public String getDoorName(Door d) {
+        for (String st : ajtok.keySet()) {
+            if (ajtok.get(st).equals(d)) {
+                return st;
+            }
+        }
+        return "";
+    }
+
+    /**
+     * @param Item. Keresett tárgy.
+     * @return Keresett tárgy neve.
+     *         Ha nincs a paraméternek megfelelő tárgy, üres sztringgel tér
+     *         vissza.
+     */
+    public String getItemName(Item t) {
+        for (String st : targyak.keySet()) {
+            if (targyak.get(st).equals(t)) {
+                return st;
+            }
+        }
+        return "";
+    }
+
+    /**
+     * @param Teacher. Keresett oktató.
+     * @return Keresett oktató neve.
+     *         Ha nincs a paraméternek megfelelő oktató, üres sztringgel tér
+     *         vissza.
+     */
+    public String getTeacherName(Teacher t) {
+        for (String st : oktatok.keySet()) {
+            if (oktatok.get(st).equals(t)) {
+                return st;
+            }
+        }
+        return "";
+    }
+
+    /**
+     * @param Human. Keresett ember.
+     * @return Keresett ember neve.
+     *         Ha nincs a paraméternek megfelelő ember, üres sztringgel tér
+     *         vissza.
+     */
+    public String getHumanName(Human t) {
+        for (String st : oktatok.keySet()) {
+            if (oktatok.get(st).equals(t)) {
+                return st;
+            }
+        }
+        for (String st : hallgatok.keySet()) {
+            if (hallgatok.get(st).equals(t)) {
                 return st;
             }
         }
@@ -89,6 +191,15 @@ public class Tester {
     }
 
     /**
+     * Eltávolít egy ajtót az ajtók gyűjteményéből.
+     *
+     * @param r Az eltávolítandó ajtó.
+     */
+    public void removeDoor(Door d) {
+        ajtok.remove(d);
+    }
+
+    /**
      * Visszaad egy parancsot a megadott kulcs alapján.
      *
      * @param key A parancs kulcsa.
@@ -102,7 +213,7 @@ public class Tester {
      * Hozzáad egy diákot a hallgatók gyűjteményéhez.
      *
      * @param name A diák neve, amely kulcsként szolgál a gyűjteményben.
-     * @param s A hozzáadandó diák objektum.
+     * @param s    A hozzáadandó diák objektum.
      */
     public void addStudent(String name, Student s) {
         hallgatok.put(name, s);
@@ -122,7 +233,7 @@ public class Tester {
      * Hozzáad egy tanárt az oktatók gyűjteményéhez.
      *
      * @param name A tanár neve, amely kulcsként szolgál a gyűjteményben.
-     * @param t A hozzáadandó tanár objektum.
+     * @param t    A hozzáadandó tanár objektum.
      */
     public void addTeacher(String name, Teacher t) {
         oktatok.put(name, t);
@@ -142,7 +253,7 @@ public class Tester {
      * Hozzáad egy szobát a szobák gyűjteményéhez.
      *
      * @param name A szoba neve, amely kulcsként szolgál a gyűjteményben.
-     * @param r A hozzáadandó szoba objektum.
+     * @param r    A hozzáadandó szoba objektum.
      */
     public void addRoom(String name, Room r) {
         szobak.put(name, r);
@@ -162,7 +273,7 @@ public class Tester {
      * Hozzáad egy ajtót az ajtók gyűjteményéhez.
      *
      * @param name Az ajtó neve, amely kulcsként szolgál a gyűjteményben.
-     * @param d A hozzáadandó ajtó objektum.
+     * @param d    A hozzáadandó ajtó objektum.
      */
     public void addDoor(String name, Door d) {
         ajtok.put(name, d);
@@ -182,12 +293,12 @@ public class Tester {
      * Hozzáad egy tárgyat a tárgyak gyűjteményéhez.
      *
      * @param name A tárgy neve, amely kulcsként szolgál a gyűjteményben.
-     * @param i A hozzáadandó tárgy objektum.
+     * @param i    A hozzáadandó tárgy objektum.
      */
     public void addItem(String name, Item i) {
         targyak.put(name, i);
     }
-    
+
     /**
      * Eltávolít egy tárgyat a tárgyak gyűjteményéből.
      *
@@ -202,7 +313,7 @@ public class Tester {
                 break;
             }
         }
-        
+
         // Ha megtaláltuk a kulcsot, eltávolítjuk a tárgyat a gyűjteményből.
         if (itemKey != null) {
             targyak.remove(itemKey);
@@ -225,7 +336,8 @@ public class Tester {
     /**
      * Egész számot kér be a felhasználótól.
      *
-     * @param uzenet Az a szöveg, amit a felhasználónak megjelenítünk a bekérés előtt.
+     * @param uzenet Az a szöveg, amit a felhasználónak megjelenítünk a bekérés
+     *               előtt.
      * @return A felhasználó által beírt egész szám.
      */
     public int askInt(String uzenet) {
@@ -237,13 +349,14 @@ public class Tester {
     /**
      * Logikai értéket kér be a felhasználótól.
      *
-     * @param uzenet Az a szöveg, amit a felhasználónak megjelenítünk a bekérés előtt.
+     * @param uzenet Az a szöveg, amit a felhasználónak megjelenítünk a bekérés
+     *               előtt.
      * @return A felhasználó által beírt logikai érték: igaz vagy hamis.
      */
     public boolean askBoolean(String uzenet) {
         System.out.println(uzenet);
         String vissza = sc.nextLine();
-        if(vissza.toLowerCase().equals("true")) {
+        if (vissza.toLowerCase().equals("true")) {
             return true;
         } else {
             return false;
@@ -278,13 +391,48 @@ public class Tester {
     }
 
     /**
+     * Lekérdezi a oktatók gyűjteményét.
+     *
+     * @return A jelenlegi oktatók gyűjteménye.
+     */
+    public Collection<Teacher> getTeachers() {
+        return oktatok.values();
+    }
+
+    /**
+     * Lekérdezi a tárgyak gyűjteményét.
+     *
+     * @return A jelenlegi tárgyak gyűjteménye.
+     */
+    public Collection<Item> getItems() {
+        return targyak.values();
+    }
+
+    /**
+     * Lekérdezi a szobák gyűjteményét.
+     *
+     * @return A jelenlegi szobák gyűjteménye.
+     */
+    public Collection<Room> getRooms() {
+        return szobak.values();
+    }
+
+    /**
+     * Lekérdezi a ajtók gyűjteményét.
+     *
+     * @return A jelenlegi ajtók gyűjteménye.
+     */
+    public Collection<Door> getDoors() {
+        return ajtok.values();
+    }
+
+    /**
      * Ellenőrzi, hogy a megadott diáknak van-e Logar tárgya.
      *
      * @param hallgato A vizsgálandó diák.
      * @return Igaz, ha a diáknak van Logar tárgya, egyébként hamis.
      */
-    public boolean hasLogar(Student hallgato) 
-    {
+    public boolean hasLogar(Student hallgato) {
         return hallgato.hasLogar();
     }
 
@@ -299,36 +447,117 @@ public class Tester {
     }
 
     /**
-     * A fő hallgatási ciklus, amely várja a felhasználói bemenetet és végrehajtja a megfelelő parancsokat.
+     * A fő hallgatási ciklus, amely várja a felhasználói bemenetet és végrehajtja a
+     * megfelelő parancsokat.
      */
     public void listen() {
-        while(true) {
+        while (true) {
             String sor = sc.nextLine(); // Read the line
-    
+
             // Check if the user wants to exit
             if ("exit".equalsIgnoreCase(sor.trim())) {
                 sc.close();
                 break;
             }
-    
+
             executeCommand(sor.split(" ")); // Split the line and execute the command
             sor = "";
         }
     }
+
     /**
      * Egy parancsot hajt végre a megadott paraméterekkel.
      *
      * @param params A parancs paraméterei.
      */
     public void executeCommand(String[] params) {
-        // a parameterek elso mezoje adja meg hogy milyen parancs lett meghivva(pl: MAKE)
-        // kikeressuk, hogy a commands tombben adott parancshoz melyik parancs osztaly tartozik,
-        // majd annak az osztalynak futtatjuk az execute fuggvenyet, ez minden parancs osztalynak mashogy van
-        // definialva -> prog 3ból volt ez a megoldás az ilyen parancssoros programok keszitesere
+        // a parameterek elso mezoje adja meg hogy milyen parancs lett meghivva(pl:
+        // MAKE)
+        // kikeressuk, hogy a commands tombben adott parancshoz melyik parancs osztaly
+        // tartozik,
+        // majd annak az osztalynak futtatjuk az execute fuggvenyet, ez minden parancs
+        // osztalynak mashogy van
+        // definialva -> prog 3ból volt ez a megoldás az ilyen parancssoros programok
+        // keszitesere
         // a veremautomatas reszek korul.
         Command c = commands.get(params[0]);
-        if(c != null) {
+        if (c != null) {
             c.execute(params, this);
         }
+    }
+
+    /*
+     * @param0 String[]. Olyan sztringeket tartalmaz, amelyekkel nem terhet vissza a
+     * függény.
+     * 
+     * @param1 String. Esetlegesen meglehet adni hogy milyen targynak keresunk
+     * nevet,
+     * ekkor a nev prefix(base) a targy tipusanak a neve lesz.
+     * 
+     * @return String. Vissza ad egy olyan nevet, ami meg
+     * egy objektumhoz sincs rendelve a jatekban.
+     * A while ciklus ellenorzi, hogy adott "nev" valtozoban
+     * tarolt nevvel rendelkezik-e mar valamilyen objektum,
+     * ha igen, a "nev" valtozot megvaltoztatjuk az alap nev prefixre(base) plusz
+     * egy szamra.
+     * Ha tulleptunk 100000-en, akkor a nev prefixhez hozza adunk egy random
+     * karaktert( base = base.concat(String.valueOf(karakterek.charAt(i))) ) es ujra
+     * kezdjuk az ellenorzest.
+     * Ha 1000-szer ujra kezdtuk az ellenorzest hibat irunk ki es ures stringgel
+     * terunk vissza.
+     */
+    public String getAvailableName(List<String> tiltottNevek, String targyTipusa) {
+        String base = "";
+        if (!targyTipusa.equals("")) {
+            base = targyTipusa;
+        } else {
+            base = "nev";
+        }
+        String karakterek = "abcdefghijklmnopqrstuvwxyz";
+        String nev = base;
+        int i = 0;
+        int hanyszorIndultUjra = 0;
+        boolean fusstovabb = true;
+        while (fusstovabb) {
+            if (i <= 100000) {
+                i++;
+            } else {
+                Random r = new Random();
+                int randomertek = r.nextInt(karakterek.length());
+                base = base.concat(String.valueOf(karakterek.charAt(i)));
+                i = 0;
+                hanyszorIndultUjra++;
+            }
+            if (hanyszorIndultUjra == 1000) {
+                System.out.println("Nem sikerult automatikusan nevet talalni. Ures nev vissza adva.");
+                return "";
+            }
+            nev = base.concat(String.valueOf(i));
+
+            if (getStudent(nev) != null || getTeacher(nev) != null || getItem(nev) != null || getRoom(nev) != null
+                    || getDoor(nev) != null) {
+                continue;
+            } else {
+                boolean voltEgyezes = false;
+                for (int u = 0; u < tiltottNevek.size(); u++) {
+                    if (tiltottNevek.get(u).equals(nev)) {
+                        voltEgyezes = true;
+                    }
+                }
+                if (!voltEgyezes) {
+                    fusstovabb = false;
+                }
+            }
+        }
+
+        return nev;
+    }
+
+    public void clear() {
+        hallgatok.clear();
+        oktatok.clear();
+        targyak.clear();
+        ajtok.clear();
+        szobak.clear();
     }
 }

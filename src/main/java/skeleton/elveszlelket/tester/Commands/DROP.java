@@ -14,11 +14,16 @@ public class DROP implements skeleton.elveszlelket.tester.Commands.Command {
      * @param params A parancs paraméterei tömbként.
      *               A params[0] tartalmazza a parancs nevét.
      *               A params[1] tartalmazza a tárgy nevét, amelyet el kell dobni.
-     *               A params[2] tartalmazza a hallgató vagy tanár nevét, aki eldobja a tárgyat.
-     * @param t      A Tester objektum, amely tartalmazza a szimulációs objektumokat.
+     *               A params[2] tartalmazza a hallgató vagy tanár nevét, aki
+     *               eldobja a tárgyat.
+     * @param t      A Tester objektum, amely tartalmazza a szimulációs
+     *               objektumokat.
      */
     public void execute(String[] params, Tester t) {
-
+        if (params.length != 3) {
+            System.out.println("Parameterk szama nem megfelelo.");
+            return;
+        }
         Item item = t.getItem(params[1]);
 
         if (item == null) {
@@ -27,10 +32,10 @@ public class DROP implements skeleton.elveszlelket.tester.Commands.Command {
         }
 
         Human human = t.getStudent(params[2]);
-        if (human == null){
+        if (human == null) {
             human = t.getTeacher(params[2]);
         }
-        
+
         if (human == null) {
             System.out.println("Human '" + params[2] + "' not found.");
             return;

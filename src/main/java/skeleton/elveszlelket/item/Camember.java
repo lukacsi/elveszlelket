@@ -6,7 +6,8 @@ import skeleton.elveszlelket.strategy.GasStrategy;
 public class Camember extends Item {
     private Boolean opened;
 
-    /** A Camembert konstruktora, beállítja
+    /**
+     * A Camembert konstruktora, beállítja
      * a nevét Camembert-re,
      * a strategy-t GasStrategy-re,
      * a opened állapotát pedig false-ra.
@@ -17,8 +18,14 @@ public class Camember extends Item {
         opened = false;
     }
 
-    /** A Camembert használatát implementáló függvény.
-     *  Meghívja a saját strategy-jét.
+    public boolean isOpened() {
+        return opened;
+    }
+
+    /**
+     * A Camembert használatát implementáló függvény.
+     * Meghívja a saját strategy-jét.
+     * 
      * @param student A tárgyat használó hallgató
      */
     public void use(Student student) {
