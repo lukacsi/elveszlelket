@@ -21,7 +21,7 @@ public class MERGE implements skeleton.elveszlelket.tester.Commands.Command {
     public void execute(String[] params, Tester t) {
 
         if (params.length != 3) {
-            System.out.println("Parameterk szama nem megfelelo.");
+            System.out.println("Parameterek szama nem megfelelo.");
             return;
         }
         Room r1 = t.getRoom(params[1]);
@@ -32,8 +32,11 @@ public class MERGE implements skeleton.elveszlelket.tester.Commands.Command {
                 return;
             }
 
-            boolean answer = t.askBoolean("Van-e hallgato/oktato " + params[1] + " vagy " + params[2] + " szobaban?");
-            if (!answer) {
+            boolean answer = t.getStudents().isEmpty();
+            if (answer) {
+                answer = t.getTeachers().isEmpty();
+            }
+            if (answer) {
                 String base = "MergedRoom";
                 String roomNev = base;
                 int i = 0;

@@ -173,6 +173,57 @@ public class INFO implements Command {
         }
     }
 
+    public void commandInfo(String command) {
+        if (command.equalsIgnoreCase("MAKE")) {
+            System.out.println(command + " hasznalata: " + command.toUpperCase() + " [tipus] [nev]");
+        } else if (command.equalsIgnoreCase("ADDHTOROOM")) {
+            System.out.println(command + " hasznalata: " + command.toUpperCase() + " [ember_neve] [szoba_neve]");
+        } else if (command.equalsIgnoreCase("ADDITOROOM")) {
+            System.out.println(command + " hasznalata: " + command.toUpperCase() + " [targy_neve] [szoba_neve]");
+        } else if (command.equalsIgnoreCase("ADDTOHUMAN")) {
+            System.out.println(command + " hasznalata: " + command.toUpperCase() + " [targy_neve] [ember_neve]");
+        } else if (command.equalsIgnoreCase("CHECKLOSE")) {
+            System.out.println(command + " hasznalata: " + command.toUpperCase());
+        } else if (command.equalsIgnoreCase("CHECKWIN")) {
+            System.out.println(command + " hasznalata: " + command.toUpperCase());
+        } else if (command.equalsIgnoreCase("CLEAR")) {
+            System.out.println(command + " hasznalata: " + command.toUpperCase());
+        } else if (command.equalsIgnoreCase("CONNECTROOM")) {
+            System.out.println(
+                    command + " hasznalata: " + command.toUpperCase() + " [ajto_neve] [szoba_neve] [szoba_neve]");
+        } else if (command.equalsIgnoreCase("CONNECTTRANS")) {
+            System.out.println(command + " hasznalata: " + command.toUpperCase()
+                    + " [hallgato_neve] [tranzisztor_neve] [tranzisztor_neve]");
+        } else if (command.equalsIgnoreCase("DROP")) {
+            System.out.println(command + " hasznalata: " + command.toUpperCase() + " [targy_neve] [ember_neve]");
+        } else if (command.equalsIgnoreCase("INFO")) {
+            System.out.println(command + " hasznalata:\n\t- " + command.toUpperCase()
+                    + " - Feljegyzett objektumok listaja.\n\t- " + command.toUpperCase()
+                    + " [parancs_neve/objektum_neve] - Leirast ad egy objektumrol/parancsrol.");
+        } else if (command.equalsIgnoreCase("MERGE")) {
+            System.out.println(command + " hasznalata: " + command.toUpperCase() + " [szoba_neve] [szoba_neve]");
+        } else if (command.equalsIgnoreCase("MOVE")) {
+            System.out.println(command + " hasznalata: " + command.toUpperCase() + " [ajto_neve] [ember_neve]");
+        } else if (command.equalsIgnoreCase("PICKUP")) {
+            System.out.println(command + " hasznalata: " + command.toUpperCase() + " [targy_neve] [ember_neve]");
+        } else if (command.equalsIgnoreCase("REMOVE")) {
+            System.out.println(command + " hasznalata: " + command.toUpperCase()
+                    + " [objektum_neve] ([objektum_neve] lehet ROOM/DOOR/STUDENT/TEACHER)");
+        } else if (command.equalsIgnoreCase("REMOVEIFROMHUMAN")) {
+            System.out.println(command + " hasznalata: " + command.toUpperCase() + " [targy_neve] [ember_neve]");
+        } else if (command.equalsIgnoreCase("REMOVEIFROMROOM")) {
+            System.out.println(command + " hasznalata: " + command.toUpperCase() + " [targy_neve] [szoba_neve]");
+        } else if (command.equalsIgnoreCase("SPLIT")) {
+            System.out.println(command + " hasznalata: " + command.toUpperCase() + " [szoba_neve]");
+        } else if (command.equalsIgnoreCase("TOGGLECURSE")) {
+            System.out.println(command + " hasznalata: " + command.toUpperCase() + " [szoba_neve] [ertek]");
+        } else if (command.equalsIgnoreCase("TOGGLEGAS")) {
+            System.out.println(command + " hasznalata: " + command.toUpperCase() + " [szoba_neve] [ertek]");
+        } else if (command.equalsIgnoreCase("USEITEM")) {
+            System.out.println(command + " hasznalata: " + command.toUpperCase() + " [ember_neve] [targy_neve]");
+        }
+    }
+
     @Override
     public void execute(String[] params, Tester t) {
 
@@ -205,6 +256,8 @@ public class INFO implements Command {
             System.out.println("Parameterek szama nem megfelelo.");
             return;
         }
+
+        commandInfo(params[1]);
 
         Student s = t.getStudent(params[1]);
         if (s != null) {

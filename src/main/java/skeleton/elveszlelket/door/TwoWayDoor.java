@@ -24,10 +24,10 @@ public class TwoWayDoor extends Door {
     }
 
     @Override
-    public Room getDest(Room r){
+    public Room getDest(Room r) {
         Room result = firstRoom;
-        if(result == r){
-            result = secoundRoom;
+        if (result == r) {
+            result = secondRoom;
         }
         return result;
     }

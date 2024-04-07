@@ -21,24 +21,28 @@ public class USEITEM implements skeleton.elveszlelket.tester.Commands.Command {
      */
     public void execute(String[] params, Tester t) {
         if (params.length != 3) {
-            System.out.println("Parameterk szama nem megfelelo.");
+            System.out.println("Parameterek szama nem megfelelo.");
             return;
         }
         Student student = t.getStudent(params[1]);
 
         if (student == null) {
-            System.out.println("Student '" + params[1] + "' not found.");
+            System.out.println("Hallgato '" + params[1] + "' nincs feljegyezve.");
             return;
         }
 
         Item item = t.getItem(params[2]);
 
         if (item == null) {
-            System.out.println("Item '" + params[2] + "' not found.");
+            System.out.println("Targy '" + params[2] + "' nincs feljegyezve.");
             return;
         }
 
-        student.useItem(item);
-        System.out.println("Item '" + item.getName() + "' used by student '");
+        if (student.getItems().contains(item)) {
+            student.useItem(item);
+            System.out.println("Targy '" + item.getName() + "' hasznalva lett: '" + t.getStudentName(student));
+        } else {
+            System.out.println("A targy nincs a hallgatonal.");
+        }
     }
 }

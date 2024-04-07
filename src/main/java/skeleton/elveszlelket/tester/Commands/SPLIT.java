@@ -22,14 +22,17 @@ public class SPLIT implements skeleton.elveszlelket.tester.Commands.Command {
     public void execute(String[] params, Tester t) {
 
         if (params.length != 2) {
-            System.out.println("Parameterk szama nem megfelelo.");
+            System.out.println("Parameterek szama nem megfelelo.");
             return;
         }
 
         Room r1 = t.getRoom(params[1]);
         if (r1 != null) {
-            boolean answer = t.askBoolean("Van oktato/hallgato " + params[1] + "-ben?");
-            if (!answer) {
+            boolean answer = r1.getStudents().isEmpty();
+            if (answer) {
+                answer = r1.getTeacher().isEmpty();
+            }
+            if (answer) {
                 String base = "SplitedRoom";
                 String elsoNev, masodikNev;
                 String roomNev = base;

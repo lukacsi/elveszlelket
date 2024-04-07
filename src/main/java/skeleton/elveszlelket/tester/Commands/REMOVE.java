@@ -24,7 +24,7 @@ public class REMOVE implements skeleton.elveszlelket.tester.Commands.Command {
     public void execute(String[] params, Tester t) {
 
         if (params.length != 3) {
-            System.out.println("Parameterk szama nem megfelelo.");
+            System.out.println("Parameterek szama nem megfelelo.");
             return;
         }
 

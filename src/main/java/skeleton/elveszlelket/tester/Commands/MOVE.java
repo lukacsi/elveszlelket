@@ -33,12 +33,20 @@ public class MOVE implements skeleton.elveszlelket.tester.Commands.Command {
 
             if (keresettStudent != null) {
                 if (!keresettStudent.isDead()) {
-                    keresettDoor.accept(keresettStudent);
+                    if (keresettDoor.getOwnerRoom().equals(keresettStudent.getRoom())) {
+                        keresettDoor.accept(keresettStudent);
+                    } else {
+                        System.out.println("Az ajto illetve az ember nem ugyanabban a szobaban vannak.");
+                    }
                 } else {
                     System.out.println("Mozgatni kivant hallgato mar nem el.");
                 }
             } else if (keresettTeacher != null) {
-                keresettDoor.accept(keresettTeacher);
+                if (keresettDoor.getOwnerRoom().equals(keresettTeacher.getRoom())) {
+                    keresettDoor.accept(keresettTeacher);
+                } else {
+                    System.out.println("Az ajto illetve az ember nem ugyanabban a szobaban vannak.");
+                }
             } else {
                 System.out.println("Parameterkent kapott human entitas nincs meg feljegyezve.");
             }
