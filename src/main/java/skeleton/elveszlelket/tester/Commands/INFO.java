@@ -221,6 +221,11 @@ public class INFO implements Command {
             System.out.println(command + " hasznalata: " + command.toUpperCase() + " [szoba_neve] [ertek]");
         } else if (command.equalsIgnoreCase("USEITEM")) {
             System.out.println(command + " hasznalata: " + command.toUpperCase() + " [ember_neve] [targy_neve]");
+        } else if (command.equalsIgnoreCase("SETUP")) {
+            System.out.println(command + " hasznalata: " + command.toUpperCase()
+                    + " [objektum_tipus]:[objektumok_szama] [objektum_tipus]:[objektumok_szama] ....");
+            System.out.println(
+                    "Pelda: SETUP ONEWAYDOOR:1 ROOM:2 STUDENT:1 - letrehoz 1db egyiranyu ajtot, 2db szobat, 1 db hallgatot");
         }
     }
 
