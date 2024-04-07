@@ -1,4 +1,5 @@
 package skeleton.elveszlelket;
+
 import skeleton.elveszlelket.item.*;
 
 import java.util.ArrayList;
@@ -8,7 +9,8 @@ import skeleton.elveszlelket.door.*;
 
 /**
  * Egy diákot reprezentál a szimulációs környezetben.
- * A diák interakcióba léphet ajtókkal és tárgyakkal, és különböző állapotokkal rendelkezik,
+ * A diák interakcióba léphet ajtókkal és tárgyakkal, és különböző állapotokkal
+ * rendelkezik,
  * amelyek befolyásolják az interakcióit a környezettel.
  */
 public class Student implements Human {
@@ -23,9 +25,45 @@ public class Student implements Human {
     private List<Item> items;
     private Room currentRoom;
 
+    public boolean isDead() {
+        return dead;
+    }
+
+    public boolean isLogarObtained() {
+        return logarObtained;
+    }
+
+    public int getStunDuration() {
+        return stunDuration;
+    }
+
+    public int getImmunityDuration() {
+        return immunityDuration;
+    }
+
+    public int getGasProtectionDuration() {
+        return gasProtectionDuration;
+    }
+
+    public boolean isLastDoorBlocked() {
+        return doorBlocked;
+    }
+
+    public Door getLastDoor() {
+        return lastDoor;
+    }
+
+    /**
+     * @return A játékos által tárolt tárgyak listája
+     */
+    public List<Item> getItems() {
+        return items;
+    }
+
     /**
      * A Student osztály konstruktora.
-     * Inicializálja a diákot az alapértelmezett állapotokkal és egy üres tárgylistával.
+     * Inicializálja a diákot az alapértelmezett állapotokkal és egy üres
+     * tárgylistával.
      */
     public Student() {
         items = new ArrayList<>();
@@ -37,6 +75,7 @@ public class Student implements Human {
         dead = false;
         winCondition = false;
         lastDoor = null;
+        currentRoom = null;
     }
 
     /**
@@ -48,8 +87,8 @@ public class Student implements Human {
     @Override
     public boolean use(OneWayDoor door) {
         Room currentRoom = getRoom();
-        if(doorBlocked == true) {
-            if(lastDoor.equals(door)) {
+        if (doorBlocked == true) {
+            if (lastDoor.equals(door)) {
                 System.out.println("Szoba valtas sikertelen!");
                 return false;
             }
@@ -58,8 +97,7 @@ public class Student implements Human {
             System.out.println("Szoba valtas sikertelen!");
             return false;
         }
-        if(!currentRoom.hasFreePlace())
-        {
+        if (!currentRoom.hasFreePlace()) {
             return false;
         }
         currentRoom.removeHuman(this);
@@ -78,14 +116,13 @@ public class Student implements Human {
     @Override
     public boolean use(TwoWayDoor door) {
         Room currentRoom = getRoom();
-        if(doorBlocked == true) {
-            if(lastDoor.equals(door)) {
+        if (doorBlocked == true) {
+            if (lastDoor.equals(door)) {
                 System.out.println("Szoba valtas sikertelen!");
                 return false;
             }
         }
-        if(!door.getDest(currentRoom).hasFreePlace())
-        {
+        if (!currentRoom.hasFreePlace()) {
             return false;
         }
         currentRoom.removeHuman(this);
@@ -99,7 +136,7 @@ public class Student implements Human {
         return items;
     }
 
-     /**
+    /**
      * A diák felvesz egy tárgyat.
      * 
      * @param item A felveendő tárgy.
@@ -107,15 +144,23 @@ public class Student implements Human {
      */
     @Override
     public boolean pickupItem(Item item) {
-        if (items.size() < 5) {
-            items.add(item);
-            if ("Logar".equals(item.getName())) {
-                item.use(this);
-                logarObtained = true;
+        if (item.getRoom() != null) {
+            if (!item.getRoom().equals(currentRoom)) {
+                return false;
             }
-            return true;
+        } else if (item.getHuman() != null) {
+            return false;
         }
-        return false;
+
+        if (items.size() >= 5) {
+            return false;
+        }
+        if (item.getName() == "Logar") {
+            item.use(this);
+            logarObtained = true;
+        }
+        items.add(item);
+        return true;
     }
 
     /**
@@ -126,12 +171,16 @@ public class Student implements Human {
      */
     @Override
     public boolean dropItem(Item item) {
-        currentRoom.addItem(item);
-        return items.remove(item);
+        if (items.contains(item)) {
+            currentRoom.addItem(item);
+            return items.remove(item);
+        }
+        return false;
     }
 
     /**
-     * A diák használ egy tárgyat. Az implementációtól függően ez különböző hatásokat válthat ki.
+     * A diák használ egy tárgyat. Az implementációtól függően ez különböző
+     * hatásokat válthat ki.
      * 
      * @param item A használni kívánt tárgy.
      * @return Igaz, ha a tárgy használata sikeres volt.
@@ -140,7 +189,7 @@ public class Student implements Human {
         item.use(this);
         return true;
     }
-    
+
     /**
      * Eltávolít egy tárgyat a diák tárgylistájából.
      * 
@@ -151,7 +200,8 @@ public class Student implements Human {
     }
 
     /**
-     * Párosít két tranzisztort. Ha mindkét tranzisztor párosítatlan, akkor összekapcsolja őket.
+     * Párosít két tranzisztort. Ha mindkét tranzisztor párosítatlan, akkor
+     * összekapcsolja őket.
      * 
      * @param t1 Az első tranzisztor.
      * @param t2 A második tranzisztor.
@@ -163,8 +213,7 @@ public class Student implements Human {
         t1.addPair(t2);
         if (t1.hasPair()) {
             return true;
-        }
-        else{
+        } else {
             return false;
         }
     }
@@ -176,10 +225,11 @@ public class Student implements Human {
      * @return Igaz, ha a diák mostantól halott, egyébként hamis.
      */
     public boolean killYourself() {
-        if(immunityDuration != 0)
+        if (immunityDuration != 0)
             dead = true;
         return dead;
     }
+
     /**
      * Blokkolja a legutóbb használt ajtó használatát a diák számára.
      */
@@ -193,7 +243,7 @@ public class Student implements Human {
      * @param duration A bénulás időtartama.
      */
     public void stun(int duration) {
-        if(gasProtectionDuration == 0) {
+        if (gasProtectionDuration == 0) {
             stunDuration += duration;
             for (Item item : items) {
                 dropItem(item);
@@ -209,11 +259,12 @@ public class Student implements Human {
      * @return Igaz, ha a teleportálás sikeres volt, egyébként hamis.
      */
     public boolean teleport(Room room) {
-        if(room.hasFreePlace()) {
+        if (room.hasFreePlace()) {
             getRoom().removeHuman(this);
             room.addHuman(this);
             return true;
-        } else return false;
+        } else
+            return false;
     }
 
     /**
@@ -298,26 +349,26 @@ public class Student implements Human {
      * @return Igaz, ha a diák halott, egyébként hamis.
      */
     public boolean halottE() {
-        if(dead)
-        {
+        if (dead) {
             return true;
-        }
-        else{
+        } else {
             return false;
         }
     }
 
     /**
-     * Jelzi, hogy a diák megérkezett egy új helyszínre. Ezt üzenetküldéssel jelezhetjük.
+     * Jelzi, hogy a diák megérkezett egy új helyszínre. Ezt üzenetküldéssel
+     * jelezhetjük.
      */
     public void iHaveArrived() {
         Room currentRoom = getRoom();
-        currentRoom.addHuman(this); 
+        currentRoom.addHuman(this);
         System.out.println("I have arrived");
     }
 
     /**
-     * Beállítja a diák győzelmi feltételét. Ez akkor történik, ha a diák használja a logart.
+     * Beállítja a diák győzelmi feltételét. Ez akkor történik, ha a diák használja
+     * a logart.
      */
     public void setWinCondition() {
         winCondition = true;
