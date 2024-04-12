@@ -3,7 +3,7 @@ package skeleton.elveszlelket.item;
 import skeleton.elveszlelket.Student;
 import skeleton.elveszlelket.strategy.NeutralizeGasStrategy;
 
-public class AirFreshener extends Item {
+public class AirFreshener extends ProtectionItem {
     
     /**
      * Az AirFreshener konstruktora.
@@ -12,6 +12,7 @@ public class AirFreshener extends Item {
      */
     public AirFreshener() {
         name = "Air Freshener";
+        uses = 1;
         strategy = new NeutralizeGasStrategy();
     }
 
