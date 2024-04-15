@@ -30,6 +30,7 @@ public class MOVE implements skeleton.elveszlelket.tester.Commands.Command {
         if (keresettDoor != null) {
             Student keresettStudent = t.getStudent(params[2]);
             Teacher keresettTeacher = t.getTeacher(params[2]);
+            CleaningLady keresettCleaner = t.getCleaningLady(params[2]);
 
             if (keresettStudent != null) {
                 if (!keresettStudent.isDead()) {
@@ -44,6 +45,12 @@ public class MOVE implements skeleton.elveszlelket.tester.Commands.Command {
             } else if (keresettTeacher != null) {
                 if (keresettDoor.getOwnerRoom().equals(keresettTeacher.getRoom())) {
                     keresettDoor.accept(keresettTeacher);
+                } else {
+                    System.out.println("Az ajto illetve az ember nem ugyanabban a szobaban vannak.");
+                }
+            } else if (keresettCleaner != null) {
+                if (keresettDoor.getOwnerRoom().equals(keresettCleaner.getRoom())) {
+                    keresettDoor.accept(keresettCleaner);
                 } else {
                     System.out.println("Az ajto illetve az ember nem ugyanabban a szobaban vannak.");
                 }

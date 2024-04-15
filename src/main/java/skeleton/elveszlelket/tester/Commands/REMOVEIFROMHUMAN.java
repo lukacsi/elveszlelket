@@ -21,8 +21,12 @@ public class REMOVEIFROMHUMAN implements Command {
             }
 
             if (item != null && human != null) {
-                human.dropItem(item);
-                item.setHuman(null);
+                if(human.dropItem(item))
+                    item.setHuman(null);
+                else {
+                    System.out.println("A tárgy nincs az embernél");
+                    return;
+                }
             }
         } else {
             System.out.println("A parameterek szama nem megfelelo.");

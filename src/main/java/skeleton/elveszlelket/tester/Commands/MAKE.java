@@ -43,6 +43,9 @@ public class MAKE implements skeleton.elveszlelket.tester.Commands.Command {
             } else if (params[1].equals("TEACHER")) {
                 System.out.println(params[1] + ": " + params[2] + " hozzaadva.");
                 t.addTeacher(params[2], new Teacher());
+            } else if (params[1].equals("CLEANINGLADY")) {
+                System.out.println(params[1] + ": " + params[2] + " hozzaadva.");
+                t.addCleaningLady(params[2], new CleaningLady());
             } else if (params[1].equals("ROOM")) {
                 System.out.println(params[1] + ": " + params[2] + " hozzaadva.");
                 t.addRoom(params[2], new Room());

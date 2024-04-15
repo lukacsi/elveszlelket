@@ -47,6 +47,14 @@ public class REMOVE implements skeleton.elveszlelket.tester.Commands.Command {
             } else {
                 System.out.println("A megadott oktató nem található a játékban.");
             }
+        } else if (objectType.equalsIgnoreCase("CLEANINGLADY")) {
+            CleaningLady cleaningToRemove = t.getCleaningLady(objectName);
+            if (cleaningToRemove != null) {
+                t.removeCleaningLady(objectName);
+                System.out.println("Az takarító (" + objectName + ") sikeresen eltávolítva a játékból.");
+            } else {
+                System.out.println("A megadott takarító nem található a játékban.");
+            }
         } else if (objectType.equalsIgnoreCase("ROOM")) { // Az eltávolítandó objektum nem STUDENT/TEACHER
             Room roomToRemove = t.getRoom(objectName);
             if (roomToRemove != null) {
