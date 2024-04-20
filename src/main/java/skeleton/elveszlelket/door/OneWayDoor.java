@@ -1,4 +1,5 @@
 package skeleton.elveszlelket.door;
+import skeleton.elveszlelket.CleaningLady;
 import skeleton.elveszlelket.Room;
 import skeleton.elveszlelket.Student;
 import skeleton.elveszlelket.Teacher;
@@ -21,6 +22,15 @@ public class OneWayDoor extends Door{
     @Override
     public void accept(Student s){
         s.use(this);
+    }
+
+    /**
+     * Elfogadja az observer takarítót.
+     * @param c A takarító.
+     */
+    @Override
+    public void accept(CleaningLady c) {
+        c.use(this);
     }
 
     /**
@@ -47,6 +57,15 @@ public class OneWayDoor extends Door{
         destination.addHuman(s);
         s.iHaveArrived();
         s.setCurrentRoom(destination);
+    }
+
+    @Override
+    public void putMeThrough(CleaningLady c) {
+        c.getRoom().removeHuman(c);
+        destination.addHuman(c);
+        c.setCurrentRoom(destination);
+        c.setLastDoor(this);
+        c.iHaveArrived();
     }
     
      /**

@@ -1,57 +1,163 @@
 package skeleton.elveszlelket;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import skeleton.elveszlelket.door.Door;
 import skeleton.elveszlelket.door.OneWayDoor;
 import skeleton.elveszlelket.door.TwoWayDoor;
 import skeleton.elveszlelket.item.Item;
 
 public class CleaningLady implements Human{
+    
+    private Room currentRoom;
+    private Door lastDoor;
 
+    public CleaningLady()
+    {
+        lastDoor = null;
+        currentRoom = null;
+    }
+
+    /**
+     * A tanár használ egy egyirányú ajtót.
+     *
+     * @param door Az egyirányú ajtó, amelyet a tanár megpróbál használni.
+     * @return Igaz, ha a tanár sikeresen használja az ajtót, egyébként hamis.
+     */
     @Override
     public boolean use(OneWayDoor door) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'use'");
+        Room currentRoom = getRoom();
+        if (!door.isRightDirection(getRoom())) {
+            System.out.println("Szoba valtas sikertelen!");
+            return false;
+        }
+        if(!currentRoom.hasFreePlace())
+        {
+            return false;
+        }
+        currentRoom.removeHuman(this);
+        door.putMeThrough(this);
+        System.out.println("Szoba valtas sikeres!");
+        return true;
     }
 
+
+    /**
+     * A tanár használ egy kétirányú ajtót.
+     *
+     * @param door A kétirányú ajtó, amelyet a tanár megpróbál használni.
+     * @return Igaz, ha a tanár sikeresen használja az ajtót, egyébként hamis.
+     */
     @Override
     public boolean use(TwoWayDoor door) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'use'");
+        Room currentRoom = getRoom();
+        if(!door.getDest(currentRoom).hasFreePlace())
+        {
+            return false;
+        }
+        currentRoom.removeHuman(this);
+        door.putMeThrough(this);
+        System.out.println("Szoba valtas sikeres!");
+        return true;
     }
 
+    /**
+     * A tanár felvesz egy tárgyat.
+     *
+     * @param item A felveendő tárgy.
+     * @return Igaz, ha a tanár sikeresen felveszi a tárgyat, egyébként hamis.
+     */
     @Override
     public boolean pickupItem(Item item) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'pickupItem'");
+        if(items.size()<1) {
+            items.add(item);
+            return true;
+        } else return false;
     }
 
+    /**
+     * A tanár eldob egy tárgyat.
+     *
+     * @param item Az eldobandó tárgy.
+     * @return Igaz, ha a tanár sikeresen eldobja a tárgyat.
+     */
     @Override
     public boolean dropItem(Item item) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'dropItem'");
+        currentRoom.addItem(item);
+        return items.remove(item);
     }
 
+    /**
+     * Megbénítja a tanárt egy adott időtartamra.
+     * Eldobja a tárgyait.
+     * @param duration A bénulás időtartama.
+     */
     @Override
     public void stun(int duration) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'stun'");
+        stunDuration += duration;
+        dropItem(items.get(0));
     }
 
+    /**
+     * Csökkenti a tanár bénulásának időtartamát.
+     *
+     * @param amount A csökkentés mértéke.
+     * @return Igaz, ha a bénulás időtartama nullára csökken, egyébként hamis.
+     */
     @Override
     public boolean decreaseStun(int amount) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'decreaseStun'");
+        stunDuration -= amount;
+        if (stunDuration < 0) {
+            stunDuration = 0;
+            return true;
+        }
+        return false;
     }
 
+    /**
+     * Visszaadja a szobát, amelyben a tanár jelenleg tartózkodik.
+     *
+     * @return A jelenlegi szoba, ahol a tanár van.
+     */
     @Override
     public Room getRoom() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getRoom'");
+        return currentRoom;
     }
 
-    @Override
-    public void iHaveArrived() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'iHaveArrived'");
+    /**
+     * Beállítja a tanár jelenlegi szobáját.
+     * Ez a metódus lehetővé teszi a tanár számára, hogy egy másik szobába lépjen.
+     *
+     * @param room Az új szoba, ahová a tanárt helyezzük.
+     */
+    public void setCurrentRoom(Room room) {
+        this.currentRoom = room;
     }
-    
+
+    public void setLastDoor(Door d) {
+        lastDoor = d;
+    }
+    /**
+     * Jelzi, hogy a tanár megérkezett egy új helyszínre.
+     * Ezt a metódust hívhatjuk meg, amikor a tanár belép egy szobába,
+     * és jelezhetjük a játékban vagy szimulációban, hogy a tanár új helyszínre érkezett.
+     */
+    public void iHaveArrived() {
+        currentRoom.addHuman(this);
+        plsLeave(lastDoor);
+        currentRoom.clean();
+        System.out.println("I have arrived");
+    }
+
+    private void plsLeave(Door d) {
+        List<Student> s = currentRoom.getStudents();
+        List<Teacher> t = currentRoom.getTeacher();
+        for (Teacher teacher : t) {
+            teacher.use(((d instanceof OneWayDoor) ? (OneWayDoor) d : (TwoWayDoor) d));
+        }
+        for (Student student : s) {
+            student.use(door);
+        }
+    }
 }

@@ -46,7 +46,7 @@ public class Room {
      * Takarítónőt ad a szobához.
      * @param c A hozzáadandó takarító.
      */
-    public void addCleaningLady(CleaningLady c) {
+    public void addHuman(CleaningLady c) {
         cleaningLadies.add(c);
     }
     
