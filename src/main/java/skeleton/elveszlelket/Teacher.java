@@ -42,6 +42,9 @@ public class Teacher implements Human {
      */
     @Override
     public boolean use(OneWayDoor door) {
+        if(stunDuration > 0) {
+            return false;
+        }
         Room currentRoom = getRoom();
         if (!door.isRightDirection(getRoom())) {
             System.out.println("Szoba valtas sikertelen!");
@@ -64,6 +67,9 @@ public class Teacher implements Human {
      */
     @Override
     public boolean use(TwoWayDoor door) {
+        if(stunDuration > 0) {
+            return false;
+        }
         Room currentRoom = getRoom();
         if (!currentRoom.hasFreePlace()) {
             return false;
@@ -82,6 +88,9 @@ public class Teacher implements Human {
      */
     @Override
     public boolean pickupItem(Item item) {
+        if(stunDuration > 0) {
+            return false;
+        }
         if (!item.getRoom().equals(currentRoom)) {
             return false;
         }
@@ -100,6 +109,9 @@ public class Teacher implements Human {
      */
     @Override
     public boolean dropItem(Item item) {
+        if(stunDuration > 0) {
+            return false;
+        }
         if (items.contains(item)) {
             currentRoom.addItem(item);
             return items.remove(item);
@@ -115,8 +127,8 @@ public class Teacher implements Human {
      */
     @Override
     public void stun(int duration) {
-        stunDuration += duration;
         dropItem(items.get(0));
+        stunDuration += duration;
     }
 
     /**
@@ -162,8 +174,12 @@ public class Teacher implements Human {
      * érkezett.
      */
     public void iHaveArrived() {
-        Room currentRoom = getRoom();
-        currentRoom.addHuman(this);
+        if(currentRoom.containsGas()) {
+            stun(3);
+        }
+        if(currentRoom.getStudents().size() > 0) {
+            currentRoom.killStudents();
+        }
         System.out.println("I have arrived");
     }
 }

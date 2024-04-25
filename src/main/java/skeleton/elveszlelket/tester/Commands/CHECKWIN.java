@@ -1,6 +1,5 @@
 package skeleton.elveszlelket.tester.Commands;
 
-import skeleton.elveszlelket.App;
 import skeleton.elveszlelket.Student;
 import skeleton.elveszlelket.tester.Tester;
 

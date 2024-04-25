@@ -2,6 +2,7 @@ package skeleton.elveszlelket.strategy;
 
 import skeleton.elveszlelket.Student;
 import skeleton.elveszlelket.item.Item;
+import skeleton.elveszlelket.item.Logar;
 
 /**
  * A WinStrategy implementálja az ItemUseStrategy interfészt,
@@ -20,6 +21,11 @@ public class WinStrategy implements ItemUseStrategy {
      * @param item A tárgy, amelynek használatakor a győzelmi feltétel beállításra kerül.
      */
     public void execute(Student student, Item item) {
-        student.setWinCondition();
+        Logar l = (Logar) item;
+        if(l.getFalse()) {
+            System.out.println("Átkozott labirintus! A logar hamis!");
+        } else {
+            student.setWinCondition();
+        }
     }
 }

@@ -2,6 +2,7 @@ package skeleton.elveszlelket.tester.Commands;
 
 import skeleton.elveszlelket.Teacher;
 import skeleton.elveszlelket.door.Door;
+import skeleton.elveszlelket.CleaningLady;
 import skeleton.elveszlelket.Room;
 import skeleton.elveszlelket.Student;
 import skeleton.elveszlelket.tester.Tester;

@@ -1,5 +1,6 @@
 package skeleton.elveszlelket.door;
 
+import skeleton.elveszlelket.CleaningLady;
 import skeleton.elveszlelket.Room;
 import skeleton.elveszlelket.Student;
 import skeleton.elveszlelket.Teacher;
@@ -70,8 +71,8 @@ public class TwoWayDoor extends Door {
         }
         s.getRoom().removeHuman(s);
         destination.addHuman(s);
+        s.setLastDoor(this);
         s.iHaveArrived();
-        s.setCurrentRoom(destination);
     }
 
     /**
@@ -89,7 +90,6 @@ public class TwoWayDoor extends Door {
         t.getRoom().removeHuman(t);
         destination.addHuman(t);
         t.iHaveArrived();
-        t.setCurrentRoom(destination);
     }
 
     /*
@@ -103,5 +103,22 @@ public class TwoWayDoor extends Door {
         firstRoom = r1;
         ownerRoom = firstRoom;
         secondRoom = r2;
+    }
+
+    @Override
+    public void accept(CleaningLady c) {
+        c.use(this);
+    }
+
+    @Override
+    public void putMeThrough(CleaningLady c) {
+        Room destination = firstRoom;
+        if (destination == c.getRoom()) {
+            destination = secondRoom;
+        }
+        c.getRoom().removeHuman(c);
+        destination.addHuman(c);
+        c.setLastDoor(this);
+        c.iHaveArrived();
     }
 }

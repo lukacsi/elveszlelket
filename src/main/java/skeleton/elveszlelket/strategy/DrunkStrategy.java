@@ -4,6 +4,7 @@ import java.util.Random;
 
 import skeleton.elveszlelket.App;
 import skeleton.elveszlelket.Student;
+import skeleton.elveszlelket.item.Beer;
 import skeleton.elveszlelket.item.Item;
 
 /**
@@ -21,36 +22,13 @@ public class DrunkStrategy implements ItemUseStrategy {
      * @param student A diák, aki a tárgyat használja.
      * @param item A tárgy, amelyre a stratégiát alkalmazzuk.
      */
-    public void execute(Student student, Item item) {
-        // Felhasználói interakció, hogy megtudjuk, van-e még használata a tárgynak.
-        boolean result = App.t.askBoolean("Beer has uses left?");
-
-        // Ha van még használata a tárgynak, beállítjuk a diák immunitását és eltávolítjuk a tárgyat.
-        if(result) {
-            student.setImmunity(10);
+    public void execute(Student student, Item item) {// Ha van még használata a tárgynak, beállítjuk a diák immunitását és eltávolítjuk a tárgyat.
+        Beer b = (Beer) item;
+        if(b.getUses() > 0) {
+            student.setImmunity(5);
             student.removeItem(item);
-            App.t.removeItem(item);
             System.out.println("Beer has been used!");
-            dropRandomItem(student);
-        }
-    }
-
-    private void dropRandomItem(Student student) {
-        // Meghatározzuk, hány tárgy van a hallgatónál
-        int numItems = student.getInventory().size();
-        if (numItems > 0) {
-            // Véletlenszerűen kiválasztunk egy tárgyat
-            Random random = new Random();
-            int index = random.nextInt(numItems);
-
-            // Tárgy eltávolítása a hallgatótól és eldobása a szobába
-            Item itemToDrop = student.getInventory().get(index);
-            boolean dropped = student.dropItem(itemToDrop);
-            if (dropped) {
-                System.out.println("Student dropped item: " + itemToDrop.getName());
-            } else {
-                System.out.println("Failed to drop item: " + itemToDrop.getName());
-            }
+            student.dropRandomItem();
         }
     }
 }

@@ -52,5 +52,7 @@ public abstract class Item {
         return name;
     }
 
+    public abstract void setFalse(boolean fals);
+    
     public abstract void use(Student student);
 }

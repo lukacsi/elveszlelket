@@ -1,5 +1,6 @@
 package skeleton.elveszlelket.strategy;
 
+import ch.qos.logback.core.FileAppender;
 import skeleton.elveszlelket.App;
 import skeleton.elveszlelket.Student;
 import skeleton.elveszlelket.item.FFP2Mask;
@@ -21,10 +22,12 @@ public class GasProtectionStrategy implements ItemUseStrategy {
      * @param item A tárgy, amelynek használata során a stratégia aktiválódik.
      */
     public void execute(Student student, Item item) {
-        int result = App.t.askInt("Hanyszor lehet a maszkot hasznalni?");
-        if(result > 0) {
-            student.setGasProtection(30);
-            FFP2Mask m = (FFP2Mask)item;
+        FFP2Mask m = (FFP2Mask) item;
+        int uses = m.getUses();
+        if(m.getFalse()) {
+            System.out.println("Maszk hamis!");
+        } else if(uses > 0) {
+            student.setGasProtection(uses);
             m.decreaseUse();
             System.out.println("Maszk felszerelve.");
         } else {

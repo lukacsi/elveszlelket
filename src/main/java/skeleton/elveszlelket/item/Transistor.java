@@ -88,4 +88,10 @@ public class Transistor extends Item {
     public Room getLocation() {
         return location;
     }
+
+    @Override
+    public void setFalse(boolean fals) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setFalse'");
+    }
 }

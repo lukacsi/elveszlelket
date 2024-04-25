@@ -86,6 +86,9 @@ public class Student implements Human {
      */
     @Override
     public boolean use(OneWayDoor door) {
+        if(stunDuration > 0) {
+            return false;
+        }
         Room currentRoom = getRoom();
         if (doorBlocked == true) {
             if (lastDoor.equals(door)) {
@@ -115,6 +118,9 @@ public class Student implements Human {
      */
     @Override
     public boolean use(TwoWayDoor door) {
+        if(stunDuration > 0) {
+            return false;
+        }
         Room currentRoom = getRoom();
         if (doorBlocked == true) {
             if (lastDoor.equals(door)) {
@@ -144,6 +150,9 @@ public class Student implements Human {
      */
     @Override
     public boolean pickupItem(Item item) {
+        if(stunDuration > 0) {
+            return false;
+        }
         if (item.getRoom() != null) {
             if (!item.getRoom().equals(currentRoom)) {
                 return false;
@@ -159,6 +168,7 @@ public class Student implements Human {
             item.use(this);
             logarObtained = true;
         }
+        item.setRoom(null);
         items.add(item);
         return true;
     }
@@ -171,11 +181,31 @@ public class Student implements Human {
      */
     @Override
     public boolean dropItem(Item item) {
+        if(stunDuration > 0) {
+            return false;
+        }
         if (items.contains(item)) {
             currentRoom.addItem(item);
             return items.remove(item);
         }
         return false;
+    }
+    
+    public void dropRandomItem() {
+        // Meghatározzuk, hány tárgy van a hallgatónál
+        int numItems = items.size();
+        if (numItems > 0) {
+            int index = App.t.r.nextInt(numItems);
+
+            // Tárgy eltávolítása a hallgatótól és eldobása a szobába
+            Item itemToDrop = items.get(index);
+            boolean dropped = dropItem(itemToDrop);
+            if (dropped) {
+                System.out.println("Student dropped item: " + itemToDrop.getName());
+            } else {
+                System.out.println("Failed to drop item: " + itemToDrop.getName());
+            }
+        }
     }
 
     /**
@@ -186,6 +216,9 @@ public class Student implements Human {
      * @return Igaz, ha a tárgy használata sikeres volt.
      */
     public boolean useItem(Item item) {
+        if(stunDuration > 0) {
+            return false;
+        }
         item.use(this);
         return true;
     }
@@ -196,6 +229,7 @@ public class Student implements Human {
      * @param item Az eltávolítandó tárgy.
      */
     public void removeItem(Item item) {
+        App.t.removeItem(item);
         items.remove(item);
     }
 
@@ -208,6 +242,9 @@ public class Student implements Human {
      * @return Igaz, ha a párosítás sikeres volt, egyébként hamis.
      */
     public boolean pairTransistor(Transistor t1, Transistor t2) {
+        if(stunDuration > 0) {
+            return false;
+        }
         t1.setLocation(currentRoom);
         t2.setLocation(currentRoom);
         t1.addPair(t2);
@@ -244,10 +281,10 @@ public class Student implements Human {
      */
     public void stun(int duration) {
         if (gasProtectionDuration == 0) {
-            stunDuration += duration;
             for (Item item : items) {
                 dropItem(item);
             }
+            stunDuration += duration;
         }
 
     }
@@ -334,6 +371,10 @@ public class Student implements Human {
         this.currentRoom = room;
     }
 
+    public void setLastDoor(Door d) {
+        lastDoor = d;
+    }
+
     /**
      * Ellenőrzi, hogy a diák rendelkezik-e a Logar tárggyal.
      * 
@@ -361,8 +402,12 @@ public class Student implements Human {
      * jelezhetjük.
      */
     public void iHaveArrived() {
-        Room currentRoom = getRoom();
-        currentRoom.addHuman(this);
+        if(currentRoom.containsGas()) {
+            stun(3);
+        }
+        if(currentRoom.getTeacher().size() > 0) {
+            currentRoom.killStudents();
+        }
         System.out.println("I have arrived");
     }
 

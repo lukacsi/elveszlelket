@@ -22,16 +22,18 @@ public class IHaveTheRightStrategy implements ItemUseStrategy {
      * @param item A tárgy, amelyre a stratégia alkalmazva lesz.
      */
     public void execute(Student student, Item item) {
-        int result1 = App.t.askInt("Hanyszor hasznalhato a TVSZ meg?");
-        if(result1 > 0) {
+        TVSZ t = (TVSZ) item;
+        if(t.getFalse()) {
+            System.out.println("TVSZ hamis.");
+        } else if(t.getUses() > 0) {
             student.setImmunity(2);
-            TVSZ t = (TVSZ)item;
             t.decreaseUse();
-            if(result1 == 1) {
+            if(t.getUses() == 0) {
                 student.removeItem(item);
-                App.t.removeItem(item);
+                System.out.println("TVSZ elhasználva.");
+            } else {
+                System.out.println("TVSZ felhasznalva");
             }
-            System.out.println("TVSZ felhasznalva");
         } else {
             System.out.println("Ez a TVSZ mar nem letezik.");
         }

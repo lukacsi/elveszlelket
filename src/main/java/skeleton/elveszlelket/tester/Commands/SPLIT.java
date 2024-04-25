@@ -1,7 +1,4 @@
 package skeleton.elveszlelket.tester.Commands;
-
-import java.util.Random;
-
 import skeleton.elveszlelket.*;
 import skeleton.elveszlelket.tester.Tester;
 
@@ -62,8 +59,7 @@ public class SPLIT implements skeleton.elveszlelket.tester.Commands.Command {
                 Room masodik = t.getRoom(roomNev);
 
                 if (r1.containsGas()) {
-                    Random r = new Random();
-                    float value = r.nextFloat();
+                    float value = Tester.r.nextFloat();
                     if (value <= 0.5) {
                         egyik.setGas(true);
                     } else {
@@ -76,8 +72,7 @@ public class SPLIT implements skeleton.elveszlelket.tester.Commands.Command {
                     } else if (masodik.containsGas()) {
                         egyik.setCursed(true);
                     } else {
-                        Random r = new Random();
-                        float value = r.nextFloat();
+                        float value = Tester.r.nextFloat();
                         if (value <= 0.5) {
                             egyik.setCursed(true);
                         } else {
@@ -86,8 +81,7 @@ public class SPLIT implements skeleton.elveszlelket.tester.Commands.Command {
                     }
                 }
                 for (i = 0; i < r1.getItems().size(); i++) {
-                    Random r = new Random();
-                    float value = r.nextFloat();
+                    float value = Tester.r.nextFloat();
                     if (value <= 0.5) {
                         egyik.addItem(r1.getItems().get(i));
                     } else {

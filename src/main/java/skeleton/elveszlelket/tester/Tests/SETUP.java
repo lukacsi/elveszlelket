@@ -1,10 +1,8 @@
 package skeleton.elveszlelket.tester.Tests;
 
-import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.List;
 
-import skeleton.elveszlelket.Room;
 import skeleton.elveszlelket.tester.Tester;
 import skeleton.elveszlelket.tester.Commands.Command;
 
@@ -16,7 +14,7 @@ public class SETUP implements Command {
      * STUDENT, TEACHER, ROOM...
      */
     private boolean isTypeCorrect(String type) {
-        if (type.equals("STUDENT") || type.equals("TEACHER") || type.equals("ROOM") || type.equals("ONEWAYDOOR")
+        if (type.equals("STUDENT") || type.equals("TEACHER") || type.equals("CLEANINGLADY") || type.equals("ROOM") || type.equals("ONEWAYDOOR")
                 || type.equals("TWOWAYDOOR") || type.equals("CAMEMBERT") || type.equals("FFP2MASK")
                 || type.equals("BEER")
                 || type.equals("RAG") || type.equals("TRANSISTOR") || type.equals("TVSZ") || type.equals("LOGAR")) {

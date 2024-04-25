@@ -2,6 +2,7 @@ package skeleton.elveszlelket.strategy;
 
 import skeleton.elveszlelket.Room;
 import skeleton.elveszlelket.Student;
+import skeleton.elveszlelket.item.AirFreshener;
 import skeleton.elveszlelket.item.Item;
 
 /**
@@ -13,15 +14,20 @@ public class NeutralizeGasStrategy implements ItemUseStrategy {
     @Override
     public void execute(Student student, Item item) {
         Room room = student.getRoom();
-
-        // Ellenőrizzük, hogy van-e gáz a szobában
-        if (room.hasGas()) {
-            // Gáz van, használjuk a légfrissítőt
-            room.setGas(false); // Gáz semlegesítése
-            System.out.println("A légfrissítő semlegesítette a szoba gázhatását.");
+        AirFreshener a = (AirFreshener) item;
+        if(a.getUses() > 0) {
+            // Ellenőrizzük, hogy van-e gáz a szobában
+            if (room.hasGas()) {
+                // Gáz van, használjuk a légfrissítőt
+                room.setGas(false); // Gáz semlegesítése
+                student.removeItem(item);
+                System.out.println("A légfrissítő semlegesítette a szoba gázhatását.");
+            } else {
+                // Nincs gáz, nincs teendő
+                System.out.println("Nincs gáz a szobában.");
+            }
         } else {
-            // Nincs gáz, nincs teendő
-            System.out.println("Nincs gáz a szobában.");
+            System.out.println("Légfrissítő kifogyott");
         }
     }
 }

@@ -1,5 +1,6 @@
 package skeleton.elveszlelket.door;
 
+import skeleton.elveszlelket.CleaningLady;
 import skeleton.elveszlelket.Room;
 import skeleton.elveszlelket.Student;
 import skeleton.elveszlelket.Teacher;
@@ -46,6 +47,7 @@ public class OneWayDoor extends Door {
     public void accept(Teacher t) {
         t.use(this);
     }
+    
 
     /**
      * Átrakja a hallgatót a másik szobába.
@@ -56,13 +58,13 @@ public class OneWayDoor extends Door {
     @Override
     public void putMeThrough(Student s) {
         boolean gasDest = destination.containsGas();
+        s.setLastDoor(this);
         if (gasDest) {
             s.blockDoor();
         }
         s.getRoom().removeHuman(s);
         destination.addHuman(s);
         s.iHaveArrived();
-        s.setCurrentRoom(destination);
     }
 
     /**
@@ -76,7 +78,6 @@ public class OneWayDoor extends Door {
         t.getRoom().removeHuman(t);
         destination.addHuman(t);
         t.iHaveArrived();
-        t.setCurrentRoom(destination);
     }
 
     /**
@@ -105,5 +106,18 @@ public class OneWayDoor extends Door {
     public void setRooms(Room r1, Room r2) {
         ownerRoom = r1;
         destination = r2;
+    }
+
+    @Override
+    public void accept(CleaningLady c) {
+        c.use(this);
+    }
+
+    @Override
+    public void putMeThrough(CleaningLady c) {
+        c.getRoom().removeHuman(c);
+        destination.addHuman(c);
+        c.setLastDoor(this);
+        c.iHaveArrived();
     }
 }

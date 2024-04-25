@@ -3,6 +3,7 @@ package skeleton.elveszlelket.strategy;
 import skeleton.elveszlelket.Student;
 import skeleton.elveszlelket.App;
 import skeleton.elveszlelket.Room;
+import skeleton.elveszlelket.item.Camember;
 import skeleton.elveszlelket.item.Item;
 
 /**
@@ -26,13 +27,12 @@ public class GasStrategy implements ItemUseStrategy {
      * @param item    A tárgy, amelynek használata során a stratégia aktiválódik.
      */
     public void execute(Student student, Item item) {
-        Room r = student.getRoom();
-        boolean result = App.t.askBoolean("Is camembert unopened?");
-
-        if (result) {
+        Camember c = (Camember) item;
+        if (!c.isOpened()) {
             student.dropItem(item);
-            App.t.removeItem(item);
-            r.setGas(true);
+            student.getRoom().setGas(true);
+        } else {
+            System.out.println("Camember már ki volt nyitva, nem lesz elég erős így a szaga.");
         }
     }
 }

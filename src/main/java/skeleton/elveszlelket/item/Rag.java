@@ -21,4 +21,9 @@ public class Rag extends ProtectionItem{
     public void use(Student student) {
         strategy.execute(student, this);
     }
+    @Override
+    public void setFalse(boolean fals) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setFalse'");
+    }
 }

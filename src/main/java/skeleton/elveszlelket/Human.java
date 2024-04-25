@@ -11,4 +11,5 @@ public interface Human {
     boolean decreaseStun(int amount);
     Room getRoom();
     void iHaveArrived();
+    void setCurrentRoom(Room room);
 }

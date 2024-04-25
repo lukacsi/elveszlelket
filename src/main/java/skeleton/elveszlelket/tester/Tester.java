@@ -1,12 +1,12 @@
 package skeleton.elveszlelket.tester;
 
 import java.util.Scanner;
+import java.util.Set;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 import skeleton.elveszlelket.*;
 import skeleton.elveszlelket.door.*;
@@ -26,10 +26,12 @@ public class Tester {
     private static HashMap<String, Command> commands;
     private static HashMap<String, Student> hallgatok;
     private static HashMap<String, Teacher> oktatok;
+    private static HashMap<String, CleaningLady> takaritok;
     private static HashMap<String, Room> szobak;
     private static HashMap<String, Door> ajtok;
     private static HashMap<String, Item> targyak;
     public Scanner sc = new Scanner(System.in);
+    public static TRandom r = new TRandom();
 
     /**
      * Konstruktor, amely inicializálja a parancsokat és a szimulációs objektumokat
@@ -58,11 +60,16 @@ public class Tester {
         commands.put("INFO", new INFO());
         commands.put("SETUP", new SETUP());
         commands.put("CLEAR", new CLEAR());
-
+        commands.put("INCREMENTTIME", new INCREMENTTIME());
+        commands.put("LIST", new LIST());
+        commands.put("REMOVEIFROMHUMAN", new REMOVEIFROMHUMAN());
+        commands.put("REMOVEIFROMROOM", new REMOVEIFROMROOM());
+        commands.put("TOGGLEFAKE", new TOGGLEFAKE());
         commands.put("T_CONNECTION", new T_CONNECTION());
 
         hallgatok = new HashMap<>();
         oktatok = new HashMap<>();
+        takaritok = new HashMap<>();
         szobak = new HashMap<>();
         ajtok = new HashMap<>();
         targyak = new HashMap<>();
@@ -77,6 +84,14 @@ public class Tester {
     public String getStudentName(Student s) {
         for (String st : hallgatok.keySet()) {
             if (hallgatok.get(st).equals(s)) {
+                return st;
+            }
+        }
+        return "";
+    }
+    public String getCleaningLadyName(CleaningLady c) {
+        for (String st : takaritok.keySet()) {
+            if(takaritok.get(st).equals(c)) {
                 return st;
             }
         }
@@ -160,6 +175,11 @@ public class Tester {
                 return st;
             }
         }
+        for (String st : takaritok.keySet()) {
+            if(takaritok.get(st).equals(t)) {
+                return st;
+            }
+        }
         return "";
     }
 
@@ -180,6 +200,10 @@ public class Tester {
 
     public void removeHuman(Student s) {
         hallgatok.remove(s);
+    }
+
+    public void removeHuman(CleaningLady c) {
+        takaritok.remove(c);
     }
 
     /**
@@ -248,6 +272,14 @@ public class Tester {
      */
     public Teacher getTeacher(Object key) {
         return oktatok.get(key);
+    }
+
+    public void addCleaningLady(String name, CleaningLady c) {
+        takaritok.put(name, c);
+    }
+
+    public CleaningLady getCleaningLady(Object key) {
+        return takaritok.get(key);
     }
 
     /**
@@ -334,35 +366,35 @@ public class Tester {
         return targyak.get(key);
     }
 
-    /**
-     * Egész számot kér be a felhasználótól.
-     *
-     * @param uzenet Az a szöveg, amit a felhasználónak megjelenítünk a bekérés
-     *               előtt.
-     * @return A felhasználó által beírt egész szám.
-     */
-    public int askInt(String uzenet) {
-        System.out.println(uzenet);
-        int vissza = sc.nextInt();
-        return vissza;
-    }
+    // /**
+    //  * Egész számot kér be a felhasználótól.
+    //  *
+    //  * @param uzenet Az a szöveg, amit a felhasználónak megjelenítünk a bekérés
+    //  *               előtt.
+    //  * @return A felhasználó által beírt egész szám.
+    //  */
+    // public int askInt(String uzenet) {
+    //     System.out.println(uzenet);
+    //     int vissza = sc.nextInt();
+    //     return vissza;
+    // }
 
-    /**
-     * Logikai értéket kér be a felhasználótól.
-     *
-     * @param uzenet Az a szöveg, amit a felhasználónak megjelenítünk a bekérés
-     *               előtt.
-     * @return A felhasználó által beírt logikai érték: igaz vagy hamis.
-     */
-    public boolean askBoolean(String uzenet) {
-        System.out.println(uzenet);
-        String vissza = sc.nextLine();
-        if (vissza.toLowerCase().equals("true")) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+    // /**
+    //  * Logikai értéket kér be a felhasználótól.
+    //  *
+    //  * @param uzenet Az a szöveg, amit a felhasználónak megjelenítünk a bekérés
+    //  *               előtt.
+    //  * @return A felhasználó által beírt logikai érték: igaz vagy hamis.
+    //  */
+    // public boolean askBoolean(String uzenet) {
+    //     System.out.println(uzenet);
+    //     String vissza = sc.nextLine();
+    //     if (vissza.toLowerCase().equals("true")) {
+    //         return true;
+    //     } else {
+    //         return false;
+    //     }
+    // }
 
     /**
      * Eltávolít egy diákot a hallgatók gyűjteményéből.
@@ -382,6 +414,10 @@ public class Tester {
         oktatok.remove(name);
     }
 
+    public void removeCleaningLady(String name) {
+        takaritok.remove(name);
+    }
+
     /**
      * Lekérdezi a hallgatók gyűjteményét.
      *
@@ -398,6 +434,10 @@ public class Tester {
      */
     public Collection<Teacher> getTeachers() {
         return oktatok.values();
+    }
+
+    public Collection<CleaningLady> getCleaningLadies() {
+        return takaritok.values();
     }
 
     /**
@@ -427,6 +467,34 @@ public class Tester {
         return ajtok.values();
     }
 
+    public List<String> getKeys(int type) {
+        List<String> keys = new ArrayList<>();
+        if(type == 0 || type == 1) {
+            keys.addAll(new ArrayList<>(hallgatok.keySet()));
+        }
+        if(type == 0 || type == 2) {
+            keys.addAll(new ArrayList<>(oktatok.keySet()));
+        }
+        if(type == 0 || type == 3) {
+            keys.addAll(new ArrayList<>(takaritok.keySet()));
+        }
+        if(type == 0 || type == 4) {
+            keys.addAll(new ArrayList<>(szobak.keySet()));
+        }
+        if(type == 0 || type == 5) {
+            keys.addAll(new ArrayList<>(ajtok.keySet()));
+        }
+        if(type == 0 || type == 6) {
+            keys.addAll(new ArrayList<>(targyak.keySet()));
+        }
+        if(type == 7) {
+            keys.addAll(new ArrayList<>(hallgatok.keySet()));
+            keys.addAll(new ArrayList<>(oktatok.keySet()));
+            keys.addAll(new ArrayList<>(takaritok.keySet()));
+        }
+        return keys;
+    }
+
     /**
      * Ellenőrzi, hogy a megadott diáknak van-e Logar tárgya.
      *
@@ -434,6 +502,7 @@ public class Tester {
      * @return Igaz, ha a diáknak van Logar tárgya, egyébként hamis.
      */
     public boolean hasLogar(Student hallgato) {
+        ///// NOTE TO SELF: WINCONDITONRA KÉNE CSEKKELNI HOGY LEKEZELJÜK A HAMIS LOGART
         return hallgato.hasLogar();
     }
 
@@ -454,8 +523,14 @@ public class Tester {
     public void listen() {
         String row = sc.nextLine();
         while(!row.toLowerCase().equals("exit")){
-            executeCommand(row.split(" "));
-            row = sc.nextLine();
+            if(row.equals("TOGGLERANDOM")) {
+                r.toggleRandom();
+                System.out.println("Randomness " + ((r.random)?"enabled.":"disabled."));
+                row = sc.nextLine();
+            } else {
+                executeCommand(row.split(" "));
+                row = sc.nextLine();
+            }
         }
     }
 
@@ -516,7 +591,6 @@ public class Tester {
             if (i <= 100000) {
                 i++;
             } else {
-                Random r = new Random();
                 int randomertek = r.nextInt(karakterek.length());
                 base = base.concat(String.valueOf(karakterek.charAt(i)));
                 i = 0;

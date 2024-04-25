@@ -9,6 +9,7 @@ import skeleton.elveszlelket.strategy.IHaveTheRightStrategy;
  */
 public class TVSZ extends ProtectionItem {
 
+    private boolean fals;
     /**
      * Konstruktor, amely létrehoz egy TVSZ objektumot.
      * Inicializálja a név és a használatok számát, valamint beállítja a védelmi stratégiát.
@@ -27,5 +28,14 @@ public class TVSZ extends ProtectionItem {
      */
     public void use(Student student) {
         strategy.execute(student, this);
+    }
+
+    @Override
+    public void setFalse(boolean fals) {
+        this.fals = fals;
+    }
+    
+    public boolean getFalse() {
+        return fals;
     }
 }

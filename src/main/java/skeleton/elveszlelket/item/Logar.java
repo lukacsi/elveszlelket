@@ -4,6 +4,7 @@ import skeleton.elveszlelket.Student;
 import skeleton.elveszlelket.strategy.WinStrategy;
 
 public class Logar extends Item {
+    private boolean fals;
     /**
      * A Logar konstruktora, beaállítja,
      * a nevét Logar-ra,
@@ -20,5 +21,14 @@ public class Logar extends Item {
      */
     public void use(Student student) {
         strategy.execute(student, this);
+    }
+
+    @Override
+    public void setFalse(boolean fals) {
+        this.fals = fals;
+    }
+    
+    public boolean getFalse() {
+        return fals;
     }
 }

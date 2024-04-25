@@ -20,6 +20,7 @@ public class TEST implements  Command {
             System.out.println("Parameterk szama nem megfelelo.");
             return;
         }
+        
         commandList = new ArrayList<>();
         asrt = new ArrayList<>();
 

@@ -1,5 +1,6 @@
 package skeleton.elveszlelket.door;
 
+import skeleton.elveszlelket.CleaningLady;
 import skeleton.elveszlelket.Room;
 import skeleton.elveszlelket.Student;
 import skeleton.elveszlelket.Teacher;
@@ -40,12 +41,9 @@ public abstract class Door {
      * @param r2 Második szoba
      * OneWayDoor esetén az r1-nek nincs jelentősége.
      */
-    public void setRooms(Room r1, Room r2) {
-    }
+    public abstract void setRooms(Room r1, Room r2);
 
-    public Room getDest(Room r){
-        return null;
-    }
+    public abstract Room getDest(Room r);
 
     /**
      * Megjeleníti vagy eltünteti az ajtót
@@ -62,16 +60,16 @@ public abstract class Door {
      * 
      * @param s A hallgató.
      */
-    public void accept(Student s) {
-    }
+    public abstract void accept(Student s);
 
     /**
      * Elfogadja az observer oktatót.
      * 
      * @param t Az oktató.
      */
-    public void accept(Teacher t) {
-    }
+    public abstract void accept(Teacher t);
+
+    public abstract void accept(CleaningLady c);
 
     /**
      * Átrakja a hallgatót a másik szobába.
@@ -79,8 +77,7 @@ public abstract class Door {
      * @param s A hallgató.
      * @return A művelet sikeressége: Igaz csakis akkor, ha sikeres.
      */
-    public void putMeThrough(Student s) {
-    }
+    public abstract void putMeThrough(Student s);
 
     /**
      * Átrakja az oktatót a másik szobába.
@@ -88,7 +85,8 @@ public abstract class Door {
      * @param t Az oktató.
      * @return A művelet sikeressége: Igaz csakis akkor, ha sikeres.
      */
-    public void putMeThrough(Teacher t) {
-    }
+    public abstract void putMeThrough(Teacher t);
+
+    public abstract void putMeThrough(CleaningLady c);
 
 }

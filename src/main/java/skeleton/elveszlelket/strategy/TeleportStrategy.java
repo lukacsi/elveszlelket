@@ -21,18 +21,19 @@ public class TeleportStrategy implements ItemUseStrategy {
      */
     public void execute(Student student, Item item) {
         Transistor t = (Transistor) item;
-        boolean answer = App.t.askBoolean(t.getName() + " parositott?");
-        if(!answer) {
-            System.out.println("Teleportacio sikertelen");
+        if(!t.hasPair()) {
+            System.out.println("Teleportacio sikertelen, nincs pár");
             return;
         }
         Transistor tp = t.getPair();
-        if(tp != null) {
+        if(tp.getLocation() != null) {
             student.dropItem(item);
             t.unPair();
             tp.unPair();
             student.teleport(tp.getLocation());
             System.out.println("Teleportacio megtortent.");   
+            return;
         }
+        System.out.println("Teleportacio sikertelen, pár nincs szobában.");
     }
 }

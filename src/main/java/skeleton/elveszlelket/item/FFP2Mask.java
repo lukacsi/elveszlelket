@@ -4,6 +4,7 @@ import skeleton.elveszlelket.Student;
 import skeleton.elveszlelket.strategy.GasProtectionStrategy;
 
 public class FFP2Mask extends ProtectionItem{
+    private boolean fals;
     /** A FFP2Mask konstruktora, beállítja
      * a nevét FFP2Mask-ra,
      * a használatok számát 3-re,
@@ -20,5 +21,11 @@ public class FFP2Mask extends ProtectionItem{
      */
     public void use(Student student) {
         strategy.execute(student, this);
+    }
+    public void setFalse(boolean fals) {
+        this.fals = fals;
+    }
+    public boolean getFalse() {
+        return fals;
     }
 }

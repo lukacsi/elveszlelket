@@ -11,10 +11,13 @@ public class Room {
 
     private List<Teacher> teachers;
     private List<Student> students;
+    private List<CleaningLady> cleaners;
     private List<Item> items;
     private List<Door> doors;
     private boolean cursed;
     private boolean hasGas;
+    private int stickyness;
+    private static int cleanlyness = 3;
 
     /**
      * Alapkonstruktor a szobához.
@@ -22,35 +25,49 @@ public class Room {
     public Room() {
         teachers = new ArrayList<>();
         students = new ArrayList<>();
+        cleaners = new ArrayList<>();
         items = new ArrayList<>();
         doors = new ArrayList<>();
+        stickyness = cleanlyness;
         cursed = false;
         hasGas = false;
     }
 
+    /*
+    * Vissza adja a szobában található tárgyakat.
+    */
+    public List<Item> getItems() {
+        if(stickyness <= 0) {
+            return new ArrayList<>();
+        }
+        return items;
+    }
+    
     /**
      * Hallgatót ad a szobához.
      * 
      * @param s A hozzáadandó hallgató.
      */
     public void addHuman(Student s) {
+        s.setCurrentRoom(this);
+        stickyness--;
         students.add(s);
     }
-
-    /*
-     * Vissza adja a szobában található tárgyakat.
-     */
-    public List<Item> getItems() {
-        return items;
-    }
-
+    
     /**
      * Oktatót ad a szobához.
      * 
      * @param t A hozzáadandó oktató.
      */
     public void addHuman(Teacher t) {
+        t.setCurrentRoom(this);
+        stickyness--;
         teachers.add(t);
+    }
+
+    public void addHuman(CleaningLady c) {
+        c.setCurrentRoom(this);
+        cleaners.add(c);
     }
 
     /**
@@ -71,6 +88,10 @@ public class Room {
         students.remove(t);
     }
 
+    public void removeHuman(CleaningLady c) {
+        cleaners.remove(c);
+    }
+
     /**
      * Visszaadja, hogy gázos-e a szoba.
      * 
@@ -78,6 +99,10 @@ public class Room {
      */
     public boolean containsGas() {
         return hasGas;
+    }
+
+    public void clean() {
+        stickyness = cleanlyness;
     }
 
     /**
@@ -138,6 +163,7 @@ public class Room {
      * @param i A hozzáadandó tárgy.
      */
     public void addItem(Item i) {
+        i.setRoom(this);
         items.add(i);
     }
 
@@ -159,9 +185,7 @@ public class Room {
         for (Student s : students) {
             s.stun(duration);
         }
-        for (Teacher t : teachers) {
-            t.stun(duration);
-        }
+        stunTeachers();
     }
 
     /**
@@ -220,6 +244,10 @@ public class Room {
 
     public List<Teacher> getTeacher() {
         return teachers;
+    }
+    
+    public List<CleaningLady> getCleaningLadies() {
+        return cleaners;
     }
 
     /**

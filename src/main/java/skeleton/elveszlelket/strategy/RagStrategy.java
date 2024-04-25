@@ -2,6 +2,7 @@ package skeleton.elveszlelket.strategy;
 
 import skeleton.elveszlelket.Student;
 import skeleton.elveszlelket.item.Item;
+import skeleton.elveszlelket.item.Rag;
 import skeleton.elveszlelket.App;
 
 /**
@@ -20,8 +21,8 @@ public class RagStrategy implements ItemUseStrategy {
      * @param item A rongy, amelynek használata a stratégiát aktiválja.
      */
     public void execute(Student student, Item item) {
-        int result = App.t.askInt("Hanyszor hasznalhato meg a rongy?");
-        if(result > 0) {
+        Rag r = (Rag) item;
+        if(r.getUses() > 0) {
             student.getRoom().stunTeachers();
             System.out.println("Rongy hasznalva.");
         } else {
