@@ -92,24 +92,24 @@ public class Tester {
         movement.addAll(oktatok.keySet());
     }
 
-    public void npcActions() {
-        for (CleaningLady cl : takaritok.values()) {
-            getRandomValue(ajtok).accept(cl);;
-        }
-        for (Teacher t : oktatok.values()) {
-            getRandomValue(ajtok).accept(t);
-            t.pickupItem(getRandomValue(targyak));
-        }
-    }
+    // public void npcActions() {
+    //     for (CleaningLady cl : takaritok.values()) {
+    //         getRandomValue(ajtok).accept(cl);;
+    //     }
+    //     for (Teacher t : oktatok.values()) {
+    //         getRandomValue(ajtok).accept(t);
+    //         t.pickupItem(getRandomValue(targyak));
+    //     }
+    // }
 
-    public <K, V> V getRandomValue(HashMap<K, V> map) {
-        // Convert the values to a list
-        List<V> valuesList = new ArrayList<>(map.values());
-        // Generate a random index
-        int randomIndex = r.nextInt(valuesList.size());
-        // Return the value at the random index
-        return valuesList.get(randomIndex);
-    }
+    // public <K, V> V getRandomValue(HashMap<K, V> map) {
+    //     // Convert the values to a list
+    //     List<V> valuesList = new ArrayList<>(map.values());
+    //     // Generate a random index
+    //     int randomIndex = r.nextInt(valuesList.size());
+    //     // Return the value at the random index
+    //     return valuesList.get(randomIndex);
+    // }
 
     /**
      * @param Student. Keresett hallgató.
