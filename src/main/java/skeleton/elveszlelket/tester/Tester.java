@@ -627,5 +627,6 @@ public class Tester {
         targyak.clear();
         ajtok.clear();
         szobak.clear();
+        
     }
 }
