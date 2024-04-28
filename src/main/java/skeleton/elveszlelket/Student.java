@@ -248,8 +248,6 @@ public class Student implements Human {
         if(stunDuration > 0) {
             return false;
         }
-        t1.setLocation(currentRoom);
-        t2.setLocation(currentRoom);
         t1.addPair(t2);
         if (t1.hasPair()) {
             return true;

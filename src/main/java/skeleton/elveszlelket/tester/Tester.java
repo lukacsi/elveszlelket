@@ -79,6 +79,7 @@ public class Tester {
         round = 0;
         movement = new ArrayList<>();
         itemUses = new ArrayList<>();
+        nextRound(1);
     }
 
     public void nextRound(int time) {
