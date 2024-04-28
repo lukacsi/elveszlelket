@@ -24,6 +24,7 @@ public class ADDHTOROOM implements skeleton.elveszlelket.tester.Commands.Command
 
         Student keresettStudent = t.getStudent(params[1]);
         Teacher keresettTeacher = t.getTeacher(params[1]);
+        CleaningLady keresettCleaningLady = t.getCleaningLady(params[1]);
         Room keresettR = t.getRoom(params[2]); // hasonlóan ha keresettR nem null, akkor van már ilyen nevű
         if (keresettTeacher != null) {
             if (keresettTeacher.getRoom() != null) {
@@ -51,6 +52,19 @@ public class ADDHTOROOM implements skeleton.elveszlelket.tester.Commands.Command
             } else {
                 System.out.println("Parameterkent kapott Szoba nincs meg feljegyezve.");
             }
+        } else if (keresettCleaningLady != null) { // felvett szoba a testernél
+            if (keresettCleaningLady.getRoom() != null) {
+                System.out.println("Adott takarito mar megtalalhato egy szobaban.");
+                return;
+            }
+
+            if (keresettR != null) {
+                keresettR.addHuman(keresettCleaningLady);
+                keresettCleaningLady.setCurrentRoom(keresettR);
+                System.out.println("Sikeresen hozzaadta a takaritot a szobahoz.");
+            } else {
+                System.out.println("Parameterkent kapott Szoba nincs meg feljegyezve.");
+            } 
         } else {
             System.out.println("Parameterkent kapott human entitas nincs meg feljegyezve.");
         }
