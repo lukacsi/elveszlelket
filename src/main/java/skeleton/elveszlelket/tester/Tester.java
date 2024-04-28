@@ -77,6 +77,8 @@ public class Tester {
         ajtok = new HashMap<>();
         targyak = new HashMap<>();
         round = 0;
+        movement = new ArrayList<>();
+        itemUses = new ArrayList<>();
     }
 
     public void nextRound() {
