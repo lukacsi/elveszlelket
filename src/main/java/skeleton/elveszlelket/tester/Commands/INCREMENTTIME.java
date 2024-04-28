@@ -1,6 +1,5 @@
 package skeleton.elveszlelket.tester.Commands;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import skeleton.elveszlelket.Student;
@@ -27,6 +26,10 @@ public class INCREMENTTIME implements Command {
                 student.decreaseImmunity();
             }
             student.decreaseStun(timeI);
+        }
+        t.nextRound();
+        if(t.r.random) {
+            t.npcActions();
         }
         System.out.println("Idő előrehaladva " + timeI + " -el!");
     }

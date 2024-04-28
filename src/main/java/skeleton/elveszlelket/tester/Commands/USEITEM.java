@@ -39,6 +39,12 @@ public class USEITEM implements skeleton.elveszlelket.tester.Commands.Command {
         }
 
         if (student.getItems().contains(item)) {
+            if (t.itemUses.contains(params[1]))
+                t.itemUses.remove(params[1]);
+            else {
+                System.out.println(params[1] + " már használt tárgyat a körben");
+                return;
+            }
             student.useItem(item);
             System.out.println("Targy '" + item.getName() + "' hasznalva lett: '" + t.getStudentName(student));
         } else {

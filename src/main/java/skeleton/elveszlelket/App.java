@@ -14,6 +14,7 @@ public class App
     public static void main( String[] args )
     {
         t = new Tester();
+        System.out.println("Fut a program!");
         t.listen();
     }
 }

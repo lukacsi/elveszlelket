@@ -1,8 +1,5 @@
 package skeleton.elveszlelket.strategy;
 
-import java.util.Random;
-
-import skeleton.elveszlelket.App;
 import skeleton.elveszlelket.Student;
 import skeleton.elveszlelket.item.Beer;
 import skeleton.elveszlelket.item.Item;

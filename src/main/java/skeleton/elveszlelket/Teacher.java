@@ -96,6 +96,7 @@ public class Teacher implements Human {
         }
         if (items.size() < 1) {
             items.add(item);
+            item.setRoom(null);
             return true;
         } else
             return false;
@@ -114,6 +115,7 @@ public class Teacher implements Human {
         }
         if (items.contains(item)) {
             currentRoom.addItem(item);
+            item.setRoom(currentRoom);
             return items.remove(item);
         }
         return false;

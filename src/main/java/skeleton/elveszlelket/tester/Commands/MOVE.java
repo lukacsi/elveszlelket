@@ -33,6 +33,13 @@ public class MOVE implements skeleton.elveszlelket.tester.Commands.Command {
             CleaningLady keresettCleaner = t.getCleaningLady(params[2]);
 
             if (keresettStudent != null) {
+                if (t.movement.contains(params[2]))
+                    t.movement.remove(params[2]);
+                else {
+                    System.out.println(params[2] + " már lépett a körben");
+                    return;
+                }
+                    
                 if (!keresettStudent.isDead()) {
                     if (keresettDoor.getOwnerRoom().equals(keresettStudent.getRoom())) {
                         keresettDoor.accept(keresettStudent);
@@ -43,12 +50,24 @@ public class MOVE implements skeleton.elveszlelket.tester.Commands.Command {
                     System.out.println("Mozgatni kivant hallgato mar nem el.");
                 }
             } else if (keresettTeacher != null) {
+                if (t.movement.contains(params[2]))
+                    t.movement.remove(params[2]);
+                else {
+                    System.out.println(params[2] + " már lépett a körben");
+                    return;
+                }
                 if (keresettDoor.getOwnerRoom().equals(keresettTeacher.getRoom())) {
                     keresettDoor.accept(keresettTeacher);
                 } else {
                     System.out.println("Az ajto illetve az ember nem ugyanabban a szobaban vannak.");
                 }
             } else if (keresettCleaner != null) {
+                if (t.movement.contains(params[2]))
+                    t.movement.remove(params[2]);
+                else {
+                    System.out.println(params[2] + " már lépett a körben");
+                    return;
+                }
                 if (keresettDoor.getOwnerRoom().equals(keresettCleaner.getRoom())) {
                     keresettDoor.accept(keresettCleaner);
                 } else {

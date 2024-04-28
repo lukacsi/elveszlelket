@@ -186,6 +186,7 @@ public class Student implements Human {
         }
         if (items.contains(item)) {
             currentRoom.addItem(item);
+            item.setRoom(currentRoom);
             return items.remove(item);
         }
         return false;

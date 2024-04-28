@@ -1,8 +1,6 @@
 package skeleton.elveszlelket.strategy;
 
 import skeleton.elveszlelket.Student;
-import skeleton.elveszlelket.App;
-import skeleton.elveszlelket.Room;
 import skeleton.elveszlelket.item.Camember;
 import skeleton.elveszlelket.item.Item;
 

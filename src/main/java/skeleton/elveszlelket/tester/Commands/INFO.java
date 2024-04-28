@@ -1,7 +1,5 @@
 package skeleton.elveszlelket.tester.Commands;
 
-import java.util.Iterator;
-
 import skeleton.elveszlelket.*;
 import skeleton.elveszlelket.door.Door;
 import skeleton.elveszlelket.item.*;

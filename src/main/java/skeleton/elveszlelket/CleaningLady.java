@@ -6,7 +6,7 @@ import skeleton.elveszlelket.door.OneWayDoor;
 import skeleton.elveszlelket.door.TwoWayDoor;
 import skeleton.elveszlelket.item.Item;
 
-public class CleaningLady implements Human{
+public class CleaningLady implements Human {
     private Door lastDoor;
     private Room currentRoom;
 
@@ -91,5 +91,4 @@ public class CleaningLady implements Human{
     public void setCurrentRoom(Room room) {
         currentRoom = room;
     }
-    
 }

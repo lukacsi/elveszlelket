@@ -1,6 +1,5 @@
 package skeleton.elveszlelket.strategy;
 
-import skeleton.elveszlelket.App;
 import skeleton.elveszlelket.Student;
 import skeleton.elveszlelket.item.Item;
 import skeleton.elveszlelket.item.Transistor;
