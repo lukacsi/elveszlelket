@@ -135,6 +135,7 @@ public class Teacher implements Human {
      */
     @Override
     public void stun(int duration) {
+        System.out.println("Oktato elkabitva.");
         dropItem(items.get(0));
         stunDuration += duration;
     }
