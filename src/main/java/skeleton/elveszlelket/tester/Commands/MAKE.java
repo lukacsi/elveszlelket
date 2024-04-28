@@ -76,6 +76,9 @@ public class MAKE implements skeleton.elveszlelket.tester.Commands.Command {
             } else if (params[1].equals("LOGAR")) {
                 System.out.println(params[1] + ": " + params[2] + " hozzaadva.");
                 t.addItem(params[2], new Logar());
+            } else if (params[1].equals("AIRFRESHENER")) {
+                System.out.println(params[1] + ": " + params[2] + " hozzáadva.");
+                t.addItem(params[2], new AirFreshener());
             } else if (params[1].equals("DOOR")) {
                 System.out.println("DOOR mint parameter nem adhato meg, megadhato:\n - ONEWAYDOOR\n - TWOWAYDOOR");
             }
