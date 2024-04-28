@@ -168,6 +168,7 @@ public class Student implements Human {
             item.use(this);
             logarObtained = true;
         }
+        item.setHuman(this);
         item.setRoom(null);
         items.add(item);
         return true;
@@ -185,6 +186,7 @@ public class Student implements Human {
             return false;
         }
         if (items.contains(item)) {
+            item.setHuman(null);
             currentRoom.addItem(item);
             item.setRoom(currentRoom);
             return items.remove(item);

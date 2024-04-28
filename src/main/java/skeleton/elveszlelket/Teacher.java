@@ -91,10 +91,15 @@ public class Teacher implements Human {
         if(stunDuration > 0) {
             return false;
         }
-        if (!item.getRoom().equals(currentRoom)) {
+        if(item.getRoom() != null) {
+            if (!item.getRoom().equals(currentRoom)) {
+                return false;
+            }
+        } else if (item.getHuman() != null) {
             return false;
         }
         if (items.size() < 1) {
+            item.setHuman(this);
             items.add(item);
             item.setRoom(null);
             return true;
@@ -114,6 +119,7 @@ public class Teacher implements Human {
             return false;
         }
         if (items.contains(item)) {
+            item.setHuman(null);
             currentRoom.addItem(item);
             item.setRoom(currentRoom);
             return items.remove(item);
