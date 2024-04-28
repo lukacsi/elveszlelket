@@ -11,7 +11,7 @@ public class TRandom extends Random {
     public TRandom() {
         super();
         sc = new Scanner(System.in);
-        random = true;
+        random = false;
     }
 
     public void toggleRandom() {

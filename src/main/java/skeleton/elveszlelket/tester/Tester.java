@@ -31,7 +31,7 @@ public class Tester {
     private static HashMap<String, Door> ajtok;
     private static HashMap<String, Item> targyak;
     public Scanner sc = new Scanner(System.in);
-    public static TRandom r = new TRandom();
+    public TRandom r = new TRandom();
     public List<String> itemUses;
     public List<String> movement;
     public int round;
@@ -102,7 +102,7 @@ public class Tester {
         }
     }
 
-    public static <K, V> V getRandomValue(HashMap<K, V> map) {
+    public <K, V> V getRandomValue(HashMap<K, V> map) {
         // Convert the values to a list
         List<V> valuesList = new ArrayList<>(map.values());
         // Generate a random index

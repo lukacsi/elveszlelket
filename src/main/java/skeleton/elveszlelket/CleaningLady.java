@@ -1,4 +1,5 @@
 package skeleton.elveszlelket;
+import java.util.ArrayList;
 import java.util.List;
 
 import skeleton.elveszlelket.door.Door;
@@ -12,12 +13,13 @@ public class CleaningLady implements Human {
 
     public void plsLeave() {
         List<Student> s = currentRoom.getStudents();
-        for (Student student : s) {
-            lastDoor.accept(student);
+        for (int i = 0; i < s.size(); i++) {
+            lastDoor.accept(s.get(i));
         }
+
         List<Teacher> t = currentRoom.getTeacher();
-        for (Teacher teacher : t) {
-            lastDoor.accept(teacher);
+        for (int i = 0; i < s.size(); i++) {
+            lastDoor.accept(t.get(i));
         }
     }
 

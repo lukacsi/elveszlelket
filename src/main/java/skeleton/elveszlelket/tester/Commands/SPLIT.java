@@ -59,7 +59,7 @@ public class SPLIT implements skeleton.elveszlelket.tester.Commands.Command {
                 Room masodik = t.getRoom(roomNev);
 
                 if (r1.containsGas()) {
-                    float value = Tester.r.nextFloat();
+                    float value = t.r.nextFloat();
                     if (value <= 0.5) {
                         egyik.setGas(true);
                     } else {
@@ -72,7 +72,7 @@ public class SPLIT implements skeleton.elveszlelket.tester.Commands.Command {
                     } else if (masodik.containsGas()) {
                         egyik.setCursed(true);
                     } else {
-                        float value = Tester.r.nextFloat();
+                        float value = t.r.nextFloat();
                         if (value <= 0.5) {
                             egyik.setCursed(true);
                         } else {
@@ -81,7 +81,7 @@ public class SPLIT implements skeleton.elveszlelket.tester.Commands.Command {
                     }
                 }
                 for (i = 0; i < r1.getItems().size(); i++) {
-                    float value = Tester.r.nextFloat();
+                    float value = t.r.nextFloat();
                     if (value <= 0.5) {
                         egyik.addItem(r1.getItems().get(i));
                     } else {
