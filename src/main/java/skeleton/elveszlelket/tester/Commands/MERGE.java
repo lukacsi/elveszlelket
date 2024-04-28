@@ -48,7 +48,7 @@ public class MERGE implements skeleton.elveszlelket.tester.Commands.Command {
                     }
                 }
                 String[] makeParams = { "MAKE", "ROOM", roomNev };
-                t.getCommand("MAKE").execute(params, t);
+                t.getCommand("MAKE").execute(makeParams, t);
                 Room uj = t.getRoom(roomNev);
                 r1.merge(r2, uj);
                 t.removeRoom(r2);
