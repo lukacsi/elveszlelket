@@ -28,9 +28,9 @@ public class INCREMENTTIME implements Command {
             student.decreaseStun(timeI);
         }
         t.nextRound(timeI);
-        if(t.r.random) {
-            t.npcActions();
-        }
+        // if(t.r.random) {
+        //     t.npcActions();
+        // }
         System.out.println("Idő előrehaladva " + timeI + " -el!");
     }
     
