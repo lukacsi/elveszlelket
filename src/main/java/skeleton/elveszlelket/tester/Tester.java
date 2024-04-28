@@ -503,9 +503,9 @@ public class Tester {
      * @param hallgato A vizsgálandó diák.
      * @return Igaz, ha a diáknak van Logar tárgya, egyébként hamis.
      */
-    public boolean hasLogar(Student hallgato) {
+    public boolean win(Student hallgato) {
         ///// NOTE TO SELF: WINCONDITONRA KÉNE CSEKKELNI HOGY LEKEZELJÜK A HAMIS LOGART
-        return hallgato.hasLogar();
+        return hallgato.won();
     }
 
     /**

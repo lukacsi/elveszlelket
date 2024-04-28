@@ -182,6 +182,5 @@ public class Teacher implements Human {
         if(currentRoom.getStudents().size() > 0) {
             currentRoom.killStudents();
         }
-        System.out.println("I have arrived");
     }
 }

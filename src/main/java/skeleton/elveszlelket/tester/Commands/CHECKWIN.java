@@ -18,7 +18,7 @@ public class CHECKWIN implements skeleton.elveszlelket.tester.Commands.Command {
      */
     public void execute(String[] params, Tester t) {
         for (Student hallgato : t.getStudents()) {
-            boolean result = hallgato.hasLogar();
+            boolean result = hallgato.won();
             if (result) {
                 System.out.println("A hallgatok megtalaltak a logart, gyozelem!");
                 return;

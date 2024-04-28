@@ -381,8 +381,8 @@ public class Student implements Human {
      * 
      * @return Igaz, ha a diák rendelkezik a Logar tárggyal, egyébként hamis.
      */
-    public boolean hasLogar() {
-        return logarObtained;
+    public boolean won() {
+        return winCondition;
     }
 
     /**
@@ -409,7 +409,6 @@ public class Student implements Human {
         if(currentRoom.getTeacher().size() > 0) {
             currentRoom.killStudents();
         }
-        System.out.println("I have arrived");
     }
 
     /**
