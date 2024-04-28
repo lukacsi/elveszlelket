@@ -81,8 +81,8 @@ public class Tester {
         itemUses = new ArrayList<>();
     }
 
-    public void nextRound() {
-        round++;
+    public void nextRound(int time) {
+        round += time;
         itemUses.clear();
         movement.clear();
         itemUses.addAll(hallgatok.keySet());
@@ -90,6 +90,7 @@ public class Tester {
         movement.addAll(takaritok.keySet());
         movement.addAll(oktatok.keySet());
     }
+
     public void npcActions() {
         for (CleaningLady cl : takaritok.values()) {
             getRandomValue(ajtok).accept(cl);;

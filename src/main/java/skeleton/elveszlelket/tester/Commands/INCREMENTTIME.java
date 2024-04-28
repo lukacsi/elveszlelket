@@ -27,7 +27,7 @@ public class INCREMENTTIME implements Command {
             }
             student.decreaseStun(timeI);
         }
-        t.nextRound();
+        t.nextRound(timeI);
         if(t.r.random) {
             t.npcActions();
         }
