@@ -1,7 +1,6 @@
 package skeleton.elveszlelket.tester.Commands;
 
 import skeleton.elveszlelket.*;
-import skeleton.elveszlelket.door.*;
 import skeleton.elveszlelket.tester.Tester;
 
 /**
