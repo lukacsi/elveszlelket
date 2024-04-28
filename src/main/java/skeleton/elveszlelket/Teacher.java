@@ -70,10 +70,6 @@ public class Teacher implements Human {
         if(stunDuration > 0) {
             return false;
         }
-        Room currentRoom = getRoom();
-        if (!currentRoom.hasFreePlace()) {
-            return false;
-        }
         currentRoom.removeHuman(this);
         door.putMeThrough(this);
         System.out.println("Szoba valtas sikeres!");
