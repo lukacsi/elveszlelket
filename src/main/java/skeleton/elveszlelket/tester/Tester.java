@@ -554,7 +554,7 @@ public class Tester {
         if (c != null) {
             c.execute(params, this);
         }else{
-            System.out.println("Ismeretlen parancs.");
+            System.out.println(params[0]+" nevu parancs nem talalhato.");
         }
     }
 

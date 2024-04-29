@@ -78,8 +78,10 @@ public class MAKE implements skeleton.elveszlelket.tester.Commands.Command {
             }else{
                 foundType = false;
             }
-            if(!foundType){
+            if(foundType){
                 System.out.println("Objektum letrehozva: " + params[2] + " (Tipus: " + params[1]+ ")");
+            }else{
+                System.out.println(params[1]+" tipus nem talalhato.");
             }
         }
     }

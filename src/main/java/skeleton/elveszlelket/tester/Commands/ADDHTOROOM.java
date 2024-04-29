@@ -37,7 +37,7 @@ public class ADDHTOROOM implements skeleton.elveszlelket.tester.Commands.Command
                 keresettTeacher.setCurrentRoom(keresettR);
                 System.out.println("Sikeresen hozzaadta az oktatot a szobahoz.");
             } else {
-                System.out.println("Parameterkent kapott szoba nincs meg feljegyezve.");
+                System.out.println("Parameterkent kapott "+params[2]+" nincs feljegyezve.");
             }
         } else if (keresettStudent != null) { // felvett szoba a testernél
             if (keresettStudent.getRoom() != null) {
@@ -50,7 +50,7 @@ public class ADDHTOROOM implements skeleton.elveszlelket.tester.Commands.Command
                 keresettStudent.setCurrentRoom(keresettR);
                 System.out.println("Sikeresen hozzaadta a hallgatot a szobahoz.");
             } else {
-                System.out.println("Parameterkent kapott Szoba nincs meg feljegyezve.");
+                System.out.println("Parameterkent kapott "+params[2]+" nincs feljegyezve.");
             }
         } else if (keresettCleaningLady != null) { // felvett szoba a testernél
             if (keresettCleaningLady.getRoom() != null) {
@@ -63,10 +63,10 @@ public class ADDHTOROOM implements skeleton.elveszlelket.tester.Commands.Command
                 keresettCleaningLady.setCurrentRoom(keresettR);
                 System.out.println("Sikeresen hozzaadta a takaritot a szobahoz.");
             } else {
-                System.out.println("Parameterkent kapott Szoba nincs meg feljegyezve.");
-            } 
+                System.out.println("Parameterkent kapott "+params[2]+" nincs feljegyezve.");
+            }
         } else {
-            System.out.println("Parameterkent kapott human entitas nincs meg feljegyezve.");
+            System.out.println("Parameterkent kapott "+params[1]+" nincs feljegyezve.");
         }
     }
 }
