@@ -26,9 +26,9 @@ public class CHECKLOSE implements skeleton.elveszlelket.tester.Commands.Command 
         }
         mindenkiHalott = true;
         if (mindenkiHalott) {
-            System.out.println("Nincsenek eletben levo hallgatok.");
+            System.out.println("Ellenorzes: Nincsenek eletben levo hallgatok.");
         } else {
-            System.out.println("Vannak eletben levo hallgatok.");
+            System.out.println("Ellenorzes: Vannak eletben levo hallgatok.");
         }
     }
 }
