@@ -39,9 +39,9 @@ public class ADDHTOROOM implements skeleton.elveszlelket.tester.Commands.Command
                 }
                 keresettR.addHuman(keresettTeacher);
                 keresettTeacher.setCurrentRoom(keresettR);
-                System.out.println(params[1]+" sikeresen hozzáadva a "+params[2]+"-hez.");
+                System.out.println(params[1]+" sikeresen hozzaadva a "+params[2]+"-hez.");
             } else {
-                System.out.println("Parameterkent kapott "+params[2]+" nincs feljegyezve.");
+                System.out.println("Parameterul kapott "+params[2]+" nincs feljegyezve.");
             }
         } else if (keresettStudent != null) { // felvett szoba a testernél
             if (keresettStudent.getRoom() != null) {
@@ -51,14 +51,14 @@ public class ADDHTOROOM implements skeleton.elveszlelket.tester.Commands.Command
 
             if (keresettR != null) {
                 if(!keresettR.hasFreePlace()){
-                    System.out.println(params[1]+" nem lett hozzáadva "+params[2]+"-hez mert az tele van.");
+                    System.out.println(params[1]+" nem lett hozzaadva "+params[2]+"-hez mert az tele van.");
                     return;
                 }
                 keresettR.addHuman(keresettStudent);
                 keresettStudent.setCurrentRoom(keresettR);
                 System.out.println(params[1]+" sikeresen hozzáadva a "+params[2]+"-hez.");
             } else {
-                System.out.println("Parameterkent kapott "+params[2]+" nincs feljegyezve.");
+                System.out.println("Parameterul kapott "+params[2]+" nincs feljegyezve.");
             }
         } else if (keresettCleaningLady != null) { // felvett szoba a testernél
             if (keresettCleaningLady.getRoom() != null) {
@@ -69,12 +69,12 @@ public class ADDHTOROOM implements skeleton.elveszlelket.tester.Commands.Command
             if (keresettR != null) {
                 keresettR.addHuman(keresettCleaningLady);
                 keresettCleaningLady.setCurrentRoom(keresettR);
-                System.out.println(params[1]+" sikeresen hozzáadva a "+params[2]+"-hez.");
+                System.out.println(params[1]+" sikeresen hozzaadva a "+params[2]+"-hez.");
             } else {
-                System.out.println("Parameterkent kapott "+params[2]+" nincs feljegyezve.");
+                System.out.println("Parameterul kapott "+params[2]+" nincs feljegyezve.");
             }
         } else {
-            System.out.println("Parameterkent kapott "+params[1]+" nincs feljegyezve.");
+            System.out.println("Parameterul kapott "+params[1]+" nincs feljegyezve.");
         }
     }
 }
