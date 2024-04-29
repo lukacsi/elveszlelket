@@ -88,12 +88,12 @@ public class SPLIT implements skeleton.elveszlelket.tester.Commands.Command {
                         masodik.addItem(r1.getItems().get(i));
                     }
                 }
-                System.out.println(params[1] + " szetbomlott " + elsoNev + " es " + masodikNev + "-re");
+                System.out.println(params[1] + " kettebontva. Uj szobak: " + elsoNev + " es " + masodikNev + ".");
             } else {
-                System.out.println(params[1] + " nem bomlott szet, mert tartozkodik valaki benne.");
+                System.out.println(params[1] + " lett szetbontva, tartozkodnak benne.");
             }
         } else {
-            System.out.println("Parameterkent megadott szoba meg nincs feljegyezve.");
+            System.out.println("Parameterul kapott "+params[1]+" nincs feljegyezve.");
         }
     }
 }

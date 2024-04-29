@@ -52,12 +52,16 @@ public class MERGE implements skeleton.elveszlelket.tester.Commands.Command {
                 r1.merge(r2, uj);
                 t.removeRoom(r2);
                 t.removeRoom(r1);
-                System.out.println("Szobak osszemergelodtek.");
+                System.out.println(params[1]+" es "+params[2]+" osszeolvasztva. Uj szoba letrehozva: "+roomNev+".");
             } else {
-                System.out.println("Szobak nem mergelhetoek.");
+                System.out.println(params[1]+" es "+params[2]+" nem lett osszeolvasztva, tartozkodnak benne.");
             }
         } else {
-            System.out.println("Parameterkent megadott szoba valamelyike meg nincs feljegyezve.");
+            if(r1 == null){
+                System.out.println("Parameterul kapott "+params[1]+" nincs feljegyezve.");
+            }else{
+                System.out.println("Parameterul kapott "+params[2]+" nincs feljegyezve.");
+            }
         }
     }
 }

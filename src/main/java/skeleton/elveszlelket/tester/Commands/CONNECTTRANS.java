@@ -50,9 +50,9 @@ public class CONNECTTRANS implements skeleton.elveszlelket.tester.Commands.Comma
                             if (!t1.hasPair() && !t2.hasPair()) {
                                 t1.addPair(t2);
                                 t2.addPair(t1);
-                                System.out.println("Tranzisztorok parosítva");
+                                System.out.println(params[2]+" es "+params[3]+" osszekapcsolva "+params[1]+" tranzisztorai kozott.");
                             } else {
-                                System.out.println("Tranzisztorok valamelyike mar parositott.");
+                                System.out.println(params[2]+" es "+params[3]+" nem lett osszekapcsolva "+params[1]+" tranzisztorai kozott. Mivel valamelyik tranzisztor mar paros.");
                             }
                         } else {
                             System.out.println("Megadott tranzisztorok valamelyike nincs a hallgatonal.");
@@ -61,13 +61,13 @@ public class CONNECTTRANS implements skeleton.elveszlelket.tester.Commands.Comma
                         System.out.println("Parameterkent kapott targyak valamelyike nem tranzisztor.");
                     }
                 } else {
-                    System.out.println("Parameterkent kapott masodik targy nincs meg feljegyezve.");
+                    System.out.println("Parameterul kapott "+params[3]+" nincs feljegyezve.");
                 }
             } else {
-                System.out.println("Parameterkent kapott elso targy nincs meg feljegyezve.");
+                System.out.println("Parameterul kapott "+params[2]+" nincs feljegyezve.");
             }
         } else {
-            System.out.println("Parameterkent kapott hallgato nincs meg feljegyezve.");
+            System.out.println("Parameterul kapott "+params[1]+" nincs feljegyezve.");
         }
     }
 }

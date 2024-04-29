@@ -15,19 +15,20 @@ public class TOGGLEFAKE implements Command {
         else if(t.getItem(params[1]) != null) {
             i = t.getItem(params[1]);
             boolean fals;
-            if(params[2].equals("TRUE"))
+            if(params[2].equals("TRUE")){
                 fals = true;
-            else if(params[2].equals("FALSE"))
+                System.out.println(params[1]+" hamis bekapcsolva.");
+            }else if(params[2].equals("FALSE")){
                 fals = false;
-            else {
+                System.out.println(params[1]+" hamis kikapcsolva.");
+            }else {
                 System.out.println("Nem igaz hamis érték");
                 return;
             }
             i.setFalse(fals);
         }
         else {
-            System.out.println("Tárgy nem létezik!");
+            System.out.println("Parameterul kapott "+params[1]+" nincs feljegyezve.");
         }
-    }
-    
+    }   
 }

@@ -77,10 +77,10 @@ public class MOVE implements skeleton.elveszlelket.tester.Commands.Command {
                     return;
                 }
             } else {
-                System.out.println("Parameterkent kapott human entitas nincs meg feljegyezve.");
+                System.out.println("Parameterul kapott "+params[2]+" nincs feljegyezve.");
             }
         } else {
-            System.out.println("Parameterkent kapott ajto nincs meg feljegyezve.");
+            System.out.println("Parameterul kapott "+params[1]+" nincs feljegyezve.");
         }
     }
 }

@@ -44,22 +44,22 @@ public class ADDTOHUMAN implements skeleton.elveszlelket.tester.Commands.Command
             if (keresettHallgato != null) {
                 if (keresettHallgato.pickupItem(keresettItem)) {
                     keresettItem.setHuman(keresettHallgato);
-                    System.out.println(params[1] + " tárgy felvétele sikeres.");
+                    System.out.println(params[1]+" sikeresen hozzaadva "+params[2]+" targyaihoz.");
                 } else {
-                    System.out.println(params[1] + " tárgy felvétele sikertelen.");
+                    System.out.println(params[1]+" nem lett hozzaadva "+params[2]+" targyaihoz, leltar tele.");
                 }
             } else if (keresettOktato != null) {
                 if (keresettOktato.pickupItem(keresettItem)) {
                     keresettItem.setHuman(keresettOktato);
-                    System.out.println(params[1] + " tárgy felvétele sikeres.");
+                    System.out.println(params[1]+" sikeresen hozzaadva "+params[2]+" targyaihoz.");
                 } else {
-                    System.out.println(params[1] + " tárgy felvétele sikertelen.");
+                    System.out.println(params[1]+" nem lett hozzaadva "+params[2]+" targyaihoz, leltar tele.");
                 }
             } else {
-                System.out.println("Parameterkent kapott human entitas nincs meg feljegyezve.");
+                System.out.println("Parameterul kapott "+params[2]+" nincs feljegyezve.");
             }
         } else {
-            System.out.println("Parameterkent kapott targy nincs meg feljegyezve.");
+            System.out.println("Parameterul kapott "+params[1]+" nincs feljegyezve.");
         }
     }
 }

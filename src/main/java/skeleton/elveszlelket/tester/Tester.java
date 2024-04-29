@@ -68,6 +68,7 @@ public class Tester {
         commands.put("REMOVEIFROMHUMAN", new REMOVEIFROMHUMAN());
         commands.put("REMOVEIFROMROOM", new REMOVEIFROMROOM());
         commands.put("TOGGLEFAKE", new TOGGLEFAKE());
+        commands.put("TOGGLERANDOM", new TOGGLERANDOM());
         commands.put("T_CONNECTION", new T_CONNECTION());
 
         hallgatok = new HashMap<>();
@@ -529,14 +530,8 @@ public class Tester {
     public void listen() {
         String row = sc.nextLine();
         while(!row.toLowerCase().equals("exit")){
-            if(row.equals("TOGGLERANDOM")) {
-                r.toggleRandom();
-                System.out.println("Randomness " + ((r.random)?"enabled.":"disabled."));
-                row = sc.nextLine();
-            } else {
-                executeCommand(row.split(" "));
-                row = sc.nextLine();
-            }
+            executeCommand(row.split(" "));
+            row = sc.nextLine();
         }
     }
 
@@ -555,9 +550,11 @@ public class Tester {
         // definialva -> prog 3ból volt ez a megoldás az ilyen parancssoros programok
         // keszitesere
         // a veremautomatas reszek korul.
-        Command c = commands.get(params[0]);
+        Command c = commands.get(params[0].toUpperCase());
         if (c != null) {
             c.execute(params, this);
+        }else{
+            System.out.println(params[0]+" nevu parancs nem talalhato.");
         }
     }
 
