@@ -42,6 +42,7 @@ public class MAKE implements skeleton.elveszlelket.tester.Commands.Command {
         if (s != null || d != null || r != null || i != null || teacher != null) {
             System.out.println(params[2] + " nevvel rendelkezo objektumot mar vett fel.");
         } else {
+            boolean foundType = true;
             if (params[1].equals("STUDENT")) {
                 t.addStudent(params[2], new Student());
                 t.itemUses.add(params[2]);
@@ -74,8 +75,12 @@ public class MAKE implements skeleton.elveszlelket.tester.Commands.Command {
                 t.addItem(params[2], new Logar());
             } else if (params[1].equals("AIRFRESHENER")) {
                 t.addItem(params[2], new AirFreshener());
+            }else{
+                foundType = false;
             }
-            System.out.println("Objektum letrehozva: " + params[2] + " (Tipus: " + params[1]+ ")");
+            if(!foundType){
+                System.out.println("Objektum letrehozva: " + params[2] + " (Tipus: " + params[1]+ ")");
+            }
         }
     }
 }
