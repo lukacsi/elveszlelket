@@ -31,7 +31,7 @@ public class INCREMENTTIME implements Command {
         // if(t.r.random) {
         //     t.npcActions();
         // }
-        System.out.println("Idő előrehaladva " + timeI + " -el!");
+        System.out.println("Ido elorehaladva " + timeI + " -el!");
     }
     
 }
