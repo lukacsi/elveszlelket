@@ -18,16 +18,16 @@ public class TOGGLEGAS implements Command {
             String ertek = params[2];
             if (ertek.equalsIgnoreCase("TRUE")) {
                 r.setGas(true);
-                System.out.println("A szoba " + params[1] + " elgazositva.");
+                System.out.println(params[1]+" gaz allapota bekapcsolva.");
             } else if (ertek.equalsIgnoreCase("FALSE")) {
                 r.setGas(false);
-                System.out.println("A szoba " + params[1] + " gaztalanitva.");
+                System.out.println(params[1]+" gaz allapota bekapcsolva.");
             } else {
                 System.out.println(
                         "Parameterul kapott igazsag ertek ervenytelen. Csak true/false formatumok elfogadottak.");
             }
         } else {
-            System.out.println("Parameterul kapott szoba nincs feljegyeze.");
+            System.out.println("Parameterul kapott "+params[1]+" nincs feljegyezve.");
         }
     }
 
