@@ -27,7 +27,7 @@ public class PICKUP implements skeleton.elveszlelket.tester.Commands.Command {
         Item item = t.getItem(params[1]);
 
         if (item == null) {
-            System.out.println("Item '" + params[1] + "' not found.");
+            System.out.println("Parameterul kapott "+params[1]+" nincs feljegyezve.");
             return;
         }
 
@@ -37,16 +37,16 @@ public class PICKUP implements skeleton.elveszlelket.tester.Commands.Command {
         }
 
         if (human == null) {
-            System.out.println("Human '" + params[2] + "' not found.");
+            System.out.println("Parameterul kapott "+params[2]+" nincs feljegyezve.");
             return;
         }
-
+        
         boolean pickedUp = human.pickupItem(item);
 
         if (pickedUp) {
-            System.out.println("Item '" + item.getName() + "' picked up '");
+            System.out.println(params[1]+" felveve "+params[2]+" altal.");
         } else {
-            System.out.println("Failed to pick up item '" + item.getName());
+            System.out.println(params[1]+" nem lett felveve "+params[2]+" altal. Tele a leltar.");
         }
     }
 }
