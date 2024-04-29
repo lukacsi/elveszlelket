@@ -33,9 +33,13 @@ public class ADDHTOROOM implements skeleton.elveszlelket.tester.Commands.Command
             }
 
             if (keresettR != null) {
+                if(!keresettR.hasFreePlace()){
+                    System.out.println(params[1]+" nem lett hozzáadva "+params[2]+"-hez mert az tele van.");
+                    return;
+                }
                 keresettR.addHuman(keresettTeacher);
                 keresettTeacher.setCurrentRoom(keresettR);
-                System.out.println("Sikeresen hozzaadta az oktatot a szobahoz.");
+                System.out.println(params[1]+" sikeresen hozzáadva a "+params[2]+"-hez.");
             } else {
                 System.out.println("Parameterkent kapott "+params[2]+" nincs feljegyezve.");
             }
@@ -46,9 +50,13 @@ public class ADDHTOROOM implements skeleton.elveszlelket.tester.Commands.Command
             }
 
             if (keresettR != null) {
+                if(!keresettR.hasFreePlace()){
+                    System.out.println(params[1]+" nem lett hozzáadva "+params[2]+"-hez mert az tele van.");
+                    return;
+                }
                 keresettR.addHuman(keresettStudent);
                 keresettStudent.setCurrentRoom(keresettR);
-                System.out.println("Sikeresen hozzaadta a hallgatot a szobahoz.");
+                System.out.println(params[1]+" sikeresen hozzáadva a "+params[2]+"-hez.");
             } else {
                 System.out.println("Parameterkent kapott "+params[2]+" nincs feljegyezve.");
             }
@@ -61,7 +69,7 @@ public class ADDHTOROOM implements skeleton.elveszlelket.tester.Commands.Command
             if (keresettR != null) {
                 keresettR.addHuman(keresettCleaningLady);
                 keresettCleaningLady.setCurrentRoom(keresettR);
-                System.out.println("Sikeresen hozzaadta a takaritot a szobahoz.");
+                System.out.println(params[1]+" sikeresen hozzáadva a "+params[2]+"-hez.");
             } else {
                 System.out.println("Parameterkent kapott "+params[2]+" nincs feljegyezve.");
             }
