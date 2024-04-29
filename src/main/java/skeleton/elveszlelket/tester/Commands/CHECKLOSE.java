@@ -26,9 +26,9 @@ public class CHECKLOSE implements skeleton.elveszlelket.tester.Commands.Command 
         }
         mindenkiHalott = true;
         if (mindenkiHalott) {
-            System.out.println("Minden hallgató halott. Játék vége!");
+            System.out.println("Nincsenek eletben levo hallgatok.");
         } else {
-            System.out.println("Néhány hallgató még mindig él. Folytasd a játékot!");
+            System.out.println("Vannak eletben levo hallgatok.");
         }
     }
 }
