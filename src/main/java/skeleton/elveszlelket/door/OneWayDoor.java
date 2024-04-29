@@ -64,6 +64,7 @@ public class OneWayDoor extends Door {
         }
         s.getRoom().removeHuman(s);
         destination.addHuman(s);
+        s.setCurrentRoom(destination);
         s.iHaveArrived();
     }
 
@@ -77,6 +78,7 @@ public class OneWayDoor extends Door {
     public void putMeThrough(Teacher t) {
         t.getRoom().removeHuman(t);
         destination.addHuman(t);
+        t.setCurrentRoom(destination);
         t.iHaveArrived();
     }
 
@@ -118,6 +120,7 @@ public class OneWayDoor extends Door {
         c.getRoom().removeHuman(c);
         destination.addHuman(c);
         c.setLastDoor(this);
+        c.setCurrentRoom(destination);
         c.iHaveArrived();
     }
 }

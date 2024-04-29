@@ -70,10 +70,6 @@ public class Teacher implements Human {
         if(stunDuration > 0) {
             return false;
         }
-        Room currentRoom = getRoom();
-        if (!currentRoom.hasFreePlace()) {
-            return false;
-        }
         currentRoom.removeHuman(this);
         door.putMeThrough(this);
         System.out.println("Szoba valtas sikeres!");
@@ -135,6 +131,7 @@ public class Teacher implements Human {
      */
     @Override
     public void stun(int duration) {
+        System.out.println("Oktato elkabitva.");
         dropItem(items.get(0));
         stunDuration += duration;
     }

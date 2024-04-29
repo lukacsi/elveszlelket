@@ -3,6 +3,7 @@ package skeleton.elveszlelket;
 import skeleton.elveszlelket.item.*;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import skeleton.elveszlelket.door.*;
@@ -281,13 +282,14 @@ public class Student implements Human {
      * @param duration A bénulás időtartama.
      */
     public void stun(int duration) {
+        System.out.println("Hallgato elkabitva.");
         if (gasProtectionDuration == 0) {
-            for (Item item : items) {
-                dropItem(item);
+            while(!items.isEmpty()) {
+                Item i = items.get(0);
+                dropItem(i);
             }
             stunDuration += duration;
         }
-
     }
 
     /**
