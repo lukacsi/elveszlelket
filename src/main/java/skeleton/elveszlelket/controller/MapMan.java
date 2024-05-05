@@ -1,6 +1,7 @@
 package skeleton.elveszlelket.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import skeleton.elveszlelket.*;
 import skeleton.elveszlelket.door.Door;
@@ -46,48 +47,80 @@ public class MapMan {
 
         // minden szobából egy ajtó egy random szobába
         for (Room room : map) {
-            int randindx = App.t.r.nextInt(size-1);
-            while (room == map.get(randindx))
-                randindx = App.t.r.nextInt(size-1);
-            Room room2 = map.get(randindx);
-
-            TwoWayDoor d = new TwoWayDoor();
-
-            d.setRooms(room, room2);
-            room.addDoor(d);
-            room2.addDoor(d);
-        }
-
-        // extra szábák súly szerint
-        for (Room room : map) {
-            // amíg a random szám az adott értéket alultalálja
+            Door d = new TwoWayDoor();
+            connectRandom(room, d);
+            
+            // extra szobák súly szerint
             while (door > App.t.r.nextFloat()) {
-                Door d;
-                int randindx = App.t.r.nextInt(size-1);
-                while (room == map.get(randindx))
-                    randindx = App.t.r.nextInt(size-1);
-                Room room2 = map.get(randindx);
-
-                // egyirányú szoba sorsolás súllyal
-                if(oneway > App.t.r.nextFloat()) 
-                    d = new OneWayDoor();
-                else
-                    d = new TwoWayDoor();
-                
-                d.setRooms(room, room2);
-                room.addDoor(d);
-                room2.addDoor(d);
+                connectRandom(room, randomDoorType());
             }
         }
+
+        // make map traversable
+        Room startingRoom = map.get(0);
         for (Room room : map) {
+            while(distance(startingRoom, room) < 0) {
+                connectRandom(room, randomDoorType());
+            }
+        }
+
+        // populate with items and calculate maxdist for later
+        int maxdist = Integer.MIN_VALUE;
+        for (Room room : map) {
+            int dist = distance(startingRoom, room);
+            if(dist > maxdist)
+                maxdist = dist;
             while (item > App.t.r.nextFloat()) {
                 Item item = getRandomItem();
                 if(fals > App.t.r.nextFloat())
                     item.setFalse(true);
                 room.addItem(item);
             }
+            // apply curse 
+            if(curse > App.t.r.nextFloat() && room != startingRoom)
+                room.setCursed(true);
+            // apply gas
+            if(gas > App.t.r.nextFloat() && room != startingRoom)
+                room.setGas(true);
         }
-        
+
+        // add students
+        for (Student student : students) {
+            startingRoom.addHuman(student);
+            student.setCurrentRoom(startingRoom);
+        }
+
+        // Add teachers 
+        for (Teacher teacher : teachers) {
+            while (true) {
+                Room rand = getRandomRoom();
+                if(distance(startingRoom, rand) > maxdist/2) {
+                    rand.addHuman(teacher);
+                    teacher.setCurrentRoom(rand);
+                    break;
+                }
+            }
+        }
+
+        // Add cleaners
+        for (CleaningLady cleaningLady : cleaningLadies) {
+            while (true) {
+                Room rand = getRandomRoom();
+                if(distance(startingRoom, rand) > maxdist/2) {
+                    rand.addHuman(cleaningLady);
+                    cleaningLady.setCurrentRoom(rand);
+                    break;
+                }
+            }
+        }
+
+        // Add real logar
+        for (Room room : map) {
+            if(distance(startingRoom, room) == maxdist) {
+                room.addItem(new Logar());
+                break;
+            }
+        }
     }
 
     private Item getRandomItem() {
@@ -114,5 +147,44 @@ public class MapMan {
         }
         return item;
     }
+
+    private int distance(Room start, Room dest) {
+        // HashMap<Room, Integer> table = new HashMap<>();
+        // table.put(start, 0);
+        // Room r = start;
+        // List<Room> neigh = new ArrayList<>();
+        // for (Door d : start.getDoors()) {
+        //     Room n = d.getDest(r);
+        //     if(n == r)
+        //         continue;
+        //     table.put(n, table.get(r));
+        // }
+        return -1;
+    }
+
+    private Room getRandomRoom() {
+        return map.get(App.t.r.nextInt(size-1));
+    }
+
+    private void connectRandom(Room room, Door door) {
+        int randindx = App.t.r.nextInt(size-1);
+        while (room == map.get(randindx))
+            randindx = App.t.r.nextInt(size-1);
+        Room room2 = map.get(randindx);
+        door.setRooms(room, room2);
+        room.addDoor(door);
+        room2.addDoor(door);
+    }
+
+    // egyirányú szoba sorsolás súllyal
+    private Door randomDoorType() {
+        Door d;
+        if(oneway > App.t.r.nextFloat()) 
+            d = new OneWayDoor();
+        else
+            d = new TwoWayDoor();
+        return d;
+    }
+
 
 }
