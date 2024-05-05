@@ -39,7 +39,8 @@ public class MapMan {
         map = new ArrayList<>();
     }
 
-    public void init() {
+    public List<Room> init() {
+        map = new ArrayList<>();
         // Annyi szoba amekkora a size
         for(int i = 0; i < size; i++) {
             map.add(new Room());
@@ -92,24 +93,26 @@ public class MapMan {
 
         // Add teachers 
         for (Teacher teacher : teachers) {
-            while (true) {
+            boolean added = false;
+            while (added) {
                 Room rand = getRandomRoom();
                 if(distance(startingRoom, rand) > maxdist/2) {
                     rand.addHuman(teacher);
                     teacher.setCurrentRoom(rand);
-                    break;
+                    added = true;
                 }
             }
         }
 
         // Add cleaners
         for (CleaningLady cleaningLady : cleaningLadies) {
-            while (true) {
+            boolean added = false;
+            while (added) {
                 Room rand = getRandomRoom();
                 if(distance(startingRoom, rand) > maxdist/2) {
                     rand.addHuman(cleaningLady);
                     cleaningLady.setCurrentRoom(rand);
-                    break;
+                    added = true;
                 }
             }
         }
@@ -121,6 +124,7 @@ public class MapMan {
                 break;
             }
         }
+        return map;
     }
 
     private Item getRandomItem() {
