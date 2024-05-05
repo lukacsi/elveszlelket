@@ -1,7 +1,5 @@
 package skeleton.elveszlelket.strategy;
 
-import ch.qos.logback.core.FileAppender;
-import skeleton.elveszlelket.App;
 import skeleton.elveszlelket.Student;
 import skeleton.elveszlelket.item.FFP2Mask;
 import skeleton.elveszlelket.item.Item;

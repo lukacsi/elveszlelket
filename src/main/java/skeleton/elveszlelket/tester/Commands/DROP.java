@@ -27,7 +27,7 @@ public class DROP implements skeleton.elveszlelket.tester.Commands.Command {
         Item item = t.getItem(params[1]);
 
         if (item == null) {
-            System.out.println("Item '" + params[1] + "' not found.");
+            System.out.println("Parameterul kapott "+params[1]+" nincs feljegyezve.");
             return;
         }
 
@@ -37,14 +37,15 @@ public class DROP implements skeleton.elveszlelket.tester.Commands.Command {
         }
 
         if (human == null) {
-            System.out.println("Human '" + params[2] + "' not found.");
+            System.out.println("Parameterul kapott "+params[2]+" nincs feljegyezve.");
             return;
         }
 
         if (human.dropItem(item)) {
-            System.out.println("Item '" + item.getName() + "' dropped by human.");
+            human.getRoom().addItem(item);
+            System.out.println(params[1]+" kidobva altal "+params[2]+". "+params[1]+" most a szobaban talalhata.");
         } else {
-            System.out.println("Unable to drop item '" + item.getName() + "' for human .");
+            System.out.println(params[1]+" nem lett kidobva altal "+params[2]+". "+params[1]+", mivel nincs nala.");
         }
     }
 }

@@ -3,7 +3,6 @@ package skeleton.elveszlelket.strategy;
 import skeleton.elveszlelket.Student;
 import skeleton.elveszlelket.item.Item;
 import skeleton.elveszlelket.item.Rag;
-import skeleton.elveszlelket.App;
 
 /**
  * A RagStrategy implementálja az ItemUseStrategy interfészt, 

@@ -30,7 +30,7 @@ public class CONNECTROOM implements skeleton.elveszlelket.tester.Commands.Comman
         if (keresettDoor != null) {
 
             if (keresettDoor.getOwnerRoom() != null) {
-                System.out.println("Ez az ajto mar osszekot ket szobat.");
+                System.out.println(params[1]+" nem lett osszekapcsolva "+params[2]+" es "+params[3]+" kozott. Mivel mashol mar hasznalatban van.");
                 return;
             }
 
@@ -43,19 +43,18 @@ public class CONNECTROOM implements skeleton.elveszlelket.tester.Commands.Comman
                         keresettRoom1.addDoor(keresettDoor);
                         keresettRoom2.addDoor(keresettDoor);
                         keresettDoor.setRooms(keresettRoom1, keresettRoom2);
-                        System.out.println("Sikeres connect.");
+                        System.out.println(params[1]+" osszekapcsolva "+params[2]+" es "+params[3]+" kozott.");
                     } else {
-                        System.out.println(
-                                "Ugyanazt a szobat sajat magaval nem lehet osszekotni egy ajton keresztul. Connect sikertelen.");
+                        System.out.println("Ugyanazt a szobat sajat magaval nem lehet osszekotni egy ajton keresztul. Connect sikertelen.");
                     }
                 } else {
-                    System.out.println("Parameterkent kapott masodik szoba nincs meg feljegyezve.");
+                    System.out.println("Parameterul kapott "+params[3]+" nincs feljegyezve.");
                 }
             } else {
-                System.out.println("Parameterkent kapott elso szoba nincs meg feljegyezve.");
+                System.out.println("Parameterul kapott "+params[2]+" nincs feljegyezve.");
             }
         } else {
-            System.out.println("Parameterkent kapott ajto nincs meg feljegyezve.");
+            System.out.println("Parameterul kapott "+params[1]+" nincs feljegyezve.");
         }
     }
 }

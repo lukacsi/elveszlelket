@@ -1,8 +1,6 @@
 package skeleton.elveszlelket.tester.Commands;
 
 import java.util.List;
-
-import skeleton.elveszlelket.*;
 import skeleton.elveszlelket.tester.Tester;
 
 public class LIST implements skeleton.elveszlelket.tester.Commands.Command {

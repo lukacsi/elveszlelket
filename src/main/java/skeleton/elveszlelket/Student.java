@@ -3,6 +3,7 @@ package skeleton.elveszlelket;
 import skeleton.elveszlelket.item.*;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import skeleton.elveszlelket.door.*;
@@ -168,6 +169,7 @@ public class Student implements Human {
             item.use(this);
             logarObtained = true;
         }
+        item.setHuman(this);
         item.setRoom(null);
         items.add(item);
         return true;
@@ -185,7 +187,9 @@ public class Student implements Human {
             return false;
         }
         if (items.contains(item)) {
+            item.setHuman(null);
             currentRoom.addItem(item);
+            item.setRoom(currentRoom);
             return items.remove(item);
         }
         return false;
@@ -245,8 +249,6 @@ public class Student implements Human {
         if(stunDuration > 0) {
             return false;
         }
-        t1.setLocation(currentRoom);
-        t2.setLocation(currentRoom);
         t1.addPair(t2);
         if (t1.hasPair()) {
             return true;
@@ -280,13 +282,14 @@ public class Student implements Human {
      * @param duration A bénulás időtartama.
      */
     public void stun(int duration) {
+        System.out.println("Hallgato elkabitva.");
         if (gasProtectionDuration == 0) {
-            for (Item item : items) {
-                dropItem(item);
+            while(!items.isEmpty()) {
+                Item i = items.get(0);
+                dropItem(i);
             }
             stunDuration += duration;
         }
-
     }
 
     /**
@@ -380,8 +383,8 @@ public class Student implements Human {
      * 
      * @return Igaz, ha a diák rendelkezik a Logar tárggyal, egyébként hamis.
      */
-    public boolean hasLogar() {
-        return logarObtained;
+    public boolean won() {
+        return winCondition;
     }
 
     /**
@@ -408,7 +411,6 @@ public class Student implements Human {
         if(currentRoom.getTeacher().size() > 0) {
             currentRoom.killStudents();
         }
-        System.out.println("I have arrived");
     }
 
     /**

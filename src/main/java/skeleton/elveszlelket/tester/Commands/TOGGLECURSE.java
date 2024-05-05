@@ -17,17 +17,15 @@ public class TOGGLECURSE implements Command {
             String ertek = params[2];
             if (ertek.equalsIgnoreCase("TRUE")) {
                 r.setCursed(true);
-                System.out.println("A szoba " + params[1] + " elatkozva.");
+                System.out.println(params[1] + " atkozottsaga bekapcsolva.");
             } else if (ertek.equalsIgnoreCase("FALSE")) {
                 r.setCursed(false);
-                System.out.println("A szoba " + params[1] + " tobbe nem elatkozott.");
+                System.out.println(params[1] + " atkozottsaga kikapcsolva.");
             } else {
-                System.out.println(
-                        "Parameterul kapott igazsag ertek ervenytelen. Csak true/false formatumok elfogadottak.");
+                System.out.println("Parameterul kapott igazsag ertek ervenytelen. Csak true/false formatumok elfogadottak.");
             }
         } else {
-            System.out.println("Parameterul kapott szoba nincs feljegyeze.");
+            System.out.println("Parameterul kapott "+params[1]+" nincs feljegyezve.");
         }
     }
-
 }

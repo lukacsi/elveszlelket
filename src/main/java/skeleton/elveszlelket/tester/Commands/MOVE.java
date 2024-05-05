@@ -33,32 +33,54 @@ public class MOVE implements skeleton.elveszlelket.tester.Commands.Command {
             CleaningLady keresettCleaner = t.getCleaningLady(params[2]);
 
             if (keresettStudent != null) {
-                if (!keresettStudent.isDead()) {
-                    if (keresettDoor.getOwnerRoom().equals(keresettStudent.getRoom())) {
-                        keresettDoor.accept(keresettStudent);
+                if (t.movement.contains(params[2])) {
+                    if (!keresettStudent.isDead()) {
+                        if (keresettDoor.getOwnerRoom().equals(keresettStudent.getRoom()) || keresettDoor.getSecondRoom().equals(keresettStudent.getRoom())) {
+                            t.movement.remove(params[2]);
+                            keresettDoor.accept(keresettStudent);
+                        } else {
+                            System.out.println("Az ajto illetve az ember nem ugyanabban a szobaban vannak.");
+                        }
+                    } else {
+                        System.out.println("Mozgatni kivant hallgato mar nem el.");
+                    }
+                }
+                else {
+                    System.out.println(params[2] + " már lépett a körben");
+                    return;
+                }
+            } else if (keresettTeacher != null) {
+                if (t.movement.contains(params[2])) {
+
+                    if (keresettDoor.getOwnerRoom().equals(keresettTeacher.getRoom()) || keresettDoor.getSecondRoom().equals(keresettTeacher.getRoom())) {
+                        keresettDoor.accept(keresettTeacher);
+                        t.movement.remove(params[2]);
                     } else {
                         System.out.println("Az ajto illetve az ember nem ugyanabban a szobaban vannak.");
                     }
-                } else {
-                    System.out.println("Mozgatni kivant hallgato mar nem el.");
                 }
-            } else if (keresettTeacher != null) {
-                if (keresettDoor.getOwnerRoom().equals(keresettTeacher.getRoom())) {
-                    keresettDoor.accept(keresettTeacher);
-                } else {
-                    System.out.println("Az ajto illetve az ember nem ugyanabban a szobaban vannak.");
+                else {
+                    System.out.println(params[2] + " már lépett a körben");
+                    return;
                 }
             } else if (keresettCleaner != null) {
-                if (keresettDoor.getOwnerRoom().equals(keresettCleaner.getRoom())) {
-                    keresettDoor.accept(keresettCleaner);
-                } else {
-                    System.out.println("Az ajto illetve az ember nem ugyanabban a szobaban vannak.");
+                if (t.movement.contains(params[2])) {
+                    if (keresettDoor.getOwnerRoom().equals(keresettCleaner.getRoom()) || keresettDoor.getSecondRoom().equals(keresettCleaner.getRoom())) {
+                        keresettDoor.accept(keresettCleaner);
+                        t.movement.remove(params[2]);
+                    } else {
+                        System.out.println("Az ajto illetve az ember nem ugyanabban a szobaban vannak.");
+                    }
+                }
+                else {
+                    System.out.println(params[2] + " már lépett a körben");
+                    return;
                 }
             } else {
-                System.out.println("Parameterkent kapott human entitas nincs meg feljegyezve.");
+                System.out.println("Parameterul kapott "+params[2]+" nincs feljegyezve.");
             }
         } else {
-            System.out.println("Parameterkent kapott ajto nincs meg feljegyezve.");
+            System.out.println("Parameterul kapott "+params[1]+" nincs feljegyezve.");
         }
     }
 }

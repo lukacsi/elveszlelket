@@ -70,10 +70,6 @@ public class Teacher implements Human {
         if(stunDuration > 0) {
             return false;
         }
-        Room currentRoom = getRoom();
-        if (!currentRoom.hasFreePlace()) {
-            return false;
-        }
         currentRoom.removeHuman(this);
         door.putMeThrough(this);
         System.out.println("Szoba valtas sikeres!");
@@ -91,11 +87,17 @@ public class Teacher implements Human {
         if(stunDuration > 0) {
             return false;
         }
-        if (!item.getRoom().equals(currentRoom)) {
+        if(item.getRoom() != null) {
+            if (!item.getRoom().equals(currentRoom)) {
+                return false;
+            }
+        } else if (item.getHuman() != null) {
             return false;
         }
         if (items.size() < 1) {
+            item.setHuman(this);
             items.add(item);
+            item.setRoom(null);
             return true;
         } else
             return false;
@@ -113,7 +115,9 @@ public class Teacher implements Human {
             return false;
         }
         if (items.contains(item)) {
+            item.setHuman(null);
             currentRoom.addItem(item);
+            item.setRoom(currentRoom);
             return items.remove(item);
         }
         return false;
@@ -127,6 +131,7 @@ public class Teacher implements Human {
      */
     @Override
     public void stun(int duration) {
+        System.out.println("Oktato elkabitva.");
         dropItem(items.get(0));
         stunDuration += duration;
     }
@@ -180,6 +185,5 @@ public class Teacher implements Human {
         if(currentRoom.getStudents().size() > 0) {
             currentRoom.killStudents();
         }
-        System.out.println("I have arrived");
     }
 }

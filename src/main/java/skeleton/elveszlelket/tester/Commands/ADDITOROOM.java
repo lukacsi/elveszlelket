@@ -41,12 +41,12 @@ public class ADDITOROOM implements skeleton.elveszlelket.tester.Commands.Command
             if (keresettR != null) {
                 keresettR.addItem(keresettItem);
                 keresettItem.setRoom(keresettR);
-                System.out.println("Sikeresen hozzaadta a targyat a szobahoz.");
+                System.out.println(params[1]+" sikeresen hozzaadva a "+params[2]+" targyaihoz.");
             } else {
-                System.out.println("Parameterkent kapott szoba nincs meg feljegyezve.");
+                System.out.println("Parameterul kapott "+params[2]+" nincs feljegyezve.");
             }
         } else {
-            System.out.println("Parameterkent kapott targy nincs meg feljegyezve.");
+            System.out.println("Parameterul kapott "+params[1]+" nincs feljegyezve.");
         }
     }
 }

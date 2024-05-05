@@ -1,12 +1,12 @@
 package skeleton.elveszlelket.tester;
 
 import java.util.Scanner;
-import java.util.Set;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import skeleton.elveszlelket.*;
 import skeleton.elveszlelket.door.*;
@@ -31,7 +31,10 @@ public class Tester {
     private static HashMap<String, Door> ajtok;
     private static HashMap<String, Item> targyak;
     public Scanner sc = new Scanner(System.in);
-    public static TRandom r = new TRandom();
+    public TRandom r = new TRandom();
+    public List<String> itemUses;
+    public List<String> movement;
+    public int round;
 
     /**
      * Konstruktor, amely inicializálja a parancsokat és a szimulációs objektumokat
@@ -65,6 +68,7 @@ public class Tester {
         commands.put("REMOVEIFROMHUMAN", new REMOVEIFROMHUMAN());
         commands.put("REMOVEIFROMROOM", new REMOVEIFROMROOM());
         commands.put("TOGGLEFAKE", new TOGGLEFAKE());
+        commands.put("TOGGLERANDOM", new TOGGLERANDOM());
         commands.put("T_CONNECTION", new T_CONNECTION());
 
         hallgatok = new HashMap<>();
@@ -73,7 +77,40 @@ public class Tester {
         szobak = new HashMap<>();
         ajtok = new HashMap<>();
         targyak = new HashMap<>();
+        round = 0;
+        movement = new ArrayList<>();
+        itemUses = new ArrayList<>();
+        nextRound(1);
     }
+
+    public void nextRound(int time) {
+        round += time;
+        itemUses.clear();
+        movement.clear();
+        itemUses.addAll(hallgatok.keySet());
+        movement.addAll(hallgatok.keySet());
+        movement.addAll(takaritok.keySet());
+        movement.addAll(oktatok.keySet());
+    }
+
+    // public void npcActions() {
+    //     for (CleaningLady cl : takaritok.values()) {
+    //         getRandomValue(ajtok).accept(cl);;
+    //     }
+    //     for (Teacher t : oktatok.values()) {
+    //         getRandomValue(ajtok).accept(t);
+    //         t.pickupItem(getRandomValue(targyak));
+    //     }
+    // }
+
+    // public <K, V> V getRandomValue(HashMap<K, V> map) {
+    //     // Convert the values to a list
+    //     List<V> valuesList = new ArrayList<>(map.values());
+    //     // Generate a random index
+    //     int randomIndex = r.nextInt(valuesList.size());
+    //     // Return the value at the random index
+    //     return valuesList.get(randomIndex);
+    // }
 
     /**
      * @param Student. Keresett hallgató.
@@ -366,36 +403,6 @@ public class Tester {
         return targyak.get(key);
     }
 
-    // /**
-    //  * Egész számot kér be a felhasználótól.
-    //  *
-    //  * @param uzenet Az a szöveg, amit a felhasználónak megjelenítünk a bekérés
-    //  *               előtt.
-    //  * @return A felhasználó által beírt egész szám.
-    //  */
-    // public int askInt(String uzenet) {
-    //     System.out.println(uzenet);
-    //     int vissza = sc.nextInt();
-    //     return vissza;
-    // }
-
-    // /**
-    //  * Logikai értéket kér be a felhasználótól.
-    //  *
-    //  * @param uzenet Az a szöveg, amit a felhasználónak megjelenítünk a bekérés
-    //  *               előtt.
-    //  * @return A felhasználó által beírt logikai érték: igaz vagy hamis.
-    //  */
-    // public boolean askBoolean(String uzenet) {
-    //     System.out.println(uzenet);
-    //     String vissza = sc.nextLine();
-    //     if (vissza.toLowerCase().equals("true")) {
-    //         return true;
-    //     } else {
-    //         return false;
-    //     }
-    // }
-
     /**
      * Eltávolít egy diákot a hallgatók gyűjteményéből.
      *
@@ -501,9 +508,9 @@ public class Tester {
      * @param hallgato A vizsgálandó diák.
      * @return Igaz, ha a diáknak van Logar tárgya, egyébként hamis.
      */
-    public boolean hasLogar(Student hallgato) {
+    public boolean win(Student hallgato) {
         ///// NOTE TO SELF: WINCONDITONRA KÉNE CSEKKELNI HOGY LEKEZELJÜK A HAMIS LOGART
-        return hallgato.hasLogar();
+        return hallgato.won();
     }
 
     /**
@@ -523,14 +530,8 @@ public class Tester {
     public void listen() {
         String row = sc.nextLine();
         while(!row.toLowerCase().equals("exit")){
-            if(row.equals("TOGGLERANDOM")) {
-                r.toggleRandom();
-                System.out.println("Randomness " + ((r.random)?"enabled.":"disabled."));
-                row = sc.nextLine();
-            } else {
-                executeCommand(row.split(" "));
-                row = sc.nextLine();
-            }
+            executeCommand(row.split(" "));
+            row = sc.nextLine();
         }
     }
 
@@ -549,9 +550,11 @@ public class Tester {
         // definialva -> prog 3ból volt ez a megoldás az ilyen parancssoros programok
         // keszitesere
         // a veremautomatas reszek korul.
-        Command c = commands.get(params[0]);
+        Command c = commands.get(params[0].toUpperCase());
         if (c != null) {
             c.execute(params, this);
+        }else{
+            System.out.println(params[0]+" nevu parancs nem talalhato.");
         }
     }
 

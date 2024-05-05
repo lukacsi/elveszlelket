@@ -71,23 +71,23 @@ public class Transistor extends Item {
         pair = null;
     }
 
-    /**
-     * Beállítja a tranzisztor helyét.
-     * 
-     * @param room A szoba, ahol a tranzisztor elhelyezkedik.
-     */
-    public void setLocation(Room room) {
-        location = room;
-    }
+    // /**
+    //  * Beállítja a tranzisztor helyét.
+    //  * 
+    //  * @param room A szoba, ahol a tranzisztor elhelyezkedik.
+    //  */
+    // public void setLocation(Room room) {
+    //     location = room;
+    // }
 
-    /**
-     * Visszaadja a tranzisztor helyét.
-     * 
-     * @return Room A szoba, ahol a tranzisztor elhelyezkedik.
-     */
-    public Room getLocation() {
-        return location;
-    }
+    // /**
+    //  * Visszaadja a tranzisztor helyét.
+    //  * 
+    //  * @return Room A szoba, ahol a tranzisztor elhelyezkedik.
+    //  */
+    // public Room getLocation() {
+    //     return location;
+    // }
 
     @Override
     public void setFalse(boolean fals) {
