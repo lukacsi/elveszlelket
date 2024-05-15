@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import skeleton.elveszlelket.door.*;
+import skeleton.elveszlelket.gui.HumanView;
 
 /**
  * Egy diákot reprezentál a szimulációs környezetben.
@@ -15,6 +16,7 @@ import skeleton.elveszlelket.door.*;
  * amelyek befolyásolják az interakcióit a környezettel.
  */
 public class Student implements Human {
+	private HumanView view;
     private int stunDuration;
     private int immunityDuration;
     private boolean doorBlocked;
@@ -25,6 +27,10 @@ public class Student implements Human {
     private Door lastDoor;
     private List<Item> items;
     private Room currentRoom;
+    
+    public HumanView getView() {
+    	return view;
+    }
 
     public boolean isDead() {
         return dead;
@@ -66,6 +72,11 @@ public class Student implements Human {
      * Inicializálja a diákot az alapértelmezett állapotokkal és egy üres
      * tárgylistával.
      */
+    
+    public void setView(float x, float y, String path) {
+    	view = new HumanView(x,y, path);
+    }
+    
     public Student() {
         items = new ArrayList<>();
         stunDuration = 0;
@@ -199,7 +210,7 @@ public class Student implements Human {
         // Meghatározzuk, hány tárgy van a hallgatónál
         int numItems = items.size();
         if (numItems > 0) {
-            int index = App.t.r.nextInt(numItems);
+            int index = Main.t.r.nextInt(numItems);
 
             // Tárgy eltávolítása a hallgatótól és eldobása a szobába
             Item itemToDrop = items.get(index);
@@ -233,7 +244,7 @@ public class Student implements Human {
      * @param item Az eltávolítandó tárgy.
      */
     public void removeItem(Item item) {
-        App.t.removeItem(item);
+        Main.t.removeItem(item);
         items.remove(item);
     }
 

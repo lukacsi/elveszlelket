@@ -1,5 +1,4 @@
 package skeleton.elveszlelket;
-import java.util.ArrayList;
 import java.util.List;
 
 import skeleton.elveszlelket.door.Door;

@@ -2,6 +2,7 @@ package skeleton.elveszlelket.item;
 
 import skeleton.elveszlelket.*;
 import skeleton.elveszlelket.Student;
+import skeleton.elveszlelket.gui.ItemView;
 import skeleton.elveszlelket.strategy.ItemUseStrategy;
 
 public abstract class Item {
@@ -9,6 +10,15 @@ public abstract class Item {
     protected ItemUseStrategy strategy;
     protected Room room;
     protected Human human;
+    private ItemView view;
+    
+    public ItemView getView() {
+    	return view;
+    }
+    
+    public void setView(float x, float y, String texturePath) {
+    	view = new ItemView(x,y,texturePath);
+    }
 
     public Item() {
         room = null;

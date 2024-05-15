@@ -5,6 +5,8 @@ import java.util.List;
 
 import skeleton.elveszlelket.door.Door;
 import skeleton.elveszlelket.door.TwoWayDoor;
+import skeleton.elveszlelket.gui.HumanView;
+import skeleton.elveszlelket.gui.RoomView;
 import skeleton.elveszlelket.item.Item;
 
 public class Room {
@@ -18,7 +20,17 @@ public class Room {
     private boolean hasGas;
     private int stickyness;
     private static int cleanlyness = 3;
+    private RoomView view;
+    
+    public RoomView getView() {
+    	return view;
+    }
 
+    public void setView(float x, float y) {
+    	view = new RoomView(x,y);
+    	view.loadTextures();
+    }
+    
     /**
      * Alapkonstruktor a szobához.
      */
