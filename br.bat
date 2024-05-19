@@ -1,26 +1,22 @@
 @echo off
+REM Set paths to JDK and JavaFX
+set JDK_PATH=C:\Program Files\Eclipse Adoptium\jdk-17.0.11.9-hotspot
+set PATH_TO_FX=%~dp0javafx-sdk-17.0.11\lib
 
-REM Clean and create bin directory
-if exist bin (
-    rmdir /s /q bin
+if not exist target\classes (
+    mkdir target\classes
 )
-mkdir bin
 
-REM Compile the project
-echo Compiling the project...
-%JAVAC% -d bin -sourcepath src -cp "%PATH_TO_FX%\javafx-controls.jar;%PATH_TO_FX%\javafx-fxml.jar" src\skeleton\elveszlelket\Main.java
-if %errorlevel% neq 0 (
+setlocal enabledelayedexpansion
+set SOURCES=
+for /R src\main %%f in (*.java) do (
+    set SOURCES=!SOURCES! %%f
+)
+"%JDK_PATH%\bin\javac.exe" --module-path "%PATH_TO_FX%" --add-modules javafx.controls,javafx.fxml -encoding UTF-8 -d target\classes %SOURCES%
+
+if errorlevel 1 (
     echo Compilation failed.
-    exit /b %errorlevel%
+    exit /b 1
 )
-echo Compilation successful.
 
-REM Run the project
-echo Running the project...
-%JAVA% --module-path "%PATH_TO_FX%" --add-modules javafx.controls,javafx.fxml -cp bin skeleton.elveszlelket.Main
-if %errorlevel% neq 0 (
-    echo Execution failed.
-    exit /b %errorlevel%
-)
-echo Execution successful.
-pause
+"%JDK_PATH%\bin\java.exe" --module-path "%PATH_TO_FX%" --add-modules javafx.controls,javafx.fxml -cp target\classes skeleton.elveszlelket.Main
