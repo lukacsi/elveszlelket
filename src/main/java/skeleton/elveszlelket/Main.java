@@ -1,5 +1,6 @@
 package skeleton.elveszlelket;
 import skeleton.elveszlelket.gui.GameView;
+import skeleton.elveszlelket.gui.Screen;
 import skeleton.elveszlelket.item.*;
 import skeleton.elveszlelket.tester.Tester;
 
@@ -66,15 +67,18 @@ public class Main extends Application
 		t1.setView(400, 80, paths.get("Transistor"));
 		
 		r.addItem(b);
+		s.pickupItem(b);
 		r.addItem(t);
 		r.addItem(c);
+		s.pickupItem(c);
 		r.addItem(f);
 		r.addItem(t1);
 		
-		GameView palyamegjelenito = new GameView(WIDTH, HEIGHT);
-		palyamegjelenito.Update(s);
+		Screen screen = new Screen(WIDTH, HEIGHT);
+		screen.Update(s);
+		screen.updateBecauseItemsHaveBeenManuallyAddedToStudent();
 		
-		Scene foscene = new Scene(palyamegjelenito, WIDTH, HEIGHT);
+		Scene foscene = new Scene(screen, WIDTH, HEIGHT);
 		arg0 = new Stage();
 		arg0.setScene(foscene);
 		arg0.show();

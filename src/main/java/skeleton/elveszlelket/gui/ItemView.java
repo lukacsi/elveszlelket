@@ -1,15 +1,9 @@
 package skeleton.elveszlelket.gui;
 
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-
 public class ItemView extends View {
 	
-	private ImageView texture;
-	
 	public ItemView(float x, float y, String texturePath) {
-		super(x,y);
-		texture = new ImageView(new Image(texturePath));
+		super(x,y,texturePath);
 	}
 	
 	public void Draw(GameView jatekmegjelenito) {

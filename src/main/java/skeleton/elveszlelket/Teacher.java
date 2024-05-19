@@ -97,6 +97,7 @@ public class Teacher implements Human {
         if (items.size() < 1) {
             item.setHuman(this);
             items.add(item);
+            item.getRoom().getItems().remove(item);
             item.setRoom(null);
             return true;
         } else

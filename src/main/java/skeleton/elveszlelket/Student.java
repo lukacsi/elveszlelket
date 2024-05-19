@@ -5,6 +5,7 @@ import skeleton.elveszlelket.item.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 
 import skeleton.elveszlelket.door.*;
 import skeleton.elveszlelket.gui.HumanView;
@@ -181,6 +182,7 @@ public class Student implements Human {
             logarObtained = true;
         }
         item.setHuman(this);
+        item.getRoom().getItems().remove(item);
         item.setRoom(null);
         items.add(item);
         return true;
@@ -210,7 +212,9 @@ public class Student implements Human {
         // Meghatározzuk, hány tárgy van a hallgatónál
         int numItems = items.size();
         if (numItems > 0) {
-            int index = Main.t.r.nextInt(numItems);
+            //int index = Main.t.r.nextInt(numItems);
+        	Random r = new Random();
+        	int index = r.nextInt(numItems);
 
             // Tárgy eltávolítása a hallgatótól és eldobása a szobába
             Item itemToDrop = items.get(index);
@@ -244,7 +248,7 @@ public class Student implements Human {
      * @param item Az eltávolítandó tárgy.
      */
     public void removeItem(Item item) {
-        Main.t.removeItem(item);
+        //Main.t.removeItem(item);
         items.remove(item);
     }
 

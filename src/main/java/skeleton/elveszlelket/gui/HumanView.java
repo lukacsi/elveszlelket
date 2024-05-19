@@ -5,11 +5,8 @@ import javafx.scene.image.ImageView;
 
 public class HumanView extends View {
 	
-	private ImageView texture;
-	
 	public HumanView(float x, float y, String texturePath) {
-		super(x,y);
-		texture = new ImageView(new Image(texturePath));
+		super(x,y, texturePath);
 	}
 	
 	public void Draw(GameView jatekmegjelenito) {
