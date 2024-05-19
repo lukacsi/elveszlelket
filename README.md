@@ -1,10 +1,11 @@
 # Project specs
 JAVA 17
+JAVAFX 17.0.11
 ## Building app
-./mvnw clean install
+./mvnw clean
 ## Running app
-./mvnw exec:java
+./mvnw javafx:run
 ## Build and Run
-./mvnw clean install exec:java
+./mvnw clean javafx:run
 ### or
 bash br.sh
