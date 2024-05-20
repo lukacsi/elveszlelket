@@ -2,7 +2,13 @@ package skeleton.elveszlelket.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Queue;
+import java.util.Set;
+
 import skeleton.elveszlelket.*;
 import skeleton.elveszlelket.door.Door;
 import skeleton.elveszlelket.door.OneWayDoor;
@@ -153,18 +159,42 @@ public class MapMan {
         return item;
     }
 
-    private int distance(Room start, Room dest) {
-        // HashMap<Room, Integer> table = new HashMap<>();
-        // table.put(start, 0);
-        // Room r = start;
-        // List<Room> neigh = new ArrayList<>();
-        // for (Door d : start.getDoors()) {
-        // Room n = d.getDest(r);
-        // if(n == r)
-        // continue;
-        // table.put(n, table.get(r));
-        // }
-        return -1;
+    private int distance(Room start, Room end) {
+        if (start.equals(end)) {
+            return 0; // ugyan az a szoba
+        }
+
+        // BFS
+        Queue<Room> queue = new LinkedList<>();
+        Set<Room> visited = new HashSet<>();
+        Map<Room, Integer> distances = new HashMap<>();
+
+        queue.add(start);
+        visited.add(start);
+        distances.put(start, 0);
+
+        while (!queue.isEmpty()) {
+            Room current = queue.poll();
+            int currentDistance = distances.get(current);
+
+            for (Door door : current.getDoors()) {
+                Room neighbor = door.getDest(current);
+                if (neighbor == current) { // ha ajtó egyirányú
+                    break;
+                }
+                if (!visited.contains(neighbor)) {
+                    queue.add(neighbor);
+                    visited.add(neighbor);
+                    distances.put(neighbor, currentDistance + 1);
+
+                    if (neighbor.equals(end)) {
+                        return distances.get(neighbor);
+                    }
+                }
+            }
+        }
+
+        return -1; // No path found
     }
 
     private Room getRandomRoom() {
