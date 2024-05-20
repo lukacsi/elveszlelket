@@ -25,7 +25,8 @@ public class MapMan {
     private List<CleaningLady> cleaningLadies;
     private List<Room> map;
 
-    public MapMan(int size, float curse, float gas, float fals, float item, float door, float oneway, List<Teacher> teachers, List<Student> students, List<CleaningLady> cleaningLadies) {
+    public MapMan(int size, float curse, float gas, float fals, float item, float door, float oneway,
+            List<Teacher> teachers, List<Student> students, List<CleaningLady> cleaningLadies) {
         this.teachers = teachers;
         this.cleaningLadies = cleaningLadies;
         this.students = students;
@@ -42,7 +43,7 @@ public class MapMan {
     public List<Room> init() {
         map = new ArrayList<>();
         // Annyi szoba amekkora a size
-        for(int i = 0; i < size; i++) {
+        for (int i = 0; i < size; i++) {
             map.add(new Room());
         }
 
@@ -50,9 +51,9 @@ public class MapMan {
         for (Room room : map) {
             Door d = new TwoWayDoor();
             connectRandom(room, d);
-            
+
             // extra szobák súly szerint
-            while (door > App.t.r.nextFloat()) {
+            while (door > Main.t.r.nextFloat()) {
                 connectRandom(room, randomDoorType());
             }
         }
@@ -60,7 +61,7 @@ public class MapMan {
         // make map traversable
         Room startingRoom = map.get(0);
         for (Room room : map) {
-            while(distance(startingRoom, room) < 0) {
+            while (distance(startingRoom, room) < 0) {
                 connectRandom(room, randomDoorType());
             }
         }
@@ -69,19 +70,19 @@ public class MapMan {
         int maxdist = Integer.MIN_VALUE;
         for (Room room : map) {
             int dist = distance(startingRoom, room);
-            if(dist > maxdist)
+            if (dist > maxdist)
                 maxdist = dist;
-            while (item > App.t.r.nextFloat()) {
+            while (item > Main.t.r.nextFloat()) {
                 Item item = getRandomItem();
-                if(fals > App.t.r.nextFloat())
+                if (fals > Main.t.r.nextFloat())
                     item.setFalse(true);
                 room.addItem(item);
             }
-            // apply curse 
-            if(curse > App.t.r.nextFloat() && room != startingRoom)
+            // apply curse
+            if (curse > Main.t.r.nextFloat() && room != startingRoom)
                 room.setCursed(true);
             // apply gas
-            if(gas > App.t.r.nextFloat() && room != startingRoom)
+            if (gas > Main.t.r.nextFloat() && room != startingRoom)
                 room.setGas(true);
         }
 
@@ -91,12 +92,12 @@ public class MapMan {
             student.setCurrentRoom(startingRoom);
         }
 
-        // Add teachers 
+        // Add teachers
         for (Teacher teacher : teachers) {
             boolean added = false;
             while (added) {
                 Room rand = getRandomRoom();
-                if(distance(startingRoom, rand) > maxdist/2) {
+                if (distance(startingRoom, rand) > maxdist / 2) {
                     rand.addHuman(teacher);
                     teacher.setCurrentRoom(rand);
                     added = true;
@@ -109,7 +110,7 @@ public class MapMan {
             boolean added = false;
             while (added) {
                 Room rand = getRandomRoom();
-                if(distance(startingRoom, rand) > maxdist/2) {
+                if (distance(startingRoom, rand) > maxdist / 2) {
                     rand.addHuman(cleaningLady);
                     cleaningLady.setCurrentRoom(rand);
                     added = true;
@@ -119,7 +120,7 @@ public class MapMan {
 
         // Add real logar
         for (Room room : map) {
-            if(distance(startingRoom, room) == maxdist) {
+            if (distance(startingRoom, room) == maxdist) {
                 room.addItem(new Logar());
                 break;
             }
@@ -129,8 +130,8 @@ public class MapMan {
 
     private Item getRandomItem() {
         Item item;
-        float rand = App.t.r.nextFloat();
-        if(rand < 0.2) {
+        float rand = Main.t.r.nextFloat();
+        if (rand < 0.2) {
             item = new Beer();
         } else if (rand < 0.3) {
             item = new AirFreshener();
@@ -158,22 +159,22 @@ public class MapMan {
         // Room r = start;
         // List<Room> neigh = new ArrayList<>();
         // for (Door d : start.getDoors()) {
-        //     Room n = d.getDest(r);
-        //     if(n == r)
-        //         continue;
-        //     table.put(n, table.get(r));
+        // Room n = d.getDest(r);
+        // if(n == r)
+        // continue;
+        // table.put(n, table.get(r));
         // }
         return -1;
     }
 
     private Room getRandomRoom() {
-        return map.get(App.t.r.nextInt(size-1));
+        return map.get(Main.t.r.nextInt(size - 1));
     }
 
     private void connectRandom(Room room, Door door) {
-        int randindx = App.t.r.nextInt(size-1);
+        int randindx = Main.t.r.nextInt(size - 1);
         while (room == map.get(randindx))
-            randindx = App.t.r.nextInt(size-1);
+            randindx = Main.t.r.nextInt(size - 1);
         Room room2 = map.get(randindx);
         door.setRooms(room, room2);
         room.addDoor(door);
@@ -183,12 +184,11 @@ public class MapMan {
     // egyirányú szoba sorsolás súllyal
     private Door randomDoorType() {
         Door d;
-        if(oneway > App.t.r.nextFloat()) 
+        if (oneway > Main.t.r.nextFloat())
             d = new OneWayDoor();
         else
             d = new TwoWayDoor();
         return d;
     }
-
 
 }
