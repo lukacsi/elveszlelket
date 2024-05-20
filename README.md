@@ -9,3 +9,4 @@ JAVAFX 17.0.11
 ./mvnw clean javafx:run
 ### or
 bash br.sh
+br.bat
