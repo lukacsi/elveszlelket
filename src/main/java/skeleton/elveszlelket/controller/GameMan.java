@@ -42,7 +42,7 @@ public class GameMan {
      * Létrehoz egy új GameMan példányt a megadott beállításokkal.
      *
      * @param settings A játék beállításai.
-     * @param stage A pálya, amelyen a jelenetek megjelennek.
+     * @param stage    A pálya, amelyen a jelenetek megjelennek.
      */
     public GameMan(Settings settings, Stage stage) {
         this.students = new ArrayList<>();
@@ -85,7 +85,7 @@ public class GameMan {
         DrawScene(s);
     }
 
-     /**
+    /**
      * A tanárok mozgatását végzi a következő szobába.
      */
     private void moveTeachers() {
@@ -140,6 +140,7 @@ public class GameMan {
             }
 
             List<Pair<Integer, Integer>> indx = new ArrayList<>();
+            System.out.println(r.getDoors().size());
             for (Door door : r.getDoors()) {
                 if (door.getView() != null) {
                     continue;

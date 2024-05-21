@@ -16,7 +16,6 @@ temp_sources.txt
 *.dmg
 *.gz
 *.iso
-*.jar
 *.rar
 *.tar
 *.zip
