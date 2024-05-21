@@ -15,10 +15,16 @@ public class GameView extends Pane {
 	private Student jelenlegiJatekos;
 	private ItemPicker pickupMenu;
 	
+	/**
+	 * Nyitja, illetve zárja a leltárat.
+	 */
 	public void translateItemMenu() {
 		itemMenu.translate();
 	}
 	
+	/**
+	 * Nyitja, illetve zárja felvehető tárgyak listáját.
+	 */
 	public void translatePickUpMenu() {
 		this.pickupMenu.translate();
 	}
