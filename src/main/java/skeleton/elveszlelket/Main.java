@@ -1,17 +1,7 @@
 package skeleton.elveszlelket;
-import skeleton.elveszlelket.controller.GameMan;
-import skeleton.elveszlelket.controller.MapMan;
-import skeleton.elveszlelket.gui.GameView;
-import skeleton.elveszlelket.gui.Screen;
-import skeleton.elveszlelket.item.*;
-import skeleton.elveszlelket.tester.Tester;
-
-import java.util.HashMap;
-
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
+import skeleton.elveszlelket.tester.Tester;
 
 public class Main extends Application
 {
@@ -38,7 +28,7 @@ public class Main extends Application
     }
 
 	@Override
-	public void start(Stage arg0) throws Exception {
+	public void start(Stage primaryStage) throws Exception {
 
 		/// ÁTRAKTAM ŐSOSZTÁLYBA ///
 		// paths = new HashMap<>();
@@ -86,8 +76,11 @@ public class Main extends Application
 		// arg0 = new Stage();
 		// arg0.setScene(foscene);
 		// arg0.show();
-		GameMan gm = new GameMan(1,0,0,arg0);
-		gm.playRound();
+		/*GameMan gm = new GameMan(1,0,0,arg0);
+		gm.playRound();*/
+
+		Menu menu = new Menu();
+		menu.start(primaryStage);
 	}
 	
 }
