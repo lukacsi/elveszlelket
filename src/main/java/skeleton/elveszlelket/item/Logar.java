@@ -1,6 +1,7 @@
 package skeleton.elveszlelket.item;
 
 import skeleton.elveszlelket.Student;
+import skeleton.elveszlelket.gui.ItemView;
 import skeleton.elveszlelket.strategy.WinStrategy;
 
 public class Logar extends Item {
@@ -30,5 +31,10 @@ public class Logar extends Item {
     
     public boolean getFalse() {
         return fals;
+    }
+
+    @Override
+    public void setView(float x, float y) {
+    	view = new ItemView(x, y, "textures/logar.png");
     }
 }

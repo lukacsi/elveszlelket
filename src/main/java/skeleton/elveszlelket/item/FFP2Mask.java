@@ -1,6 +1,7 @@
 package skeleton.elveszlelket.item;
 
 import skeleton.elveszlelket.Student;
+import skeleton.elveszlelket.gui.ItemView;
 import skeleton.elveszlelket.strategy.GasProtectionStrategy;
 
 public class FFP2Mask extends ProtectionItem{
@@ -27,5 +28,9 @@ public class FFP2Mask extends ProtectionItem{
     }
     public boolean getFalse() {
         return fals;
+    }
+    @Override
+    public void setView(float x, float y) {
+    	view = new ItemView(x, y, "textures/mask.png");
     }
 }

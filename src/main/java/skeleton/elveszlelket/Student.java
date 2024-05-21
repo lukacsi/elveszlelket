@@ -74,8 +74,8 @@ public class Student implements Human {
      * tárgylistával.
      */
     
-    public void setView(float x, float y, String path) {
-    	view = new HumanView(x,y, path);
+    public void setView(float x, float y) {
+    	view = new HumanView(x,y, "textures/student.png");
     }
     
     public Student() {

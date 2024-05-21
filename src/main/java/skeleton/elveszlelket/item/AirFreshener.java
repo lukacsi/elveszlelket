@@ -1,6 +1,7 @@
 package skeleton.elveszlelket.item;
 
 import skeleton.elveszlelket.Student;
+import skeleton.elveszlelket.gui.ItemView;
 import skeleton.elveszlelket.strategy.NeutralizeGasStrategy;
 
 public class AirFreshener extends ProtectionItem {
@@ -31,5 +32,10 @@ public class AirFreshener extends ProtectionItem {
     public void setFalse(boolean fals) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'setFalse'");
+    }
+
+    @Override
+    public void setView(float x, float y) {
+    	view = new ItemView(x, y, "textures/airfreshener.png");
     }
 }

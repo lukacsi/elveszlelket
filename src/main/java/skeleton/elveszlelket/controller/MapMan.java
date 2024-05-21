@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
+import java.util.Random;
 import java.util.Set;
 
 import skeleton.elveszlelket.*;
@@ -30,6 +31,7 @@ public class MapMan {
     private List<Student> students;
     private List<CleaningLady> cleaningLadies;
     private List<Room> map;
+    private Random r;
 
     public MapMan(int size, float curse, float gas, float fals, float item, float door, float oneway,
             List<Teacher> teachers, List<Student> students, List<CleaningLady> cleaningLadies) {
@@ -43,6 +45,7 @@ public class MapMan {
         this.item = item;
         this.door = door;
         this.oneway = oneway;
+        r = new Random();
         map = new ArrayList<>();
     }
 
@@ -59,7 +62,7 @@ public class MapMan {
             connectRandom(room, d);
 
             // extra szobák súly szerint
-            while (door > Main.t.r.nextFloat()) {
+            while (door > r.nextFloat()) {
                 connectRandom(room, randomDoorType());
             }
         }
@@ -78,17 +81,17 @@ public class MapMan {
             int dist = distance(startingRoom, room);
             if (dist > maxdist)
                 maxdist = dist;
-            while (item > Main.t.r.nextFloat()) {
+            while (item > r.nextFloat()) {
                 Item item = getRandomItem();
-                if (fals > Main.t.r.nextFloat())
+                if (fals > r.nextFloat())
                     item.setFalse(true);
                 room.addItem(item);
             }
             // apply curse
-            if (curse > Main.t.r.nextFloat() && room != startingRoom)
+            if (curse > r.nextFloat() && room != startingRoom)
                 room.setCursed(true);
             // apply gas
-            if (gas > Main.t.r.nextFloat() && room != startingRoom)
+            if (gas > r.nextFloat() && room != startingRoom)
                 room.setGas(true);
         }
 
@@ -136,7 +139,7 @@ public class MapMan {
 
     private Item getRandomItem() {
         Item item;
-        float rand = Main.t.r.nextFloat();
+        float rand = r.nextFloat();
         if (rand < 0.2) {
             item = new Beer();
         } else if (rand < 0.3) {
@@ -198,13 +201,13 @@ public class MapMan {
     }
 
     private Room getRandomRoom() {
-        return map.get(Main.t.r.nextInt(size - 1));
+        return map.get(r.nextInt(size - 1));
     }
 
     private void connectRandom(Room room, Door door) {
-        int randindx = Main.t.r.nextInt(size - 1);
+        int randindx = r.nextInt(size - 1);
         while (room == map.get(randindx))
-            randindx = Main.t.r.nextInt(size - 1);
+            randindx = r.nextInt(size - 1);
         Room room2 = map.get(randindx);
         door.setRooms(room, room2);
         room.addDoor(door);
@@ -214,7 +217,7 @@ public class MapMan {
     // egyirányú szoba sorsolás súllyal
     private Door randomDoorType() {
         Door d;
-        if (oneway > Main.t.r.nextFloat())
+        if (oneway > r.nextFloat())
             d = new OneWayDoor();
         else
             d = new TwoWayDoor();

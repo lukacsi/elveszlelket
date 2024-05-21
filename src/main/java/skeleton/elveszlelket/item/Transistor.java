@@ -2,6 +2,7 @@ package skeleton.elveszlelket.item;
 
 import skeleton.elveszlelket.Room;
 import skeleton.elveszlelket.Student;
+import skeleton.elveszlelket.gui.ItemView;
 import skeleton.elveszlelket.strategy.TeleportStrategy;
 
 /**
@@ -93,5 +94,10 @@ public class Transistor extends Item {
     public void setFalse(boolean fals) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'setFalse'");
+    }
+
+    @Override
+    public void setView(float x, float y) {
+    	view = new ItemView(x, y, "textures/transistor.png");
     }
 }

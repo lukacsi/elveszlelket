@@ -1,25 +1,29 @@
 #!/bin/bash
 
-# Define the source directory and the main class
-SRC_DIR="src/main/java"
-MAIN_CLASS="skeleton.elveszlelket.App"
-TARGET_DIR="target/classes"
+# Set paths to JavaFX
+PATH_TO_FX="$(dirname "$0")/javafx-sdk-17.0.11/lib"
 
-# Create the target directory if it doesn't exist
-mkdir -p $TARGET_DIR
+# Create target/classes directory if it does not exist
+if [ ! -d "target/classes" ]; then
+    mkdir -p "target/classes"
+fi
 
-# Compile the Java files
-echo "Compiling Java files..."
-javac -d $TARGET_DIR $(find $SRC_DIR -name "*.java")
+SOURCE_LIST="temp_sources.txt"
+rm -f $SOURCE_LIST
 
-# Check if the compilation was successful
-if [ $? -eq 0 ]; then
-    echo "Compilation successful."
-else
+# Find all .java files and write them to SOURCE_LIST
+find src/main -name "*.java" > $SOURCE_LIST
+
+# Compile the Java sources
+"$JDK_PATH/bin/javac" --module-path "$PATH_TO_FX" --add-modules javafx.controls,javafx.fxml -encoding UTF-8 -d target/classes @$SOURCE_LIST
+if [ $? -ne 0 ]; then
     echo "Compilation failed."
+    rm -f $SOURCE_LIST
     exit 1
 fi
 
-# Run the main class
-echo "Running the application..."
-java -cp $TARGET_DIR $MAIN_CLASS
+# Run the Java application
+"$JDK_PATH/bin/java" --module-path "$PATH_TO_FX" --add-modules javafx.controls,javafx.fxml -cp target/classes skeleton.elveszlelket.Main
+
+# Clean up
+rm -f $SOURCE_LIST
