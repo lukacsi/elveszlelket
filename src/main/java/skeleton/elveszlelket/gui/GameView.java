@@ -15,70 +15,71 @@ public class GameView extends Pane {
 	private ItemMenu itemMenu;
 	private Student jelenlegiJatekos;
 	private ItemPicker pickupMenu;
-	
+
 	public void translateItemMenu() {
 		itemMenu.translate();
 	}
-	
+
 	public void translatePickUpMenu() {
 		this.pickupMenu.translate();
 	}
-	
+
 	public void closePickUpMenu() {
 		this.pickupMenu.Close();
 	}
-	
+
 	public void closeItemMenu() {
 		this.itemMenu.Close();
 	}
-	
+
 	public GameView(float w, float h) {
 		WIDTH = w;
 		HEIGHT = h;
-		itemMenu = new ItemMenu(this, WIDTH, HEIGHT/5);
-		pickupMenu = new ItemPicker(this, WIDTH, HEIGHT/5);
+		itemMenu = new ItemMenu(this, WIDTH, HEIGHT / 5);
+		pickupMenu = new ItemPicker(this, WIDTH, HEIGHT / 5);
 		this.setMinSize(w, h);
 		this.setPrefSize(w, h);
 		/*
-		this.setOnKeyPressed(e -> {
-			switch(e.getCode()) {
-				case I:
-					translateItemMenu();
-					closePickUpMenu();
-					break;
-				case S:
-					playerDown();
-					closePickUpMenu();
-					break;
-				case W:
-					playerUp();
-					closePickUpMenu();
-					break;
-				case D:
-					playerRight();
-					closePickUpMenu();
-					break;
-				case A:
-					playerLeft();
-					closePickUpMenu();
-					break;
-				case P:
-					translatePickUpMenu();
-					closeItemMenu();
-					break;
-				}
-			e.consume();
-		}); */
+		 * this.setOnKeyPressed(e -> {
+		 * switch(e.getCode()) {
+		 * case I:
+		 * translateItemMenu();
+		 * closePickUpMenu();
+		 * break;
+		 * case S:
+		 * playerDown();
+		 * closePickUpMenu();
+		 * break;
+		 * case W:
+		 * playerUp();
+		 * closePickUpMenu();
+		 * break;
+		 * case D:
+		 * playerRight();
+		 * closePickUpMenu();
+		 * break;
+		 * case A:
+		 * playerLeft();
+		 * closePickUpMenu();
+		 * break;
+		 * case P:
+		 * translatePickUpMenu();
+		 * closeItemMenu();
+		 * break;
+		 * }
+		 * e.consume();
+		 * });
+		 */
 	}
-	
+
 	public void updateItemsPos() {
-		for(Item i : this.jelenlegiJatekos.getItems()) {
+		for (Item i : this.jelenlegiJatekos.getItems()) {
 			i.getView().setPos(this.jelenlegiJatekos.getView().getX(), this.jelenlegiJatekos.getView().getY());
 		}
 	}
-	
+
 	public void updateItemPos(Item i) {
-		if(i != null) {
+		if (i != null) {
 			i.getView().setPos(this.jelenlegiJatekos.getView().getX(), this.jelenlegiJatekos.getView().getY());
 		}
 	}
@@ -87,9 +88,10 @@ public class GameView extends Pane {
 		Student jelenlegi = this.jelenlegiJatekos;
 		Room jelenlegiRoom = this.jelenlegiJatekos.getRoom();
 		float hatar = 0 + jelenlegiRoom.getView().getTileWidth();
-		
-		if(jelenlegi.getView().getX() > hatar) {
-			jelenlegi.getView().setPos(jelenlegi.getView().getX()-jelenlegiRoom.getView().egysegNegyzetWidth, jelenlegi.getView().getY());
+
+		if (jelenlegi.getView().getX() > hatar) {
+			jelenlegi.getView().setPos(jelenlegi.getView().getX() - jelenlegiRoom.getView().egysegNegyzetWidth,
+					jelenlegi.getView().getY());
 			Update(jelenlegiJatekos);
 			updateItemsPos();
 		}
@@ -98,10 +100,11 @@ public class GameView extends Pane {
 	public void playerRight() {
 		Student jelenlegi = this.jelenlegiJatekos;
 		Room jelenlegiRoom = this.jelenlegiJatekos.getRoom();
-		float hatar = jelenlegiRoom.getView().getX() - jelenlegiRoom.getView().getTileWidth()*2;
-		
-		if(jelenlegi.getView().getX() <  hatar) {
-			jelenlegi.getView().setPos(jelenlegi.getView().getX()+jelenlegiRoom.getView().egysegNegyzetWidth, jelenlegi.getView().getY());
+		float hatar = jelenlegiRoom.getView().getX() - jelenlegiRoom.getView().getTileWidth() * 2;
+
+		if (jelenlegi.getView().getX() < hatar) {
+			jelenlegi.getView().setPos(jelenlegi.getView().getX() + jelenlegiRoom.getView().egysegNegyzetWidth,
+					jelenlegi.getView().getY());
 			Update(jelenlegiJatekos);
 			updateItemsPos();
 		}
@@ -111,55 +114,61 @@ public class GameView extends Pane {
 		Student jelenlegi = this.jelenlegiJatekos;
 		Room jelenlegiRoom = this.jelenlegiJatekos.getRoom();
 		float hatar = 0 + jelenlegiRoom.getView().getTileHeight();
-		
-		if(jelenlegi.getView().getY() > hatar) {
-			jelenlegi.getView().setPos(jelenlegi.getView().getX(), jelenlegi.getView().getY()-jelenlegiRoom.getView().getTileHeight());
+
+		if (jelenlegi.getView().getY() > hatar) {
+			jelenlegi.getView().setPos(jelenlegi.getView().getX(),
+					jelenlegi.getView().getY() - jelenlegiRoom.getView().getTileHeight());
 			Update(jelenlegiJatekos);
 			updateItemsPos();
 		}
 	}
-	
+
 	public void playerDown() {
 		Student jelenlegi = this.jelenlegiJatekos;
 		Room jelenlegiRoom = this.jelenlegiJatekos.getRoom();
-		float hatar = jelenlegiRoom.getView().getY() - jelenlegiRoom.getView().getTileHeight()*2;
-		
-		if(jelenlegi.getView().getY() < hatar) {
-			jelenlegi.getView().setPos(jelenlegi.getView().getX(), jelenlegi.getView().getY()+jelenlegiRoom.getView().getTileHeight());
+		float hatar = jelenlegiRoom.getView().getY() - jelenlegiRoom.getView().getTileHeight() * 2;
+
+		if (jelenlegi.getView().getY() < hatar) {
+			jelenlegi.getView().setPos(jelenlegi.getView().getX(),
+					jelenlegi.getView().getY() + jelenlegiRoom.getView().getTileHeight());
 			Update(jelenlegiJatekos);
 			updateItemsPos();
 		}
 	}
-	
+
 	public void Update(Student jelenlegiJatekos) {
-		
-		if(jelenlegiJatekos != null) {
+
+		if (jelenlegiJatekos != null) {
 			this.jelenlegiJatekos = jelenlegiJatekos;
 			// Letorlunk mindent korabbi texturat.
 			this.getChildren().clear();
-			
+
 			// Szoba rajz
 			RoomView rv = jelenlegiJatekos.getRoom().getView();
 			rv.normalizeTexture(rv.getTileWidth(), rv.getTileHeight());
 			rv.Draw(this);
-			
-			for(Item i : jelenlegiJatekos.getRoom().getItems()) {
+
+			for (Item i : jelenlegiJatekos.getRoom().getItems()) {
 				ItemView iv = i.getView();
 				iv.setPos(rv.xToTileX(iv.getX()), rv.yToTileY(iv.getY()));
 				iv.normalizeTexture(rv.getTileWidth(), rv.getTileHeight());
 				iv.Draw(this);
 			}
-			
+
 			// Student Rajz
-			View v = jelenlegiJatekos.getView();
-			v.setPos(rv.xToTileX(v.getX()), rv.yToTileY(v.getY()));
-			v.normalizeTexture(rv.getTileWidth(), rv.getTileHeight());
-			v.Draw(this);
-			this.getChildren().add(itemMenu);
-			this.getChildren().add(pickupMenu);
+			for (Student st : jelenlegiJatekos.getRoom().getStudents()) {
+				if (st == jelenlegiJatekos) {
+					this.getChildren().add(itemMenu);
+					this.getChildren().add(pickupMenu);
+				}
+				View v = st.getView();
+				v.setPos(rv.xToTileX(v.getX()), rv.yToTileY(v.getY()));
+				v.normalizeTexture(rv.getTileWidth(), rv.getTileHeight());
+				v.Draw(this);
+			}
 
 			// Ajto Rajz
-			for(Door d : jelenlegiJatekos.getRoom().getDoors()) {
+			for (Door d : jelenlegiJatekos.getRoom().getDoors()) {
 				DoorView dv = d.getView();
 				dv.setPos(rv.xToTileX(dv.getX()), rv.yToTileY(dv.getY()));
 				dv.normalizeTexture(rv.getTileWidth(), rv.getTileHeight());
@@ -169,7 +178,7 @@ public class GameView extends Pane {
 			System.out.println("GameView nem kapott jelenlegi jatekost.");
 		}
 	}
-	
+
 	public Student getCurrentPlayer() {
 		return this.jelenlegiJatekos;
 	}
