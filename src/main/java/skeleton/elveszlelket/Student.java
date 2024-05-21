@@ -280,8 +280,14 @@ public class Student implements Human {
      * @return Igaz, ha a diák mostantól halott, egyébként hamis.
      */
     public boolean killYourself() {
-        if (immunityDuration != 0)
-            dead = true;
+        if (immunityDuration == 0) {
+            for (Item item : items) {
+                useItem(item);
+            }
+            if (immunityDuration == 0) {
+                dead = true;
+            }
+        }
         return dead;
     }
 
