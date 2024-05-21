@@ -18,6 +18,10 @@ import skeleton.elveszlelket.Teacher;
 import skeleton.elveszlelket.door.Door;
 import skeleton.elveszlelket.gui.Screen;
 
+/**
+ * A játék fő irányító osztálya, kezeli
+ * a szereplők mozgatását és a képernyő frissítését.
+ */
 public class GameMan {
     private List<Student> students;
     private List<Teacher> teachers;
@@ -33,6 +37,12 @@ public class GameMan {
     	return this.jelenlegiJatekos;
     }
 
+    /**
+     * Létrehoz egy új GameMan példányt a megadott beállításokkal.
+     *
+     * @param settings A játék beállításai.
+     * @param stage A pálya, amelyen a jelenetek megjelennek.
+     */
     public GameMan(Settings settings, Stage stage) {
         this.students = new ArrayList<>();
         this.teachers = new ArrayList<>();
@@ -59,6 +69,9 @@ public class GameMan {
         sQueue.addAll(students);
     }
 
+    /**
+     * Lejátssza a következő kört a játékban.
+     */
     public void playRound() {
         if (sQueue.isEmpty()) {
             moveTeachers();
@@ -70,6 +83,9 @@ public class GameMan {
         DrawScene(s);
     }
 
+     /**
+     * A tanárok mozgatását végzi a következő szobába.
+     */
     private void moveTeachers() {
         for (Teacher gajdos : teachers) {
             Door door = gajdos.getRoom().getDoorAt(rand.nextInt(0, 20));
@@ -80,6 +96,9 @@ public class GameMan {
         }
     }
 
+    /**
+     * A takarítónők mozgatását végzi a következő szobába.
+     */
     private void moveCleaners() {
         for (CleaningLady gizi : cleaners) {
             Door door = gizi.getRoom().getDoorAt(rand.nextInt(0, 20));
@@ -90,6 +109,11 @@ public class GameMan {
         }
     }
 
+    /**
+     * Kirajzolja a megadott diák számára a jelenetet.
+     *
+     * @param s A diák, akinek a jelenet kirajzolásra kerül.
+     */
     // Na ez azt csinálja hogy hasheli a roomot és aszerint pakolja a cuccokat.
     // AZ ELDOBOTT ITEMEKET NEM TUDOM HOGYAN KÉNE
     private void DrawScene(Student s) {
@@ -155,6 +179,12 @@ public class GameMan {
         this.jelenlegiJatekos = s;
     }
 
+    /**
+     * Visszaadja a megadott szám abszolút értékét.
+     *
+     * @param num A szám, amelynek az abszolút értékét ki akarjuk számolni.
+     * @return A megadott szám abszolút értéke.
+     */
     private int abs(int num) {
         return (num < 0) ? -num : num;
     }
