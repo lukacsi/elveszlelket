@@ -11,6 +11,7 @@ import skeleton.elveszlelket.item.Item;
 public class CleaningLady implements Human {
     private Door lastDoor;
     private Room currentRoom;
+    private HumanView view;
 
     public void plsLeave() {
         List<Student> s = currentRoom.getStudents();
@@ -98,6 +99,10 @@ public class CleaningLady implements Human {
     public void setView(float x, float y) {
         String resourcePath = "file:textures/cleaningady.png";
         HumanView view = new HumanView(x, y, resourcePath);
+    }
+
+    public HumanView getView() {
+        return view;
     }
 
 }

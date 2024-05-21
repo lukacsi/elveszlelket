@@ -16,6 +16,7 @@ public class Teacher implements Human {
     private int stunDuration;
     private List<Item> items;
     private Room currentRoom;
+    private HumanView view;
 
     public int getStunDuration() {
         return stunDuration;
@@ -43,7 +44,7 @@ public class Teacher implements Human {
      */
     @Override
     public boolean use(OneWayDoor door) {
-        if(stunDuration > 0) {
+        if (stunDuration > 0) {
             return false;
         }
         Room currentRoom = getRoom();
@@ -68,7 +69,7 @@ public class Teacher implements Human {
      */
     @Override
     public boolean use(TwoWayDoor door) {
-        if(stunDuration > 0) {
+        if (stunDuration > 0) {
             return false;
         }
         currentRoom.removeHuman(this);
@@ -85,10 +86,10 @@ public class Teacher implements Human {
      */
     @Override
     public boolean pickupItem(Item item) {
-        if(stunDuration > 0) {
+        if (stunDuration > 0) {
             return false;
         }
-        if(item.getRoom() != null) {
+        if (item.getRoom() != null) {
             if (!item.getRoom().equals(currentRoom)) {
                 return false;
             }
@@ -113,7 +114,7 @@ public class Teacher implements Human {
      */
     @Override
     public boolean dropItem(Item item) {
-        if(stunDuration > 0) {
+        if (stunDuration > 0) {
             return false;
         }
         if (items.contains(item)) {
@@ -181,10 +182,10 @@ public class Teacher implements Human {
      * érkezett.
      */
     public void iHaveArrived() {
-        if(currentRoom.containsGas()) {
+        if (currentRoom.containsGas()) {
             stun(3);
         }
-        if(currentRoom.getStudents().size() > 0) {
+        if (currentRoom.getStudents().size() > 0) {
             currentRoom.killStudents();
         }
     }
@@ -192,5 +193,9 @@ public class Teacher implements Human {
     public void setView(float x, float y) {
         String resourcePath = "file:textures/teacher.png";
         HumanView view = new HumanView(x, y, resourcePath);
+    }
+
+    public HumanView getView() {
+        return view;
     }
 }

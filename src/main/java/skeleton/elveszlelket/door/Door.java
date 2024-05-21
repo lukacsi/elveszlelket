@@ -98,5 +98,4 @@ public abstract class Door {
     public DoorView getView() {
         return view;
     }
-
 }

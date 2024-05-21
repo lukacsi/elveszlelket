@@ -8,6 +8,7 @@ import java.util.Random;
 
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.util.Pair;
 import skeleton.elveszlelket.item.Item;
 import skeleton.elveszlelket.CleaningLady;
 import skeleton.elveszlelket.Human;
@@ -25,7 +26,7 @@ public class GameMan {
     private Queue<Student> sQueue;
     public int round;
     private Stage stage;
-    private Random r;
+    private Random rand;
 
     public GameMan(Settings settings, Stage stage) {
         this.students = new ArrayList<>();
@@ -66,7 +67,7 @@ public class GameMan {
 
     private void moveTeachers() {
         for (Teacher gajdos : teachers) {
-            Door door = gajdos.getRoom().getDoorAt(r.nextInt(0, 20));
+            Door door = gajdos.getRoom().getDoorAt(rand.nextInt(0, 20));
             if (door != null) {
                 door.accept(gajdos);
                 door.putMeThrough(gajdos);
@@ -76,7 +77,7 @@ public class GameMan {
 
     private void moveCleaners() {
         for (CleaningLady gizi : cleaners) {
-            Door door = gizi.getRoom().getDoorAt(r.nextInt(0, 20));
+            Door door = gizi.getRoom().getDoorAt(rand.nextInt(0, 20));
             if (door != null) {
                 door.accept(gizi);
                 door.putMeThrough(gizi);
@@ -97,14 +98,30 @@ public class GameMan {
         System.out.println("width: " + WIDTH + " height: " + HEIGHT);
         r.setView(WIDTH, HEIGHT);
         for (Item i : r.getItems()) {
-            // VALMIT CSINÁLNI KELL HA SIZEW == SIZEH
+            if (i.getView() != null) {
+                continue;
+            }
             float w = abs(i.hashCode()) % (sizew - 2);
             float h = (abs(i.hashCode() * sizew)) % (sizeh - 2);
             i.setView((w + 1) * 40, (h + 1) * 40);
             System.out.println(i.getClass().toString() + " " + (w + 1) * 40 + " " + (h + 1) * 40);
         }
 
+        for (Door door : r.getDoors()) {
+            if(door.getView() != null) {
+                continue;
+            }
+            int hash = Math.abs(door.hashCode());
+            // Ensure x and y are within bounds and not on the border
+            int x = (hash % (sizew - 2)) + 1; // 1 <= x < h-1
+            int y = (hash % (sizeh - 2)) + 1; // 1 <= y < w-1
+            door.setView(x * 40, y * 40); // Assuming a scale factor of 40
+        }
+
         for (Student st : r.getStudents()) {
+            if(st.getView() != null) {
+                continue;
+            }
             if (st == s) {
                 continue;
             }
@@ -113,11 +130,17 @@ public class GameMan {
             st.setView((w + 1) * 40, (h + 1) * 40);
         }
         for (Teacher t : r.getTeacher()) {
+            if(t.getView() != null) {
+                continue;
+            }
             float w = abs(t.hashCode()) % (sizew - 2);
             float h = (abs(t.hashCode() * sizew)) % (sizeh - 2);
             t.setView((w + 1) * 40, (h + 1) * 40);
         }
         for (CleaningLady c : r.getCleaningLadies()) {
+            if(c.getView() != null) {
+                continue;
+            }
             float w = abs(c.hashCode()) % (sizew - 2);
             float h = (abs(c.hashCode() * sizew)) % (sizeh - 2);
             c.setView((w + 1) * 40, (h + 1) * 40);
@@ -135,5 +158,14 @@ public class GameMan {
 
     private int abs(int num) {
         return (num < 0) ? -num : num;
+    }
+
+    private void placeDoors(int sizew, int sizeh, Room r) {
+        List<Door> d = r.getDoors();
+
+        List<List<Door>> walls = new ArrayList<>();
+        for (int i = 0; i < 4; i++) {
+            walls.add(new ArrayList<>());
+        }
     }
 }
