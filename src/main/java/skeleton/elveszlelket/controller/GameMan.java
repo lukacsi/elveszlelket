@@ -67,7 +67,7 @@ public class GameMan {
     private void moveTeachers() {
         for (Teacher gajdos : teachers) {
             Door door = gajdos.getRoom().getDoorAt(r.nextInt(0, 20));
-            if(door != null){
+            if (door != null) {
                 door.accept(gajdos);
                 door.putMeThrough(gajdos);
             }
@@ -77,7 +77,7 @@ public class GameMan {
     private void moveCleaners() {
         for (CleaningLady gizi : cleaners) {
             Door door = gizi.getRoom().getDoorAt(r.nextInt(0, 20));
-            if(door != null){
+            if (door != null) {
                 door.accept(gizi);
                 door.putMeThrough(gizi);
             }
