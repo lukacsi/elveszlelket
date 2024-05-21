@@ -23,14 +23,25 @@ public class GameView extends Pane {
 		this.pickupMenu.translate();
 	}
 	
+	/**
+	 * Bezárja a felvehető tárgyak menüjét.
+	 */
 	public void closePickUpMenu() {
 		this.pickupMenu.Close();
 	}
 	
+	/**
+	 * Bezárja a játékos leltárát.
+	 */
 	public void closeItemMenu() {
 		this.itemMenu.Close();
 	}
 	
+	/**
+	 * A játéknézet konstruktora.
+	 * @param w A nézet szélessége.
+	 * @param h A nézet magassága.
+	 */
 	public GameView(float w, float h) {
 		WIDTH = w;
 		HEIGHT = h;
@@ -70,18 +81,28 @@ public class GameView extends Pane {
 		}); */
 	}
 	
+	/**
+	 * Frissíti az összes tárgy pozícióját.
+	 */
 	public void updateItemsPos() {
 		for(Item i : this.jelenlegiJatekos.getItems()) {
 			i.getView().setPos(this.jelenlegiJatekos.getView().getX(), this.jelenlegiJatekos.getView().getY());
 		}
 	}
 	
+	/**
+	 * Frissíti az adott tárgy pozícióját.
+	 * @param i Az adott tárgy.
+	 */
 	public void updateItemPos(Item i) {
 		if(i != null) {
 			i.getView().setPos(this.jelenlegiJatekos.getView().getX(), this.jelenlegiJatekos.getView().getY());
 		}
 	}
 
+	/**
+	 * Balra mozgatja a jelenleg aktív játékost.
+	 */
 	public void playerLeft() {
 		Student jelenlegi = this.jelenlegiJatekos;
 		Room jelenlegiRoom = this.jelenlegiJatekos.getRoom();
@@ -94,6 +115,9 @@ public class GameView extends Pane {
 		}
 	}
 
+	/**
+	 * Jobbra mozgatja a jelenleg aktív játékost.
+	 */
 	public void playerRight() {
 		Student jelenlegi = this.jelenlegiJatekos;
 		Room jelenlegiRoom = this.jelenlegiJatekos.getRoom();
@@ -106,6 +130,9 @@ public class GameView extends Pane {
 		}
 	}
 
+	/**
+	 * Felfele mozgatja a jelenleg aktív játékost.
+	 */
 	public void playerUp() {
 		Student jelenlegi = this.jelenlegiJatekos;
 		Room jelenlegiRoom = this.jelenlegiJatekos.getRoom();
@@ -118,6 +145,9 @@ public class GameView extends Pane {
 		}
 	}
 	
+	/**
+	 * Lefele mozgatja a jelenleg aktív játékost.
+	 */
 	public void playerDown() {
 		Student jelenlegi = this.jelenlegiJatekos;
 		Room jelenlegiRoom = this.jelenlegiJatekos.getRoom();
@@ -130,6 +160,10 @@ public class GameView extends Pane {
 		}
 	}
 	
+	/**
+	 * Frissíti az adott játékos megjelenítését.
+	 * @param jelenlegiJatekos Az adott játékos.
+	 */
 	public void Update(Student jelenlegiJatekos) {
 		
 		if(jelenlegiJatekos != null) {
@@ -161,6 +195,10 @@ public class GameView extends Pane {
 		}
 	}
 	
+	/**
+	 * Visszaadja a jelenleg aktív játékost.
+	 * @return A jelenleg aktív játékos.
+	 */
 	public Student getCurrentPlayer() {
 		return this.jelenlegiJatekos;
 	}
