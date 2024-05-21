@@ -80,6 +80,14 @@ public class GameMan {
             moveTeachers();
             moveCleaners();
             round++;
+            for (Student s : students) {
+                s.decreaseGasProtection();
+                s.decreaseImmunity();
+                s.decreaseStun(1);
+            }
+            for (Teacher t : teachers) {
+                t.decreaseStun(1);
+            }
             sQueue.addAll(students);
         }
         Student s = sQueue.poll();

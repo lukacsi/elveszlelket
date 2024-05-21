@@ -18,6 +18,7 @@ public abstract class ProtectionItem extends Item {
     /**
      * @return int A maradék használatok számát adja vissza
      */
+    @Override
     public int getUses() {
         return uses;
     }

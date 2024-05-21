@@ -5,6 +5,7 @@ import javafx.animation.TranslateTransition;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -78,10 +79,15 @@ public class ItemMenu extends HBox {
 						e.consume();
 					}
 				});
+
+				Label usesLabel = new Label("Uses: " + ((i.getUses() == 0) ? "inf" : i.getUses()));
+				usesLabel.setStyle("-fx-text-fill: white;");
+				usesLabel.setPadding(new Insets(0, 5, 0, 5));
+
 				kozepV.setAlignment(Pos.CENTER);
 				kozepH.setAlignment(Pos.CENTER);
 				kozepV.getChildren().add(b);
-				kozepH.getChildren().add(kozepV);
+				kozepH.getChildren().addAll(kozepV, usesLabel);
 				kozepH.setMinWidth(WIDTH / 5);
 				this.getChildren().add(kozepH);
 			}
@@ -138,10 +144,15 @@ public class ItemMenu extends HBox {
 						e.consume();
 					}
 				});
+
+				Label usesLabel = new Label("Uses: " + ((i.getUses() == 0) ? "inf" : i.getUses()));
+				usesLabel.setStyle("-fx-text-fill: white;");
+				usesLabel.setPadding(new Insets(0, 5, 0, 5));
+
 				kozepV.setAlignment(Pos.CENTER);
 				kozepH.setAlignment(Pos.CENTER);
 				kozepV.getChildren().add(b);
-				kozepH.getChildren().add(kozepV);
+				kozepH.getChildren().addAll(kozepV, usesLabel);
 				kozepH.setMinWidth(WIDTH / 5);
 				this.getChildren().add(kozepH);
 			}

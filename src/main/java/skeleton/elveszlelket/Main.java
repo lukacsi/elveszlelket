@@ -1,4 +1,5 @@
 package skeleton.elveszlelket;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -74,20 +75,23 @@ public class Main extends Application {
 		// arg0 = new Stage();
 		// arg0.setScene(foscene);
 		// arg0.show();
-		/*GameMan gm = new GameMan(1,0,0,arg0);
-		gm.playRound();*/
 		/*
-		Screen screen = new Screen(WIDTH, HEIGHT);
-		screen.Update(s);
-		screen.updateBecauseItemsHaveBeenManuallyAddedToStudent();
+		 * GameMan gm = new GameMan(1,0,0,arg0);
+		 * gm.playRound();
+		 */
+		/*
+		 * Screen screen = new Screen(WIDTH, HEIGHT);
+		 * screen.Update(s);
+		 * screen.updateBecauseItemsHaveBeenManuallyAddedToStudent();
+		 * 
+		 * Scene foscene = new Scene(screen, WIDTH, HEIGHT);
+		 * primaryStage = new Stage();
+		 * primaryStage.setScene(foscene);
+		 * primaryStage.show();
+		 */
 
-		Scene foscene = new Scene(screen, WIDTH, HEIGHT);
-		primaryStage = new Stage();
-		primaryStage.setScene(foscene);
-		primaryStage.show(); */
-		
-		//screen.Update(s);
-		//screen.updateBecauseItemsHaveBeenManuallyAddedToStudent();
+		// screen.Update(s);
+		// screen.updateBecauseItemsHaveBeenManuallyAddedToStudent();
 
 		Screen screen = new Screen(primaryStage, WIDTH, HEIGHT);
 		Scene foscene = new Scene(screen, WIDTH, HEIGHT);
