@@ -5,7 +5,8 @@ import skeleton.elveszlelket.gui.ItemView;
 import skeleton.elveszlelket.strategy.DrunkStrategy;
 
 public class Beer extends ProtectionItem {
-    /** A Sör konstruktora, beállítja
+    /**
+     * A Sör konstruktora, beállítja
      * a nevét Beer-re,
      * a használatok számát 1-re,
      * a strategy-t DrunkStrategy-re.
@@ -15,9 +16,11 @@ public class Beer extends ProtectionItem {
         uses = 1;
         strategy = new DrunkStrategy();
     }
-    
-    /** A Sör használatát implementáló függvény.
-     *  Meghívja a saját strategy-jét.
+
+    /**
+     * A Sör használatát implementáló függvény.
+     * Meghívja a saját strategy-jét.
+     * 
      * @param student A tárgyat használó hallgató
      */
     public void use(Student student) {
@@ -26,12 +29,11 @@ public class Beer extends ProtectionItem {
 
     @Override
     public void setFalse(boolean fals) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setFalse'");
+        return;
     }
 
     @Override
     public void setView(float x, float y) {
-    	view = new ItemView(x, y, "textures/beer.png");
+        view = new ItemView(x, y, "file:textures/beer.png");
     }
 }

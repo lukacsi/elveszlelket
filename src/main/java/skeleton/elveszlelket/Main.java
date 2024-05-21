@@ -3,29 +3,26 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import skeleton.elveszlelket.tester.Tester;
 
-public class Main extends Application
-{
+public class Main extends Application {
 	float WIDTH = 400;
 	float HEIGHT = 400;
-	
-	// HashMap<String, String> paths;
-	
-	
-    public static Tester t;
 
-    /**
-     * Az alkalmazás belépési pontja.
-     * Létrehoz egy Tester példányt és elindítja a parancsok feldolgozását.
-     *
-     * @param args
-     */
-    public static void main( String[] args )
-    {
-        //t = new Tester();
-    	launch(args);
-        System.out.println("Fut a program!");
-        //t.listen();
-    }
+	// HashMap<String, String> paths;
+
+	public static Tester t;
+
+	/**
+	 * Az alkalmazás belépési pontja.
+	 * Létrehoz egy Tester példányt és elindítja a parancsok feldolgozását.
+	 *
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// t = new Tester();
+		launch(args);
+		System.out.println("Fut a program!");
+		// t.listen();
+	}
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -40,15 +37,14 @@ public class Main extends Application
 		// paths.put("CleaningLady", "file:textures/cleaninglady.png");
 		// paths.put("Mask", "file:textures/mask.png");
 		// paths.put("FFP2Mask", "file:textures/mask.png");
-		//t = new Tester();
-		
+		// t = new Tester();
+
 		// Room r = new Room();
 		// r.setView(WIDTH, HEIGHT);
 		// Student s = new Student();
 		// s.setCurrentRoom(r);
 		// s.setView(40, 40);
-		
-		
+
 		// Beer b = new Beer();
 		// b.setView(160, 40);
 		// TVSZ t = new TVSZ();
@@ -59,7 +55,7 @@ public class Main extends Application
 		// f.setView(320, 200);
 		// Transistor t1 = new Transistor();
 		// t1.setView(400, 80);
-		
+
 		// r.addItem(b);
 		// s.pickupItem(b);
 		// r.addItem(t);
@@ -67,11 +63,11 @@ public class Main extends Application
 		// s.pickupItem(c);
 		// r.addItem(f);
 		// r.addItem(t1);
-		
+
 		// Screen screen = new Screen(WIDTH, HEIGHT);
 		// screen.Update(s);
 		// screen.updateBecauseItemsHaveBeenManuallyAddedToStudent();
-		
+
 		// Scene foscene = new Scene(screen, WIDTH, HEIGHT);
 		// arg0 = new Stage();
 		// arg0.setScene(foscene);
@@ -82,5 +78,5 @@ public class Main extends Application
 		Menu menu = new Menu();
 		menu.start(primaryStage);
 	}
-	
+
 }

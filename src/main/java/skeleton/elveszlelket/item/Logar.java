@@ -6,6 +6,7 @@ import skeleton.elveszlelket.strategy.WinStrategy;
 
 public class Logar extends Item {
     private boolean fals;
+
     /**
      * A Logar konstruktora, beaállítja,
      * a nevét Logar-ra,
@@ -15,9 +16,11 @@ public class Logar extends Item {
         name = "Logar";
         strategy = new WinStrategy();
     }
-    
-    /** A Logar használatát implementáló függvény.
-     *  Meghívja a saját strategy-jét.
+
+    /**
+     * A Logar használatát implementáló függvény.
+     * Meghívja a saját strategy-jét.
+     * 
      * @param student A tárgyat használó hallgató
      */
     public void use(Student student) {
@@ -28,13 +31,13 @@ public class Logar extends Item {
     public void setFalse(boolean fals) {
         this.fals = fals;
     }
-    
+
     public boolean getFalse() {
         return fals;
     }
 
     @Override
     public void setView(float x, float y) {
-    	view = new ItemView(x, y, "textures/logar.png");
+        view = new ItemView(x, y, "file:textures/logar.png");
     }
 }

@@ -1,5 +1,8 @@
 package skeleton.elveszlelket.controller;
 
+import java.io.Console;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
@@ -22,21 +25,25 @@ public class GameMan {
     private Stage stage;
 
     public GameMan(int studentNum, int teacherNum, int cleanerNum, Stage stage) {
+        this.students = new ArrayList<>();
+        this.teachers = new ArrayList<>();
+        this.cleaners = new ArrayList<>();
+        this.sQueue = new LinkedList<>();
         this.stage = stage;
         round = 0;
-        for(int i = 0; i < studentNum; i++) {
+        for (int i = 0; i < studentNum; i++) {
             students.add(new Student());
         }
-        for(int i = 0; i < teacherNum; i++) {
+        for (int i = 0; i < teacherNum; i++) {
             teachers.add(new Teacher());
         }
-        for(int i = 0; i < cleanerNum; i++) {
+        for (int i = 0; i < cleanerNum; i++) {
             cleaners.add(new CleaningLady());
         }
-        
-        MapMan m = new MapMan(1, 1, 1, 1, 1, 1, 1, teachers, students, cleaners);
+
+        MapMan m = new MapMan(1, 0.1f, 0.1f, 0.1f, 0.5f, 0.1f, 0.1f, teachers, students, cleaners);
         map = m.init();
-        
+
         round = 1;
         sQueue.addAll(students);
     }
@@ -62,23 +69,36 @@ public class GameMan {
 
     }
 
+    // Na ez azt csinálja hogy hasheli a roomot és aszerint pakolja a cuccokat.
+    // AZ ELDOBOTT ITEMEKET NEM TUDOM HOGYAN KÉNE
     private void DrawScene(Student s) {
-        float WIDTH = 400;
-        float HEIGHT = 400;
-		Room r = s.getRoom();
-		r.setView(WIDTH, HEIGHT);
+        Room r = s.getRoom();
+        // MAX 10 MIN 5 (EBBŐL 2 FAL)
+        int sizew = (abs(r.hashCode()) % 6) + 5;
+        int sizeh = (abs(sizew * r.hashCode()) % 6) + 5;
+        float WIDTH = sizew * 40.0f;
+        float HEIGHT = sizeh * 40.0f;
+        System.out.println(r.hashCode());
+        System.out.println("width: " + WIDTH + " height: " + HEIGHT);
+        r.setView(WIDTH, HEIGHT);
         for (Item i : r.getItems()) {
-            float w = (i.hashCode()) % 8;
-            float h = (i.hashCode()/2) % 8 ;
-            i.setView(w, h);
+            // VALMIT CSINÁLNI KELL HA SIZEW == SIZEH
+            float w = abs(i.hashCode()) % (sizew - 2);
+            float h = (abs(i.hashCode() * sizew)) % (sizeh - 2);
+            i.setView((w + 1) * 40, (h + 1) * 40);
+            System.out.println(i.getClass().toString() + " " + (w + 1) * 40 + " " + (h + 1) * 40);
         }
         s.setView(40, 40);
         Screen screen = new Screen(WIDTH, HEIGHT);
         screen.Update(s);
 
-        Scene fScene = new Scene(screen, WIDTH, HEIGHT);
+        Scene fScene = new Scene(screen, 400.0f, 400.0f);
         stage = new Stage();
         stage.setScene(fScene);
         stage.show();
-	}
+    }
+
+    private int abs(int num) {
+        return (num < 0) ? -num : num;
+    }
 }

@@ -5,15 +5,19 @@ import skeleton.elveszlelket.gui.ItemView;
 import skeleton.elveszlelket.strategy.IHaveTheRightStrategy;
 
 /**
- * A TVSZ osztály egy védelmi elemet reprezentál, amelyet a diákok használhatnak.
- * Ez az elem egy adott stratégiát használ, amelyet a diákok védelmére alkalmaznak.
+ * A TVSZ osztály egy védelmi elemet reprezentál, amelyet a diákok
+ * használhatnak.
+ * Ez az elem egy adott stratégiát használ, amelyet a diákok védelmére
+ * alkalmaznak.
  */
 public class TVSZ extends ProtectionItem {
 
     private boolean fals;
+
     /**
      * Konstruktor, amely létrehoz egy TVSZ objektumot.
-     * Inicializálja a név és a használatok számát, valamint beállítja a védelmi stratégiát.
+     * Inicializálja a név és a használatok számát, valamint beállítja a védelmi
+     * stratégiát.
      */
     public TVSZ() {
         name = "TVSZ";
@@ -35,13 +39,13 @@ public class TVSZ extends ProtectionItem {
     public void setFalse(boolean fals) {
         this.fals = fals;
     }
-    
+
     public boolean getFalse() {
         return fals;
     }
 
     @Override
     public void setView(float x, float y) {
-    	view = new ItemView(x, y, "textures/tvsz.png");
+        view = new ItemView(x, y, "file:textures/tvsz.png");
     }
 }

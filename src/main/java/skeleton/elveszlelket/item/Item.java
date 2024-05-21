@@ -11,11 +11,11 @@ public abstract class Item {
     protected Room room;
     protected Human human;
     protected ItemView view;
-    
+
     public ItemView getView() {
-    	return view;
+        return view;
     }
-    
+
     public abstract void setView(float x, float y);
 
     public Item() {
@@ -61,6 +61,6 @@ public abstract class Item {
     }
 
     public abstract void setFalse(boolean fals);
-    
+
     public abstract void use(Student student);
 }

@@ -61,7 +61,10 @@ skeleton\elveszlelket\gui\GameView$1.class
 skeleton\elveszlelket\tester\Commands\CONNECTTRANS.class
 skeleton\elveszlelket\gui\ItemPicker.class
 skeleton\elveszlelket\item\Transistor.class
+<<<<<<< HEAD
 skeleton\elveszlelket\Menu.class
+=======
+>>>>>>> 6b9a8da (hát valami alap hashelés)
 skeleton\elveszlelket\strategy\RagStrategy.class
 skeleton\elveszlelket\strategy\GasProtectionStrategy.class
 skeleton\elveszlelket\gui\View.class
@@ -71,5 +74,8 @@ skeleton\elveszlelket\item\Camember.class
 skeleton\elveszlelket\tester\Commands\CHECKLOSE.class
 skeleton\elveszlelket\tester\Commands\PICKUP.class
 skeleton\elveszlelket\strategy\GasStrategy.class
+<<<<<<< HEAD
 skeleton\elveszlelket\Options.class
+=======
+>>>>>>> 6b9a8da (hát valami alap hashelés)
 skeleton\elveszlelket\tester\Commands\MERGE.class

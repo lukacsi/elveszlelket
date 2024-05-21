@@ -59,11 +59,14 @@ public class MapMan {
         // minden szobából egy ajtó egy random szobába
         for (Room room : map) {
             Door d = new TwoWayDoor();
-            connectRandom(room, d);
-
+            if (size > 1) {
+                connectRandom(room, d);
+            }
             // extra szobák súly szerint
             while (door > r.nextFloat()) {
-                connectRandom(room, randomDoorType());
+                if (size > 1) {
+                    connectRandom(room, randomDoorType());
+                }
             }
         }
 

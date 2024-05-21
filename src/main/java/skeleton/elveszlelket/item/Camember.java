@@ -35,11 +35,11 @@ public class Camember extends Item {
 
     @Override
     public void setFalse(boolean fals) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setFalse'");
+        return;
     }
+
     @Override
     public void setView(float x, float y) {
-    	view = new ItemView(x, y, "textures/camembert.png");
+        view = new ItemView(x, y, "file:textures/camembert.png");
     }
 }
