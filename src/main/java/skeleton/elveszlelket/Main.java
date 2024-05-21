@@ -86,9 +86,18 @@ public class Main extends Application {
 		primaryStage.setScene(foscene);
 		primaryStage.show(); */
 		
+		//screen.Update(s);
+		//screen.updateBecauseItemsHaveBeenManuallyAddedToStudent();
 
-		Menu menu = new Menu();
-		menu.start(primaryStage);
+		Screen screen = new Screen(primaryStage, WIDTH, HEIGHT);
+		Scene foscene = new Scene(screen, WIDTH, HEIGHT);
+		foscene.setOnKeyPressed(e -> {
+			screen.keyPressed(e);
+		});
+		screen.setParentScene(foscene);
+		primaryStage = new Stage();
+		primaryStage.setScene(foscene);
+		primaryStage.show();
 	}
 
 }

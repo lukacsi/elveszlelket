@@ -27,6 +27,11 @@ public class GameMan {
     public int round;
     private Stage stage;
     private Random rand;
+    private Student jelenlegiJatekos;
+    
+    public Student getCurrentPlayer() {
+    	return this.jelenlegiJatekos;
+    }
 
     public GameMan(Settings settings, Stage stage) {
         this.students = new ArrayList<>();
@@ -147,13 +152,7 @@ public class GameMan {
         }
 
         s.setView(40, 40);
-        Screen screen = new Screen(WIDTH, HEIGHT);
-        screen.Update(s);
-
-        Scene fScene = new Scene(screen, WIDTH, HEIGHT);
-        stage = new Stage();
-        stage.setScene(fScene);
-        stage.show();
+        this.jelenlegiJatekos = s;
     }
 
     private int abs(int num) {
