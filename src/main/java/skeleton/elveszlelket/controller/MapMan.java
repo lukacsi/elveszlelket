@@ -40,15 +40,15 @@ public class MapMan {
     /**
      * Létrehoz egy új MapMan példányt a megadott paraméterekkel.
      *
-     * @param size A pálya mérete.
-     * @param curse Az átok valószínűsége.
-     * @param gas A gáz valószínűsége.
-     * @param fals A hamis tárgyak valószínűsége.
-     * @param item A tárgyak keletkézésének valószínűsége.
-     * @param door Az ajtók keletkézésének valószínűsége.
-     * @param oneway Az egyirányú ajtók keletkézésének valószínűsége.
-     * @param teachers A tanárok listája.
-     * @param students A diákok listája.
+     * @param size           A pálya mérete.
+     * @param curse          Az átok valószínűsége.
+     * @param gas            A gáz valószínűsége.
+     * @param fals           A hamis tárgyak valószínűsége.
+     * @param item           A tárgyak keletkézésének valószínűsége.
+     * @param door           Az ajtók keletkézésének valószínűsége.
+     * @param oneway         Az egyirányú ajtók keletkézésének valószínűsége.
+     * @param teachers       A tanárok listája.
+     * @param students       A diákok listája.
      * @param cleaningLadies A takarítónők listája.
      */
     public MapMan(int size, float curse, float gas, float fals, float item, float door, float oneway,
@@ -68,7 +68,8 @@ public class MapMan {
     }
 
     /**
-     * Inicializálja a pályát, létrehozza a szobákat, ajtókat és elhelyezi a tárgyakat.
+     * Inicializálja a pályát, létrehozza a szobákat, ajtókat és elhelyezi a
+     * tárgyakat.
      *
      * @return A létrehozott szobák listája.
      */
@@ -101,6 +102,7 @@ public class MapMan {
             // extra szobák súly szerint
             while (door > r.nextFloat()) {
                 if (size > 1) {
+                    System.out.println("EXTRA SZOBA HOZZÁADÁS");
                     connectRandom(room, randomDoorType());
                     if (room.getDoors().size() >= 12)
                         break;
@@ -112,9 +114,11 @@ public class MapMan {
         Room startingRoom = map.get(0);
         for (Room room : map) {
             while (distance(startingRoom, room) < 0) {
+                System.out.println("EXTRA BEJÁRHATÓSÁGI SZOBA HOZZÁADÁS");
                 connectRandom(room, randomDoorType());
                 if (room.getDoors().size() >= 12) {
                     map = new ArrayList<>();
+                    System.out.println("PÁLYAGENERÁLÁS ELDOBVA!");
                     map = init();
                     return map;
                 }
@@ -128,6 +132,7 @@ public class MapMan {
             if (dist > maxdist)
                 maxdist = dist;
             while (item > r.nextFloat()) {
+                System.out.println("EXTRA ITEM HOZZÁADÁS");
                 Item item = getRandomItem();
                 if (fals > r.nextFloat())
                     item.setFalse(true);
@@ -151,8 +156,9 @@ public class MapMan {
         for (Teacher teacher : teachers) {
             boolean added = false;
             while (!added) {
+                System.out.println("TEACHER HOZZÁADÁS");
                 Room rand = (size == 1) ? map.get(0) : getRandomRoom();
-                if (distance(startingRoom, rand) > maxdist / 2) {
+                if (distance(startingRoom, rand) >= (maxdist - 1)) {
                     rand.addHuman(teacher);
                     teacher.setCurrentRoom(rand);
                     added = true;
@@ -164,8 +170,9 @@ public class MapMan {
         for (CleaningLady cleaningLady : cleaningLadies) {
             boolean added = false;
             while (!added) {
+                System.out.println("CLEANER HOZZÁADÁS");
                 Room rand = (size == 1) ? map.get(0) : getRandomRoom();
-                if (distance(startingRoom, rand) > maxdist / 2) {
+                if (distance(startingRoom, rand) >= (maxdist - 2)) {
                     rand.addHuman(cleaningLady);
                     cleaningLady.setCurrentRoom(rand);
                     added = true;
@@ -217,9 +224,10 @@ public class MapMan {
      * Kiszámítja a megadott két szoba közötti távolságot BFS algoritmussal.
      *
      * @param start A kiindulási szoba.
-     * @param end A cél szoba.
-     * @return A két szoba közötti távolság. Ha a két szoba közötti távolság 0, akkor ugyan azt a szobát adtunk kiindulási és cél szobának.
-     * Ha viszont nincs út, akkor -1-et ad vissza.
+     * @param end   A cél szoba.
+     * @return A két szoba közötti távolság. Ha a két szoba közötti távolság 0,
+     *         akkor ugyan azt a szobát adtunk kiindulási és cél szobának.
+     *         Ha viszont nincs út, akkor -1-et ad vissza.
      */
     private int distance(Room start, Room end) {
         if (start.equals(end)) {
@@ -276,8 +284,9 @@ public class MapMan {
      */
     private void connectRandom(Room room, Door door) {
         int randindx = r.nextInt(size - 1);
-        while (room == map.get(randindx))
+        while (room == map.get(randindx)) {
             randindx = r.nextInt(size - 1);
+        }
         Room room2 = map.get(randindx);
         door.setRooms(room, room2);
         room.addDoor(door);
@@ -285,7 +294,8 @@ public class MapMan {
     }
 
     /**
-     * Véletlenszerűen kiválaszt egy ajtótípust a megadott valószínűségekkel (egyirányú szoba sorsolás súllyal).
+     * Véletlenszerűen kiválaszt egy ajtótípust a megadott valószínűségekkel
+     * (egyirányú szoba sorsolás súllyal).
      *
      * @return Egy véletlenszerűen kiválasztott ajtótípus.
      */

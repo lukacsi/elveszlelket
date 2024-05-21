@@ -4,8 +4,10 @@ import javafx.scene.control.Button;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import skeleton.elveszlelket.CleaningLady;
 import skeleton.elveszlelket.Room;
 import skeleton.elveszlelket.Student;
+import skeleton.elveszlelket.Teacher;
 import skeleton.elveszlelket.door.Door;
 import skeleton.elveszlelket.item.Item;
 
@@ -15,37 +17,38 @@ public class GameView extends Pane {
 	private ItemMenu itemMenu;
 	private Student jelenlegiJatekos;
 	private ItemPicker pickupMenu;
-	
+
 	/**
 	 * Nyitja, illetve zárja a leltárat.
 	 */
 	public void translateItemMenu() {
 		itemMenu.translate();
 	}
-	
+
 	/**
 	 * Nyitja, illetve zárja felvehető tárgyak listáját.
 	 */
 	public void translatePickUpMenu() {
 		this.pickupMenu.translate();
 	}
-	
+
 	/**
 	 * Bezárja a felvehető tárgyak menüjét.
 	 */
 	public void closePickUpMenu() {
 		this.pickupMenu.Close();
 	}
-	
+
 	/**
 	 * Bezárja a játékos leltárát.
 	 */
 	public void closeItemMenu() {
 		this.itemMenu.Close();
 	}
-	
+
 	/**
 	 * A játéknézet konstruktora.
+	 * 
 	 * @param w A nézet szélessége.
 	 * @param h A nézet magassága.
 	 */
@@ -88,7 +91,7 @@ public class GameView extends Pane {
 		 * });
 		 */
 	}
-	
+
 	/**
 	 * Frissíti az összes tárgy pozícióját.
 	 */
@@ -97,9 +100,10 @@ public class GameView extends Pane {
 			i.getView().setPos(this.jelenlegiJatekos.getView().getX(), this.jelenlegiJatekos.getView().getY());
 		}
 	}
-	
+
 	/**
 	 * Frissíti az adott tárgy pozícióját.
+	 * 
 	 * @param i Az adott tárgy.
 	 */
 	public void updateItemPos(Item i) {
@@ -155,7 +159,7 @@ public class GameView extends Pane {
 			updateItemsPos();
 		}
 	}
-	
+
 	/**
 	 * Lefele mozgatja a jelenleg aktív játékost.
 	 */
@@ -171,9 +175,10 @@ public class GameView extends Pane {
 			updateItemsPos();
 		}
 	}
-	
+
 	/**
 	 * Frissíti az adott játékos megjelenítését.
+	 * 
 	 * @param jelenlegiJatekos Az adott játékos.
 	 */
 	public void Update(Student jelenlegiJatekos) {
@@ -207,6 +212,20 @@ public class GameView extends Pane {
 				v.Draw(this);
 			}
 
+			for (CleaningLady cl : jelenlegiJatekos.getRoom().getCleaningLadies()) {
+				View v = cl.getView();
+				v.setPos(rv.xToTileX(v.getX()), rv.yToTileY(v.getY()));
+				v.normalizeTexture(rv.getTileWidth(), rv.getTileHeight());
+				v.Draw(this);
+			}
+
+			for (Teacher tc : jelenlegiJatekos.getRoom().getTeacher()) {
+				View v = tc.getView();
+				v.setPos(rv.xToTileX(v.getX()), rv.yToTileY(v.getY()));
+				v.normalizeTexture(rv.getTileWidth(), rv.getTileHeight());
+				v.Draw(this);
+			}
+
 			// Ajto Rajz
 			for (Door d : jelenlegiJatekos.getRoom().getDoors()) {
 				DoorView dv = d.getView();
@@ -218,9 +237,10 @@ public class GameView extends Pane {
 			System.out.println("GameView nem kapott jelenlegi jatekost.");
 		}
 	}
-	
+
 	/**
 	 * Visszaadja a jelenleg aktív játékost.
+	 * 
 	 * @return A jelenleg aktív játékos.
 	 */
 	public Student getCurrentPlayer() {
