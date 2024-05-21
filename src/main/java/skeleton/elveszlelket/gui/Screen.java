@@ -28,7 +28,16 @@ public class Screen extends Pane {
 		this.parent = parent;
 		this.getChildren().add(menu);
 		//this.getChildren().add(palyamegjelenito);
-		
+	}
+	
+	public void setParentScene(Scene mire) {
+		this.parentScene = mire;
+	}
+	
+	public void startGame(Settings settings) {
+        GameMan gm = new GameMan(settings, new Stage());
+        gm.playRound();
+        
 		this.setOnKeyPressed(e -> {
 			switch(e.getCode()) {
 				case I:
@@ -58,15 +67,6 @@ public class Screen extends Pane {
 				}
 			e.consume();
 		});
-	}
-	
-	public void setParentScene(Scene mire) {
-		this.parentScene = mire;
-	}
-	
-	public void startGame(Settings settings) {
-        GameMan gm = new GameMan(settings, new Stage());
-        gm.playRound();
         
         showCurrentRound(gm.getCurrentPlayer());
 	}

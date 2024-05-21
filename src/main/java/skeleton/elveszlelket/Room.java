@@ -2,6 +2,7 @@ package skeleton.elveszlelket;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import skeleton.elveszlelket.door.Door;
 import skeleton.elveszlelket.door.TwoWayDoor;
@@ -143,6 +144,19 @@ public class Room {
             uj.setCursed(true);
         if (hasGas || r1.containsGas())
             uj.setGas(true);
+        
+        for(Door d : doors) {
+        	if(!d.getDest(r1).equals(r1)) {
+        		d.setRooms(uj, d.getDest(r1));
+        		uj.addDoor(d);
+        	}
+        }
+        for(Door d : r1.getDoors()) {
+        	if(!d.getDest(r1).equals(this)) {
+        		d.setRooms(uj, d.getDest(r1));
+        		uj.addDoor(d);
+        	}
+        }
     }
 
     public boolean hasGas() {

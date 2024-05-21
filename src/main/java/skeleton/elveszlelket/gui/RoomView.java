@@ -72,6 +72,14 @@ public class RoomView extends View {
 	public float getTileHeight() {
 		return this.egysegNegyzetHeight;
 	}
+	
+	public int howManyTilesInWidth() {
+		return (int) (x / this.egysegNegyzetWidth);
+	}
+	
+	public int howManyTilesInHeight() {
+		return (int) (y / this.egysegNegyzetHeight);
+	}
 
 	@Override
 	public void normalizeTexture(float tileX, float tileY) {
