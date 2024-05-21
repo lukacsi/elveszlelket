@@ -1,10 +1,11 @@
 package skeleton.elveszlelket.item;
 
 import skeleton.elveszlelket.Student;
+import skeleton.elveszlelket.gui.ItemView;
 import skeleton.elveszlelket.strategy.NeutralizeGasStrategy;
 
 public class AirFreshener extends ProtectionItem {
-    
+
     /**
      * Az AirFreshener konstruktora.
      * Beállítja a nevét "Air Freshener"-re,
@@ -29,7 +30,11 @@ public class AirFreshener extends ProtectionItem {
 
     @Override
     public void setFalse(boolean fals) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setFalse'");
+        return;
+    }
+
+    @Override
+    public void setView(float x, float y) {
+        view = new ItemView(x, y, "file:textures/airfreshener.png");
     }
 }

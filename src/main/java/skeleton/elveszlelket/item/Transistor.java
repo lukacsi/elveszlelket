@@ -2,11 +2,14 @@ package skeleton.elveszlelket.item;
 
 import skeleton.elveszlelket.Room;
 import skeleton.elveszlelket.Student;
+import skeleton.elveszlelket.gui.ItemView;
 import skeleton.elveszlelket.strategy.TeleportStrategy;
 
 /**
- * Ez az osztály egy tranzisztor reprezentációja, amely képes párosítani egy másik tranzisztort.
- * A tranzisztor használata lehetővé teszi a diákok teleportálását a párosított tranzisztor helyére.
+ * Ez az osztály egy tranzisztor reprezentációja, amely képes párosítani egy
+ * másik tranzisztort.
+ * A tranzisztor használata lehetővé teszi a diákok teleportálását a párosított
+ * tranzisztor helyére.
  */
 public class Transistor extends Item {
     private Transistor pair;
@@ -14,7 +17,8 @@ public class Transistor extends Item {
 
     /**
      * Konstruktor, amely létrehoz egy új Transistor példányt.
-     * Az alapértelmezett név 'Transistor' és a használati stratégia a teleportálási stratégia.
+     * Az alapértelmezett név 'Transistor' és a használati stratégia a teleportálási
+     * stratégia.
      */
     public Transistor() {
         name = "Transistor";
@@ -23,7 +27,8 @@ public class Transistor extends Item {
 
     /**
      * Használja a tranzisztort a megadott diákon.
-     * A tranzisztor használatakor a diák a párosított tranzisztor helyére teleportálódik.
+     * A tranzisztor használatakor a diák a párosított tranzisztor helyére
+     * teleportálódik.
      * 
      * @param student A diák, aki a tranzisztort használja.
      */
@@ -72,26 +77,30 @@ public class Transistor extends Item {
     }
 
     // /**
-    //  * Beállítja a tranzisztor helyét.
-    //  * 
-    //  * @param room A szoba, ahol a tranzisztor elhelyezkedik.
-    //  */
+    // * Beállítja a tranzisztor helyét.
+    // *
+    // * @param room A szoba, ahol a tranzisztor elhelyezkedik.
+    // */
     // public void setLocation(Room room) {
-    //     location = room;
+    // location = room;
     // }
 
     // /**
-    //  * Visszaadja a tranzisztor helyét.
-    //  * 
-    //  * @return Room A szoba, ahol a tranzisztor elhelyezkedik.
-    //  */
+    // * Visszaadja a tranzisztor helyét.
+    // *
+    // * @return Room A szoba, ahol a tranzisztor elhelyezkedik.
+    // */
     // public Room getLocation() {
-    //     return location;
+    // return location;
     // }
 
     @Override
     public void setFalse(boolean fals) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setFalse'");
+        return;
+    }
+
+    @Override
+    public void setView(float x, float y) {
+        view = new ItemView(x, y, "file:textures/transistor.png");
     }
 }

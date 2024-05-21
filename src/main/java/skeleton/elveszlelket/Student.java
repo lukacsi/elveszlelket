@@ -17,7 +17,7 @@ import skeleton.elveszlelket.gui.HumanView;
  * amelyek befolyásolják az interakcióit a környezettel.
  */
 public class Student implements Human {
-	private HumanView view;
+    private HumanView view;
     private int stunDuration;
     private int immunityDuration;
     private boolean doorBlocked;
@@ -28,9 +28,9 @@ public class Student implements Human {
     private Door lastDoor;
     private List<Item> items;
     private Room currentRoom;
-    
+
     public HumanView getView() {
-    	return view;
+        return view;
     }
 
     public boolean isDead() {
@@ -73,11 +73,12 @@ public class Student implements Human {
      * Inicializálja a diákot az alapértelmezett állapotokkal és egy üres
      * tárgylistával.
      */
-    
-    public void setView(float x, float y, String path) {
-    	view = new HumanView(x,y, path);
+
+    public void setView(float x, float y) {
+        String resourcePath = "file:textures/student.png";
+        view = new HumanView(x, y, resourcePath);
     }
-    
+
     public Student() {
         items = new ArrayList<>();
         stunDuration = 0;
@@ -99,7 +100,7 @@ public class Student implements Human {
      */
     @Override
     public boolean use(OneWayDoor door) {
-        if(stunDuration > 0) {
+        if (stunDuration > 0) {
             return false;
         }
         Room currentRoom = getRoom();
@@ -131,7 +132,7 @@ public class Student implements Human {
      */
     @Override
     public boolean use(TwoWayDoor door) {
-        if(stunDuration > 0) {
+        if (stunDuration > 0) {
             return false;
         }
         Room currentRoom = getRoom();
@@ -163,7 +164,7 @@ public class Student implements Human {
      */
     @Override
     public boolean pickupItem(Item item) {
-        if(stunDuration > 0) {
+        if (stunDuration > 0) {
             return false;
         }
         if (item.getRoom() != null) {
@@ -196,7 +197,7 @@ public class Student implements Human {
      */
     @Override
     public boolean dropItem(Item item) {
-        if(stunDuration > 0) {
+        if (stunDuration > 0) {
             return false;
         }
         if (items.contains(item)) {
@@ -207,14 +208,14 @@ public class Student implements Human {
         }
         return false;
     }
-    
+
     public void dropRandomItem() {
         // Meghatározzuk, hány tárgy van a hallgatónál
         int numItems = items.size();
         if (numItems > 0) {
-            //int index = Main.t.r.nextInt(numItems);
-        	Random r = new Random();
-        	int index = r.nextInt(numItems);
+            // int index = Main.t.r.nextInt(numItems);
+            Random r = new Random();
+            int index = r.nextInt(numItems);
 
             // Tárgy eltávolítása a hallgatótól és eldobása a szobába
             Item itemToDrop = items.get(index);
@@ -235,7 +236,7 @@ public class Student implements Human {
      * @return Igaz, ha a tárgy használata sikeres volt.
      */
     public boolean useItem(Item item) {
-        if(stunDuration > 0) {
+        if (stunDuration > 0) {
             return false;
         }
         item.use(this);
@@ -248,7 +249,7 @@ public class Student implements Human {
      * @param item Az eltávolítandó tárgy.
      */
     public void removeItem(Item item) {
-        //Main.t.removeItem(item);
+        // Main.t.removeItem(item);
         items.remove(item);
     }
 
@@ -261,7 +262,7 @@ public class Student implements Human {
      * @return Igaz, ha a párosítás sikeres volt, egyébként hamis.
      */
     public boolean pairTransistor(Transistor t1, Transistor t2) {
-        if(stunDuration > 0) {
+        if (stunDuration > 0) {
             return false;
         }
         t1.addPair(t2);
@@ -299,7 +300,7 @@ public class Student implements Human {
     public void stun(int duration) {
         System.out.println("Hallgato elkabitva.");
         if (gasProtectionDuration == 0) {
-            while(!items.isEmpty()) {
+            while (!items.isEmpty()) {
                 Item i = items.get(0);
                 dropItem(i);
             }
@@ -420,10 +421,10 @@ public class Student implements Human {
      * jelezhetjük.
      */
     public void iHaveArrived() {
-        if(currentRoom.containsGas()) {
+        if (currentRoom.containsGas()) {
             stun(3);
         }
-        if(currentRoom.getTeacher().size() > 0) {
+        if (currentRoom.getTeacher().size() > 0) {
             currentRoom.killStudents();
         }
     }

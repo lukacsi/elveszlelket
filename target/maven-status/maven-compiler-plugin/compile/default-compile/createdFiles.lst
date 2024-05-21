@@ -9,6 +9,8 @@ skeleton\elveszlelket\tester\Tester.class
 skeleton\elveszlelket\Human.class
 skeleton\elveszlelket\CleaningLady.class
 skeleton\elveszlelket\tester\Commands\CONNECTROOM.class
+skeleton\elveszlelket\gui\Screen.class
+skeleton\elveszlelket\gui\ItemMenu.class
 skeleton\elveszlelket\tester\Commands\DROP.class
 skeleton\elveszlelket\tester\Commands\TOGGLERANDOM.class
 skeleton\elveszlelket\strategy\WinStrategy.class
@@ -21,11 +23,14 @@ skeleton\elveszlelket\door\OneWayDoor.class
 skeleton\elveszlelket\gui\GameView.class
 skeleton\elveszlelket\item\Item.class
 skeleton\elveszlelket\tester\Commands\CLEAR.class
+skeleton\elveszlelket\controller\TurnMan.class
 skeleton\elveszlelket\tester\Commands\MOVE.class
 skeleton\elveszlelket\item\AirFreshener.class
+skeleton\elveszlelket\controller\MapMan.class
 skeleton\elveszlelket\item\Logar.class
 skeleton\elveszlelket\tester\Commands\MAKE.class
 skeleton\elveszlelket\tester\Tests\SETUP.class
+skeleton\elveszlelket\controller\NpcMan.class
 skeleton\elveszlelket\item\TVSZ.class
 skeleton\elveszlelket\strategy\ItemUseStrategy.class
 skeleton\elveszlelket\door\TwoWayDoor.class
@@ -38,6 +43,7 @@ skeleton\elveszlelket\door\Door.class
 skeleton\elveszlelket\Teacher.class
 skeleton\elveszlelket\tester\Commands\TOGGLECURSE.class
 skeleton\elveszlelket\tester\Commands\USEITEM.class
+skeleton\elveszlelket\controller\GameMan.class
 skeleton\elveszlelket\item\Beer.class
 skeleton\elveszlelket\Student.class
 skeleton\elveszlelket\item\ProtectionItem.class
@@ -51,8 +57,14 @@ skeleton\elveszlelket\tester\Commands\ADDTOHUMAN.class
 skeleton\elveszlelket\tester\Tests\T_CONNECTION.class
 skeleton\elveszlelket\tester\TRandom.class
 skeleton\elveszlelket\tester\Commands\ADDITOROOM.class
+skeleton\elveszlelket\gui\GameView$1.class
 skeleton\elveszlelket\tester\Commands\CONNECTTRANS.class
+skeleton\elveszlelket\gui\ItemPicker.class
 skeleton\elveszlelket\item\Transistor.class
+<<<<<<< HEAD
+skeleton\elveszlelket\Menu.class
+=======
+>>>>>>> 6b9a8da (hát valami alap hashelés)
 skeleton\elveszlelket\strategy\RagStrategy.class
 skeleton\elveszlelket\strategy\GasProtectionStrategy.class
 skeleton\elveszlelket\gui\View.class
@@ -62,4 +74,8 @@ skeleton\elveszlelket\item\Camember.class
 skeleton\elveszlelket\tester\Commands\CHECKLOSE.class
 skeleton\elveszlelket\tester\Commands\PICKUP.class
 skeleton\elveszlelket\strategy\GasStrategy.class
+<<<<<<< HEAD
+skeleton\elveszlelket\Options.class
+=======
+>>>>>>> 6b9a8da (hát valami alap hashelés)
 skeleton\elveszlelket\tester\Commands\MERGE.class

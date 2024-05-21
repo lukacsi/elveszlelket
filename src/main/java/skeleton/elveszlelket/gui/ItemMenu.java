@@ -37,7 +37,7 @@ public class ItemMenu extends HBox {
 		Student current = parent.getCurrentPlayer();
 		if(current != null) {
 			this.getChildren().clear();
-			
+			ItemMenu onmaga = this;
 			for(Item i : current.getItems()) {
 				VBox kozepV = new VBox();
 				HBox kozepH = new HBox();
@@ -49,10 +49,17 @@ public class ItemMenu extends HBox {
 				i.getView().normalizeTexture(WIDTH/5-padding*2, HEIGHT-padding*2);
 				b.setGraphic(i.getView().getTexture());
 				b.setOnMouseClicked(e -> {
-					
-					i.use(current);
-					parent.Update(current);
-					e.consume();
+					if(e.getButton().equals(MouseButton.PRIMARY)) {
+						i.use(current);
+						parent.Update(current);
+						onmaga.refresh();
+						e.consume();
+					} else if(e.getButton().equals(MouseButton.SECONDARY)) {
+						current.dropItem(i);
+						parent.Update(current);
+						onmaga.refresh();
+						e.consume();
+					}
 				});
 				kozepV.setAlignment(Pos.CENTER);
 				kozepH.setAlignment(Pos.CENTER);

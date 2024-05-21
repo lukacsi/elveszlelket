@@ -10,15 +10,13 @@ public abstract class Item {
     protected ItemUseStrategy strategy;
     protected Room room;
     protected Human human;
-    private ItemView view;
-    
+    protected ItemView view;
+
     public ItemView getView() {
-    	return view;
+        return view;
     }
-    
-    public void setView(float x, float y, String texturePath) {
-    	view = new ItemView(x,y,texturePath);
-    }
+
+    public abstract void setView(float x, float y);
 
     public Item() {
         room = null;
@@ -63,6 +61,6 @@ public abstract class Item {
     }
 
     public abstract void setFalse(boolean fals);
-    
+
     public abstract void use(Student student);
 }

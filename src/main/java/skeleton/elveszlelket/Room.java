@@ -10,7 +10,6 @@ import skeleton.elveszlelket.gui.RoomView;
 import skeleton.elveszlelket.item.Item;
 
 public class Room {
-
     private List<Teacher> teachers;
     private List<Student> students;
     private List<CleaningLady> cleaners;
