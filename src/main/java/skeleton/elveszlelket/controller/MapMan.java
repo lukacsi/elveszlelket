@@ -50,6 +50,20 @@ public class MapMan {
     }
 
     public List<Room> init() {
+        if (size < 5)
+            size = 5;
+        if(curse < 0 && curse >=1)
+            curse = 0.1f;
+        if(gas < 0 && gas >=1)
+            gas = 0.1f;
+        if(fals < 0 && fals >=1)
+            fals = 0.1f;
+        if(item < 0 && item >=1)
+            item = 0.5f;
+        if(door < 0 && door >=1)
+            door = 0.1f;
+        if(oneway < 0 && oneway >=1)
+            oneway = 0.1f;
         map = new ArrayList<>();
         // Annyi szoba amekkora a size
         for (int i = 0; i < size; i++) {
@@ -107,8 +121,8 @@ public class MapMan {
         // Add teachers
         for (Teacher teacher : teachers) {
             boolean added = false;
-            while (added) {
-                Room rand = getRandomRoom();
+            while (!added) {
+                Room rand = (size == 1) ? map.get(0) : getRandomRoom();
                 if (distance(startingRoom, rand) > maxdist / 2) {
                     rand.addHuman(teacher);
                     teacher.setCurrentRoom(rand);
@@ -120,8 +134,8 @@ public class MapMan {
         // Add cleaners
         for (CleaningLady cleaningLady : cleaningLadies) {
             boolean added = false;
-            while (added) {
-                Room rand = getRandomRoom();
+            while (!added) {
+                Room rand = (size == 1) ? map.get(0) : getRandomRoom();
                 if (distance(startingRoom, rand) > maxdist / 2) {
                     rand.addHuman(cleaningLady);
                     cleaningLady.setCurrentRoom(rand);
