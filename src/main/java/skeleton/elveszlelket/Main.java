@@ -96,6 +96,7 @@ public class Main extends Application {
 		});
 		screen.setParentScene(foscene);
 		primaryStage = new Stage();
+		primaryStage.setResizable(false);
 		primaryStage.setScene(foscene);
 		primaryStage.show();
 	}
