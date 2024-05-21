@@ -24,6 +24,10 @@ import skeleton.elveszlelket.item.Rag;
 import skeleton.elveszlelket.item.TVSZ;
 import skeleton.elveszlelket.item.Transistor;
 
+/**
+ * A MapMan osztály felelős a játék pálya létrehozásáért és inicializálásáért,
+ * valamint a szobák és ajtók közötti kapcsolatok létrehozásáért.
+ */
 public class MapMan {
     private int size;
     private float curse, gas, fals, item, door, oneway;
@@ -33,6 +37,20 @@ public class MapMan {
     private List<Room> map;
     private Random r;
 
+    /**
+     * Létrehoz egy új MapMan példányt a megadott paraméterekkel.
+     *
+     * @param size A pálya mérete.
+     * @param curse Az átok valószínűsége.
+     * @param gas A gáz valószínűsége.
+     * @param fals A hamis tárgyak valószínűsége.
+     * @param item A tárgyak keletkézésének valószínűsége.
+     * @param door Az ajtók keletkézésének valószínűsége.
+     * @param oneway Az egyirányú ajtók keletkézésének valószínűsége.
+     * @param teachers A tanárok listája.
+     * @param students A diákok listája.
+     * @param cleaningLadies A takarítónők listája.
+     */
     public MapMan(int size, float curse, float gas, float fals, float item, float door, float oneway,
             List<Teacher> teachers, List<Student> students, List<CleaningLady> cleaningLadies) {
         this.teachers = teachers;
@@ -49,6 +67,11 @@ public class MapMan {
         map = new ArrayList<>();
     }
 
+    /**
+     * Inicializálja a pályát, létrehozza a szobákat, ajtókat és elhelyezi a tárgyakat.
+     *
+     * @return A létrehozott szobák listája.
+     */
     public List<Room> init() {
         if (size < 5)
             size = 5;
@@ -160,6 +183,11 @@ public class MapMan {
         return map;
     }
 
+    /**
+     * Véletlenszerűen kiválaszt egy tárgyat a megadott valószínűségekkel.
+     *
+     * @return Egy véletlenszerűen kiválasztott tárgy.
+     */
     private Item getRandomItem() {
         Item item;
         float rand = r.nextFloat();
@@ -185,6 +213,14 @@ public class MapMan {
         return item;
     }
 
+    /**
+     * Kiszámítja a megadott két szoba közötti távolságot BFS algoritmussal.
+     *
+     * @param start A kiindulási szoba.
+     * @param end A cél szoba.
+     * @return A két szoba közötti távolság. Ha a két szoba közötti távolság 0, akkor ugyan azt a szobát adtunk kiindulási és cél szobának.
+     * Ha viszont nincs út, akkor -1-et ad vissza.
+     */
     private int distance(Room start, Room end) {
         if (start.equals(end)) {
             return 0; // ugyan az a szoba
@@ -223,10 +259,21 @@ public class MapMan {
         return -1; // No path found
     }
 
+    /**
+     * Véletlenszerűen kiválaszt egy szobát.
+     *
+     * @return Egy véletlenszerűen kiválasztott szoba.
+     */
     private Room getRandomRoom() {
         return map.get(r.nextInt(size - 1));
     }
 
+    /**
+     * Véletlenszerűen kapcsol egy szobát egy másik szobához egy ajtóval.
+     *
+     * @param room Az egyik szoba.
+     * @param door Az ajtó, amellyel a kapcsolatot létrehozzuk.
+     */
     private void connectRandom(Room room, Door door) {
         int randindx = r.nextInt(size - 1);
         while (room == map.get(randindx))
@@ -237,6 +284,11 @@ public class MapMan {
         room2.addDoor(door);
     }
 
+    /**
+     * Véletlenszerűen kiválaszt egy ajtótípust a megadott valószínűségekkel (egyirányú szoba sorsolás súllyal).
+     *
+     * @return Egy véletlenszerűen kiválasztott ajtótípus.
+     */
     // egyirányú szoba sorsolás súllyal
     private Door randomDoorType() {
         Door d;
