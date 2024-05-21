@@ -1,5 +1,5 @@
-
 package skeleton.elveszlelket;
+
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -9,10 +9,11 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+import skeleton.elveszlelket.controller.Settings;
 
 public class Options {
 
-    public static void display() {
+    public static void display(Settings settings) {
         Stage window = new Stage();
         window.setTitle("Options");
 
@@ -33,79 +34,79 @@ public class Options {
         // Settings Labels and TextFields
         Label playersLabel = new Label("players");
         GridPane.setConstraints(playersLabel, 0, 1);
-        TextField playersField = new TextField();
+        TextField playersField = new TextField(String.valueOf(settings.studentNum));
         playersField.setPrefWidth(80);
         GridPane.setConstraints(playersField, 1, 1);
 
         Label teachersLabel = new Label("teachers");
         GridPane.setConstraints(teachersLabel, 0, 2);
-        TextField teachersField = new TextField();
+        TextField teachersField = new TextField(String.valueOf(settings.teacherNum));
         teachersField.setPrefWidth(80);
         GridPane.setConstraints(teachersField, 1, 2);
 
         Label cleanersLabel = new Label("cleaners");
         GridPane.setConstraints(cleanersLabel, 0, 3);
-        TextField cleanersField = new TextField();
+        TextField cleanersField = new TextField(String.valueOf(settings.cleanerNum));
         cleanersField.setPrefWidth(80);
         GridPane.setConstraints(cleanersField, 1, 3);
 
         Label mapSizeLabel = new Label("map size");
         GridPane.setConstraints(mapSizeLabel, 0, 4);
-        TextField mapSizeField = new TextField();
+        TextField mapSizeField = new TextField(String.valueOf(settings.size));
         mapSizeField.setPrefWidth(80);
         GridPane.setConstraints(mapSizeField, 1, 4);
 
         // Random Weights Labels and TextFields
         Label curseLabel = new Label("curse");
         GridPane.setConstraints(curseLabel, 0, 6);
-        TextField curseField = new TextField();
+        TextField curseField = new TextField(String.valueOf(settings.curse));
         curseField.setPrefWidth(80);
         GridPane.setConstraints(curseField, 1, 6);
 
         Label gasLabel = new Label("gas");
         GridPane.setConstraints(gasLabel, 2, 6);
-        TextField gasField = new TextField();
+        TextField gasField = new TextField(String.valueOf(settings.gas));
         gasField.setPrefWidth(80);
         GridPane.setConstraints(gasField, 3, 6);
 
         Label itemLabel = new Label("item");
         GridPane.setConstraints(itemLabel, 0, 7);
-        TextField itemField = new TextField();
+        TextField itemField = new TextField(String.valueOf(settings.item));
         itemField.setPrefWidth(80);
         GridPane.setConstraints(itemField, 1, 7);
 
         Label falseItemsLabel = new Label("false items");
         GridPane.setConstraints(falseItemsLabel, 2, 7);
-        TextField falseItemsField = new TextField();
+        TextField falseItemsField = new TextField(String.valueOf(settings.fals));
         falseItemsField.setPrefWidth(80);
         GridPane.setConstraints(falseItemsField, 3, 7);
 
         Label doorLabel = new Label("door");
         GridPane.setConstraints(doorLabel, 0, 8);
-        TextField doorField = new TextField();
+        TextField doorField = new TextField(String.valueOf(settings.door));
         doorField.setPrefWidth(80);
         GridPane.setConstraints(doorField, 1, 8);
 
         Label oneWayLabel = new Label("one way");
         GridPane.setConstraints(oneWayLabel, 2, 8);
-        TextField oneWayField = new TextField();
+        TextField oneWayField = new TextField(String.valueOf(settings.oneway));
         oneWayField.setPrefWidth(80);
         GridPane.setConstraints(oneWayField, 3, 8);
 
         // Back button
         Button backButton = new Button("BACK");
         backButton.setOnAction(e -> {
-            // Get values from text fields
-            String players = playersField.getText();
-            String teachers = teachersField.getText();
-            String cleaners = cleanersField.getText();
-            String mapSize = mapSizeField.getText();
-            String curse = curseField.getText();
-            String item = itemField.getText();
-            String door = doorField.getText();
-            String gas = gasField.getText();
-            String falseItems = falseItemsField.getText();
-            String oneWay = oneWayField.getText();
+            // Get values from text fields and update settings
+            settings.studentNum = Integer.parseInt(playersField.getText());
+            settings.teacherNum = Integer.parseInt(teachersField.getText());
+            settings.cleanerNum = Integer.parseInt(cleanersField.getText());
+            settings.size = Integer.parseInt(mapSizeField.getText());
+            settings.curse = Float.parseFloat(curseField.getText());
+            settings.gas = Float.parseFloat(gasField.getText());
+            settings.item = Float.parseFloat(itemField.getText());
+            settings.fals = Float.parseFloat(falseItemsField.getText());
+            settings.door = Float.parseFloat(doorField.getText());
+            settings.oneway = Float.parseFloat(oneWayField.getText());
 
             // Close the window
             window.close();

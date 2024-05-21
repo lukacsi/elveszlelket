@@ -1,6 +1,5 @@
 package skeleton.elveszlelket.controller;
 
-import java.io.Console;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -11,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import skeleton.elveszlelket.item.Item;
 import skeleton.elveszlelket.CleaningLady;
+import skeleton.elveszlelket.Human;
 import skeleton.elveszlelket.Room;
 import skeleton.elveszlelket.Student;
 import skeleton.elveszlelket.Teacher;
@@ -27,24 +27,26 @@ public class GameMan {
     private Stage stage;
     private Random r;
 
-    public GameMan(int studentNum, int teacherNum, int cleanerNum, Stage stage) {
+    public GameMan(Settings settings, Stage stage) {
         this.students = new ArrayList<>();
         this.teachers = new ArrayList<>();
         this.cleaners = new ArrayList<>();
         this.sQueue = new LinkedList<>();
         this.stage = stage;
         round = 0;
-        for (int i = 0; i < studentNum; i++) {
+        for (int i = 0; i < settings.studentNum; i++) {
             students.add(new Student());
         }
-        for (int i = 0; i < teacherNum; i++) {
+        for (int i = 0; i < settings.teacherNum; i++) {
             teachers.add(new Teacher());
         }
-        for (int i = 0; i < cleanerNum; i++) {
+        for (int i = 0; i < settings.cleanerNum; i++) {
             cleaners.add(new CleaningLady());
         }
 
-        MapMan m = new MapMan(1, 0.1f, 0.1f, 0.1f, 0.5f, 0.1f, 0.1f, teachers, students, cleaners);
+        MapMan m = new MapMan(settings.size, settings.curse, settings.gas, settings.fals, settings.item, settings.door,
+                settings.oneway, teachers, students,
+                cleaners);
         map = m.init();
 
         round = 1;
@@ -52,16 +54,14 @@ public class GameMan {
     }
 
     public void playRound() {
-        while (!sQueue.isEmpty()) {
-            Student s = sQueue.poll();
-            DrawScene(s);
+        if (sQueue.isEmpty()) {
+            moveTeachers();
+            moveCleaners();
+            round++;
+            sQueue.addAll(students);
         }
-
-        moveTeachers();
-        moveCleaners();
-
-        round++;
-        sQueue.addAll(students);
+        Student s = sQueue.poll();
+        DrawScene(s);
     }
 
     private void moveTeachers() {
@@ -103,11 +103,31 @@ public class GameMan {
             i.setView((w + 1) * 40, (h + 1) * 40);
             System.out.println(i.getClass().toString() + " " + (w + 1) * 40 + " " + (h + 1) * 40);
         }
+
+        for (Student st : r.getStudents()) {
+            if (st == s) {
+                continue;
+            }
+            float w = abs(st.hashCode()) % (sizew - 2);
+            float h = (abs(st.hashCode() * sizew)) % (sizeh - 2);
+            st.setView((w + 1) * 40, (h + 1) * 40);
+        }
+        for (Teacher t : r.getTeacher()) {
+            float w = abs(t.hashCode()) % (sizew - 2);
+            float h = (abs(t.hashCode() * sizew)) % (sizeh - 2);
+            t.setView((w + 1) * 40, (h + 1) * 40);
+        }
+        for (CleaningLady c : r.getCleaningLadies()) {
+            float w = abs(c.hashCode()) % (sizew - 2);
+            float h = (abs(c.hashCode() * sizew)) % (sizeh - 2);
+            c.setView((w + 1) * 40, (h + 1) * 40);
+        }
+
         s.setView(40, 40);
         Screen screen = new Screen(WIDTH, HEIGHT);
         screen.Update(s);
 
-        Scene fScene = new Scene(screen, 400.0f, 400.0f);
+        Scene fScene = new Scene(screen, WIDTH, HEIGHT);
         stage = new Stage();
         stage.setScene(fScene);
         stage.show();

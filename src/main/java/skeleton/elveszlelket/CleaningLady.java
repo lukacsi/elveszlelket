@@ -1,9 +1,11 @@
 package skeleton.elveszlelket;
+
 import java.util.List;
 
 import skeleton.elveszlelket.door.Door;
 import skeleton.elveszlelket.door.OneWayDoor;
 import skeleton.elveszlelket.door.TwoWayDoor;
+import skeleton.elveszlelket.gui.HumanView;
 import skeleton.elveszlelket.item.Item;
 
 public class CleaningLady implements Human {
@@ -23,7 +25,7 @@ public class CleaningLady implements Human {
     }
 
     public void clean() {
-        if(currentRoom.containsGas()) {
+        if (currentRoom.containsGas()) {
             currentRoom.setGas(false);
         }
         currentRoom.clean();
@@ -31,12 +33,12 @@ public class CleaningLady implements Human {
 
     public void setLastDoor(Door d) {
         lastDoor = d;
-    } 
+    }
 
     @Override
     public boolean use(OneWayDoor door) {
-        if(!door.isRightDirection(getRoom())) {
-            if(door.getDest(getRoom()).hasFreePlace()) {
+        if (!door.isRightDirection(getRoom())) {
+            if (door.getDest(getRoom()).hasFreePlace()) {
                 door.putMeThrough(this);
                 return true;
             }
@@ -46,7 +48,7 @@ public class CleaningLady implements Human {
 
     @Override
     public boolean use(TwoWayDoor door) {
-        if(door.getDest(getRoom()).hasFreePlace()) {
+        if (door.getDest(getRoom()).hasFreePlace()) {
             door.putMeThrough(this);
             return true;
         }
@@ -92,4 +94,10 @@ public class CleaningLady implements Human {
     public void setCurrentRoom(Room room) {
         currentRoom = room;
     }
+
+    public void setView(float x, float y) {
+        String resourcePath = "file:textures/cleaningady.png";
+        HumanView view = new HumanView(x, y, resourcePath);
+    }
+
 }

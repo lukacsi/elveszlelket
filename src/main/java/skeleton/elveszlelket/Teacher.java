@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import skeleton.elveszlelket.door.*;
+import skeleton.elveszlelket.gui.HumanView;
 
 /**
  * Egy tanárt reprezentál a szimulációs környezetben.
@@ -186,5 +187,10 @@ public class Teacher implements Human {
         if(currentRoom.getStudents().size() > 0) {
             currentRoom.killStudents();
         }
+    }
+
+    public void setView(float x, float y) {
+        String resourcePath = "file:textures/teacher.png";
+        HumanView view = new HumanView(x, y, resourcePath);
     }
 }

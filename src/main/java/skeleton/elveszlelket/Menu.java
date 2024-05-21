@@ -8,14 +8,15 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import skeleton.elveszlelket.controller.GameMan;;
-
-
+import skeleton.elveszlelket.controller.GameMan;
+import skeleton.elveszlelket.controller.Settings;
 
 public class Menu extends Application {
+    public static Settings settings;
 
     @Override
     public void start(Stage primaryStage) {
+        settings = new Settings(1, 1, 1, 5, 0.1f, 0.1f, 0.1f, 0.5f, 0.1f, 0.1f);
         primaryStage.setTitle("ELVESZLELKET THE GAME");
 
         Label titleLabel = new Label("ELVESZLELKET");
@@ -25,7 +26,7 @@ public class Menu extends Application {
         Label titleLabel2 = new Label("THE GAME");
         titleLabel2.setStyle("-fx-font-family: 'Serif'; -fx-font-size: 24; -fx-font-weight: bold;");
         titleLabel2.setAlignment(Pos.CENTER);
-        
+
         Region spacer = new Region();
         spacer.setMinHeight(20);
 
@@ -42,10 +43,10 @@ public class Menu extends Application {
         exitButton.setPrefSize(150, 50);
 
         playButton.setOnAction(e -> {
-            primaryStage.close(); 
+            primaryStage.close();
             try {
-                GameMan gm = new GameMan(1,0,0,new Stage());
-		        gm.playRound();
+                GameMan gm = new GameMan(settings, new Stage());
+                gm.playRound();
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
@@ -53,7 +54,7 @@ public class Menu extends Application {
 
         // Add action for the options button
         optionsButton.setOnAction(e -> {
-            Options.display();
+            Options.display(settings);
         });
 
         // Close the application
@@ -66,5 +67,9 @@ public class Menu extends Application {
         Scene scene = new Scene(layout, 400, 400);
         primaryStage.setScene(scene);
         primaryStage.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
     }
 }
