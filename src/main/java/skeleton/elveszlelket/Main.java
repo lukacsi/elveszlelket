@@ -1,6 +1,8 @@
 package skeleton.elveszlelket;
 import javafx.application.Application;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
+import skeleton.elveszlelket.gui.Screen;
 import skeleton.elveszlelket.tester.Tester;
 
 public class Main extends Application {
@@ -74,6 +76,16 @@ public class Main extends Application {
 		// arg0.show();
 		/*GameMan gm = new GameMan(1,0,0,arg0);
 		gm.playRound();*/
+		/*
+		Screen screen = new Screen(WIDTH, HEIGHT);
+		screen.Update(s);
+		screen.updateBecauseItemsHaveBeenManuallyAddedToStudent();
+
+		Scene foscene = new Scene(screen, WIDTH, HEIGHT);
+		primaryStage = new Stage();
+		primaryStage.setScene(foscene);
+		primaryStage.show(); */
+		
 
 		Menu menu = new Menu();
 		menu.start(primaryStage);

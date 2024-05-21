@@ -4,34 +4,74 @@ import javafx.animation.TranslateTransition;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollBar;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import skeleton.elveszlelket.Room;
 import skeleton.elveszlelket.Student;
 import skeleton.elveszlelket.item.Item;
 
-public class ItemPicker extends ItemMenu {
+public class ItemPicker extends ScrollPane {
+	protected GameView parent;
+	protected float HEIGHT, WIDTH;
+	protected boolean shown;
+	protected float transitionTime = 150;
+	private HBox view;
+	private int ScrollBarWidth = 10;
+	private int padding = 8;
+	private float normalizedWidth, normalizedHeight;
+	private Insets paddingInsets;
+	
 	public ItemPicker(GameView parent, float WIDTH, float HEIGHT) {
-		super(parent, WIDTH, HEIGHT);
+		this.HEIGHT = HEIGHT;
+		this.WIDTH = WIDTH;
+		this.parent = parent;
+		shown = false;
+		view = new HBox();
+		view.setAlignment(Pos.CENTER);
+		view.setStyle("-fx-background-color:grey; -fx-border-width: 0;");
+		view.setMinSize(WIDTH, HEIGHT);
+		view.setMaxSize(WIDTH, HEIGHT);
+		
+		this.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+		this.setMinSize(WIDTH, HEIGHT);
+		this.setMaxSize(WIDTH, HEIGHT);
+		this.setLayoutY(parent.HEIGHT);
+		this.setStyle("-fx-border-width: 0;");
+		this.setContent(view);
+		
+		this.normalizedHeight = HEIGHT-padding*2-this.ScrollBarWidth;
+		this.normalizedWidth = WIDTH/5-padding*2-this.ScrollBarWidth;
+		this.paddingInsets = new Insets(0, padding, padding, padding+this.ScrollBarWidth);
+	}
+	
+	public void translate() {
+		if(shown) {
+			Close();
+		} else {
+			Open();
+		}
 	}
 	
 	public void refresh() {
 		ItemPicker onmaga = this;
 		Student jelenlegiJatekos = parent.getCurrentPlayer();
 		Room jelenlegiRoom = jelenlegiJatekos.getRoom();
-		this.getChildren().clear();
+		view.getChildren().clear();
 		for(Item i : jelenlegiRoom.getItems()) {
 			if(i.getView().getX() == jelenlegiJatekos.getView().getX() && i.getView().getY() == jelenlegiJatekos.getView().getY()) {
 				VBox kozepV = new VBox();
 				HBox kozepH = new HBox();
-				int padding = 10;
-				kozepV.setPadding(new Insets(padding));
+				kozepV.setPadding(this.paddingInsets);
 				
 				Button b = new Button();
 				b.setStyle("-fx-background-color: transparent; -fx-border-width: 0;");
 				ItemView temp = new ItemView(0,0, i.getView().getTexturePath());
-				temp.normalizeTexture(WIDTH/5-padding*2, HEIGHT-padding*2);
+				temp.normalizeTexture(this.normalizedWidth, normalizedHeight);
 				b.setGraphic(temp.getTexture());
 				b.setOnMouseClicked(e -> {
 					jelenlegiJatekos.pickupItem(i);
@@ -45,7 +85,7 @@ public class ItemPicker extends ItemMenu {
 				kozepV.getChildren().add(b);
 				kozepH.getChildren().add(kozepV);
 				kozepH.setMinWidth(WIDTH/5);
-				this.getChildren().add(kozepH);
+				view.getChildren().add(kozepH);
 			}
 		}
 	}
@@ -57,18 +97,17 @@ public class ItemPicker extends ItemMenu {
 			Room jelenlegiRoom = jelenlegiJatekos.getRoom();
 			
 			ItemPicker onmaga = this;
-			this.getChildren().clear();
+			view.getChildren().clear();
 			for(Item i : jelenlegiRoom.getItems()) {
 				if(i.getView().getX() == jelenlegiJatekos.getView().getX() && i.getView().getY() == jelenlegiJatekos.getView().getY()) {
 					VBox kozepV = new VBox();
 					HBox kozepH = new HBox();
-					int padding = 10;
-					kozepV.setPadding(new Insets(padding));
+					kozepV.setPadding(this.paddingInsets);
 					
 					Button b = new Button();
 					b.setStyle("-fx-background-color: transparent; -fx-border-width: 0;");
 					ItemView temp = new ItemView(0,0, i.getView().getTexturePath());
-					temp.normalizeTexture(WIDTH/5-padding*2, HEIGHT-padding*2);
+					temp.normalizeTexture(this.normalizedWidth, this.normalizedHeight);
 					b.setGraphic(temp.getTexture());
 					b.setOnMouseClicked(e -> {
 						jelenlegiJatekos.pickupItem(i);
@@ -82,7 +121,7 @@ public class ItemPicker extends ItemMenu {
 					kozepV.getChildren().add(b);
 					kozepH.getChildren().add(kozepV);
 					kozepH.setMinWidth(WIDTH/5);
-					this.getChildren().add(kozepH);
+					view.getChildren().add(kozepH);
 				}
 			}
 			
