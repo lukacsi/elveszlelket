@@ -1,5 +1,6 @@
 package skeleton.elveszlelket.gui;
 
+import javafx.animation.Transition;
 import javafx.animation.TranslateTransition;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -10,17 +11,19 @@ import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import skeleton.elveszlelket.Student;
 import skeleton.elveszlelket.item.Item;
+import skeleton.elveszlelket.item.Transistor;
 
 public class ItemMenu extends HBox {
 	protected GameView parent;
 	protected float HEIGHT, WIDTH;
 	protected boolean shown;
 	protected float transitionTime = 150;
-	
+
 	/**
 	 * Az ItemMenu konstruktora.
+	 * 
 	 * @param parent A GameView
-	 * @param WIDTH Az ItemMenu szélessége.
+	 * @param WIDTH  Az ItemMenu szélessége.
 	 * @param HEIGHT Az ItemMenu magassága.
 	 */
 	public ItemMenu(GameView parent, float WIDTH, float HEIGHT) {
@@ -34,40 +37,41 @@ public class ItemMenu extends HBox {
 		this.setMaxSize(WIDTH, HEIGHT);
 		this.setLayoutY(parent.HEIGHT);
 	}
-	
+
 	/**
 	 * Megmondja, hogy a leltár meg van-e jelenítve.
+	 * 
 	 * @return Igaz, ha meg van jelenítve, egyébként hamis.
 	 */
 	public boolean isShown() {
 		return shown;
 	}
-	
+
 	/**
 	 * Frissíti a leltárat.
 	 */
 	public void refresh() {
 		Student current = parent.getCurrentPlayer();
-		if(current != null) {
+		if (current != null) {
 			this.getChildren().clear();
 			ItemMenu onmaga = this;
-			for(Item i : current.getItems()) {
+			for (Item i : current.getItems()) {
 				VBox kozepV = new VBox();
 				HBox kozepH = new HBox();
 				int padding = 10;
 				kozepV.setPadding(new Insets(padding));
-				
+
 				Button b = new Button();
 				b.setStyle("-fx-background-color: transparent; -fx-border-width: 0;");
-				i.getView().normalizeTexture(WIDTH/5-padding*2, HEIGHT-padding*2);
+				i.getView().normalizeTexture(WIDTH / 5 - padding * 2, HEIGHT - padding * 2);
 				b.setGraphic(i.getView().getTexture());
 				b.setOnMouseClicked(e -> {
-					if(e.getButton().equals(MouseButton.PRIMARY)) {
+					if (e.getButton().equals(MouseButton.PRIMARY)) {
 						i.use(current);
 						parent.Update(current);
 						onmaga.refresh();
 						e.consume();
-					} else if(e.getButton().equals(MouseButton.SECONDARY)) {
+					} else if (e.getButton().equals(MouseButton.SECONDARY)) {
 						current.dropItem(i);
 						parent.Update(current);
 						onmaga.refresh();
@@ -78,48 +82,56 @@ public class ItemMenu extends HBox {
 				kozepH.setAlignment(Pos.CENTER);
 				kozepV.getChildren().add(b);
 				kozepH.getChildren().add(kozepV);
-				kozepH.setMinWidth(WIDTH/5);
+				kozepH.setMinWidth(WIDTH / 5);
 				this.getChildren().add(kozepH);
 			}
 		}
 	}
-	
+
 	/**
 	 * Nyitja, illetve zárja a leltárat.
 	 */
 	public void translate() {
-		if(shown) {
+		if (shown) {
 			Close();
 		} else {
 			Open();
 		}
 	}
-	
+
 	/**
 	 * Kinyitja a leltárat.
 	 */
 	public void Open() {
 		Student current = parent.getCurrentPlayer();
-		if(current != null && !shown) {
+		if (current != null && !shown) {
 			this.getChildren().clear();
 			ItemMenu onmaga = this;
-			for(Item i : current.getItems()) {
+			for (Item i : current.getItems()) {
 				VBox kozepV = new VBox();
 				HBox kozepH = new HBox();
 				int padding = 10;
 				kozepV.setPadding(new Insets(padding));
-				
+
 				Button b = new Button();
 				b.setStyle("-fx-background-color: transparent; -fx-border-width: 0;");
-				i.getView().normalizeTexture(WIDTH/5-padding*2, HEIGHT-padding*2);
+				i.getView().normalizeTexture(WIDTH / 5 - padding * 2, HEIGHT - padding * 2);
 				b.setGraphic(i.getView().getTexture());
 				b.setOnMouseClicked(e -> {
-					if(e.getButton().equals(MouseButton.PRIMARY)) {
-						i.use(current);
+					if (e.getButton().equals(MouseButton.PRIMARY)) {
+						if (i.getName().equals("Transistor")) {
+							Transistor t = (Transistor) i;
+							if (t.hasPair())
+								i.use(current);
+							else
+								t.connectRandom(current);
+						} else {
+							i.use(current);
+						}
 						parent.Update(current);
 						onmaga.refresh();
 						e.consume();
-					} else if(e.getButton().equals(MouseButton.SECONDARY)) {
+					} else if (e.getButton().equals(MouseButton.SECONDARY)) {
 						current.dropItem(i);
 						parent.Update(current);
 						onmaga.refresh();
@@ -130,10 +142,10 @@ public class ItemMenu extends HBox {
 				kozepH.setAlignment(Pos.CENTER);
 				kozepV.getChildren().add(b);
 				kozepH.getChildren().add(kozepV);
-				kozepH.setMinWidth(WIDTH/5);
+				kozepH.setMinWidth(WIDTH / 5);
 				this.getChildren().add(kozepH);
 			}
-			
+
 			shown = true;
 			TranslateTransition translation = new TranslateTransition(Duration.millis(this.transitionTime), this);
 			translation.setByY(-HEIGHT);
@@ -142,13 +154,13 @@ public class ItemMenu extends HBox {
 			translation.play();
 		}
 	}
-	
+
 	/**
 	 * Bezárja a leltárat.
 	 */
 	public void Close() {
 		Student current = parent.getCurrentPlayer();
-		if(current != null && shown) {
+		if (current != null && shown) {
 			shown = false;
 			TranslateTransition translation = new TranslateTransition(Duration.millis(this.transitionTime), this);
 			translation.setByY(HEIGHT);
@@ -157,5 +169,5 @@ public class ItemMenu extends HBox {
 			translation.play();
 		}
 	}
-	
+
 }

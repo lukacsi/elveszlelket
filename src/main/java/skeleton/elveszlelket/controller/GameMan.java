@@ -152,21 +152,21 @@ public class GameMan {
                         if (rand.nextFloat() > 0.5f) {
                             x = 0;
                         } else {
-                            x = sizeh - 1;
+                            x = sizew - 1;
                         }
-                        y = rand.nextInt(1, sizew - 1);
+                        y = rand.nextInt(1, sizeh - 1);
                     } else {
                         if (rand.nextFloat() > 0.5f) {
                             y = 0;
                         } else {
-                            y = sizew - 1;
+                            y = sizeh - 1;
                         }
-                        x = rand.nextInt(1, sizeh - 1);
+                        x = rand.nextInt(1, sizew - 1);
                     }
                     if (!indx.contains(new Pair<>(x, y))) {
                         vege = true;
-                        door.setView(y * 40, x * 40);
-                        System.out.println("width: " + y * 40 + " height: " + x * 40);
+                        door.setView(x * 40, y * 40);
+                        System.out.println("width: " + x * 40 + " height: " + y * 40);
                     }
                 }
             }

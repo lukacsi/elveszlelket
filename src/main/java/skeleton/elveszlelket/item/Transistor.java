@@ -13,7 +13,6 @@ import skeleton.elveszlelket.strategy.TeleportStrategy;
  */
 public class Transistor extends Item {
     private Transistor pair;
-    private Room location;
 
     /**
      * Konstruktor, amely létrehoz egy új Transistor példányt.
@@ -76,24 +75,6 @@ public class Transistor extends Item {
         pair = null;
     }
 
-    // /**
-    // * Beállítja a tranzisztor helyét.
-    // *
-    // * @param room A szoba, ahol a tranzisztor elhelyezkedik.
-    // */
-    // public void setLocation(Room room) {
-    // location = room;
-    // }
-
-    // /**
-    // * Visszaadja a tranzisztor helyét.
-    // *
-    // * @return Room A szoba, ahol a tranzisztor elhelyezkedik.
-    // */
-    // public Room getLocation() {
-    // return location;
-    // }
-
     @Override
     public void setFalse(boolean fals) {
         return;
@@ -102,5 +83,14 @@ public class Transistor extends Item {
     @Override
     public void setView(float x, float y) {
         view = new ItemView(x, y, "file:textures/transistor.png");
+    }
+
+    public void connectRandom(Student s) {
+        for (Item i : s.getInventory()) {
+            if (i.getName().equals("Transistor")) {
+                Transistor t = (Transistor) i;
+                addPair(t);
+            }
+        }
     }
 }
