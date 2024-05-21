@@ -9,7 +9,6 @@ skeleton\elveszlelket\tester\Tester.class
 skeleton\elveszlelket\Human.class
 skeleton\elveszlelket\CleaningLady.class
 skeleton\elveszlelket\tester\Commands\CONNECTROOM.class
-skeleton\elveszlelket\gui\Screen.class
 skeleton\elveszlelket\gui\ItemMenu.class
 skeleton\elveszlelket\tester\Commands\DROP.class
 skeleton\elveszlelket\tester\Commands\TOGGLERANDOM.class
@@ -43,7 +42,6 @@ skeleton\elveszlelket\door\Door.class
 skeleton\elveszlelket\Teacher.class
 skeleton\elveszlelket\tester\Commands\TOGGLECURSE.class
 skeleton\elveszlelket\tester\Commands\USEITEM.class
-skeleton\elveszlelket\controller\GameMan.class
 skeleton\elveszlelket\item\Beer.class
 skeleton\elveszlelket\Student.class
 skeleton\elveszlelket\item\ProtectionItem.class
@@ -61,11 +59,9 @@ skeleton\elveszlelket\tester\Commands\ADDITOROOM.class
 skeleton\elveszlelket\tester\Commands\CONNECTTRANS.class
 skeleton\elveszlelket\gui\ItemPicker.class
 skeleton\elveszlelket\item\Transistor.class
-skeleton\elveszlelket\Menu.class
 skeleton\elveszlelket\strategy\RagStrategy.class
 skeleton\elveszlelket\strategy\GasProtectionStrategy.class
 skeleton\elveszlelket\gui\View.class
-skeleton\elveszlelket\Main.class
 skeleton\elveszlelket\item\Rag.class
 skeleton\elveszlelket\item\Camember.class
 skeleton\elveszlelket\tester\Commands\CHECKLOSE.class

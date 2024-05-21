@@ -94,7 +94,6 @@ public class GameMan {
             Door door = gajdos.getRoom().getDoorAt(rand.nextInt(0, 20));
             if (door != null) {
                 door.accept(gajdos);
-                door.putMeThrough(gajdos);
             }
         }
     }
@@ -107,7 +106,6 @@ public class GameMan {
             Door door = gizi.getRoom().getDoorAt(rand.nextInt(0, 20));
             if (door != null) {
                 door.accept(gizi);
-                door.putMeThrough(gizi);
             }
         }
     }
