@@ -17,6 +17,12 @@ public class ItemMenu extends HBox {
 	protected boolean shown;
 	protected float transitionTime = 150;
 	
+	/**
+	 * Az ItemMenu konstruktora.
+	 * @param parent A GameView
+	 * @param WIDTH Az ItemMenu szélessége.
+	 * @param HEIGHT Az ItemMenu magassága.
+	 */
 	public ItemMenu(GameView parent, float WIDTH, float HEIGHT) {
 		this.parent = parent;
 		shown = false;
@@ -29,10 +35,17 @@ public class ItemMenu extends HBox {
 		this.setLayoutY(parent.HEIGHT);
 	}
 	
+	/**
+	 * Megmondja, hogy a leltár meg van-e jelenítve.
+	 * @return Igaz, ha meg van jelenítve, egyébként hamis.
+	 */
 	public boolean isShown() {
 		return shown;
 	}
 	
+	/**
+	 * Frissíti a leltárat.
+	 */
 	public void refresh() {
 		Student current = parent.getCurrentPlayer();
 		if(current != null) {
@@ -71,6 +84,9 @@ public class ItemMenu extends HBox {
 		}
 	}
 	
+	/**
+	 * Nyitja, illetve zárja a leltárat.
+	 */
 	public void translate() {
 		if(shown) {
 			Close();
@@ -79,6 +95,9 @@ public class ItemMenu extends HBox {
 		}
 	}
 	
+	/**
+	 * Kinyitja a leltárat.
+	 */
 	public void Open() {
 		Student current = parent.getCurrentPlayer();
 		if(current != null && !shown) {
@@ -124,6 +143,9 @@ public class ItemMenu extends HBox {
 		}
 	}
 	
+	/**
+	 * Bezárja a leltárat.
+	 */
 	public void Close() {
 		Student current = parent.getCurrentPlayer();
 		if(current != null && shown) {

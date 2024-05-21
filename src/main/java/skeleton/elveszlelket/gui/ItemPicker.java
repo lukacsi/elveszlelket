@@ -26,6 +26,12 @@ public class ItemPicker extends ScrollPane {
 	private float normalizedWidth, normalizedHeight;
 	private Insets paddingInsets;
 	
+	/**
+	 * ItemPicker konstruktora.
+	 * @param parent A GameView.
+	 * @param WIDTH A felvehető tárgyak listájának szélessége.
+	 * @param HEIGHT A felvehető tárgyak listájának magassága.
+	 */
 	public ItemPicker(GameView parent, float WIDTH, float HEIGHT) {
 		this.HEIGHT = HEIGHT;
 		this.WIDTH = WIDTH;
@@ -49,6 +55,9 @@ public class ItemPicker extends ScrollPane {
 		this.paddingInsets = new Insets(0, padding, padding, padding+this.ScrollBarWidth);
 	}
 	
+	/**
+	 * Nyitja, illetve csukja felvehető tárgyak listáját.
+	 */
 	public void translate() {
 		if(shown) {
 			Close();
@@ -57,6 +66,9 @@ public class ItemPicker extends ScrollPane {
 		}
 	}
 	
+	/**
+	 * Frissíti a felvehető tárgyak listáját.
+	 */
 	public void refresh() {
 		ItemPicker onmaga = this;
 		Student jelenlegiJatekos = parent.getCurrentPlayer();
@@ -90,6 +102,9 @@ public class ItemPicker extends ScrollPane {
 		}
 	}
 	
+	/**
+	 * Kinyitja a felvehető tárgyak listáját.
+	 */
 	public void Open() {
 		
 		Student jelenlegiJatekos = parent.getCurrentPlayer();
@@ -134,6 +149,9 @@ public class ItemPicker extends ScrollPane {
 		}
 	}
 	
+	/**
+	 * Bezárja a felvehető tárgyak listáját.
+	 */
 	public void Close() {
 		if(shown) {
 			shown = false;

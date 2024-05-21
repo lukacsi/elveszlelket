@@ -48,6 +48,7 @@ skeleton\elveszlelket\item\Beer.class
 skeleton\elveszlelket\Student.class
 skeleton\elveszlelket\item\ProtectionItem.class
 skeleton\elveszlelket\gui\ItemView.class
+skeleton\elveszlelket\gui\Screen$1.class
 skeleton\elveszlelket\tester\Commands\ADDHTOROOM.class
 skeleton\elveszlelket\tester\Commands\INCREMENTTIME.class
 skeleton\elveszlelket\tester\Tests\TEST.class
@@ -57,7 +58,6 @@ skeleton\elveszlelket\tester\Commands\ADDTOHUMAN.class
 skeleton\elveszlelket\tester\Tests\T_CONNECTION.class
 skeleton\elveszlelket\tester\TRandom.class
 skeleton\elveszlelket\tester\Commands\ADDITOROOM.class
-skeleton\elveszlelket\gui\GameView$1.class
 skeleton\elveszlelket\tester\Commands\CONNECTTRANS.class
 skeleton\elveszlelket\gui\ItemPicker.class
 skeleton\elveszlelket\item\Transistor.class

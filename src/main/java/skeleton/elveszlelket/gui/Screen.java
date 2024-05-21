@@ -19,11 +19,11 @@ public class Screen extends Pane {
 	private Menu menu;
 	private GameMan gameManager;
 	private float WIDTH, HEIGHT;
-	
+
 	public Screen(Stage parent, float WIDTH, float HEIGHT) {
 		this.WIDTH = WIDTH;
 		this.HEIGHT = HEIGHT;
-		//palyamegjelenito = new GameView(WIDTH, HEIGHT);
+		// palyamegjelenito = new GameView(WIDTH, HEIGHT);
 		menu = new Menu(this);
 		this.parent = parent;
 		this.getChildren().add(menu);
@@ -39,7 +39,7 @@ public class Screen extends Pane {
         gm.playRound();
         
 		this.setOnKeyPressed(e -> {
-			switch(e.getCode()) {
+			switch (e.getCode()) {
 				case I:
 					this.palyamegjelenito.translateItemMenu();
 					this.palyamegjelenito.closePickUpMenu();
@@ -64,17 +64,17 @@ public class Screen extends Pane {
 					this.palyamegjelenito.translatePickUpMenu();
 					this.palyamegjelenito.closeItemMenu();
 					break;
-				}
+			}
 			e.consume();
 		});
         
         showCurrentRound(gm.getCurrentPlayer());
 	}
-	
+
 	public void showCurrentRound(Student jelenlegiJatekos) {
 		this.getChildren().clear();
 		Room jelenlegiSzoba = jelenlegiJatekos.getRoom();
-		
+
 		palyamegjelenito = new GameView(jelenlegiSzoba.getView().getX(), jelenlegiSzoba.getView().getY());
 		this.WIDTH = this.palyamegjelenito.WIDTH;
 		this.HEIGHT = this.palyamegjelenito.HEIGHT;
@@ -82,17 +82,18 @@ public class Screen extends Pane {
 
 		this.parentScene.getWindow().setWidth(WIDTH + 14.66666);
 		this.parentScene.getWindow().setHeight(HEIGHT + 37.333333);
-		//System.out.println(this.parentScene.getWindow().getWidth() + " " + this.parentScene.getWindow().getHeight());
-		
-        this.palyamegjelenito.Update(jelenlegiJatekos);
+		// System.out.println(this.parentScene.getWindow().getWidth() + " " +
+		// this.parentScene.getWindow().getHeight());
+
+		this.palyamegjelenito.Update(jelenlegiJatekos);
 	}
-	
+
 	public void close() {
 		parent.close();
 	}
-	
+
 	public void keyPressed(KeyEvent e) {
-		switch(e.getCode()) {
+		switch (e.getCode()) {
 			case I:
 				this.palyamegjelenito.translateItemMenu();
 				this.palyamegjelenito.closePickUpMenu();
@@ -117,14 +118,14 @@ public class Screen extends Pane {
 				this.palyamegjelenito.translatePickUpMenu();
 				this.palyamegjelenito.closeItemMenu();
 				break;
-			}
+		}
 		e.consume();
 	}
-	
+
 	public void Update(Student jelenlegiJatekos) {
 		palyamegjelenito.Update(jelenlegiJatekos);
 	}
-	
+
 	// Csak a tesztelesnel kell.
 	public void updateBecauseItemsHaveBeenManuallyAddedToStudent() {
 		palyamegjelenito.updateItemsPos();

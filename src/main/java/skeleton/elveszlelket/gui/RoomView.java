@@ -13,6 +13,11 @@ public class RoomView extends View {
 
 	ArrayList<ImageView> textures;
 
+	/**
+	 * A RoomView konstruktora.
+	 * @param x A szoba szélessége.
+	 * @param y A szoba magassága.
+	 */
 	public RoomView(float x, float y) {
 		super(x, y);
 		if (x % egysegNegyzetWidth != 0) {
@@ -25,6 +30,9 @@ public class RoomView extends View {
 		textures = new ArrayList<>();
 	}
 
+	/**
+	 * Betölti aszoba textúráját.
+	 */
 	public void loadTextures() {
 		for (int sor = 0; sor < this.x; sor += this.egysegNegyzetWidth) {
 			for (int oszlop = 0; oszlop < this.y; oszlop += this.egysegNegyzetHeight) {
@@ -43,6 +51,9 @@ public class RoomView extends View {
 		}
 	}
 
+	/**
+	 * Kirajzolja a szobát.
+	 */
 	public void Draw(GameView jatekmegjelenito) {
 		for (ImageView tex : textures) {
 			jatekmegjelenito.getChildren().add(tex);
@@ -60,15 +71,29 @@ public class RoomView extends View {
 		return normalized * this.egysegNegyzetWidth;
 	}
 
+	/*
+	 * return int
+	 * Minden szoba egység területű, adott y (float) koordinátára kiszámolja,
+	 * hogy hányadik szobán belüli egységnégyzetbe esik a koordináta bele.
+	 * int cast mindig lefele kerekit.
+	 */
 	public float yToTileY(float y) {
 		int normalized = (int) (y / this.egysegNegyzetHeight);
 		return normalized * this.egysegNegyzetHeight;
 	}
 
+	/**
+	 * Visszadja az egysegnegyzet szélességét.
+	 * @return Az egységnégyzet szélessége.
+	 */
 	public float getTileWidth() {
 		return this.egysegNegyzetWidth;
 	}
 
+	/**
+	 * Visszaadja az egységnégyzet magasságát.
+	 * @return Az egységnégyzet magassága.
+	 */
 	public float getTileHeight() {
 		return this.egysegNegyzetHeight;
 	}
@@ -81,6 +106,11 @@ public class RoomView extends View {
 		return (int) (y / this.egysegNegyzetHeight);
 	}
 
+	/**
+	 * Ráilleszti a szoba összes négyzetére a hozzá tartozó textúrát.
+	 * @param tileX Az egységnégyzet szélessége.
+	 * @param tileY Az egységnégyzet magassága.
+	 */
 	@Override
 	public void normalizeTexture(float tileX, float tileY) {
 		for (ImageView tex : textures) {

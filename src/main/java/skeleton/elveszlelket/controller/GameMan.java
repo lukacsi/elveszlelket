@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 import java.util.Random;
+import java.util.Set;
 
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -19,6 +20,10 @@ import skeleton.elveszlelket.door.Door;
 import skeleton.elveszlelket.gui.DoorView;
 import skeleton.elveszlelket.gui.Screen;
 
+/**
+ * A játék fő irányító osztálya, kezeli
+ * a szereplők mozgatását és a képernyő frissítését.
+ */
 public class GameMan {
     private List<Student> students;
     private List<Teacher> teachers;
@@ -29,16 +34,23 @@ public class GameMan {
     private Stage stage;
     private Random rand;
     private Student jelenlegiJatekos;
-    
+
     public Student getCurrentPlayer() {
-    	return this.jelenlegiJatekos;
+        return this.jelenlegiJatekos;
     }
 
+    /**
+     * Létrehoz egy új GameMan példányt a megadott beállításokkal.
+     *
+     * @param settings A játék beállításai.
+     * @param stage    A pálya, amelyen a jelenetek megjelennek.
+     */
     public GameMan(Settings settings, Stage stage) {
         this.students = new ArrayList<>();
         this.teachers = new ArrayList<>();
         this.cleaners = new ArrayList<>();
         this.sQueue = new LinkedList<>();
+        rand = new Random();
         this.stage = stage;
         round = 0;
         for (int i = 0; i < settings.studentNum; i++) {
@@ -60,6 +72,9 @@ public class GameMan {
         sQueue.addAll(students);
     }
 
+    /**
+     * Lejátssza a következő kört a játékban.
+     */
     public void playRound() {
         if (sQueue.isEmpty()) {
             moveTeachers();
@@ -71,6 +86,9 @@ public class GameMan {
         DrawScene(s);
     }
 
+    /**
+     * A tanárok mozgatását végzi a következő szobába.
+     */
     private void moveTeachers() {
         for (Teacher gajdos : teachers) {
             Door door = gajdos.getRoom().getDoorAt(rand.nextInt(0, 20));
@@ -81,6 +99,9 @@ public class GameMan {
         }
     }
 
+    /**
+     * A takarítónők mozgatását végzi a következő szobába.
+     */
     private void moveCleaners() {
         for (CleaningLady gizi : cleaners) {
             Door door = gizi.getRoom().getDoorAt(rand.nextInt(0, 20));
@@ -91,6 +112,11 @@ public class GameMan {
         }
     }
 
+    /**
+     * Kirajzolja a megadott diák számára a jelenetet.
+     *
+     * @param s A diák, akinek a jelenet kirajzolásra kerül.
+     */
     // Na ez azt csinálja hogy hasheli a roomot és aszerint pakolja a cuccokat.
     // AZ ELDOBOTT ITEMEKET NEM TUDOM HOGYAN KÉNE
     private void DrawScene(Student s) {
@@ -102,57 +128,78 @@ public class GameMan {
         float HEIGHT = sizeh * 40.0f;
         System.out.println(r.hashCode());
         System.out.println("width: " + WIDTH + " height: " + HEIGHT);
+
+        if (r.getView() == null) {
+            for (Item i : r.getItems()) {
+                if (i.getView() != null) {
+                    continue;
+                }
+                float w = abs(i.hashCode()) % (sizew - 2);
+                float h = (abs(i.hashCode() * sizew)) % (sizeh - 2);
+                i.setView((w + 1) * 40, (h + 1) * 40);
+                System.out.println(i.getClass().toString() + " " + (w + 1) * 40 + " " + (h + 1) * 40);
+            }
+
+            List<Pair<Integer, Integer>> indx = new ArrayList<>();
+            System.out.println(r.getDoors().size());
+            for (Door door : r.getDoors()) {
+                if (door.getView() != null) {
+                    continue;
+                }
+                boolean vege = false;
+                while (!vege) {
+                    int x;
+                    int y;
+                    if (rand.nextFloat() > 0.5f) {
+                        if (rand.nextFloat() > 0.5f) {
+                            x = 0;
+                        } else {
+                            x = sizeh - 1;
+                        }
+                        y = rand.nextInt(1, sizew-1);
+                    } else {
+                        if (rand.nextFloat() > 0.5f) {
+                            y = 0;
+                        } else {
+                            y = sizew - 1;
+                        }
+                        x = rand.nextInt(1, sizeh-1);
+                    }
+                    if (!indx.contains(new Pair<>(x, y))) {
+                        vege = true;
+                        door.setView(y * 40, x * 40);
+                        System.out.println("width: " + y * 40 + " height: " + x * 40);
+                    }
+                }
+            }
+
+            for (Student st : r.getStudents()) {
+                if (st.getView() != null) {
+                    continue;
+                }
+                float w = abs(st.hashCode()) % (sizew - 2);
+                float h = (abs(st.hashCode() * sizew)) % (sizeh - 2);
+                st.setView((w + 1) * 40, (h + 1) * 40);
+            }
+            for (Teacher t : r.getTeacher()) {
+                if (t.getView() != null) {
+                    continue;
+                }
+                float w = abs(t.hashCode()) % (sizew - 2);
+                float h = (abs(t.hashCode() * sizew)) % (sizeh - 2);
+                t.setView((w + 1) * 40, (h + 1) * 40);
+            }
+            for (CleaningLady c : r.getCleaningLadies()) {
+                if (c.getView() != null) {
+                    continue;
+                }
+                float w = abs(c.hashCode()) % (sizew - 2);
+                float h = (abs(c.hashCode() * sizew)) % (sizeh - 2);
+                c.setView((w + 1) * 40, (h + 1) * 40);
+            }
+        }
+
         r.setView(WIDTH, HEIGHT);
-        for (Item i : r.getItems()) {
-            if (i.getView() != null) {
-                continue;
-            }
-            float w = abs(i.hashCode()) % (sizew - 2);
-            float h = (abs(i.hashCode() * sizew)) % (sizeh - 2);
-            i.setView((w + 1) * 40, (h + 1) * 40);
-            System.out.println(i.getClass().toString() + " " + (w + 1) * 40 + " " + (h + 1) * 40);
-        }
-
-        for (Door door : r.getDoors()) {
-            if(door.getView() != null) {
-                continue;
-            }
-            int hash = Math.abs(door.hashCode());
-            // Ensure x and y are within bounds and not on the border
-            int x = (hash % (sizew - 2)) + 1; // 1 <= x < h-1
-            int y = (hash % (sizeh - 2)) + 1; // 1 <= y < w-1
-            door.setView(x * 40, y * 40); // Assuming a scale factor of 40
-        }
-
-        for (Student st : r.getStudents()) {
-            if(st.getView() != null) {
-                continue;
-            }
-            if (st == s) {
-                continue;
-            }
-            float w = abs(st.hashCode()) % (sizew - 2);
-            float h = (abs(st.hashCode() * sizew)) % (sizeh - 2);
-            st.setView((w + 1) * 40, (h + 1) * 40);
-        }
-        for (Teacher t : r.getTeacher()) {
-            if(t.getView() != null) {
-                continue;
-            }
-            float w = abs(t.hashCode()) % (sizew - 2);
-            float h = (abs(t.hashCode() * sizew)) % (sizeh - 2);
-            t.setView((w + 1) * 40, (h + 1) * 40);
-        }
-        for (CleaningLady c : r.getCleaningLadies()) {
-            if(c.getView() != null) {
-                continue;
-            }
-            float w = abs(c.hashCode()) % (sizew - 2);
-            float h = (abs(c.hashCode() * sizew)) % (sizeh - 2);
-            c.setView((w + 1) * 40, (h + 1) * 40);
-        }
-
-        s.setView(40, 40);
         this.jelenlegiJatekos = s;
     }
     
@@ -205,16 +252,13 @@ public class GameMan {
     	}
     }
 
+    /**
+     * Visszaadja a megadott szám abszolút értékét.
+     *
+     * @param num A szám, amelynek az abszolút értékét ki akarjuk számolni.
+     * @return A megadott szám abszolút értéke.
+     */
     private int abs(int num) {
         return (num < 0) ? -num : num;
-    }
-
-    private void placeDoors(int sizew, int sizeh, Room r) {
-        List<Door> d = r.getDoors();
-
-        List<List<Door>> walls = new ArrayList<>();
-        for (int i = 0; i < 4; i++) {
-            walls.add(new ArrayList<>());
-        }
     }
 }
