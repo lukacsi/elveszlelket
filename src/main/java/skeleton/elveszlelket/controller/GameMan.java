@@ -156,14 +156,14 @@ public class GameMan {
                         } else {
                             x = sizeh - 1;
                         }
-                        y = rand.nextInt(1, sizew-1);
+                        y = rand.nextInt(1, sizew - 1);
                     } else {
                         if (rand.nextFloat() > 0.5f) {
                             y = 0;
                         } else {
                             y = sizew - 1;
                         }
-                        x = rand.nextInt(1, sizeh-1);
+                        x = rand.nextInt(1, sizeh - 1);
                     }
                     if (!indx.contains(new Pair<>(x, y))) {
                         vege = true;
@@ -197,59 +197,61 @@ public class GameMan {
                 float h = (abs(c.hashCode() * sizew)) % (sizeh - 2);
                 c.setView((w + 1) * 40, (h + 1) * 40);
             }
+            r.setView(WIDTH, HEIGHT);
         }
 
-        r.setView(WIDTH, HEIGHT);
         this.jelenlegiJatekos = s;
     }
-    
+
     public void mergeRooms(Room regi1, Room regi2) {
-    	Room uj = new Room();
-    	regi1.merge(regi2, uj);
-    	uj.setView(regi1.getView().getX()+regi2.getView().getX(), regi1.getView().getY()+regi2.getView().getY());
-    	
+        Room uj = new Room();
+        regi1.merge(regi2, uj);
+        uj.setView(regi1.getView().getX() + regi2.getView().getX(), regi1.getView().getY() + regi2.getView().getY());
+
         int sizew = (abs(uj.hashCode()) % 6) + 5;
         int sizeh = (abs(sizew * uj.hashCode()) % 6) + 5;
-    	for(Item i : uj.getItems()) {
+        for (Item i : uj.getItems()) {
             float w = abs(i.hashCode()) % (sizew - 2);
             float h = (abs(i.hashCode() * sizew)) % (sizeh - 2);
             i.setView((w + 1) * 40, (h + 1) * 40);
-    	}
-    	
-    	float nextXJobb = uj.getView().getTileWidth(), nextXBal = uj.getView().getTileWidth();
-    	float nextYAlul = uj.getView().getTileHeight(), nextYFelul = uj.getView().getTileHeight();
-    	
-    	// Eloszor csak oldalara rakjuk
-    	for(Door d : uj.getDoors()) {
-    		if(d.getView().getX() % (uj.getView().getX()-uj.getView().getTileWidth()) == 0) {
-    			if(d.getView().getX() == 0) {
-        			d.getView().setPos(nextXBal, d.getView().getY());
-        			nextXBal += uj.getView().getTileWidth();
-    			} else {
-        			d.getView().setPos(nextXJobb, d.getView().getY());
-        			nextXJobb += uj.getView().getTileWidth();
-    			}
-    		} else if(d.getView().getY() % (uj.getView().getY()-uj.getView().getTileHeight()) == 0) {
-    			if(d.getView().getY() == 0) {
-        			d.getView().setPos(d.getView().getX(), nextYFelul);
-        			nextYFelul += uj.getView().getTileHeight();
-    			} else {
-        			d.getView().setPos(d.getView().getX(), nextYAlul);
-        			nextYAlul += uj.getView().getTileHeight();
-    			}
-    		}
-    	}
-    	Random r = new Random();
-    	// Randomizaljuk az ajtok poziciojat
-    	for(Door d : uj.getDoors()) {
-    		if(d.getView().getX() % (uj.getView().getX()-uj.getView().getTileWidth()) == 0) {
-    			float randomy = d.getView().getY() * r.nextInt( (int)(uj.getView().getY()/uj.getView().getTileHeight()));
-    			d.getView().setPos(d.getView().getX(), randomy);
-    		} else if(d.getView().getY() % (uj.getView().getY()-uj.getView().getTileHeight()) == 0) {
-    			float randomx = d.getView().getX() * r.nextInt( (int)(uj.getView().getX()/uj.getView().getTileWidth()));
-    			d.getView().setPos(randomx, d.getView().getY());
-    		}
-    	}
+        }
+
+        float nextXJobb = uj.getView().getTileWidth(), nextXBal = uj.getView().getTileWidth();
+        float nextYAlul = uj.getView().getTileHeight(), nextYFelul = uj.getView().getTileHeight();
+
+        // Eloszor csak oldalara rakjuk
+        for (Door d : uj.getDoors()) {
+            if (d.getView().getX() % (uj.getView().getX() - uj.getView().getTileWidth()) == 0) {
+                if (d.getView().getX() == 0) {
+                    d.getView().setPos(nextXBal, d.getView().getY());
+                    nextXBal += uj.getView().getTileWidth();
+                } else {
+                    d.getView().setPos(nextXJobb, d.getView().getY());
+                    nextXJobb += uj.getView().getTileWidth();
+                }
+            } else if (d.getView().getY() % (uj.getView().getY() - uj.getView().getTileHeight()) == 0) {
+                if (d.getView().getY() == 0) {
+                    d.getView().setPos(d.getView().getX(), nextYFelul);
+                    nextYFelul += uj.getView().getTileHeight();
+                } else {
+                    d.getView().setPos(d.getView().getX(), nextYAlul);
+                    nextYAlul += uj.getView().getTileHeight();
+                }
+            }
+        }
+        Random r = new Random();
+        // Randomizaljuk az ajtok poziciojat
+        for (Door d : uj.getDoors()) {
+            if (d.getView().getX() % (uj.getView().getX() - uj.getView().getTileWidth()) == 0) {
+                float randomy = d.getView().getY()
+                        * r.nextInt((int) (uj.getView().getY() / uj.getView().getTileHeight()));
+                d.getView().setPos(d.getView().getX(), randomy);
+            } else if (d.getView().getY() % (uj.getView().getY() - uj.getView().getTileHeight()) == 0) {
+                float randomx = d.getView().getX()
+                        * r.nextInt((int) (uj.getView().getX() / uj.getView().getTileWidth()));
+                d.getView().setPos(randomx, d.getView().getY());
+            }
+        }
     }
 
     /**
