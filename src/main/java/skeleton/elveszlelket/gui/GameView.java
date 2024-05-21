@@ -1,6 +1,7 @@
 package skeleton.elveszlelket.gui;
 
 import javafx.scene.control.Button;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import skeleton.elveszlelket.Room;
@@ -14,45 +15,59 @@ public class GameView extends Pane {
 	private Student jelenlegiJatekos;
 	private ItemPicker pickupMenu;
 	
+	public void translateItemMenu() {
+		itemMenu.translate();
+	}
+	
+	public void translatePickUpMenu() {
+		this.pickupMenu.translate();
+	}
+	
+	public void closePickUpMenu() {
+		this.pickupMenu.Close();
+	}
+	
+	public void closeItemMenu() {
+		this.itemMenu.Close();
+	}
+	
 	public GameView(float w, float h) {
 		WIDTH = w;
 		HEIGHT = h;
 		itemMenu = new ItemMenu(this, WIDTH, HEIGHT/5);
-		itemMenu.getChildren().add(new Button("b"));
 		pickupMenu = new ItemPicker(this, WIDTH, HEIGHT/5);
 		this.setMinSize(w, h);
 		this.setPrefSize(w, h);
-		this.requestFocus();
+		/*
 		this.setOnKeyPressed(e -> {
 			switch(e.getCode()) {
 				case I:
-					itemMenu.translate();
-					pickupMenu.Close();
+					translateItemMenu();
+					closePickUpMenu();
 					break;
 				case S:
 					playerDown();
-					pickupMenu.Close();
+					closePickUpMenu();
 					break;
 				case W:
 					playerUp();
-					pickupMenu.Close();
+					closePickUpMenu();
 					break;
 				case D:
 					playerRight();
-					pickupMenu.Close();
+					closePickUpMenu();
 					break;
 				case A:
 					playerLeft();
-					pickupMenu.Close();
+					closePickUpMenu();
 					break;
 				case P:
-					pickupMenu.translate();
-					itemMenu.Close();
+					translatePickUpMenu();
+					closeItemMenu();
 					break;
 				}
 			e.consume();
-		});
-		
+		}); */
 	}
 	
 	public void updateItemsPos() {
