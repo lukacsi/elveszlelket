@@ -197,7 +197,6 @@ public class GameMan {
         }
 
         r.setView(WIDTH, HEIGHT);
-        s.setView(40, 40);
         this.jelenlegiJatekos = s;
     }
 
