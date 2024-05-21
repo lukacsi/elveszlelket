@@ -27,7 +27,7 @@ public class RoomView extends View {
 
 	public void loadTextures() {
 		for (int sor = 0; sor < this.x; sor += this.egysegNegyzetWidth) {
-			for (int oszlop = 0; oszlop < this.x; oszlop += this.egysegNegyzetHeight) {
+			for (int oszlop = 0; oszlop < this.y; oszlop += this.egysegNegyzetHeight) {
 				if (sor == 0 || oszlop == 0 || sor == (x - egysegNegyzetWidth) || oszlop == (y - egysegNegyzetHeight)) {
 					ImageView uj = new ImageView(new Image("file:textures/wall.png"));
 					uj.setLayoutX(sor);
