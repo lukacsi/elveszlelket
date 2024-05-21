@@ -80,7 +80,7 @@ public class ItemMenu extends HBox {
 					}
 				});
 
-				Label usesLabel = new Label("Uses: " + ((i.getUses() == 0) ? "inf" : i.getUses()));
+				Label usesLabel = new Label("Uses: " + /* ((i.getUses() == 0) ? "inf" : */i.getUses());// );
 				usesLabel.setStyle("-fx-text-fill: white;");
 				usesLabel.setPadding(new Insets(0, 5, 0, 5));
 
@@ -145,7 +145,7 @@ public class ItemMenu extends HBox {
 					}
 				});
 
-				Label usesLabel = new Label("Uses: " + ((i.getUses() == 0) ? "inf" : i.getUses()));
+				Label usesLabel = new Label("Uses: " + /* ((i.getUses() == 0) ? "inf" : */i.getUses());// );
 				usesLabel.setStyle("-fx-text-fill: white;");
 				usesLabel.setPadding(new Insets(0, 5, 0, 5));
 
