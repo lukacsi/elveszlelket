@@ -7,7 +7,12 @@ import skeleton.elveszlelket.Student;
 
 public class Screen extends Pane {
 	private GameView palyamegjelenito;
-	
+
+	/**
+	 * A Screen konstruktora.
+	 * @param WIDTH A képernyő szélessége.
+	 * @param HEIGHT A képernyő magassága.
+	 */
 	public Screen(float WIDTH, float HEIGHT) {
 		palyamegjelenito = new GameView(WIDTH, HEIGHT);
 		this.getChildren().add(palyamegjelenito);
@@ -43,6 +48,10 @@ public class Screen extends Pane {
 		});
 	}
 	
+	/**
+	 * Eseménykezelő gombnyomásra.
+	 * @param e Az esemény.
+	 */
 	public void keyPressed(KeyEvent e) {
 		switch(e.getCode()) {
 			case I:
@@ -73,6 +82,10 @@ public class Screen extends Pane {
 		e.consume();
 	}
 	
+	/**
+	 * Frissíti a jelenleg aktív játékos kinézetét.
+	 * @param jelenlegiJatekos A jelenleg aktív játékos.
+	 */
 	public void Update(Student jelenlegiJatekos) {
 		palyamegjelenito.Update(jelenlegiJatekos);
 	}
