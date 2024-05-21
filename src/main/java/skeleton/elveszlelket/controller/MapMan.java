@@ -52,19 +52,18 @@ public class MapMan {
     public List<Room> init() {
         if (size < 5)
             size = 5;
-        if(curse < 0 && curse >=1)
+        if (curse < 0 && curse >= 1)
             curse = 0.1f;
-        if(gas < 0 && gas >=1)
+        if (gas < 0 && gas >= 1)
             gas = 0.1f;
-        if(fals < 0 && fals >=1)
+        if (fals < 0 && fals >= 1)
             fals = 0.1f;
-        if(item < 0 && item >=1)
+        if (item < 0 && item >= 1)
             item = 0.5f;
-        if(door < 0 && door >=1)
+        if (door < 0 && door >= 1)
             door = 0.1f;
-        if(oneway < 0 && oneway >=1)
+        if (oneway < 0 && oneway >= 1)
             oneway = 0.1f;
-        map = new ArrayList<>();
         // Annyi szoba amekkora a size
         for (int i = 0; i < size; i++) {
             map.add(new Room());
@@ -80,6 +79,8 @@ public class MapMan {
             while (door > r.nextFloat()) {
                 if (size > 1) {
                     connectRandom(room, randomDoorType());
+                    if (room.getDoors().size() >= 12)
+                        break;
                 }
             }
         }
@@ -89,6 +90,11 @@ public class MapMan {
         for (Room room : map) {
             while (distance(startingRoom, room) < 0) {
                 connectRandom(room, randomDoorType());
+                if (room.getDoors().size() >= 12) {
+                    map = new ArrayList<>();
+                    map = init();
+                    return map;
+                }
             }
         }
 

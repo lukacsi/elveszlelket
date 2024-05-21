@@ -4,10 +4,12 @@ import skeleton.elveszlelket.CleaningLady;
 import skeleton.elveszlelket.Room;
 import skeleton.elveszlelket.Student;
 import skeleton.elveszlelket.Teacher;
+import skeleton.elveszlelket.gui.DoorView;
 
 public abstract class Door {
     boolean hidden = false;
     Room ownerRoom;
+    DoorView view;
 
     public boolean isHidden() {
         return hidden;
@@ -89,4 +91,11 @@ public abstract class Door {
 
     public abstract void putMeThrough(CleaningLady c);
 
+    public void setView(int i, int j) {
+        view = new DoorView(i, j, "file:textures/door.png");
+    }
+
+    public DoorView getView() {
+        return view;
+    }
 }

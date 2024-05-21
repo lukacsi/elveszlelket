@@ -10,14 +10,15 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import skeleton.elveszlelket.controller.GameMan;
 import skeleton.elveszlelket.controller.Settings;
+import skeleton.elveszlelket.gui.Screen;
 
-public class Menu extends Application {
+public class Menu extends VBox {
     public static Settings settings;
+    private Screen parent;
 
-    @Override
-    public void start(Stage primaryStage) {
+    public Menu(Screen parent) {
+    	this.parent = parent;
         settings = new Settings(1, 1, 1, 5, 0.1f, 0.1f, 0.1f, 0.5f, 0.1f, 0.1f);
-        primaryStage.setTitle("ELVESZLELKET THE GAME");
 
         Label titleLabel = new Label("ELVESZLELKET");
         titleLabel.setStyle("-fx-font-family: 'Serif'; -fx-font-size: 24; -fx-font-weight: bold;");
@@ -43,10 +44,9 @@ public class Menu extends Application {
         exitButton.setPrefSize(150, 50);
 
         playButton.setOnAction(e -> {
-            primaryStage.close();
+            parent.close();
             try {
-                GameMan gm = new GameMan(settings, new Stage());
-                gm.playRound();
+                parent.startGame(settings);
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
@@ -58,18 +58,9 @@ public class Menu extends Application {
         });
 
         // Close the application
-        exitButton.setOnAction(e -> primaryStage.close());
+        exitButton.setOnAction(e -> parent.close());
 
-        VBox layout = new VBox(10); // 10 is the spacing between elements
-        layout.setAlignment(Pos.CENTER); // Center align the elements
-        layout.getChildren().addAll(titleLabel, titleLabel2, spacer, playButton, optionsButton, exitButton);
-
-        Scene scene = new Scene(layout, 400, 400);
-        primaryStage.setScene(scene);
-        primaryStage.show();
-    }
-
-    public static void main(String[] args) {
-        launch(args);
+        this.setAlignment(Pos.CENTER); // Center align the elements
+        this.getChildren().addAll(titleLabel, titleLabel2, spacer, playButton, optionsButton, exitButton);
     }
 }

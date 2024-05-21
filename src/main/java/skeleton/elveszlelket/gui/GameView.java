@@ -6,6 +6,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import skeleton.elveszlelket.Room;
 import skeleton.elveszlelket.Student;
+import skeleton.elveszlelket.door.Door;
 import skeleton.elveszlelket.item.Item;
 
 public class GameView extends Pane {
@@ -196,6 +197,14 @@ public class GameView extends Pane {
 			v.Draw(this);
 			this.getChildren().add(itemMenu);
 			this.getChildren().add(pickupMenu);
+
+			// Ajto Rajz
+			for(Door d : jelenlegiJatekos.getRoom().getDoors()) {
+				DoorView dv = d.getView();
+				dv.setPos(rv.xToTileX(dv.getX()), rv.yToTileY(dv.getY()));
+				dv.normalizeTexture(rv.getTileWidth(), rv.getTileHeight());
+				dv.Draw(this);
+			}
 		} else {
 			System.out.println("GameView nem kapott jelenlegi jatekost.");
 		}
