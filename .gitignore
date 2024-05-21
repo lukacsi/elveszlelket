@@ -3,8 +3,7 @@ temp_sources.txt
  Compiled source #
 ###################
 *.com
-*.class
-*.dll
+*.classpath
 *.exe
 *.o
 *.so
