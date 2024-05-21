@@ -91,7 +91,7 @@ public class GameMan {
      */
     private void moveTeachers() {
         for (Teacher gajdos : teachers) {
-            Door door = gajdos.getRoom().getDoorAt(rand.nextInt(0, 20));
+            Door door = gajdos.getRoom().getDoorAt(rand.nextInt(0, 11));
             if (door != null) {
                 door.accept(gajdos);
             }
@@ -103,7 +103,7 @@ public class GameMan {
      */
     private void moveCleaners() {
         for (CleaningLady gizi : cleaners) {
-            Door door = gizi.getRoom().getDoorAt(rand.nextInt(0, 20));
+            Door door = gizi.getRoom().getDoorAt(rand.nextInt(0, 11));
             if (door != null) {
                 door.accept(gizi);
             }
