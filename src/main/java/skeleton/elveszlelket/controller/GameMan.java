@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import java.util.Random;
 
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -13,6 +14,7 @@ import skeleton.elveszlelket.CleaningLady;
 import skeleton.elveszlelket.Room;
 import skeleton.elveszlelket.Student;
 import skeleton.elveszlelket.Teacher;
+import skeleton.elveszlelket.door.Door;
 import skeleton.elveszlelket.gui.Screen;
 
 public class GameMan {
@@ -23,6 +25,7 @@ public class GameMan {
     private Queue<Student> sQueue;
     public int round;
     private Stage stage;
+    private Random r;
 
     public GameMan(int studentNum, int teacherNum, int cleanerNum, Stage stage) {
         this.students = new ArrayList<>();
@@ -62,11 +65,23 @@ public class GameMan {
     }
 
     private void moveTeachers() {
-
+        for (Teacher gajdos : teachers) {
+            Door door = gajdos.getRoom().getDoorAt(r.nextInt(0, 20));
+            if(door != null){
+                door.accept(gajdos);
+                door.putMeThrough(gajdos);
+            }
+        }
     }
 
     private void moveCleaners() {
-
+        for (CleaningLady gizi : cleaners) {
+            Door door = gizi.getRoom().getDoorAt(r.nextInt(0, 20));
+            if(door != null){
+                door.accept(gizi);
+                door.putMeThrough(gizi);
+            }
+        }
     }
 
     // Na ez azt csinálja hogy hasheli a roomot és aszerint pakolja a cuccokat.
