@@ -80,6 +80,9 @@ public class GameMan {
             moveTeachers();
             moveCleaners();
             round++;
+            for (int i = 0; i < Math.floor(map.size() / 3); i++) {
+                map.get(rand.nextInt(map.size())).changeDoorStatus();
+            }
             for (Student s : students) {
                 s.decreaseGasProtection();
                 s.decreaseImmunity();
