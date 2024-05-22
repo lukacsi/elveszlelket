@@ -10,6 +10,7 @@ import java.util.Queue;
 import java.util.Random;
 import java.util.Set;
 
+import ch.qos.logback.classic.util.ClassicEnvUtil;
 import skeleton.elveszlelket.*;
 import skeleton.elveszlelket.door.Door;
 import skeleton.elveszlelket.door.OneWayDoor;
@@ -191,14 +192,40 @@ public class MapMan {
                 break;
             }
         }
+        initView();
         return map;
     }
 
-    /**
-     * Véletlenszerűen kiválaszt egy tárgyat a megadott valószínűségekkel.
-     *
-     * @return Egy véletlenszerűen kiválasztott tárgy.
-     */
+    private void initView() {
+        for (Room room : map) {
+            int sizew = r.nextInt(5, 10);
+            int sizeh = r.nextInt(5, 10);
+            float WIDTH = sizew * 40.0f;
+            float HEIGHT = sizeh * 40.0f;
+            room.setView(WIDTH, HEIGHT);
+            for (Item i : room.getItems()) {
+                float w = r.nextInt(1, sizew - 2);
+                float h = r.nextInt(1, sizeh - 2);
+                i.setView(w * 40, h * 40);
+            }
+            for (Student s : room.getStudents()) {
+                float w = r.nextInt(1, sizew - 2);
+                float h = r.nextInt(1, sizeh - 2);
+                s.setView(w * 40, h * 40);
+            }
+            for (CleaningLady cl : room.getCleaningLadies()) {
+                float w = r.nextInt(1, sizew - 2);
+                float h = r.nextInt(1, sizeh - 2);
+                cl.setView(w * 40, h * 40);
+            }
+            for (Teacher t : room.getTeacher()) {
+                float w = r.nextInt(1, sizew - 2);
+                float h = r.nextInt(1, sizeh - 2);
+                t.setView(w * 40, h * 40);
+            }
+        }
+    }
+
     /**
      * Véletlenszerűen kiválaszt egy tárgyat a megadott valószínűségekkel.
      *
