@@ -1,6 +1,5 @@
 package skeleton.elveszlelket.gui;
 
-import javafx.animation.Transition;
 import javafx.animation.TranslateTransition;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;

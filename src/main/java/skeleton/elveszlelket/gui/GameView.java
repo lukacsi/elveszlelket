@@ -3,7 +3,6 @@ package skeleton.elveszlelket.gui;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -166,6 +165,7 @@ public class GameView extends Pane {
 				if (d.getView().getY() == jelenlegi.getView().getY() && d.getView()
 						.getX() == 0) {
 					if (d.accept(jelenlegi)) {
+						this.Parent.changeRoom(jelenlegi);
 						if (d.getOwnerRoom().equals(jelenlegiRoom)) {
 							jelenlegi.getView().setPos(
 									d.getView().getX2() - d.getDest(jelenlegiRoom).getView().getTileWidth(),

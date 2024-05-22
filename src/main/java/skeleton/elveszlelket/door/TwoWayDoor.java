@@ -20,6 +20,7 @@ public class TwoWayDoor extends Door {
      *         feljegyzett
      *         szobája.
      */
+    @Override
     public Room getSecondRoom() {
         return secondRoom;
     }

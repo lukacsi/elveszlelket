@@ -19,6 +19,7 @@ public class OneWayDoor extends Door {
      *         feljegyzett
      *         szobája.
      */
+    @Override
     public Room getSecondRoom() {
         return destination;
     }

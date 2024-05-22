@@ -1,8 +1,5 @@
 package skeleton.elveszlelket.gui;
 
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-
 public class HumanView extends View {
 	
 
@@ -19,6 +16,7 @@ public class HumanView extends View {
 	/**
 	 * Kirajzolja az embert.
 	 */
+	@Override
 	public void Draw(GameView jatekmegjelenito) {
 		texture.setLayoutX(x);
 		texture.setLayoutY(y);
