@@ -165,18 +165,18 @@ public class GameView extends Pane {
 			for (Door d : jelenlegiRoom.getDoors()) {
 				if (d.getView().getY() == jelenlegi.getView().getY() && d.getView()
 						.getX() == 0) {
-					d.accept(jelenlegi);
-					this.Parent.changeRoom(jelenlegi);
-					if (d.getOwnerRoom().equals(jelenlegiRoom)) {
-						jelenlegi.getView().setPos(
-								d.getView().getX2() - d.getDest(jelenlegiRoom).getView().getTileWidth(),
-								d.getView().getY2());
-					} else {
-						jelenlegi.getView().setPos(
-								d.getView().getX() - d.getDest(jelenlegiRoom).getView().getTileWidth(),
-								d.getView().getY());
+					if (d.accept(jelenlegi)) {
+						if (d.getOwnerRoom().equals(jelenlegiRoom)) {
+							jelenlegi.getView().setPos(
+									d.getView().getX2() - d.getDest(jelenlegiRoom).getView().getTileWidth(),
+									d.getView().getY2());
+						} else {
+							jelenlegi.getView().setPos(
+									d.getView().getX() - d.getDest(jelenlegiRoom).getView().getTileWidth(),
+									d.getView().getY());
+						}
+						updateItemsPos();
 					}
-					updateItemsPos();
 				}
 			}
 		}
@@ -198,16 +198,17 @@ public class GameView extends Pane {
 			for (Door d : jelenlegiRoom.getDoors()) {
 				if (d.getView().getY() == jelenlegi.getView().getY() && d.getView()
 						.getX() == jelenlegiRoom.getView().getX() - jelenlegiRoom.getView().getTileWidth()) {
-					d.accept(jelenlegi);
-					this.Parent.changeRoom(jelenlegi);
-					if (d.getOwnerRoom().equals(jelenlegiRoom)) {
-						jelenlegi.getView().setPos(d.getView().getX2(),
-								d.getView().getY2() - d.getDest(jelenlegiRoom).getView().getTileWidth());
-					} else {
-						jelenlegi.getView().setPos(d.getView().getX(),
-								d.getView().getY() - d.getDest(jelenlegiRoom).getView().getTileWidth());
+					if (d.accept(jelenlegi)) {
+						this.Parent.changeRoom(jelenlegi);
+						if (d.getOwnerRoom().equals(jelenlegiRoom)) {
+							jelenlegi.getView().setPos(d.getView().getX2(),
+									d.getView().getY2() - d.getDest(jelenlegiRoom).getView().getTileWidth());
+						} else {
+							jelenlegi.getView().setPos(d.getView().getX(),
+									d.getView().getY() - d.getDest(jelenlegiRoom).getView().getTileWidth());
+						}
+						updateItemsPos();
 					}
-					updateItemsPos();
 				}
 			}
 		}
@@ -229,16 +230,17 @@ public class GameView extends Pane {
 		} else {
 			for (Door d : jelenlegiRoom.getDoors()) {
 				if (d.getView().getX() == jelenlegi.getView().getX() && d.getView().getY() == 0) {
-					d.accept(jelenlegi);
-					this.Parent.changeRoom(jelenlegi);
-					if (d.getOwnerRoom().equals(jelenlegiRoom)) {
-						jelenlegi.getView().setPos(d.getView().getX2(),
-								d.getView().getY2() - d.getDest(jelenlegiRoom).getView().getTileWidth());
-					} else {
-						jelenlegi.getView().setPos(d.getView().getX(),
-								d.getView().getY() - d.getDest(jelenlegiRoom).getView().getTileWidth());
+					if (d.accept(jelenlegi)) {
+						this.Parent.changeRoom(jelenlegi);
+						if (d.getOwnerRoom().equals(jelenlegiRoom)) {
+							jelenlegi.getView().setPos(d.getView().getX2(),
+									d.getView().getY2() - d.getDest(jelenlegiRoom).getView().getTileWidth());
+						} else {
+							jelenlegi.getView().setPos(d.getView().getX(),
+									d.getView().getY() - d.getDest(jelenlegiRoom).getView().getTileWidth());
+						}
+						updateItemsPos();
 					}
-					updateItemsPos();
 				}
 			}
 		}
@@ -261,16 +263,17 @@ public class GameView extends Pane {
 			for (Door d : jelenlegiRoom.getDoors()) {
 				if (d.getView().getX() == jelenlegi.getView().getX() && d.getView()
 						.getY() == jelenlegiRoom.getView().getY() - jelenlegiRoom.getView().getTileHeight()) {
-					d.accept(jelenlegi);
-					this.Parent.changeRoom(jelenlegi);
-					if (d.getOwnerRoom().equals(jelenlegiRoom)) {
-						jelenlegi.getView().setPos(d.getView().getX2(),
-								0 + d.getDest(jelenlegiRoom).getView().getTileHeight());
-					} else {
-						jelenlegi.getView().setPos(d.getView().getX(),
-								0 + d.getDest(jelenlegiRoom).getView().getTileHeight());
+					if (d.accept(jelenlegi)) {
+						this.Parent.changeRoom(jelenlegi);
+						if (d.getOwnerRoom().equals(jelenlegiRoom)) {
+							jelenlegi.getView().setPos(d.getView().getX2(),
+									0 + d.getDest(jelenlegiRoom).getView().getTileHeight());
+						} else {
+							jelenlegi.getView().setPos(d.getView().getX(),
+									0 + d.getDest(jelenlegiRoom).getView().getTileHeight());
+						}
+						updateItemsPos();
 					}
-					updateItemsPos();
 				}
 			}
 		}

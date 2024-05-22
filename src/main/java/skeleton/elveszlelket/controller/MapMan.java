@@ -193,35 +193,42 @@ public class MapMan {
     }
 
     private void initView() {
+        // minden szóbában legeneráljük a view-t
         for (Room room : map) {
             int sizew = r.nextInt(5, 10);
             int sizeh = r.nextInt(5, 10);
             float WIDTH = sizew * 40.0f;
             float HEIGHT = sizeh * 40.0f;
             room.setView(WIDTH, HEIGHT);
+            // minden itemhez
             for (Item i : room.getItems()) {
                 float w = r.nextInt(1, sizew - 2);
                 float h = r.nextInt(1, sizeh - 2);
                 i.setView((w + 1) * 40, (h + 1) * 40);
             }
+            // minden hallgatóhoz
             for (Student s : room.getStudents()) {
                 float w = r.nextInt(1, sizew - 2);
                 float h = r.nextInt(1, sizeh - 2);
                 s.setView((w + 1) * 40, (h + 1) * 40);
             }
+            // minden takarítóhoz
             for (CleaningLady cl : room.getCleaningLadies()) {
                 float w = r.nextInt(1, sizew - 2);
                 float h = r.nextInt(1, sizeh - 2);
                 cl.setView((w + 1) * 40, (h + 1) * 40);
             }
+            // minden oktatóhoz
             for (Teacher t : room.getTeacher()) {
                 float w = r.nextInt(1, sizew - 2);
                 float h = r.nextInt(1, sizeh - 2);
                 t.setView((w + 1) * 40, (h + 1) * 40);
             }
         }
+        // miután megvan minden szoba az ajtókkal is foglalkozunk
         for (Room room : map) {
             for (Door d : room.getDoors()) {
+                // ha van már view akkor békénhagyjuk
                 if (d.getView() == null) {
                     Room r1 = d.getOwnerRoom();
                     Room r2 = d.getSecondRoom();

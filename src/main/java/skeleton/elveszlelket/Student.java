@@ -244,6 +244,7 @@ public class Student implements Human {
             return false;
         }
         item.use(this);
+        usedItem = true;
         return true;
     }
 
@@ -288,7 +289,7 @@ public class Student implements Human {
             for (Item item : items) {
                 useItem(item);
             }
-            if (immunityDuration == 0) {
+            if (immunityDuration <= 0) {
                 dead = true;
             }
         }
@@ -437,6 +438,7 @@ public class Student implements Human {
         if (currentRoom.getTeacher().size() > 0) {
             currentRoom.killStudents();
         }
+        changedRoom = true;
     }
 
     /**

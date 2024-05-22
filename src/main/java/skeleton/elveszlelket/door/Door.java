@@ -62,16 +62,16 @@ public abstract class Door {
      * 
      * @param s A hallgató.
      */
-    public abstract void accept(Student s);
+    public abstract boolean accept(Student s);
 
     /**
      * Elfogadja az observer oktatót.
      * 
      * @param t Az oktató.
      */
-    public abstract void accept(Teacher t);
+    public abstract boolean accept(Teacher t);
 
-    public abstract void accept(CleaningLady c);
+    public abstract boolean accept(CleaningLady c);
 
     /**
      * Átrakja a hallgatót a másik szobába.

@@ -39,8 +39,8 @@ public class TwoWayDoor extends Door {
      * @param s A hallgató.
      */
     @Override
-    public void accept(Student s) {
-        s.use(this);
+    public boolean accept(Student s) {
+        return s.use(this);
     }
 
     /**
@@ -49,8 +49,8 @@ public class TwoWayDoor extends Door {
      * @param t Az oktató.
      */
     @Override
-    public void accept(Teacher t) {
-        t.use(this);
+    public boolean accept(Teacher t) {
+        return t.use(this);
     }
 
     /**
@@ -108,8 +108,8 @@ public class TwoWayDoor extends Door {
     }
 
     @Override
-    public void accept(CleaningLady c) {
-        c.use(this);
+    public boolean accept(CleaningLady c) {
+        return c.use(this);
     }
 
     @Override
