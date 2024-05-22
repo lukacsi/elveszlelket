@@ -42,10 +42,10 @@ public class Screen extends Pane {
 	}
 
 	public void startGame(Settings settings) {
-        GameMan gm = new GameMan(settings, new Stage());
-        gameManager = gm;
-        gm.playRound();
-        
+		GameMan gm = new GameMan(settings, new Stage());
+		gameManager = gm;
+		gm.playRound();
+
 		this.setOnKeyPressed(e -> {
 			switch (e.getCode()) {
 				case I:
@@ -78,15 +78,13 @@ public class Screen extends Pane {
 			}
 			e.consume();
 		});
-        
-        showCurrentRound(gm.getCurrentPlayer());
+
+		showCurrentRound(gm.getCurrentPlayer());
 	}
 
 	public void showCurrentRound(Student jelenlegiJatekos) {
 		this.getChildren().clear();
 		Room jelenlegiSzoba = jelenlegiJatekos.getRoom();
-
-		this.getChildren().add(new Button("b"));
 
 		palyamegjelenito = new GameView(this, jelenlegiSzoba.getView().getX(), jelenlegiSzoba.getView().getY());
 		this.WIDTH = this.palyamegjelenito.WIDTH;
@@ -97,12 +95,10 @@ public class Screen extends Pane {
 		this.parentScene.getWindow().setHeight(HEIGHT + 37.333333);
 		// System.out.println(this.parentScene.getWindow().getWidth() + " " +
 		// this.parentScene.getWindow().getHeight());
-
 		this.palyamegjelenito.Update(jelenlegiJatekos);
 		// System.out.println(this.parentScene.getWindow().getWidth() + " " +
 		// this.parentScene.getWindow().getHeight());
 
-		this.palyamegjelenito.Update(jelenlegiJatekos);
 	}
 
 	public void close() {

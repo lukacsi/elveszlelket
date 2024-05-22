@@ -161,6 +161,24 @@ public class GameView extends Pane {
 					jelenlegi.getView().getY());
 			Update(jelenlegiJatekos);
 			updateItemsPos();
+		} else {
+			for (Door d : jelenlegiRoom.getDoors()) {
+				if (d.getView().getY() == jelenlegi.getView().getY() && d.getView()
+						.getX() == 0) {
+					d.accept(jelenlegi);
+					this.Parent.changeRoom(jelenlegi);
+					if (d.getOwnerRoom().equals(jelenlegiRoom)) {
+						jelenlegi.getView().setPos(
+								d.getView().getX2() - d.getDest(jelenlegiRoom).getView().getTileWidth(),
+								d.getView().getY2());
+					} else {
+						jelenlegi.getView().setPos(
+								d.getView().getX() - d.getDest(jelenlegiRoom).getView().getTileWidth(),
+								d.getView().getY());
+					}
+					updateItemsPos();
+				}
+			}
 		}
 	}
 
@@ -223,6 +241,7 @@ public class GameView extends Pane {
 						jelenlegi.getView().setPos(d.getView().getX(),
 								d.getView().getY() - d.getDest(jelenlegiRoom).getView().getTileWidth());
 					}
+					this.Update(jelenlegi);
 					updateItemsPos();
 				}
 			}
@@ -271,18 +290,6 @@ public class GameView extends Pane {
 					iv.Draw(this);
 				}
 
-				// Student Rajz
-				for (Student st : jelenlegiJatekos.getRoom().getStudents()) {
-					if (st == jelenlegiJatekos) {
-						this.getChildren().add(itemMenu);
-						this.getChildren().add(pickupMenu);
-					}
-					View v = st.getView();
-					v.setPos(rv.xToTileX(v.getX()), rv.yToTileY(v.getY()));
-					v.normalizeTexture(rv.getTileWidth(), rv.getTileHeight());
-					v.Draw(this);
-				}
-
 				// Ajto Rajz
 				for (Door d : jelenlegiJatekos.getRoom().getDoors()) {
 					DoorView dv = d.getView();
@@ -295,6 +302,18 @@ public class GameView extends Pane {
 					dv.normalizeTexture(rv.getTileWidth(), rv.getTileHeight());
 					dv.Draw(this);
 				}
+				// Student Rajz
+				for (Student st : jelenlegiJatekos.getRoom().getStudents()) {
+					if (st == jelenlegiJatekos) {
+						this.getChildren().add(itemMenu);
+						this.getChildren().add(pickupMenu);
+					}
+					View v = st.getView();
+					v.setPos(rv.xToTileX(v.getX()), rv.yToTileY(v.getY()));
+					v.normalizeTexture(rv.getTileWidth(), rv.getTileHeight());
+					v.Draw(this);
+				}
+
 			} else {
 				System.out.println("GameView nem kapott jelenlegi jatekost.");
 			}
