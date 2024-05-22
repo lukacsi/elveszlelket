@@ -91,7 +91,7 @@ public abstract class Door {
 
     public abstract void putMeThrough(CleaningLady c);
 
-    public void setView(int i, int j, float x2, float y2) {
+    public void setView(float i, float j, float x2, float y2) {
         view = new DoorView(i, j, x2, y2, "file:textures/door.png");
     }
 

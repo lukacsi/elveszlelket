@@ -168,7 +168,7 @@ public class GameMan {
                     vege = true;
                     elsox = x;
                     elsoy = y;
-                    if (y * 40 % (sizew * 40 - 40.0f) == 0) {
+                    if (y * 40 % (sizew*40 - 40.0f) == 0) {
                         rotate = true;
                     }
                     indx.add(new Pair<>(x, y));
