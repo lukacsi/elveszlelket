@@ -192,7 +192,6 @@ public class GameView extends Pane {
 						jelenlegi.getView().setPos(d.getView().getX(),
 								d.getView().getY() - d.getDest(jelenlegiRoom).getView().getTileWidth());
 					}
-					Update(jelenlegiJatekos);
 					updateItemsPos();
 				}
 			}
@@ -224,7 +223,6 @@ public class GameView extends Pane {
 						jelenlegi.getView().setPos(d.getView().getX(),
 								d.getView().getY() - d.getDest(jelenlegiRoom).getView().getTileWidth());
 					}
-					Update(jelenlegiJatekos);
 					updateItemsPos();
 				}
 			}
