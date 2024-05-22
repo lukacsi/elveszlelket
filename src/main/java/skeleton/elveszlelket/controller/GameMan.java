@@ -79,7 +79,19 @@ public class GameMan {
                 settings.oneway, teachers, students,
                 cleaners);
         map = m.init();
-
+        
+        
+        for(Student s : this.students) {
+        	s.setView(40, 40);
+        }
+        
+        Random rand = new Random();
+        for(Room r : map) {
+        	float x = rand.nextInt(11);
+        	float y = rand.nextInt(11);
+        	r.setView(x*40.0f, y*40.0f);
+        }
+        
         round = 1;
         sQueue.addAll(students);
     }
@@ -109,6 +121,7 @@ public class GameMan {
             sQueue.addAll(students);
         }
         Student s = sQueue.poll();
+        this.jelenlegiJatekos = s;
         DrawScene(s);
     }
 
@@ -157,140 +170,136 @@ public class GameMan {
         float WIDTH = sizew * 40.0f;
         float HEIGHT = sizeh * 40.0f;
         System.out.println("width: " + WIDTH + " height: " + HEIGHT);
-
-        if (r.getView() == null) {
-            for (Item i : r.getItems()) {
-                if (i.getView() != null) {
-                    continue;
-                }
-                float w = abs(i.hashCode()) % (sizew - 2);
-                float h = (abs(i.hashCode() * sizew)) % (sizeh - 2);
-                i.setView((w + 1) * 40, (h + 1) * 40);
-                System.out.println(i.getClass().toString() + " " + (w + 1) * 40 + " " + (h + 1) * 40);
+        Random rand = new Random();
+        for (Item i : r.getItems()) {
+            if (i.getView() != null) {
+                continue;
             }
-
-            if (r.getView() == null) {
-                for (Item i : r.getItems()) {
-                    if (i.getView() != null) {
-                        continue;
-                    }
-                    float w = abs(i.hashCode()) % (sizew - 2);
-                    float h = (abs(i.hashCode() * sizew)) % (sizeh - 2);
-                    i.setView((w + 1) * 40, (h + 1) * 40);
-                    System.out.println(i.getClass().toString() + " " + (w + 1) * 40 + " " + (h + 1) * 40);
-                }
-
-                List<Pair<Integer, Integer>> indx = new ArrayList<>();
-
-                // System.out.println(r.getDoors().size());
-                for (Door door : r.getDoors()) {
-                    if (door.getView() != null) {
-                        continue;
-                    }
-                    boolean rotate = false;
-                    boolean vege = false;
-                    int elsox = 1, elsoy = 1;
-                    int masodikx = 1, masodiky = 1;
-                    while (!vege) {
-                        int x;
-                        int y;
-                        if (rand.nextFloat() > 0.5f) {
-                            if (rand.nextFloat() > 0.5f) {
-                                x = 0;
-                            } else {
-                                x = sizew - 1;
-                            }
-                            y = rand.nextInt(1, sizeh - 1);
-                        } else {
-                            if (rand.nextFloat() > 0.5f) {
-                                y = 0;
-                            } else {
-                                y = sizeh - 1;
-                            }
-                            x = rand.nextInt(1, sizew - 1);
-                        }
-                        if (!indx.contains(new Pair<>(x, y))) {
-                            vege = true;
-                            elsox = x;
-                            elsoy = y;
-                            if (y * 40 % (HEIGHT - 40.0f) == 0) {
-                                rotate = true;
-                            }
-                            indx.add(new Pair<>(x, y));
-                            System.out.println("width: " + x * 40 + " height: " + y * 40);
-                        }
-                    }
-                    vege = false;
-                    Room masodik = door.getDest(r);
-                    if (masodik.equals(r)) {
-                        masodik = door.getOwnerRoom();
-                    }
-                    int sizeWSecond = (abs(masodik.hashCode()) % 6) + 5;
-                    int sizeHSecond = (abs(sizeWSecond * masodik.hashCode()) % 6) + 5;
-                    int x;
-                    int y;
-                    if (elsox % (sizew - 1) == 0) {
-                        if (elsox == 0) {
-                            x = sizeWSecond - 1;
-                        } else {
-                            x = 0;
-                        }
-                        y = elsoy;
-                        vege = true;
-                        masodikx = x;
-                        masodiky = y;
-                        System.out.println("width2: " + x * 40 + " height2: " + y * 40);
-                    } else if (elsoy % (sizeh - 1) == 0) {
-                        if (elsoy == 0) {
-                            y = sizeHSecond - 1;
-                        } else {
-                            y = 0;
-                        }
-                        x = elsox;
-                        masodikx = x;
-                        masodiky = y;
-                        System.out.println("width2: " + x * 40 + " height2: " + y * 40);
-                    }
-                    if(door.getOwnerRoom().equals(r)) {
-                    	 door.setView(elsox * 40, elsoy * 40, masodikx * 40, masodiky * 40);
-                    } else {
-                    	 door.setView(masodikx * 40, masodiky * 40, elsox * 40, elsoy * 40);
-                    }
-                 
-                    if (rotate) {
-                        door.getView().rotateTexture90();
-                    }
-                }
-
-                for (Student st : r.getStudents()) {
-                    if (st.getView() != null) {
-                        continue;
-                    }
-                    float w = abs(st.hashCode()) % (sizew - 2);
-                    float h = (abs(st.hashCode() * sizew)) % (sizeh - 2);
-                    st.setView((w + 1) * 40, (h + 1) * 40);
-                }
-                for (Teacher t : r.getTeacher()) {
-                    if (t.getView() != null) {
-                        continue;
-                    }
-                    float w = abs(t.hashCode()) % (sizew - 2);
-                    float h = (abs(t.hashCode() * sizew)) % (sizeh - 2);
-                    t.setView((w + 1) * 40, (h + 1) * 40);
-                }
-                for (CleaningLady c : r.getCleaningLadies()) {
-                    if (c.getView() != null) {
-                        continue;
-                    }
-                    float w = abs(c.hashCode()) % (sizew - 2);
-                    float h = (abs(c.hashCode() * sizew)) % (sizeh - 2);
-                    c.setView((w + 1) * 40, (h + 1) * 40);
-                }
-            }
-
-            r.setView(WIDTH, HEIGHT);
-            this.jelenlegiJatekos = s;
+            float w = rand.nextInt(sizew-2);
+            float h = rand.nextInt(sizeh-2);
+            i.setView((w + 1) * 40, (h + 1) * 40);
+            System.out.println(i.getClass().toString() + " " + (w + 1) * 40 + " " + (h + 1) * 40);
         }
+
+        List<Pair<Integer, Integer>> indx = new ArrayList<>();
+        System.out.println(r.getDoors().size());
+        for (Door door : r.getDoors()) {
+            if (door.getView() != null) {
+                continue;
+            }
+            boolean rotate = false;
+            boolean vege = false;
+            int elsox = 1, elsoy = 1;
+            int masodikx = 1, masodiky = 1;
+            while (!vege) {
+                int x;
+                int y;
+                if (rand.nextFloat() > 0.5f) {
+                    if (rand.nextFloat() > 0.5f) {
+                        x = 0;
+                    } else {
+                        x = sizew - 1;
+                    }
+                    y = rand.nextInt(1, sizeh - 1);
+                } else {
+                    if (rand.nextFloat() > 0.5f) {
+                        y = 0;
+                    } else {
+                        y = sizeh - 1;
+                    }
+                    x = rand.nextInt(1, sizew - 1);
+                }
+                if (!indx.contains(new Pair<>(x, y))) {
+                    vege = true;
+                    elsox = x;
+                    elsoy = y;
+                    if (y * 40 % (HEIGHT - 40.0f) == 0) {
+                        rotate = true;
+                    }
+                    indx.add(new Pair<>(x, y));
+                    System.out.println("width: " + x * 40 + " height: " + y * 40);
+                }
+            }
+            vege = false;
+            Room masodik = door.getDest(r);
+           
+            if (masodik.equals(r)) {
+                masodik = door.getOwnerRoom();
+            }
+            int sizeWSecond = (abs(masodik.hashCode()) % 6) + 5;
+            int sizeHSecond = (abs(sizeWSecond * masodik.hashCode()) % 6) + 5;
+            int x;
+            int y;
+            if (elsox % (sizew - 1) == 0) {
+                if (elsox == 0) {
+                    x = sizeWSecond - 1;
+                } else {
+                    x = 0;
+                }
+                y = rand.nextInt((int)masodik.getView().getTileHeight());
+                ArrayList<Pair<Integer, Integer>> existingCords = new ArrayList<>();
+                while(existingCords.contains(new Pair<>(x,y)) && existingCords.size() < masodik.getView().getTileHeight()-2) {
+                	 existingCords.add(new Pair<>(x,y));
+                	 y = rand.nextInt((int)masodik.getView().getTileHeight());
+                }
+                masodikx = x;
+                masodiky = y;
+                System.out.println("width2: " + x * 40 + " height2: " + y * 40);
+            } else if (elsoy % (sizeh - 1) == 0) {
+                if (elsoy == 0) {
+                    y = sizeHSecond - 1;
+                } else {
+                    y = 0;
+                }
+                x = rand.nextInt((int)masodik.getView().getTileWidth());
+                ArrayList<Pair<Integer, Integer>> existingCords = new ArrayList<>();
+                while(existingCords.contains(new Pair<>(x,y)) && existingCords.size() < masodik.getView().getTileWidth()-2) {
+                	 existingCords.add(new Pair<>(x,y));
+                	 x = rand.nextInt((int)masodik.getView().getTileWidth());
+                }
+                masodikx = x;
+                masodiky = y;
+                System.out.println("width2: " + x * 40 + " height2: " + y * 40);
+            }
+            
+
+            if(door.getOwnerRoom().equals(r)) {
+            	 door.setView(elsox * 40, elsoy * 40, masodikx * 40, masodiky * 40);
+            } else {
+            	 door.setView(masodikx * 40, masodiky * 40, elsox * 40, elsoy * 40);
+            }
+            
+            if (rotate) {
+                door.getView().rotateTexture90();
+            }
+        
+        }
+
+        for (Student st : r.getStudents()) {
+            if (st.getView() != null) {
+                continue;
+            }
+            float w = abs(st.hashCode()) % (sizew - 2);
+            float h = (abs(st.hashCode() * sizew)) % (sizeh - 2);
+            st.setView((w + 1) * 40, (h + 1) * 40);
+        }
+        for (Teacher t : r.getTeacher()) {
+            if (t.getView() != null) {
+                continue;
+            }
+            float w = abs(t.hashCode()) % (sizew - 2);
+            float h = (abs(t.hashCode() * sizew)) % (sizeh - 2);
+            t.setView((w + 1) * 40, (h + 1) * 40);
+        }
+        for (CleaningLady c : r.getCleaningLadies()) {
+            if (c.getView() != null) {
+                continue;
+            }
+            float w = abs(c.hashCode()) % (sizew - 2);
+            float h = (abs(c.hashCode() * sizew)) % (sizeh - 2);
+            c.setView((w + 1) * 40, (h + 1) * 40);
+        }
+        r.setView(WIDTH, HEIGHT);
     }
 
     public void mergeRooms(Room regi1, Room regi2) {
