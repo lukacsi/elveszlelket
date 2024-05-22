@@ -192,6 +192,9 @@ public class MapMan {
         return map;
     }
 
+    /**
+     * Betölti a Viewokat az összes entitásra, hogy később lehessen velük dolgozni.
+     */
     private void initView() {
         // minden szóbában legeneráljük a view-t
         for (Room room : map) {

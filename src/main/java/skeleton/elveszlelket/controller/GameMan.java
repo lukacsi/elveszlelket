@@ -123,6 +123,11 @@ public class GameMan {
         return true;
     }
 
+    /**
+     * Összeolvasz két szobát
+     * @param regi1 egyik szoba
+     * @param regi2 másik szoba
+     */
     public void mergeRooms(Room regi1, Room regi2) {
         Room uj = new Room();
         regi1.merge(regi2, uj);
@@ -184,6 +189,9 @@ public class GameMan {
         return (num < 0) ? -num : num;
     }
 
+    /**
+     * Kitörli a jelenlegi játékos, így tőbbé nem kerül sorra.
+     */
     public void removeCurrent() {
         students.remove(jelenlegiJatekos);
         playRound();

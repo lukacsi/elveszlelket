@@ -1,3 +1,4 @@
+```java
 package skeleton.elveszlelket;
 
 import javafx.geometry.Insets;
@@ -11,8 +12,17 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import skeleton.elveszlelket.controller.Settings;
 
+/**
+ * Az Options osztály megjeleníti és kezeli a játék beállításait tartalmazó ablakot.
+ * Lehetővé teszi a felhasználó számára a különböző beállítások módosítását.
+ */
 public class Options {
 
+    /**
+     * Megjeleníti a beállítások ablakot és kezeli a felhasználói bevitelt.
+     *
+     * @param settings a játék jelenlegi beállításai
+     */
     public static void display(Settings settings) {
         Stage window = new Stage();
         window.setTitle("Options");
@@ -22,16 +32,16 @@ public class Options {
         grid.setVgap(10);
         grid.setHgap(20);
 
-        // Section Titles
+        // Címek
         Label settingsTitle = new Label("SETTINGS");
         settingsTitle.setFont(Font.font("Serif", FontWeight.BOLD, 16));
-        GridPane.setConstraints(settingsTitle, 0, 0, 2, 1); // Span two columns
+        GridPane.setConstraints(settingsTitle, 0, 0, 2, 1); // Két oszlopot fed le
 
         Label randomWeightsTitle = new Label("RANDOM WEIGHTS");
         randomWeightsTitle.setFont(Font.font("Serif", FontWeight.BOLD, 16));
-        GridPane.setConstraints(randomWeightsTitle, 0, 5, 4, 1); // Span four columns
+        GridPane.setConstraints(randomWeightsTitle, 0, 5, 4, 1); // Négy oszlopot fed le
 
-        // Settings Labels and TextFields
+        // Beállítások címkék és szövegmezők
         Label playersLabel = new Label("players");
         GridPane.setConstraints(playersLabel, 0, 1);
         TextField playersField = new TextField(String.valueOf(settings.studentNum));
@@ -56,7 +66,7 @@ public class Options {
         mapSizeField.setPrefWidth(80);
         GridPane.setConstraints(mapSizeField, 1, 4);
 
-        // Random Weights Labels and TextFields
+        // Véletlen-súlyozotr címkék és szövegmezők
         Label curseLabel = new Label("curse");
         GridPane.setConstraints(curseLabel, 0, 6);
         TextField curseField = new TextField(String.valueOf(settings.curse));
@@ -93,10 +103,10 @@ public class Options {
         oneWayField.setPrefWidth(80);
         GridPane.setConstraints(oneWayField, 3, 8);
 
-        // Back button
+        // Vissza gomb
         Button backButton = new Button("BACK");
         backButton.setOnAction(e -> {
-            // Get values from text fields and update settings
+            // mezőkből származó értékek beolvasása és beállítások frissítése
             settings.studentNum = Integer.parseInt(playersField.getText());
             settings.teacherNum = Integer.parseInt(teachersField.getText());
             settings.cleanerNum = Integer.parseInt(cleanersField.getText());
@@ -108,7 +118,7 @@ public class Options {
             settings.door = Float.parseFloat(doorField.getText());
             settings.oneway = Float.parseFloat(oneWayField.getText());
 
-            // Close the window
+            // bezárás
             window.close();
         });
         GridPane.setConstraints(backButton, 0, 10);
@@ -133,3 +143,4 @@ public class Options {
         window.show();
     }
 }
+```

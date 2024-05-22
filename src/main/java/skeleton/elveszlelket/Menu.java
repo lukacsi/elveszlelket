@@ -12,10 +12,20 @@ import skeleton.elveszlelket.controller.GameMan;
 import skeleton.elveszlelket.controller.Settings;
 import skeleton.elveszlelket.gui.Screen;
 
+/**
+ * A Menu osztály kezeli a főmenü megjelenítését és annak funkcióit.
+ * Itt találhatók a játék indítására, beállítások megnyitására és kilépésre szolgáló gombok.
+ */
 public class Menu extends VBox {
     public static Settings settings;
     private Screen parent;
 
+    /**
+     * Létrehoz egy Menu objektumot a megadott szülő Screen objektummal.
+     * Inicializálja a menü elemeit és beállítja a gombok eseménykezelőit.
+     *
+     * @param parent a menü szülő Screen objektuma
+     */
     public Menu(Screen parent) {
         this.parent = parent;
         settings = new Settings(2, 1, 1, 15, 0.1f, 0.1f, 0.1f, 0.5f, 0.1f, 0.1f);
@@ -38,7 +48,7 @@ public class Menu extends VBox {
         Button exitButton = new Button("EXIT");
         exitButton.setStyle("-fx-font-family: 'Serif'; -fx-font-size: 12; -fx-font-weight: bold;");
 
-        // Set button sizes
+
         playButton.setPrefSize(150, 50);
         optionsButton.setPrefSize(150, 50);
         exitButton.setPrefSize(150, 50);
@@ -52,15 +62,16 @@ public class Menu extends VBox {
             }
         });
 
-        // Add action for the options button
         optionsButton.setOnAction(e -> {
             Options.display(settings);
         });
 
-        // Close the application
-        exitButton.setOnAction(e -> parent.close());
+        exitButton.setOnAction(e -> {
+            Stage stage = (Stage) getScene().getWindow();
+            stage.close();
+        });
 
-        this.setAlignment(Pos.CENTER); // Center align the elements
+        this.setAlignment(Pos.CENTER);
         this.getChildren().addAll(titleLabel, titleLabel2, spacer, playButton, optionsButton, exitButton);
     }
 }
