@@ -28,7 +28,7 @@ public class Menu extends VBox {
      */
     public Menu(Screen parent) {
         this.parent = parent;
-        settings = new Settings(2, 1, 1, 15, 0.1f, 0.1f, 0.1f, 0.5f, 0.1f, 0.1f);
+        settings = new Settings(2, 1, 1, 5, 0.1f, 0.1f, 0.1f, 0.5f, 0.1f, 0.1f);
 
         Label titleLabel = new Label("ELVESZLELKET");
         titleLabel.setStyle("-fx-font-family: 'Serif'; -fx-font-size: 24; -fx-font-weight: bold;");

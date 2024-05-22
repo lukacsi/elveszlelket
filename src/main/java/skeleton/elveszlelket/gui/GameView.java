@@ -388,10 +388,12 @@ public class GameView extends Pane {
 			}
 
 			for (Teacher t : jelenlegiJatekos.getRoom().getTeacher()) {
-				View v = t.getView();
-				v.setPos(rv.xToTileX(v.getX()), rv.yToTileY(v.getY()));
-				v.normalizeTexture(rv.getTileWidth(), rv.getTileHeight());
-				v.Draw(this);
+				if(!this.getChildren().contains(t)) {
+					View v = t.getView();
+					v.setPos(rv.xToTileX(v.getX()), rv.yToTileY(v.getY()));
+					v.normalizeTexture(rv.getTileWidth(), rv.getTileHeight());
+					v.Draw(this);
+				}
 			}
 			for (CleaningLady c : jelenlegiJatekos.getRoom().getCleaningLadies()) {
 				View v = c.getView();
