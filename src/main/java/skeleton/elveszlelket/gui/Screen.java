@@ -40,6 +40,15 @@ public class Screen extends Pane {
 		// gameManager.DrawScene(jelenlegi);
 		showCurrentRound(jelenlegi);
 	}
+	
+	public void endGame() {
+		this.getChildren().clear();
+		this.getChildren().add(menu);
+	}
+	
+	public boolean isEveryoneDead() {
+		return gameManager.isEveryoneDead();
+	}
 
 	public void startGame(Settings settings) {
 		GameMan gm = new GameMan(settings, new Stage());
@@ -72,6 +81,9 @@ public class Screen extends Pane {
 					this.palyamegjelenito.translatePickUpMenu();
 					this.palyamegjelenito.closeItemMenu();
 					break;
+				case X:
+					break;
+					
 			}
 			e.consume();
 		});

@@ -218,6 +218,15 @@ public class GameMan {
 
     // this.jelenlegiJatekos = s;
     // }
+    
+    public boolean isEveryoneDead() {
+    	for(Student s : this.students) {
+    		if(!s.isDead()) {
+    			return false;
+    		}
+    	}
+    	return true;
+    }
 
     public void mergeRooms(Room regi1, Room regi2) {
         Room uj = new Room();

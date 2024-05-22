@@ -1,9 +1,12 @@
 package skeleton.elveszlelket.gui;
 
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import skeleton.elveszlelket.CleaningLady;
 import skeleton.elveszlelket.Room;
 import skeleton.elveszlelket.Student;
@@ -262,15 +265,15 @@ public class GameView extends Pane {
 			updateItemsPos();
 		} else {
 			for (Door d : jelenlegiRoom.getDoors()) {
-				if (d.getView().getX() == jelenlegi.getView().getX() && d.getView().getY() == 0) {
+				if (d.getView().getX() == jelenlegi.getView().getX() && d.getView().getY() == jelenlegiRoom.getView().getY()-jelenlegiRoom.getView().getTileHeight()) {
 					d.accept(jelenlegi);
 					this.Parent.changeRoom(jelenlegi);
 					if (d.getOwnerRoom().equals(jelenlegiRoom)) {
 						jelenlegi.getView().setPos(d.getView().getX2(),
-								d.getView().getY2() + d.getDest(jelenlegiRoom).getView().getTileWidth());
+								0 + d.getDest(jelenlegiRoom).getView().getTileHeight());
 					} else {
 						jelenlegi.getView().setPos(d.getView().getX(),
-								d.getView().getY() + d.getDest(jelenlegiRoom).getView().getTileWidth());
+							    0 + d.getDest(jelenlegiRoom).getView().getTileHeight());
 					}
 					updateItemsPos();
 				}
@@ -285,9 +288,39 @@ public class GameView extends Pane {
 	 */
 	public void Update(Student jelenlegiJatekos) {
 
-		if (jelenlegiJatekos != null) {
-
-			if (jelenlegiJatekos != null) {
+			if(Parent.isEveryoneDead()) {
+				this.getChildren().clear();
+				VBox v = new VBox();
+				HBox h = new HBox();
+				Button b = new Button("Ohh ne!");
+				b.setStyle("-fx-border-width:0;");
+				b.setOnMouseClicked(e -> {
+					Parent.endGame();
+				});
+				h.getChildren().add(b);
+				h.getChildren().add(new TextArea("Oktatok nyertek."));
+				v.setAlignment(Pos.CENTER);
+				h.setAlignment(Pos.CENTER);
+				v.getChildren().add(h);
+				this.getChildren().add(v);
+			}
+			else if(jelenlegiJatekos.won()) {
+				this.getChildren().clear();
+				VBox v = new VBox();
+				HBox h = new HBox();
+				Button b = new Button("Kiraly");
+				b.setStyle("-fx-border-width:0;");
+				b.setOnMouseClicked(e -> {
+					Parent.endGame();
+				});
+				h.getChildren().add(b);
+				h.getChildren().add(new TextArea("Hallgatok nyertek"));
+				v.setAlignment(Pos.CENTER);
+				h.setAlignment(Pos.CENTER);
+				v.getChildren().add(h);
+				this.getChildren().add(v);
+			}
+			else if (jelenlegiJatekos != null) {
 				this.jelenlegiJatekos = jelenlegiJatekos;
 				// Letorlunk mindent korabbi texturat.
 				this.getChildren().clear();
@@ -344,7 +377,6 @@ public class GameView extends Pane {
 			} else {
 				System.out.println("GameView nem kapott jelenlegi jatekost.");
 			}
-		}
 	}
 
 	/**
