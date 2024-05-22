@@ -165,7 +165,7 @@ public class GameView extends Pane {
 				if (d.getView().getY() == jelenlegi.getView().getY() && d.getView()
 						.getX() == 0) {
 					if (d.accept(jelenlegi)) {
-						if (d.getOwnerRoom().equals(jelenlegiRoom)) {
+						/*if (d.getOwnerRoom().equals(jelenlegiRoom)) {
 							jelenlegi.getView().setPos(
 									d.getView().getX2() - d.getDest(jelenlegiRoom).getView().getTileWidth(),
 									d.getView().getY2());
@@ -173,7 +173,8 @@ public class GameView extends Pane {
 							jelenlegi.getView().setPos(
 									d.getView().getX() - d.getDest(jelenlegiRoom).getView().getTileWidth(),
 									d.getView().getY());
-						}
+						}*/
+						jelenlegi.getView().setPos(40, 40);
 						this.Parent.changeRoom(jelenlegi);
 						updateItemsPos();
 					}
@@ -199,13 +200,14 @@ public class GameView extends Pane {
 				if (d.getView().getY() == jelenlegi.getView().getY() && d.getView()
 						.getX() == jelenlegiRoom.getView().getX() - jelenlegiRoom.getView().getTileWidth()) {
 					if (d.accept(jelenlegi)) {
-						if (d.getOwnerRoom().equals(jelenlegiRoom)) {
+						/*if (d.getOwnerRoom().equals(jelenlegiRoom)) {
 							jelenlegi.getView().setPos(d.getView().getX2(),
 									d.getView().getY2() - d.getDest(jelenlegiRoom).getView().getTileWidth());
 						} else {
 							jelenlegi.getView().setPos(d.getView().getX(),
 									d.getView().getY() - d.getDest(jelenlegiRoom).getView().getTileWidth());
-						}
+						} */
+						jelenlegi.getView().setPos(40, 40);
 						this.Parent.changeRoom(jelenlegi);
 						updateItemsPos();
 					}
@@ -231,13 +233,14 @@ public class GameView extends Pane {
 			for (Door d : jelenlegiRoom.getDoors()) {
 				if (d.getView().getX() == jelenlegi.getView().getX() && d.getView().getY() == 0) {
 					if (d.accept(jelenlegi)) {
-						if (d.getOwnerRoom().equals(jelenlegiRoom)) {
+						/*if (d.getOwnerRoom().equals(jelenlegiRoom)) {
 							jelenlegi.getView().setPos(d.getView().getX2(),
 									d.getView().getY2() - d.getDest(jelenlegiRoom).getView().getTileWidth());
 						} else {
 							jelenlegi.getView().setPos(d.getView().getX(),
 									d.getView().getY() - d.getDest(jelenlegiRoom).getView().getTileWidth());
-						}
+						}*/
+						jelenlegi.getView().setPos(40, 40);
 						this.Parent.changeRoom(jelenlegi);
 						updateItemsPos();
 					}
@@ -264,13 +267,14 @@ public class GameView extends Pane {
 				if (d.getView().getX() == jelenlegi.getView().getX() && d.getView()
 						.getY() == jelenlegiRoom.getView().getY() - jelenlegiRoom.getView().getTileHeight()) {
 					if (d.accept(jelenlegi)) {
-						if (d.getOwnerRoom().equals(jelenlegiRoom)) {
+						/*if (d.getOwnerRoom().equals(jelenlegiRoom)) {
 							jelenlegi.getView().setPos(d.getView().getX2(),
 									0 + d.getDest(jelenlegiRoom).getView().getTileHeight());
 						} else {
 							jelenlegi.getView().setPos(d.getView().getX(),
 									0 + d.getDest(jelenlegiRoom).getView().getTileHeight());
-						}
+						}*/
+						jelenlegi.getView().setPos(40, 40);
 						this.Parent.changeRoom(jelenlegi);
 						updateItemsPos();
 					}
