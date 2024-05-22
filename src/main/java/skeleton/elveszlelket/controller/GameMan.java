@@ -96,6 +96,10 @@ public class GameMan {
             sQueue.addAll(students);
         }
         this.jelenlegiJatekos = sQueue.poll();
+        System.out.println(jelenlegiJatekos.getRoom().getDoors().size());
+        for (Door d : jelenlegiJatekos.getRoom().getDoors()) {
+            System.out.println(d.getView().getX() + " " + d.getView().getY());
+        }
     }
 
     /**
@@ -136,80 +140,83 @@ public class GameMan {
     // // System.out.println(r.getDoors().size());
     // // List<Pair<Integer, Integer>> indx = new ArrayList<>();
 
-    // // // System.out.println(r.getDoors().size());
-    // // for (Door door : r.getDoors()) {
-    // // if (door.getView() != null) {
-    // // continue;
-    // // }
-    // // boolean rotate = false;
-    // // boolean vege = false;
-    // // int elsox = 1, elsoy = 1;
-    // // int masodikx = 1, masodiky = 1;
-    // // while (!vege) {
-    // // int x;
-    // // int y;
-    // // if (rand.nextFloat() > 0.5f) {
-    // // if (rand.nextFloat() > 0.5f) {
-    // // x = 0;
-    // // } else {
-    // // x = sizew - 1;
-    // // }
-    // // y = rand.nextInt(1, sizeh - 1);
-    // // } else {
-    // // if (rand.nextFloat() > 0.5f) {
-    // // y = 0;
-    // // } else {
-    // // y = sizeh - 1;
-    // // }
-    // // x = rand.nextInt(1, sizew - 1);
-    // // }
-    // // if (!indx.contains(new Pair<>(x, y))) {
-    // // vege = true;
-    // // elsox = x;
-    // // elsoy = y;
-    // // if (y * 40 % (sizew*40 - 40.0f) == 0) {
-    // // rotate = true;
-    // // }
-    // // indx.add(new Pair<>(x, y));
-    // // System.out.println("width: " + x * 40 + " height: " + y * 40);
-    // // }
-    // // }
-    // // vege = false;
-    // // Room masodik = door.getDest(r);
-    // // if (masodik.equals(r)) {
-    // // masodik = door.getOwnerRoom();
-    // // }
-    // // int sizeWSecond = (abs(masodik.hashCode()) % 6) + 5;
-    // // int sizeHSecond = (abs(sizeWSecond * masodik.hashCode()) % 6) + 5;
-    // // int x;
-    // // int y;
-    // // if (elsox % (sizew - 1) == 0) {
-    // // if (elsox == 0) {
-    // // x = sizeWSecond - 1;
-    // // } else {
-    // // x = 0;
-    // // }
-    // // y = elsoy;
-    // // vege = true;
-    // // masodikx = x;
-    // // masodiky = y;
-    // // System.out.println("width2: " + x * 40 + " height2: " + y * 40);
-    // // } else if (elsoy % (sizeh - 1) == 0) {
-    // // if (elsoy == 0) {
-    // // y = sizeHSecond - 1;
-    // // } else {
-    // // y = 0;
-    // // }
-    // // x = elsox;
-    // // masodikx = x;
-    // // masodiky = y;
-    // // System.out.println("width2: " + x * 40 + " height2: " + y * 40);
-    // // }
-    // // if (door.getOwnerRoom().equals(r)) {
-    // // door.setView(elsox * 40, elsoy * 40, masodikx * 40, masodiky * 40);
-    // // } else {
-    // // door.setView(masodikx * 40, masodiky * 40, elsox * 40, elsoy * 40);
-    // // }
+    // System.out.println(r.getDoors().size());
+    // for(
+
+    // Door door:r.getDoors())
+    // {
+    // if (door.getView() != null) {
+    // continue;
+    // }
+    // boolean rotate = false;
+    // boolean vege = false;
+    // int elsox = 1, elsoy = 1;
+    // int masodikx = 1, masodiky = 1;
+    // while (!vege) {
+    // int x;
+    // int y;
+    // if (rand.nextFloat() > 0.5f) {
+    // if (rand.nextFloat() > 0.5f) {
+    // x = 0;
+    // } else {
+    // x = sizew - 1;
+    // }
+    // y = rand.nextInt(1, sizeh - 1);
+    // } else {
+    // if (rand.nextFloat() > 0.5f) {
+    // y = 0;
+    // } else {
+    // y = sizeh - 1;
+    // }
+    // x = rand.nextInt(1, sizew - 1);
+    // }
+    // if (!indx.contains(new Pair<>(x, y))) {
+    // vege = true;
+    // elsox = x;
+    // elsoy = y;
+    // if (y * 40 % (sizew*40 - 40.0f) == 0) {
+    // rotate = true;
+    // }
+    // indx.add(new Pair<>(x, y));
+    // System.out.println("width: " + x * 40 + " height: " + y * 40);
+    // }
+    // }
+    // vege = false;
+    // Room masodik = door.getDest(r);
+    // if (masodik.equals(r)) {
+    // masodik = door.getOwnerRoom();
+    // }
+    // int sizeWSecond = (abs(masodik.hashCode()) % 6) + 5;
+    // int sizeHSecond = (abs(sizeWSecond * masodik.hashCode()) % 6) + 5;
+    // int x;
+    // int y;
+    // if (elsox % (sizew - 1) == 0) {
+    // if (elsox == 0) {
+    // x = sizeWSecond - 1;
+    // } else {
+    // x = 0;
+    // }
+    // y = elsoy;
+    // vege = true;
+    // masodikx = x;
+    // masodiky = y;
+    // System.out.println("width2: " + x * 40 + " height2: " + y * 40);
+    // } else if (elsoy % (sizeh - 1) == 0) {
+    // if (elsoy == 0) {
+    // y = sizeHSecond - 1;
+    // } else {
+    // y = 0;
+    // }
+    // x = elsox;
+    // masodikx = x;
+    // masodiky = y;
+    // System.out.println("width2: " + x * 40 + " height2: " + y * 40);
+    // }
+    // if (door.getOwnerRoom().equals(r)) {
+    // door.setView(elsox * 40, elsoy * 40, masodikx * 40, masodiky * 40);
+    // } else {
+    // door.setView(masodikx * 40, masodiky * 40, elsox * 40, elsoy * 40);
+    // }
 
     // // if (rotate) {
     // // door.getView().rotateTexture90();

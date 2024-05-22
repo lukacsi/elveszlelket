@@ -159,13 +159,13 @@ public class MapMan {
             teacher.setCurrentRoom(startingRoom);
             // boolean added = false;
             // while (!added) {
-            //     System.out.println("TEACHER HOZZÁADÁS");
-            //     Room rand = (size == 1) ? map.get(0) : getRandomRoom();
-            //     if (distance(startingRoom, rand) >= (maxdist - 1)) {
-            //         rand.addHuman(teacher);
-            //         teacher.setCurrentRoom(rand);
-            //         added = true;
-            //     }
+            // System.out.println("TEACHER HOZZÁADÁS");
+            // Room rand = (size == 1) ? map.get(0) : getRandomRoom();
+            // if (distance(startingRoom, rand) >= (maxdist - 1)) {
+            // rand.addHuman(teacher);
+            // teacher.setCurrentRoom(rand);
+            // added = true;
+            // }
             // }
         }
 
@@ -175,13 +175,13 @@ public class MapMan {
             cleaningLady.setCurrentRoom(startingRoom);
             // boolean added = false;
             // while (!added) {
-            //     System.out.println("CLEANER HOZZÁADÁS");
-            //     Room rand = (size == 1) ? map.get(0) : getRandomRoom();
-            //     if (distance(startingRoom, rand) >= (maxdist - 2)) {
-            //         rand.addHuman(cleaningLady);
-            //         cleaningLady.setCurrentRoom(rand);
-            //         added = true;
-            //     }
+            // System.out.println("CLEANER HOZZÁADÁS");
+            // Room rand = (size == 1) ? map.get(0) : getRandomRoom();
+            // if (distance(startingRoom, rand) >= (maxdist - 2)) {
+            // rand.addHuman(cleaningLady);
+            // cleaningLady.setCurrentRoom(rand);
+            // added = true;
+            // }
             // }
         }
 
@@ -229,7 +229,47 @@ public class MapMan {
                 if (d.getView() == null) {
                     Room r1 = d.getOwnerRoom();
                     Room r2 = d.getSecondRoom();
-                    d.setView(r1.getView().getX(), r1.getView().getY(), r2.getView().getX(), r2.getView().getY());
+                    int x1, x2;
+                    int y1, y2;
+                    int sizex1 = (int) r1.getView().getX() / 40;
+                    int sizey1 = (int) r1.getView().getY() / 40;
+                    int sizex2 = (int) r2.getView().getX() / 40;
+                    int sizey2 = (int) r2.getView().getY() / 40;
+                    if (r.nextFloat() > 0.5f) {
+                        if (r.nextFloat() > 0.5f) {
+                            x1 = 0;
+                        } else {
+                            x1 = sizex1 - 1;
+                        }
+                        y1 = r.nextInt(1, sizey1 - 2);
+                    } else {
+                        if (r.nextFloat() > 0.5f) {
+                            y1 = 0;
+                        } else {
+                            y1 = sizey1 - 1;
+                        }
+                        x1 = r.nextInt(1, sizex1 - 2);
+                    }
+                    x1 *= 40;
+                    y1 *= 40;
+                    if (r.nextFloat() > 0.5f) {
+                        if (r.nextFloat() > 0.5f) {
+                            x2 = 0;
+                        } else {
+                            x2 = sizex2 - 1;
+                        }
+                        y2 = r.nextInt(1, sizey2 - 2);
+                    } else {
+                        if (r.nextFloat() > 0.5f) {
+                            y2 = 0;
+                        } else {
+                            y2 = sizey2 - 1;
+                        }
+                        x2 = r.nextInt(1, sizex2 - 2);
+                    }
+                    x2 *= 40;
+                    y2 *= 40;
+                    d.setView(x1, y1, x2, y2);
                 }
             }
         }
