@@ -29,34 +29,74 @@ public class Student implements Human {
     private List<Item> items;
     private Room currentRoom;
 
+    /**
+     * Visszaadja a diák nézetét.
+     *
+     * @return a diák nézete
+     */
     public HumanView getView() {
         return view;
     }
 
+    /**
+     * Ellenőrzi, hogy a diák halott-e.
+     *
+     * @return igaz, ha a diák halott, különben hamis
+     */
     public boolean isDead() {
         return dead;
     }
 
+     /**
+     * Ellenőrzi, hogy a diák megszerezte-e a Logart.
+     *
+     * @return igaz, ha a diák megszerezte a Logart, különben hamis
+     */
     public boolean isLogarObtained() {
         return logarObtained;
     }
 
+    /**
+     * Visszaadja a diák elkábításának időtartamát.
+     *
+     * @return az elkábítás időtartama
+     */
     public int getStunDuration() {
         return stunDuration;
     }
 
+    /**
+     * Visszaadja a diák immunitásának időtartamát.
+     *
+     * @return az immunitás időtartama
+     */
     public int getImmunityDuration() {
         return immunityDuration;
     }
 
+     /**
+     * Visszaadja a diák gázvédelem időtartamát.
+     *
+     * @return a gázvédelem időtartama
+     */
     public int getGasProtectionDuration() {
         return gasProtectionDuration;
     }
 
+     /**
+     * Ellenőrzi, hogy a diák utoljára használt ajtója blokkolva van-e.
+     *
+     * @return igaz, ha az ajtó blokkolva van, különben hamis
+     */
     public boolean isLastDoorBlocked() {
         return doorBlocked;
     }
 
+    /**
+     * Visszaadja az utoljára használt ajtót.
+     *
+     * @return az utoljára használt ajtó
+     */
     public Door getLastDoor() {
         return lastDoor;
     }
@@ -79,6 +119,10 @@ public class Student implements Human {
         view = new HumanView(x, y, resourcePath);
     }
 
+    /**
+     * A Student osztály konstruktora.
+     * Inicializálja a diákot az alapértelmezett állapotokkal és egy üres tárgylistával.
+     */
     public Student() {
         items = new ArrayList<>();
         stunDuration = 0;
@@ -152,6 +196,11 @@ public class Student implements Human {
         return true;
     }
 
+    /**
+     * Visszaadja a Inventory listáját
+     * 
+     * @return items tárgyak listája
+     */
     public List<Item> getInventory() {
         return items;
     }
@@ -209,6 +258,12 @@ public class Student implements Human {
         return false;
     }
 
+    /**
+     * A diák eldob egy tárgyat.
+     * 
+     * @param item Az eldobandó tárgy.
+     * @return Igaz, ha a diák sikeresen eldobja a tárgyat.
+     */
     public void dropRandomItem() {
         // Meghatározzuk, hány tárgy van a hallgatónál
         int numItems = items.size();

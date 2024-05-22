@@ -77,6 +77,11 @@ public class Room {
         teachers.add(t);
     }
 
+     /**
+     * Hallgatót ad a szobához.
+     * 
+     * @param s A hozzáadandó hallgató.
+     */
     public void addHuman(CleaningLady c) {
         c.setCurrentRoom(this);
         cleaners.add(c);
@@ -100,6 +105,11 @@ public class Room {
         students.remove(t);
     }
 
+    /**
+     * Elvesz egy takarítőnőt a szobából.
+     * 
+     * @param t A törlendő CleaningLady.
+     */
     public void removeHuman(CleaningLady c) {
         cleaners.remove(c);
     }
@@ -159,6 +169,11 @@ public class Room {
         }
     }
 
+    /**
+     * Visszaadja, hogy gázos-e a szoba.
+     * 
+     * @return Igaz csakis akkor, ha gázos.
+     */
     public boolean hasGas() {
         return hasGas;
     }
@@ -259,18 +274,38 @@ public class Room {
         }
     }
 
+    /**
+    * Visszaadja az ajtók listáját.
+    *
+    * @return az ajtók listája
+    */
     public List<Door> getDoors() {
         return doors;
     }
 
+    /**
+    * Visszaadja a diákok listáját.
+    *
+    * @return a diákok listája
+    */
     public List<Student> getStudents() {
         return students;
     }
 
+    /**
+    * Visszaadja a tanárok listáját.
+    *
+    * @return a tanárok listája
+    */
     public List<Teacher> getTeacher() {
         return teachers;
     }
     
+    /**
+    * Visszaadja a takarítónők listáját.
+    *
+    * @return a takarítónők listája
+    */
     public List<CleaningLady> getCleaningLadies() {
         return cleaners;
     }

@@ -22,6 +22,11 @@ public class Teacher implements Human {
         return stunDuration;
     }
 
+    /**
+     * Visszaadja a items listáját
+     * 
+     * @return items tárgyak listája
+     */
     public List<Item> getItems() {
         return items;
     }
@@ -190,11 +195,22 @@ public class Teacher implements Human {
         }
     }
 
+    /**
+     * Beállítja a Human nézetét a GUI-ban.
+     *
+     * @param x a nézet x-koordinátája
+     * @param y a nézet y-koordinátája
+     */
     public void setView(float x, float y) {
         String resourcePath = "file:textures/teacher.png";
         HumanView view = new HumanView(x, y, resourcePath);
     }
 
+    /**
+     * Visszaadja a Teacher nézetét a GUI-ban.
+     *
+     * @return view a Teacher nézete
+     */
     public HumanView getView() {
         return view;
     }
