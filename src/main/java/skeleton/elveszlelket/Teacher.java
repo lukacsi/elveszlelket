@@ -192,7 +192,7 @@ public class Teacher implements Human {
 
     public void setView(float x, float y) {
         String resourcePath = "file:textures/teacher.png";
-        HumanView view = new HumanView(x, y, resourcePath);
+        view = new HumanView(x, y, resourcePath);
     }
 
     public HumanView getView() {

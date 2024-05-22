@@ -97,8 +97,8 @@ public class CleaningLady implements Human {
     }
 
     public void setView(float x, float y) {
-        String resourcePath = "file:textures/cleaningady.png";
-        HumanView view = new HumanView(x, y, resourcePath);
+        String resourcePath = "file:textures/cleaninglady.png";
+        view = new HumanView(x, y, resourcePath);
     }
 
     public HumanView getView() {

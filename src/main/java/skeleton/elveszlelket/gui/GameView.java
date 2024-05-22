@@ -241,7 +241,6 @@ public class GameView extends Pane {
 						jelenlegi.getView().setPos(d.getView().getX(),
 								d.getView().getY() - d.getDest(jelenlegiRoom).getView().getTileWidth());
 					}
-					this.Update(jelenlegi);
 					updateItemsPos();
 				}
 			}
@@ -261,6 +260,21 @@ public class GameView extends Pane {
 					jelenlegi.getView().getY() + jelenlegiRoom.getView().getTileHeight());
 			Update(jelenlegiJatekos);
 			updateItemsPos();
+		} else {
+			for (Door d : jelenlegiRoom.getDoors()) {
+				if (d.getView().getX() == jelenlegi.getView().getX() && d.getView().getY() == 0) {
+					d.accept(jelenlegi);
+					this.Parent.changeRoom(jelenlegi);
+					if (d.getOwnerRoom().equals(jelenlegiRoom)) {
+						jelenlegi.getView().setPos(d.getView().getX2(),
+								d.getView().getY2() + d.getDest(jelenlegiRoom).getView().getTileWidth());
+					} else {
+						jelenlegi.getView().setPos(d.getView().getX(),
+								d.getView().getY() + d.getDest(jelenlegiRoom).getView().getTileWidth());
+					}
+					updateItemsPos();
+				}
+			}
 		}
 	}
 
@@ -309,6 +323,19 @@ public class GameView extends Pane {
 						this.getChildren().add(pickupMenu);
 					}
 					View v = st.getView();
+					v.setPos(rv.xToTileX(v.getX()), rv.yToTileY(v.getY()));
+					v.normalizeTexture(rv.getTileWidth(), rv.getTileHeight());
+					v.Draw(this);
+				}
+
+				for (Teacher t : jelenlegiJatekos.getRoom().getTeacher()) {
+					View v = t.getView();
+					v.setPos(rv.xToTileX(v.getX()), rv.yToTileY(v.getY()));
+					v.normalizeTexture(rv.getTileWidth(), rv.getTileHeight());
+					v.Draw(this);
+				}
+				for (CleaningLady c : jelenlegiJatekos.getRoom().getCleaningLadies()) {
+					View v = c.getView();
 					v.setPos(rv.xToTileX(v.getX()), rv.yToTileY(v.getY()));
 					v.normalizeTexture(rv.getTileWidth(), rv.getTileHeight());
 					v.Draw(this);
