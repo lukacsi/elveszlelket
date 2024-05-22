@@ -20,7 +20,7 @@ public class CleaningLady implements Human {
         }
 
         List<Teacher> t = currentRoom.getTeacher();
-        for (int i = 0; i < s.size(); i++) {
+        for (int i = 0; i < t.size(); i++) {
             if(lastDoor != null) {
                 lastDoor.accept(t.get(i));
             }

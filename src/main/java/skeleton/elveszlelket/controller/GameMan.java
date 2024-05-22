@@ -72,9 +72,9 @@ public class GameMan {
             moveTeachers();
             moveCleaners();
             round++;
-            for (int i = 0; i < map.size() / 3; i++) {
+            /*for (int i = 0; i < map.size() / 3; i++) {
                 map.get(rand.nextInt(map.size())).changeDoorStatus();
-            }
+            }*/
             for (Student s : students) {
                 s.incrementTime();
             }

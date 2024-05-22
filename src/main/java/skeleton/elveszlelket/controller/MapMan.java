@@ -275,6 +275,7 @@ public class MapMan {
                     }
                     x2 *= 40;
                     y2 *= 40;
+
                     d.setView(x1, y1, x2, y2);
                     System.out.println(x1+" "+ y1 +" "+ x2 +" "+ y2);
                     System.out.println("1: "+sizex1*40 +" "+ sizey1*40 +" 2: "+ sizex2*40 +" "+sizey2*40);

@@ -165,7 +165,6 @@ public class GameView extends Pane {
 				if (d.getView().getY() == jelenlegi.getView().getY() && d.getView()
 						.getX() == 0) {
 					if (d.accept(jelenlegi)) {
-						this.Parent.changeRoom(jelenlegi);
 						if (d.getOwnerRoom().equals(jelenlegiRoom)) {
 							jelenlegi.getView().setPos(
 									d.getView().getX2() - d.getDest(jelenlegiRoom).getView().getTileWidth(),
@@ -175,6 +174,7 @@ public class GameView extends Pane {
 									d.getView().getX() - d.getDest(jelenlegiRoom).getView().getTileWidth(),
 									d.getView().getY());
 						}
+						this.Parent.changeRoom(jelenlegi);
 						updateItemsPos();
 					}
 				}
@@ -199,7 +199,6 @@ public class GameView extends Pane {
 				if (d.getView().getY() == jelenlegi.getView().getY() && d.getView()
 						.getX() == jelenlegiRoom.getView().getX() - jelenlegiRoom.getView().getTileWidth()) {
 					if (d.accept(jelenlegi)) {
-						this.Parent.changeRoom(jelenlegi);
 						if (d.getOwnerRoom().equals(jelenlegiRoom)) {
 							jelenlegi.getView().setPos(d.getView().getX2(),
 									d.getView().getY2() - d.getDest(jelenlegiRoom).getView().getTileWidth());
@@ -207,6 +206,7 @@ public class GameView extends Pane {
 							jelenlegi.getView().setPos(d.getView().getX(),
 									d.getView().getY() - d.getDest(jelenlegiRoom).getView().getTileWidth());
 						}
+						this.Parent.changeRoom(jelenlegi);
 						updateItemsPos();
 					}
 				}
@@ -231,7 +231,6 @@ public class GameView extends Pane {
 			for (Door d : jelenlegiRoom.getDoors()) {
 				if (d.getView().getX() == jelenlegi.getView().getX() && d.getView().getY() == 0) {
 					if (d.accept(jelenlegi)) {
-						this.Parent.changeRoom(jelenlegi);
 						if (d.getOwnerRoom().equals(jelenlegiRoom)) {
 							jelenlegi.getView().setPos(d.getView().getX2(),
 									d.getView().getY2() - d.getDest(jelenlegiRoom).getView().getTileWidth());
@@ -239,6 +238,7 @@ public class GameView extends Pane {
 							jelenlegi.getView().setPos(d.getView().getX(),
 									d.getView().getY() - d.getDest(jelenlegiRoom).getView().getTileWidth());
 						}
+						this.Parent.changeRoom(jelenlegi);
 						updateItemsPos();
 					}
 				}
@@ -264,7 +264,6 @@ public class GameView extends Pane {
 				if (d.getView().getX() == jelenlegi.getView().getX() && d.getView()
 						.getY() == jelenlegiRoom.getView().getY() - jelenlegiRoom.getView().getTileHeight()) {
 					if (d.accept(jelenlegi)) {
-						this.Parent.changeRoom(jelenlegi);
 						if (d.getOwnerRoom().equals(jelenlegiRoom)) {
 							jelenlegi.getView().setPos(d.getView().getX2(),
 									0 + d.getDest(jelenlegiRoom).getView().getTileHeight());
@@ -272,6 +271,7 @@ public class GameView extends Pane {
 							jelenlegi.getView().setPos(d.getView().getX(),
 									0 + d.getDest(jelenlegiRoom).getView().getTileHeight());
 						}
+						this.Parent.changeRoom(jelenlegi);
 						updateItemsPos();
 					}
 				}
