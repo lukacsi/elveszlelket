@@ -1,4 +1,3 @@
-```java
 package skeleton.elveszlelket;
 
 import javafx.geometry.Insets;
@@ -143,4 +142,3 @@ public class Options {
         window.show();
     }
 }
-```
