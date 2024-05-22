@@ -152,9 +152,6 @@ public class GameView extends Pane {
 	/**
 	 * Balra mozgatja a jelenleg aktív játékost.
 	 */
-	/**
-	 * Balra mozgatja a jelenleg aktív játékost.
-	 */
 	public void playerLeft() {
 		Student jelenlegi = this.jelenlegiJatekos;
 		Room jelenlegiRoom = this.jelenlegiJatekos.getRoom();
@@ -185,9 +182,6 @@ public class GameView extends Pane {
 		}
 	}
 
-	/**
-	 * Jobbra mozgatja a jelenleg aktív játékost.
-	 */
 	/**
 	 * Jobbra mozgatja a jelenleg aktív játékost.
 	 */
@@ -265,7 +259,8 @@ public class GameView extends Pane {
 			updateItemsPos();
 		} else {
 			for (Door d : jelenlegiRoom.getDoors()) {
-				if (d.getView().getX() == jelenlegi.getView().getX() && d.getView().getY() == jelenlegiRoom.getView().getY()-jelenlegiRoom.getView().getTileHeight()) {
+				if (d.getView().getX() == jelenlegi.getView().getX() && d.getView()
+						.getY() == jelenlegiRoom.getView().getY() - jelenlegiRoom.getView().getTileHeight()) {
 					d.accept(jelenlegi);
 					this.Parent.changeRoom(jelenlegi);
 					if (d.getOwnerRoom().equals(jelenlegiRoom)) {
@@ -273,7 +268,7 @@ public class GameView extends Pane {
 								0 + d.getDest(jelenlegiRoom).getView().getTileHeight());
 					} else {
 						jelenlegi.getView().setPos(d.getView().getX(),
-							    0 + d.getDest(jelenlegiRoom).getView().getTileHeight());
+								0 + d.getDest(jelenlegiRoom).getView().getTileHeight());
 					}
 					updateItemsPos();
 				}
@@ -287,96 +282,124 @@ public class GameView extends Pane {
 	 * @param jelenlegiJatekos Az adott játékos.
 	 */
 	public void Update(Student jelenlegiJatekos) {
+		this.jelenlegiJatekos = jelenlegiJatekos;
+		if (Parent.isEveryoneDead()) {
+			this.getChildren().clear();
+			VBox v = new VBox();
+			HBox h = new HBox();
+			Button b = new Button("Ohh ne!");
+			b.setStyle("-fx-border-width:0;");
+			b.setOnMouseClicked(e -> {
+				Parent.endGame();
+			});
+			h.getChildren().add(b);
+			h.getChildren().add(new TextArea("Oktatok nyertek."));
+			v.setAlignment(Pos.CENTER);
+			h.setAlignment(Pos.CENTER);
+			v.getChildren().add(h);
+			this.getChildren().add(v);
+		} else if (jelenlegiJatekos.won()) {
+			this.getChildren().clear();
+			VBox v = new VBox();
+			HBox h = new HBox();
+			Button b = new Button("Kiraly");
+			b.setStyle("-fx-border-width:0;");
+			b.setOnMouseClicked(e -> {
+				Parent.endGame();
+			});
+			h.getChildren().add(b);
+			h.getChildren().add(new TextArea("Hallgatok nyertek"));
+			v.setAlignment(Pos.CENTER);
+			h.setAlignment(Pos.CENTER);
+			v.getChildren().add(h);
+			this.getChildren().add(v);
+		} else if (jelenlegiJatekos.isDead()) {
+			this.getChildren().clear();
+			VBox v = new VBox();
+			HBox h = new HBox();
+			Button b = new Button(":(");
+			b.setStyle("-fx-border-width:0;");
+			b.setOnMouseClicked(e -> {
+				Parent.nextPlayer();
+			});
+			h.getChildren().add(b);
+			h.getChildren().add(new TextArea("Meghaltál!"));
+			v.setAlignment(Pos.CENTER);
+			h.setAlignment(Pos.CENTER);
+			v.getChildren().add(h);
+			this.getChildren().add(v);
+		} else if (jelenlegiJatekos.getStunDuration() > 0) {
+			this.getChildren().clear();
+			VBox v = new VBox();
+			HBox h = new HBox();
+			Button b = new Button("Kövi kör");
+			b.setStyle("-fx-border-width:0;");
+			b.setOnMouseClicked(e -> {
+				Parent.nextRound();
+			});
+			h.getChildren().add(b);
+			h.getChildren().add(new TextArea("El vagy kábulva " + jelenlegiJatekos.getStunDuration() + " körre."));
+			v.setAlignment(Pos.CENTER);
+			h.setAlignment(Pos.CENTER);
+			v.getChildren().add(h);
+			this.getChildren().add(v);
+		} else if (jelenlegiJatekos != null) {
+			this.jelenlegiJatekos = jelenlegiJatekos;
+			// Letorlunk mindent korabbi texturat.
+			this.getChildren().clear();
 
-			if(Parent.isEveryoneDead()) {
-				this.getChildren().clear();
-				VBox v = new VBox();
-				HBox h = new HBox();
-				Button b = new Button("Ohh ne!");
-				b.setStyle("-fx-border-width:0;");
-				b.setOnMouseClicked(e -> {
-					Parent.endGame();
-				});
-				h.getChildren().add(b);
-				h.getChildren().add(new TextArea("Oktatok nyertek."));
-				v.setAlignment(Pos.CENTER);
-				h.setAlignment(Pos.CENTER);
-				v.getChildren().add(h);
-				this.getChildren().add(v);
+			// Szoba rajz
+			RoomView rv = jelenlegiJatekos.getRoom().getView();
+			rv.normalizeTexture(rv.getTileWidth(), rv.getTileHeight());
+			rv.Draw(this);
+
+			for (Item i : jelenlegiJatekos.getRoom().getItems()) {
+				ItemView iv = i.getView();
+				iv.setPos(rv.xToTileX(iv.getX()), rv.yToTileY(iv.getY()));
+				iv.normalizeTexture(rv.getTileWidth(), rv.getTileHeight());
+				iv.Draw(this);
 			}
-			else if(jelenlegiJatekos.won()) {
-				this.getChildren().clear();
-				VBox v = new VBox();
-				HBox h = new HBox();
-				Button b = new Button("Kiraly");
-				b.setStyle("-fx-border-width:0;");
-				b.setOnMouseClicked(e -> {
-					Parent.endGame();
-				});
-				h.getChildren().add(b);
-				h.getChildren().add(new TextArea("Hallgatok nyertek"));
-				v.setAlignment(Pos.CENTER);
-				h.setAlignment(Pos.CENTER);
-				v.getChildren().add(h);
-				this.getChildren().add(v);
+
+			// Ajto Rajz
+			for (Door d : jelenlegiJatekos.getRoom().getDoors()) {
+				DoorView dv = d.getView();
+				if (d.getOwnerRoom().equals(jelenlegiJatekos.getRoom())) {
+					dv.setPos(rv.xToTileX(dv.getX()), rv.yToTileY(dv.getY()));
+				} else {
+					dv.setPos(rv.xToTileX(dv.getX2()), rv.yToTileY(dv.getY2()));
+				}
+
+				dv.normalizeTexture(rv.getTileWidth(), rv.getTileHeight());
+				dv.Draw(this);
 			}
-			else if (jelenlegiJatekos != null) {
-				this.jelenlegiJatekos = jelenlegiJatekos;
-				// Letorlunk mindent korabbi texturat.
-				this.getChildren().clear();
-
-				// Szoba rajz
-				RoomView rv = jelenlegiJatekos.getRoom().getView();
-				rv.normalizeTexture(rv.getTileWidth(), rv.getTileHeight());
-				rv.Draw(this);
-
-				for (Item i : jelenlegiJatekos.getRoom().getItems()) {
-					ItemView iv = i.getView();
-					iv.setPos(rv.xToTileX(iv.getX()), rv.yToTileY(iv.getY()));
-					iv.normalizeTexture(rv.getTileWidth(), rv.getTileHeight());
-					iv.Draw(this);
+			// Student Rajz
+			for (Student st : jelenlegiJatekos.getRoom().getStudents()) {
+				if (st == jelenlegiJatekos) {
+					this.getChildren().add(itemMenu);
+					this.getChildren().add(pickupMenu);
 				}
-
-				// Ajto Rajz
-				for (Door d : jelenlegiJatekos.getRoom().getDoors()) {
-					DoorView dv = d.getView();
-					if (d.getOwnerRoom().equals(jelenlegiJatekos.getRoom())) {
-						dv.setPos(rv.xToTileX(dv.getX()), rv.yToTileY(dv.getY()));
-					} else {
-						dv.setPos(rv.xToTileX(dv.getX2()), rv.yToTileY(dv.getY2()));
-					}
-
-					dv.normalizeTexture(rv.getTileWidth(), rv.getTileHeight());
-					dv.Draw(this);
-				}
-				// Student Rajz
-				for (Student st : jelenlegiJatekos.getRoom().getStudents()) {
-					if (st == jelenlegiJatekos) {
-						this.getChildren().add(itemMenu);
-						this.getChildren().add(pickupMenu);
-					}
-					View v = st.getView();
-					v.setPos(rv.xToTileX(v.getX()), rv.yToTileY(v.getY()));
-					v.normalizeTexture(rv.getTileWidth(), rv.getTileHeight());
-					v.Draw(this);
-				}
-
-				for (Teacher t : jelenlegiJatekos.getRoom().getTeacher()) {
-					View v = t.getView();
-					v.setPos(rv.xToTileX(v.getX()), rv.yToTileY(v.getY()));
-					v.normalizeTexture(rv.getTileWidth(), rv.getTileHeight());
-					v.Draw(this);
-				}
-				for (CleaningLady c : jelenlegiJatekos.getRoom().getCleaningLadies()) {
-					View v = c.getView();
-					v.setPos(rv.xToTileX(v.getX()), rv.yToTileY(v.getY()));
-					v.normalizeTexture(rv.getTileWidth(), rv.getTileHeight());
-					v.Draw(this);
-				}
-
-			} else {
-				System.out.println("GameView nem kapott jelenlegi jatekost.");
+				View v = st.getView();
+				v.setPos(rv.xToTileX(v.getX()), rv.yToTileY(v.getY()));
+				v.normalizeTexture(rv.getTileWidth(), rv.getTileHeight());
+				v.Draw(this);
 			}
+
+			for (Teacher t : jelenlegiJatekos.getRoom().getTeacher()) {
+				View v = t.getView();
+				v.setPos(rv.xToTileX(v.getX()), rv.yToTileY(v.getY()));
+				v.normalizeTexture(rv.getTileWidth(), rv.getTileHeight());
+				v.Draw(this);
+			}
+			for (CleaningLady c : jelenlegiJatekos.getRoom().getCleaningLadies()) {
+				View v = c.getView();
+				v.setPos(rv.xToTileX(v.getX()), rv.yToTileY(v.getY()));
+				v.normalizeTexture(rv.getTileWidth(), rv.getTileHeight());
+				v.Draw(this);
+			}
+
+		} else {
+			System.out.println("GameView nem kapott jelenlegi jatekost.");
+		}
 	}
 
 	/**

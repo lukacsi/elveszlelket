@@ -10,7 +10,6 @@ import java.util.Queue;
 import java.util.Random;
 import java.util.Set;
 
-import ch.qos.logback.classic.util.ClassicEnvUtil;
 import skeleton.elveszlelket.*;
 import skeleton.elveszlelket.door.Door;
 import skeleton.elveszlelket.door.OneWayDoor;
@@ -105,7 +104,7 @@ public class MapMan {
                 if (size > 1) {
                     System.out.println("EXTRA SZOBA HOZZÁADÁS");
                     connectRandom(room, randomDoorType());
-                    if (room.getDoors().size() >= 12)
+                    if (room.getDoors().size() >= 6)
                         break;
                 }
             }
@@ -150,39 +149,36 @@ public class MapMan {
         // add students
         for (Student student : students) {
             startingRoom.addHuman(student);
-            student.setCurrentRoom(startingRoom);
         }
 
         // Add teachers
         for (Teacher teacher : teachers) {
-            startingRoom.addHuman(teacher);
-            teacher.setCurrentRoom(startingRoom);
-            // boolean added = false;
-            // while (!added) {
-            // System.out.println("TEACHER HOZZÁADÁS");
-            // Room rand = (size == 1) ? map.get(0) : getRandomRoom();
-            // if (distance(startingRoom, rand) >= (maxdist - 1)) {
-            // rand.addHuman(teacher);
-            // teacher.setCurrentRoom(rand);
-            // added = true;
-            // }
-            // }
+            // startingRoom.addHuman(teacher);
+            // teacher.setCurrentRoom(startingRoom);
+            boolean added = false;
+            while (!added) {
+                System.out.println("TEACHER HOZZÁADÁS");
+                Room rand = (size == 1) ? map.get(0) : getRandomRoom();
+                if (distance(startingRoom, rand) >= (maxdist - 1)) {
+                    rand.addHuman(teacher);
+                    added = true;
+                }
+            }
         }
 
         // Add cleaners
         for (CleaningLady cleaningLady : cleaningLadies) {
-            startingRoom.addHuman(cleaningLady);
-            cleaningLady.setCurrentRoom(startingRoom);
-            // boolean added = false;
-            // while (!added) {
-            // System.out.println("CLEANER HOZZÁADÁS");
-            // Room rand = (size == 1) ? map.get(0) : getRandomRoom();
-            // if (distance(startingRoom, rand) >= (maxdist - 2)) {
-            // rand.addHuman(cleaningLady);
-            // cleaningLady.setCurrentRoom(rand);
-            // added = true;
-            // }
-            // }
+            // startingRoom.addHuman(cleaningLady);
+            // cleaningLady.setCurrentRoom(startingRoom);
+            boolean added = false;
+            while (!added) {
+                System.out.println("CLEANER HOZZÁADÁS");
+                Room rand = (size == 1) ? map.get(0) : getRandomRoom();
+                if (distance(startingRoom, rand) >= (maxdist - 2)) {
+                    rand.addHuman(cleaningLady);
+                    added = true;
+                }
+            }
         }
 
         // Add real logar

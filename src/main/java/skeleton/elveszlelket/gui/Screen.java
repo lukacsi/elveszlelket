@@ -38,12 +38,12 @@ public class Screen extends StackPane {
 	public void changeRoom(Student jelenlegi) {
 		showCurrentRound(jelenlegi);
 	}
-	
+
 	public void endGame() {
 		this.getChildren().clear();
 		this.getChildren().add(menu);
 	}
-	
+
 	public boolean isEveryoneDead() {
 		return gameManager.isEveryoneDead();
 	}
@@ -87,6 +87,10 @@ public class Screen extends StackPane {
 					this.palyamegjelenito.translatePickUpMenu();
 					this.palyamegjelenito.closeItemMenu();
 					break;
+				case X:
+					this.palyamegjelenito.closeItemMenu();
+					nextRound();
+					break;
 				default:
 					break;
 			}
@@ -125,5 +129,15 @@ public class Screen extends StackPane {
 	// Csak a tesztelesnel kell.
 	public void updateBecauseItemsHaveBeenManuallyAddedToStudent() {
 		palyamegjelenito.updateItemsPos();
+	}
+
+	public void nextRound() {
+		gameManager.playRound();
+		showCurrentRound(gameManager.getCurrentPlayer());
+	}
+
+	public void nextPlayer() {
+		gameManager.removeCurrent();
+		showCurrentRound(gameManager.getCurrentPlayer());
 	}
 }

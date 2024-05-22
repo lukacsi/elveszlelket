@@ -28,6 +28,8 @@ public class Student implements Human {
     private Door lastDoor;
     private List<Item> items;
     private Room currentRoom;
+    private boolean changedRoom;
+    private boolean usedItem;
 
     public HumanView getView() {
         return view;
@@ -90,6 +92,8 @@ public class Student implements Human {
         winCondition = false;
         lastDoor = null;
         currentRoom = null;
+        changedRoom = false;
+        usedItem = false;
     }
 
     /**
@@ -100,7 +104,7 @@ public class Student implements Human {
      */
     @Override
     public boolean use(OneWayDoor door) {
-        if (stunDuration > 0) {
+        if (stunDuration > 0 || changedRoom) {
             return false;
         }
         Room currentRoom = getRoom();
@@ -132,7 +136,7 @@ public class Student implements Human {
      */
     @Override
     public boolean use(TwoWayDoor door) {
-        if (stunDuration > 0) {
+        if (stunDuration > 0 || changedRoom) {
             return false;
         }
         Room currentRoom = getRoom();
@@ -236,7 +240,7 @@ public class Student implements Human {
      * @return Igaz, ha a tárgy használata sikeres volt.
      */
     public boolean useItem(Item item) {
-        if (stunDuration > 0) {
+        if (stunDuration > 0 || usedItem) {
             return false;
         }
         item.use(this);
@@ -357,7 +361,7 @@ public class Student implements Human {
     /**
      * Csökkenti a diák immunitásának időtartamát.
      */
-    public void decreaseImmunity() {
+    private void decreaseImmunity() {
         immunityDuration--;
     }
 
@@ -373,7 +377,7 @@ public class Student implements Human {
     /**
      * Csökkenti a diák gázvédelem időtartamát.
      */
-    public void decreaseGasProtection() {
+    private void decreaseGasProtection() {
         gasProtectionDuration--;
     }
 
@@ -441,5 +445,13 @@ public class Student implements Human {
      */
     public void setWinCondition() {
         winCondition = true;
+    }
+
+    public void incrementTime() {
+        usedItem = false;
+        changedRoom = false;
+        decreaseGasProtection();
+        decreaseImmunity();
+        decreaseStun(1);
     }
 }

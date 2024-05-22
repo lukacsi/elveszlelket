@@ -10,7 +10,7 @@ public class INCREMENTTIME implements Command {
 
     @Override
     public void execute(String[] params, Tester t) {
-        if(params.length != 2) {
+        if (params.length != 2) {
             System.out.println("Parameterk szama nem megfelelo.");
             return;
         }
@@ -21,17 +21,15 @@ public class INCREMENTTIME implements Command {
             teacher.decreaseStun(timeI);
         }
         for (Student student : students) {
-            for(int i = 0; i < timeI; i++) {
-                student.decreaseGasProtection();
-                student.decreaseImmunity();
+            for (int i = 0; i < timeI; i++) {
+                student.incrementTime();
             }
-            student.decreaseStun(timeI);
         }
         t.nextRound(timeI);
         // if(t.r.random) {
-        //     t.npcActions();
+        // t.npcActions();
         // }
         System.out.println("Ido elorehaladva " + timeI + " -el!");
     }
-    
+
 }

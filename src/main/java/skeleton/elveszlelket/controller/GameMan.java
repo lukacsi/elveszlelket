@@ -86,9 +86,7 @@ public class GameMan {
                 map.get(rand.nextInt(map.size())).changeDoorStatus();
             }
             for (Student s : students) {
-                s.decreaseGasProtection();
-                s.decreaseImmunity();
-                s.decreaseStun(1);
+                s.incrementTime();
             }
             for (Teacher t : teachers) {
                 t.decreaseStun(1);
@@ -225,14 +223,14 @@ public class GameMan {
 
     // this.jelenlegiJatekos = s;
     // }
-    
+
     public boolean isEveryoneDead() {
-    	for(Student s : this.students) {
-    		if(!s.isDead()) {
-    			return false;
-    		}
-    	}
-    	return true;
+        for (Student s : this.students) {
+            if (!s.isDead()) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public void mergeRooms(Room regi1, Room regi2) {
@@ -294,5 +292,10 @@ public class GameMan {
      */
     private int abs(int num) {
         return (num < 0) ? -num : num;
+    }
+
+    public void removeCurrent() {
+        students.remove(jelenlegiJatekos);
+        playRound();
     }
 }
