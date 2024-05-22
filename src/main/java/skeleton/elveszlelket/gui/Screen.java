@@ -49,18 +49,18 @@ public class Screen extends StackPane {
 	}
 
 	public void startGame(Settings settings) {
-		GameMan gm = new GameMan(settings, new Stage());
-		gameManager = gm;
-		gm.playRound();
+		gameManager = new GameMan(settings, new Stage());
+		gameManager.playRound();
 
 		this.setOnKeyPressed(e -> handleKeyPress(e));
-		showCurrentRound(gm.getCurrentPlayer());
+		showCurrentRound(gameManager.getCurrentPlayer());
 	}
 
 	private void handleKeyPress(KeyEvent e) {
 		long currentTime = System.currentTimeMillis();
 
-		if (currentTime - lastKeyPressTime > KEY_PRESS_DELAY) {
+		if (currentTime - lastKeyPressTime > KEY_PRESS_DELAY && !gameManager.getCurrentPlayer().isDead()
+				&& gameManager.getCurrentPlayer().getStunDuration() <= 0) {
 			lastKeyPressTime = currentTime;
 			switch (e.getCode()) {
 				case I:
