@@ -37,7 +37,7 @@ public class Screen extends Pane {
 	}
 
 	public void changeRoom(Student jelenlegi) {
-		gameManager.DrawScene(jelenlegi);
+		// gameManager.DrawScene(jelenlegi);
 		showCurrentRound(jelenlegi);
 	}
 
