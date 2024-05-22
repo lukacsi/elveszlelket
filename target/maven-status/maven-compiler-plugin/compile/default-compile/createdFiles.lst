@@ -22,14 +22,12 @@ skeleton\elveszlelket\door\OneWayDoor.class
 skeleton\elveszlelket\gui\GameView.class
 skeleton\elveszlelket\item\Item.class
 skeleton\elveszlelket\tester\Commands\CLEAR.class
-skeleton\elveszlelket\controller\TurnMan.class
 skeleton\elveszlelket\tester\Commands\MOVE.class
 skeleton\elveszlelket\item\AirFreshener.class
 skeleton\elveszlelket\controller\MapMan.class
 skeleton\elveszlelket\item\Logar.class
 skeleton\elveszlelket\tester\Commands\MAKE.class
 skeleton\elveszlelket\tester\Tests\SETUP.class
-skeleton\elveszlelket\controller\NpcMan.class
 skeleton\elveszlelket\item\TVSZ.class
 skeleton\elveszlelket\strategy\ItemUseStrategy.class
 skeleton\elveszlelket\door\TwoWayDoor.class

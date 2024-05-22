@@ -72,6 +72,9 @@ public class Screen extends Pane {
 					this.palyamegjelenito.translatePickUpMenu();
 					this.palyamegjelenito.closeItemMenu();
 					break;
+				case X:
+					gameManager.playRound(palyamegjelenito);
+					break;
 			}
 			e.consume();
 		});

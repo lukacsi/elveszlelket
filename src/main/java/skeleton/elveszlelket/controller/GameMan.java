@@ -19,6 +19,7 @@ import skeleton.elveszlelket.Student;
 import skeleton.elveszlelket.Teacher;
 import skeleton.elveszlelket.door.Door;
 import skeleton.elveszlelket.gui.DoorView;
+import skeleton.elveszlelket.gui.GameView;
 import skeleton.elveszlelket.gui.Screen;
 
 /**
@@ -111,7 +112,34 @@ public class GameMan {
         Student s = sQueue.poll();
         DrawScene(s);
     }
-
+/**
+     * Lejátssza a következő kört a játékban.
+     */
+    /**
+     * Lejátssza a következő kört a játékban.
+     */
+    public void playRound(GameView gw) {
+        if (sQueue.isEmpty()) {
+            moveTeachers();
+            moveCleaners();
+            round++;
+            for (int i = 0; i < Math.floor(map.size() / 3); i++) {
+                map.get(rand.nextInt(map.size())).changeDoorStatus();
+            }
+            for (Student s : students) {
+                s.decreaseGasProtection();
+                s.decreaseImmunity();
+                s.decreaseStun(1);
+            }
+            for (Teacher t : teachers) {
+                t.decreaseStun(1);
+            }
+            sQueue.addAll(students);
+        }
+        Student s = sQueue.poll();
+        gw.Update(s);
+        DrawScene(s);
+    }
     /**
      * A tanárok mozgatását végzi a következő szobába.
      */
