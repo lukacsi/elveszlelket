@@ -156,7 +156,6 @@ public class GameMan {
         int sizeh = (abs(sizew * r.hashCode()) % 6) + 5;
         float WIDTH = sizew * 40.0f;
         float HEIGHT = sizeh * 40.0f;
-        System.out.println(r.hashCode());
         System.out.println("width: " + WIDTH + " height: " + HEIGHT);
 
         if (r.getView() == null) {
@@ -182,7 +181,7 @@ public class GameMan {
                 }
 
                 List<Pair<Integer, Integer>> indx = new ArrayList<>();
-                List<Pair<Integer, Integer>> indx2 = new ArrayList<>();
+
                 // System.out.println(r.getDoors().size());
                 for (Door door : r.getDoors()) {
                     if (door.getView() != null) {
@@ -228,42 +227,38 @@ public class GameMan {
                     }
                     int sizeWSecond = (abs(masodik.hashCode()) % 6) + 5;
                     int sizeHSecond = (abs(sizeWSecond * masodik.hashCode()) % 6) + 5;
-                    while (!vege) {
-                        int x;
-                        int y;
-                        if (elsox % (sizew - 1) == 0) {
-                            if (elsox == 0) {
-                                x = sizeWSecond - 1;
-                            } else {
-                                x = 0;
-                            }
-                            y = rand.nextInt(1, sizeHSecond - 1);
-                            if (!indx2.contains(new Pair<>(x, y))) {
-                                vege = true;
-                                masodikx = x;
-                                masodiky = y;
-                                System.out.println("width2: " + x * 40 + " height2: " + y * 40);
-                                indx2.add(new Pair<>(x, y));
-                            }
-                        } else if (elsoy % (sizeh - 1) == 0) {
-                            if (elsoy == 0) {
-                                y = sizeHSecond - 1;
-                            } else {
-                                y = 0;
-                            }
-                            x = rand.nextInt(1, sizeWSecond - 1);
-                            if (!indx2.contains(new Pair<>(x, y))) {
-                                vege = true;
-                                masodikx = x;
-                                masodiky = y;
-                                System.out.println("width2: " + x * 40 + " height2: " + y * 40);
-                                indx2.add(new Pair<>(x, y));
-                            }
+                    int x;
+                    int y;
+                    if (elsox % (sizew - 1) == 0) {
+                        if (elsox == 0) {
+                            x = sizeWSecond - 1;
+                        } else {
+                            x = 0;
                         }
-                        door.setView(elsox * 40, elsoy * 40, masodikx * 40, masodiky * 40);
-                        if (rotate) {
-                            door.getView().rotateTexture90();
+                        y = elsoy;
+                        vege = true;
+                        masodikx = x;
+                        masodiky = y;
+                        System.out.println("width2: " + x * 40 + " height2: " + y * 40);
+                    } else if (elsoy % (sizeh - 1) == 0) {
+                        if (elsoy == 0) {
+                            y = sizeHSecond - 1;
+                        } else {
+                            y = 0;
                         }
+                        x = elsox;
+                        masodikx = x;
+                        masodiky = y;
+                        System.out.println("width2: " + x * 40 + " height2: " + y * 40);
+                    }
+                    if(door.getOwnerRoom().equals(r)) {
+                    	 door.setView(elsox * 40, elsoy * 40, masodikx * 40, masodiky * 40);
+                    } else {
+                    	 door.setView(masodikx * 40, masodiky * 40, elsox * 40, elsoy * 40);
+                    }
+                 
+                    if (rotate) {
+                        door.getView().rotateTexture90();
                     }
                 }
 

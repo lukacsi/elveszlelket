@@ -83,8 +83,6 @@ public class Screen extends Pane {
 		this.getChildren().clear();
 		Room jelenlegiSzoba = jelenlegiJatekos.getRoom();
 
-		this.getChildren().add(new Button("b"));
-
 		palyamegjelenito = new GameView(this, jelenlegiSzoba.getView().getX(), jelenlegiSzoba.getView().getY());
 		this.WIDTH = this.palyamegjelenito.WIDTH;
 		this.HEIGHT = this.palyamegjelenito.HEIGHT;
@@ -94,12 +92,10 @@ public class Screen extends Pane {
 		this.parentScene.getWindow().setHeight(HEIGHT + 37.333333);
 		// System.out.println(this.parentScene.getWindow().getWidth() + " " +
 		// this.parentScene.getWindow().getHeight());
-
 		this.palyamegjelenito.Update(jelenlegiJatekos);
 		// System.out.println(this.parentScene.getWindow().getWidth() + " " +
 		// this.parentScene.getWindow().getHeight());
 
-		this.palyamegjelenito.Update(jelenlegiJatekos);
 	}
 
 	public void close() {

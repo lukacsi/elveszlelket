@@ -161,6 +161,20 @@ public class GameView extends Pane {
 					jelenlegi.getView().getY());
 			Update(jelenlegiJatekos);
 			updateItemsPos();
+		} else {
+			for (Door d : jelenlegiRoom.getDoors()) {
+				if (d.getView().getY() == jelenlegi.getView().getY() && d.getView()
+						.getX() == 0) {
+					d.accept(jelenlegi);
+					this.Parent.changeRoom(jelenlegi);
+					if (d.getOwnerRoom().equals(jelenlegiRoom)) {
+						jelenlegi.getView().setPos(d.getView().getX2()-d.getDest(jelenlegiRoom).getView().getTileWidth(), d.getView().getY2());
+					} else {
+						jelenlegi.getView().setPos(d.getView().getX()-d.getDest(jelenlegiRoom).getView().getTileWidth(), d.getView().getY());
+					}
+					updateItemsPos();
+				}
+			}
 		}
 	}
 
@@ -223,6 +237,7 @@ public class GameView extends Pane {
 						jelenlegi.getView().setPos(d.getView().getX(),
 								d.getView().getY() - d.getDest(jelenlegiRoom).getView().getTileWidth());
 					}
+					this.Update(jelenlegi);
 					updateItemsPos();
 				}
 			}
