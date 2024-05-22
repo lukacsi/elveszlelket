@@ -11,8 +11,19 @@ public abstract class View {
 	/**
 	 * A View osztály alapértelmezett konstruktora.
 	 */
+	/**
+	 * A View osztály alapértelmezett konstruktora.
+	 */
 	public View() {
 		System.out.println("View osztaly nem tartalmaz koordinatakat!");
+	}
+	
+	/**
+	 * Visszaadja a nézethez tartozó textúra elérési útját.
+	 * @return Az elérési út.
+	 */
+	public void rotateTexture90() {
+		texture.setRotate(90);
 	}
 	
 	/**
@@ -27,10 +38,19 @@ public abstract class View {
 	 * Visszaadja a nézet textúráját.
 	 * @return A nézet textúrája.
 	 */
+	/**
+	 * Visszaadja a nézet textúráját.
+	 * @return A nézet textúrája.
+	 */
 	public ImageView getTexture() {
 		return texture;
 	}
 
+	/**
+	 * A View osztály konstruktora.
+	 * @param x x koordináta.
+	 * @param y y koordináta.
+	 */
 	/**
 	 * A View osztály konstruktora.
 	 * @param x x koordináta.
@@ -42,6 +62,12 @@ public abstract class View {
 		this.texture = null;
 	}
 	
+	/**
+	 * A View osztály konstruktora.
+	 * @param x x koordináta.
+	 * @param y y koordináta.
+	 * @param texturePath A nézet textúrájának elérési útvonala.
+	 */
 	/**
 	 * A View osztály konstruktora.
 	 * @param x x koordináta.
@@ -60,11 +86,20 @@ public abstract class View {
 	 * @param x új x koordináta.
 	 * @param y új y koordináta.
 	 */
+	/**
+	 * Beállítja a nézet x és y koordinátáját.
+	 * @param x új x koordináta.
+	 * @param y új y koordináta.
+	 */
 	public void setPos(float x, float y) {
 		this.x = x;
 		this.y = y;
 	}
 	
+	/**
+	 * Getter az x koordinátához.
+	 * @return
+	 */
 	/**
 	 * Getter az x koordinátához.
 	 * @return
@@ -77,10 +112,18 @@ public abstract class View {
 	 * Getter az y koordinátához.
 	 * @return
 	 */
+	/**
+	 * Getter az y koordinátához.
+	 * @return
+	 */
 	public float getY() {
 		return y;
 	}
 	
+	/**
+	 * Kirajzolja a nézetet a paraméterként kapott GameView-ba.
+	 * @param jatekmegjelenito Az adott GameView.
+	 */
 	/**
 	 * Kirajzolja a nézetet a paraméterként kapott GameView-ba.
 	 * @param jatekmegjelenito Az adott GameView.

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Queue;
 import java.util.Random;
 import java.util.Set;
+import java.util.Set;
 
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -20,6 +21,10 @@ import skeleton.elveszlelket.door.Door;
 import skeleton.elveszlelket.gui.DoorView;
 import skeleton.elveszlelket.gui.Screen;
 
+/**
+ * A játék fő irányító osztálya, kezeli
+ * a szereplők mozgatását és a képernyő frissítését.
+ */
 /**
  * A játék fő irányító osztálya, kezeli
  * a szereplők mozgatását és a képernyő frissítését.
@@ -45,11 +50,18 @@ public class GameMan {
      * @param settings A játék beállításai.
      * @param stage    A pálya, amelyen a jelenetek megjelennek.
      */
+    /**
+     * Létrehoz egy új GameMan példányt a megadott beállításokkal.
+     *
+     * @param settings A játék beállításai.
+     * @param stage    A pálya, amelyen a jelenetek megjelennek.
+     */
     public GameMan(Settings settings, Stage stage) {
         this.students = new ArrayList<>();
         this.teachers = new ArrayList<>();
         this.cleaners = new ArrayList<>();
         this.sQueue = new LinkedList<>();
+        rand = new Random();
         rand = new Random();
         this.stage = stage;
         round = 0;
@@ -72,6 +84,9 @@ public class GameMan {
         sQueue.addAll(students);
     }
 
+    /**
+     * Lejátssza a következő kört a játékban.
+     */
     /**
      * Lejátssza a következő kört a játékban.
      */
@@ -100,6 +115,9 @@ public class GameMan {
     /**
      * A tanárok mozgatását végzi a következő szobába.
      */
+    /**
+     * A tanárok mozgatását végzi a következő szobába.
+     */
     private void moveTeachers() {
         for (Teacher gajdos : teachers) {
             Door door = gajdos.getRoom().getDoorAt(rand.nextInt(0, 11));
@@ -109,6 +127,9 @@ public class GameMan {
         }
     }
 
+    /**
+     * A takarítónők mozgatását végzi a következő szobába.
+     */
     /**
      * A takarítónők mozgatását végzi a következő szobába.
      */
@@ -128,7 +149,7 @@ public class GameMan {
      */
     // Na ez azt csinálja hogy hasheli a roomot és aszerint pakolja a cuccokat.
     // AZ ELDOBOTT ITEMEKET NEM TUDOM HOGYAN KÉNE
-    private void DrawScene(Student s) {
+    public void DrawScene(Student s) {
         Room r = s.getRoom();
         // MAX 10 MIN 5 (EBBŐL 2 FAL)
         int sizew = (abs(r.hashCode()) % 6) + 5;
@@ -149,67 +170,132 @@ public class GameMan {
                 System.out.println(i.getClass().toString() + " " + (w + 1) * 40 + " " + (h + 1) * 40);
             }
 
-            List<Pair<Integer, Integer>> indx = new ArrayList<>();
-            System.out.println(r.getDoors().size());
-            for (Door door : r.getDoors()) {
-                if (door.getView() != null) {
-                    continue;
+            if (r.getView() == null) {
+                for (Item i : r.getItems()) {
+                    if (i.getView() != null) {
+                        continue;
+                    }
+                    float w = abs(i.hashCode()) % (sizew - 2);
+                    float h = (abs(i.hashCode() * sizew)) % (sizeh - 2);
+                    i.setView((w + 1) * 40, (h + 1) * 40);
+                    System.out.println(i.getClass().toString() + " " + (w + 1) * 40 + " " + (h + 1) * 40);
                 }
-                boolean vege = false;
-                while (!vege) {
-                    int x;
-                    int y;
-                    if (rand.nextFloat() > 0.5f) {
-                        if (rand.nextFloat() > 0.5f) {
-                            x = 0;
-                        } else {
-                            x = sizew - 1;
-                        }
-                        y = rand.nextInt(1, sizeh - 1);
-                    } else {
-                        if (rand.nextFloat() > 0.5f) {
-                            y = 0;
-                        } else {
-                            y = sizeh - 1;
-                        }
-                        x = rand.nextInt(1, sizew - 1);
+
+                List<Pair<Integer, Integer>> indx = new ArrayList<>();
+                List<Pair<Integer, Integer>> indx2 = new ArrayList<>();
+                // System.out.println(r.getDoors().size());
+                for (Door door : r.getDoors()) {
+                    if (door.getView() != null) {
+                        continue;
                     }
-                    if (!indx.contains(new Pair<>(x, y))) {
-                        vege = true;
-                        door.setView(x * 40, y * 40);
-                        System.out.println("width: " + x * 40 + " height: " + y * 40);
+                    boolean rotate = false;
+                    boolean vege = false;
+                    int elsox = 1, elsoy = 1;
+                    int masodikx = 1, masodiky = 1;
+                    while (!vege) {
+                        int x;
+                        int y;
+                        if (rand.nextFloat() > 0.5f) {
+                            if (rand.nextFloat() > 0.5f) {
+                                x = 0;
+                            } else {
+                                x = sizew - 1;
+                            }
+                            y = rand.nextInt(1, sizeh - 1);
+                        } else {
+                            if (rand.nextFloat() > 0.5f) {
+                                y = 0;
+                            } else {
+                                y = sizeh - 1;
+                            }
+                            x = rand.nextInt(1, sizew - 1);
+                        }
+                        if (!indx.contains(new Pair<>(x, y))) {
+                            vege = true;
+                            elsox = x;
+                            elsoy = y;
+                            if (y * 40 % (HEIGHT - 40.0f) == 0) {
+                                rotate = true;
+                            }
+                            indx.add(new Pair<>(x, y));
+                            System.out.println("width: " + x * 40 + " height: " + y * 40);
+                        }
                     }
+                    vege = false;
+                    Room masodik = door.getDest(r);
+                    if (masodik.equals(r)) {
+                        masodik = door.getOwnerRoom();
+                    }
+                    int sizeWSecond = (abs(masodik.hashCode()) % 6) + 5;
+                    int sizeHSecond = (abs(sizeWSecond * masodik.hashCode()) % 6) + 5;
+                    while (!vege) {
+                        int x;
+                        int y;
+                        if (elsox % (sizew - 1) == 0) {
+                            if (elsox == 0) {
+                                x = sizeWSecond - 1;
+                            } else {
+                                x = 0;
+                            }
+                            y = rand.nextInt(1, sizeHSecond - 1);
+                            if (!indx2.contains(new Pair<>(x, y))) {
+                                vege = true;
+                                masodikx = x;
+                                masodiky = y;
+                                System.out.println("width2: " + x * 40 + " height2: " + y * 40);
+                                indx2.add(new Pair<>(x, y));
+                            }
+                        } else if (elsoy % (sizeh - 1) == 0) {
+                            if (elsoy == 0) {
+                                y = sizeHSecond - 1;
+                            } else {
+                                y = 0;
+                            }
+                            x = rand.nextInt(1, sizeWSecond - 1);
+                            if (!indx2.contains(new Pair<>(x, y))) {
+                                vege = true;
+                                masodikx = x;
+                                masodiky = y;
+                                System.out.println("width2: " + x * 40 + " height2: " + y * 40);
+                                indx2.add(new Pair<>(x, y));
+                            }
+                        }
+                        door.setView(elsox * 40, elsoy * 40, masodikx * 40, masodiky * 40);
+                        if (rotate) {
+                            door.getView().rotateTexture90();
+                        }
+                    }
+                }
+
+                for (Student st : r.getStudents()) {
+                    if (st.getView() != null) {
+                        continue;
+                    }
+                    float w = abs(st.hashCode()) % (sizew - 2);
+                    float h = (abs(st.hashCode() * sizew)) % (sizeh - 2);
+                    st.setView((w + 1) * 40, (h + 1) * 40);
+                }
+                for (Teacher t : r.getTeacher()) {
+                    if (t.getView() != null) {
+                        continue;
+                    }
+                    float w = abs(t.hashCode()) % (sizew - 2);
+                    float h = (abs(t.hashCode() * sizew)) % (sizeh - 2);
+                    t.setView((w + 1) * 40, (h + 1) * 40);
+                }
+                for (CleaningLady c : r.getCleaningLadies()) {
+                    if (c.getView() != null) {
+                        continue;
+                    }
+                    float w = abs(c.hashCode()) % (sizew - 2);
+                    float h = (abs(c.hashCode() * sizew)) % (sizeh - 2);
+                    c.setView((w + 1) * 40, (h + 1) * 40);
                 }
             }
 
-            for (Student st : r.getStudents()) {
-                if (st.getView() != null) {
-                    continue;
-                }
-                float w = abs(st.hashCode()) % (sizew - 2);
-                float h = (abs(st.hashCode() * sizew)) % (sizeh - 2);
-                st.setView((w + 1) * 40, (h + 1) * 40);
-            }
-            for (Teacher t : r.getTeacher()) {
-                if (t.getView() != null) {
-                    continue;
-                }
-                float w = abs(t.hashCode()) % (sizew - 2);
-                float h = (abs(t.hashCode() * sizew)) % (sizeh - 2);
-                t.setView((w + 1) * 40, (h + 1) * 40);
-            }
-            for (CleaningLady c : r.getCleaningLadies()) {
-                if (c.getView() != null) {
-                    continue;
-                }
-                float w = abs(c.hashCode()) % (sizew - 2);
-                float h = (abs(c.hashCode() * sizew)) % (sizeh - 2);
-                c.setView((w + 1) * 40, (h + 1) * 40);
-            }
             r.setView(WIDTH, HEIGHT);
+            this.jelenlegiJatekos = s;
         }
-
-        this.jelenlegiJatekos = s;
     }
 
     public void mergeRooms(Room regi1, Room regi2) {
@@ -263,6 +349,12 @@ public class GameMan {
         }
     }
 
+    /**
+     * Visszaadja a megadott szám abszolút értékét.
+     *
+     * @param num A szám, amelynek az abszolút értékét ki akarjuk számolni.
+     * @return A megadott szám abszolút értéke.
+     */
     /**
      * Visszaadja a megadott szám abszolút értékét.
      *

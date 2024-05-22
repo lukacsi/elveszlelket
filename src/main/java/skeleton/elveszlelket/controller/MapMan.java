@@ -28,6 +28,10 @@ import skeleton.elveszlelket.item.Transistor;
  * A MapMan osztály felelős a játék pálya létrehozásáért és inicializálásáért,
  * valamint a szobák és ajtók közötti kapcsolatok létrehozásáért.
  */
+/**
+ * A MapMan osztály felelős a játék pálya létrehozásáért és inicializálásáért,
+ * valamint a szobák és ajtók közötti kapcsolatok létrehozásáért.
+ */
 public class MapMan {
     private int size;
     private float curse, gas, fals, item, door, oneway;
@@ -195,6 +199,11 @@ public class MapMan {
      *
      * @return Egy véletlenszerűen kiválasztott tárgy.
      */
+    /**
+     * Véletlenszerűen kiválaszt egy tárgyat a megadott valószínűségekkel.
+     *
+     * @return Egy véletlenszerűen kiválasztott tárgy.
+     */
     private Item getRandomItem() {
         Item item;
         float rand = r.nextFloat();
@@ -272,10 +281,21 @@ public class MapMan {
      *
      * @return Egy véletlenszerűen kiválasztott szoba.
      */
+    /**
+     * Véletlenszerűen kiválaszt egy szobát.
+     *
+     * @return Egy véletlenszerűen kiválasztott szoba.
+     */
     private Room getRandomRoom() {
         return map.get(r.nextInt(size - 1));
     }
 
+    /**
+     * Véletlenszerűen kapcsol egy szobát egy másik szobához egy ajtóval.
+     *
+     * @param room Az egyik szoba.
+     * @param door Az ajtó, amellyel a kapcsolatot létrehozzuk.
+     */
     /**
      * Véletlenszerűen kapcsol egy szobát egy másik szobához egy ajtóval.
      *
